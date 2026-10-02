@@ -1,0 +1,9 @@
+# local tooling
+.claude/
+.impeccable/
+# working files kept out of the public prototype (only the reference post is shown in index.html)
+brand-source/*
+!brand-source/reference-post.png
+*.psd
+Thumbs.db
+.DS_Store

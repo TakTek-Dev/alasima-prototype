@@ -1,0 +1,412 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<title>العاصمة — الأولى</title>
+<meta name="description" content="أخبار العاصمة من العاصمة. منصة إعلامية مقدسية تتابع القدس بالمكان والساعة.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Alexandria:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400&display=swap">
+<link rel="preload" as="image" href="assets/img/oldcity-1.jpg" fetchpriority="high">
+<link rel="stylesheet" href="assets/css/asima.css?v=17">
+<style>
+/* ===================== Home — «تحت القبة» =====================
+   Spatial thesis: one lead composition (headline → dome photo → figure), wrapped by the
+   sash of latest updates; then descending weight: also → Jerusalem orbit → reports →
+   lens → voices. Night/limestone alternate as editorial rhythm, not decoration. */
+
+/* ---- Lead: the dome and the sash ---- */
+/* Height is set by the text column, never by a viewport guess: the headline is sized from its own
+   column (cqi), so it holds ~26 Arabic characters per line and a ≤70-character lead stays within 3 lines
+   at every width. The dome photo stretches to whatever that column needs. */
+.lead { padding-top: 12px; padding-bottom: 30px; overflow: clip; }
+.lead__mast { display: flex; justify-content: space-between; align-items: center; gap: 8px 24px; flex-wrap: wrap; padding-bottom: 10px; border-bottom: 1px solid var(--rule); font-size: var(--fs-meta); color: var(--ink-3); }
+.lead__mast b { color: var(--ink); font-weight: 600; }
+.lead__grid {
+  display: grid; padding-top: clamp(20px, 2.2vw, 30px);
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  grid-template-areas: "head visual" "body visual";
+  grid-template-rows: auto 1fr;
+  column-gap: clamp(28px, 3.6vw, 56px);
+}
+.lead__head { grid-area: head; container-type: inline-size; }
+.lead__head .hl-display { font-size: clamp(1.75rem, 6.9cqi, 3rem); line-height: 1.4; }
+.lead__body { grid-area: body; display: grid; gap: var(--s-4); align-content: end; padding-top: var(--s-4); padding-bottom: calc(var(--sash-overlap) + var(--s-5)); }
+.lead__body .dek { max-width: 54ch; }
+.lead__actions { display: flex; flex-wrap: wrap; gap: 8px 20px; align-items: center; padding-top: var(--s-1); }
+.lead__actions .ai-mark { margin-inline-start: auto; }
+.lead__visual { grid-area: visual; position: relative; min-height: clamp(380px, 33vw, 480px); }
+.lead__visual .dome-frame { position: absolute; inset: 0; }
+.lead__figure { position: absolute; z-index: 3; inset-inline-start: calc(clamp(28px, 3.6vw, 56px) * -0.6); bottom: calc(var(--sash-overlap) + 18px); max-width: 78%; }
+.lead__figure .madd { font-size: clamp(1.35rem, 0.9rem + 1.3vw, 2.15rem); color: #F2F0EB; text-shadow: 0 2px 22px rgba(0,0,0,.5); }
+.lead__figure .madd__fig { color: var(--gold); }
+.lead__figure .madd__tail { color: #F2F0EB; }
+.lead .sash-wrap { margin-top: calc(var(--sash-overlap) * -1); position: relative; z-index: 4; }
+.lead .sash__list span { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+:root { --sash-overlap: 56px; }
+
+/* ---- Also on the front page: feature · pair · most read ---- */
+.also { padding-block: var(--sec) var(--sec-tight); }
+.also__grid { display: grid; grid-template-columns: minmax(0, 6fr) minmax(0, 3fr) minmax(0, 3fr); gap: var(--s-6) var(--col-gap); align-items: start; }
+.also__pair { display: grid; gap: var(--s-6); }
+.feature { display: grid; gap: var(--s-4); }
+.feature .hl-2 { font-size: var(--fs-h2); }
+.mostread__head { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; margin-bottom: var(--s-2); }
+.mostread__head h2 { font-size: var(--fs-h4); font-weight: 800; }
+
+/* ---- Jerusalem orbit ---- */
+.orbit { padding-block: var(--sec); position: relative; overflow: clip; }
+.orbit__grid { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: var(--s-7) clamp(28px, 4vw, 64px); align-items: stretch; }
+.orbit__intro { display: grid; gap: var(--s-4); margin-bottom: var(--s-5); }
+.orbit__intro .dek { color: var(--ink-2); }
+.orbit__panel { display: grid; gap: var(--s-4); align-content: start; }
+.orbit__panel .tabs { margin-top: var(--s-2); }
+.orbit__panel [data-panel] { max-height: 470px; overflow-y: auto; scrollbar-width: thin; margin-inline-end: -8px; padding-inline-end: 8px; }
+.month { margin-top: var(--sec-tight); padding-top: var(--s-6); border-top: 1px solid var(--rule); }
+.month__head { display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap; gap: 8px 20px; margin-bottom: var(--s-5); }
+.month__head h3 { font-size: var(--fs-h4); font-weight: 800; }
+.month__grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.month__grid > div { display: grid; gap: var(--s-3); align-content: start; padding-inline: var(--s-6); }
+.month__grid > div:first-child { padding-inline-start: 0; }
+.month__grid > div + div { border-inline-start: 1px solid var(--rule); }
+.month .madd { font-size: clamp(1.35rem, 1rem + 1.1vw, 1.95rem); }
+.month .src { font-size: var(--fs-meta); color: var(--ink-3); }
+
+/* ---- Reports & investigations ---- */
+.reports { padding-block: var(--sec); }
+.reports__grid { display: grid; grid-template-columns: minmax(0, 8fr) minmax(0, 4fr); gap: var(--s-6) var(--col-gap); align-items: start; }
+.inv { display: grid; grid-template-columns: repeat(8, minmax(0, 1fr)); }
+.inv__img { grid-column: 3 / -1; grid-row: 1; }
+.inv__panel { grid-column: 1 / span 4; grid-row: 1; align-self: end; position: relative; z-index: 2; margin-bottom: calc(var(--s-7) * -1); background: var(--sheet); padding: var(--s-6) var(--s-6) var(--s-5); display: grid; gap: var(--s-4); box-shadow: 0 24px 48px -32px rgba(16,18,21,.45); }
+.inv__ruler { grid-column: 1 / -1; grid-row: 2; padding-top: calc(var(--s-7) + var(--s-5)); }
+.covers { display: grid; gap: var(--col-gap); }
+
+/* ---- Lens (full-bleed visual segment) ---- */
+.lens { padding-bottom: var(--sec); }
+.lens__stage { position: relative; aspect-ratio: 2.35 / 1; max-height: 78vh; width: 100%; overflow: hidden; }
+.lens__stage img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 58%; filter: saturate(.8) contrast(1.06); }
+.lens__stage::before { content: ""; position: absolute; inset: 0; z-index: 1; background: linear-gradient(270deg, rgba(16,18,21,.88) 0%, rgba(16,18,21,.5) 34%, rgba(16,18,21,0) 62%), linear-gradient(0deg, rgba(16,18,21,.8) 0%, rgba(16,18,21,0) 40%); }
+.lens__over { position: absolute; inset: 0; z-index: 2; display: grid; grid-template-rows: auto 1fr auto; padding-block: clamp(20px, 3vw, 40px); }
+.lens__over .wrap { width: 100%; }
+.lens__title { display: grid; gap: 6px; max-width: 30ch; }
+.lens__title h2 { font-size: var(--fs-h2); font-weight: 800; }
+.lens__title p { color: #BDBAB2; font-size: var(--fs-small); }
+.lens__story { display: flex; align-items: end; justify-content: space-between; gap: var(--s-5); flex-wrap: wrap; }
+.lens__story h3 { font-size: var(--fs-h2); font-weight: 800; max-width: 22ch; color: #F2F0EB; }
+.lens__story .meta { color: #C2BFB7; margin-top: 8px; }
+.lens .play { position: static; }
+.lens__story h3 a { color: #F2F0EB; }
+.contact { display: grid; grid-auto-flow: column; grid-auto-columns: minmax(180px, 1fr); gap: var(--col-gap); margin-top: var(--s-6); overflow-x: auto; scroll-snap-type: x mandatory; padding-bottom: 6px; scrollbar-width: thin; }
+.contact > a { scroll-snap-align: start; display: grid; gap: 8px; }
+.contact .cap { margin: 0; }
+.contact time { font-weight: 700; color: var(--ink); font-variant-numeric: tabular-nums; }
+
+/* ---- Voices: analysis · politics ---- */
+.voices { padding-block: var(--sec); }
+.voices__grid { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: var(--s-7) clamp(28px, 4vw, 64px); }
+.opinion { display: grid; }
+.opinion article { display: grid; grid-template-columns: 56px minmax(0, 1fr); gap: 6px 16px; padding-block: var(--s-5); border-top: 1px solid var(--rule); }
+.opinion article:first-of-type { border-top: 0; padding-top: 0; }
+.opinion .arch-ava { grid-row: span 3; }
+.opinion .who { font-size: var(--fs-meta); color: var(--ink-3); }
+.opinion .who b { color: var(--ink); font-weight: 600; }
+.opinion blockquote { grid-column: 1 / -1; margin-top: var(--s-3); }
+.politics { display: grid; gap: var(--s-5); }
+.politics__lead { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr); gap: var(--col-gap); align-items: start; }
+.politics__rows { display: grid; grid-template-columns: 1fr 1fr; gap: var(--col-gap); border-top: 1px solid var(--rule); padding-top: var(--s-5); }
+
+/* ---- Responsive: re-composed, not shrunk ---- */
+@media (max-width: 1100px) {
+  .also__grid { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
+  .feature { grid-column: 1 / -1; }
+  .reports__grid, .voices__grid { grid-template-columns: 1fr; }
+  .covers { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 900px) {
+  :root { --sash-overlap: 40px; }
+  .lead { padding-top: 0; }
+  .lead__mast { display: none; }
+  .lead__grid { grid-template-columns: 1fr; grid-template-areas: "visual" "head" "body"; grid-template-rows: auto; padding-top: 44px; row-gap: var(--s-5); }
+  .lead__visual { min-height: 0; aspect-ratio: 4 / 3; }
+  .lead__figure { inset-inline-start: 12px; bottom: 20px; }
+  .lead__body { padding-top: 0; padding-bottom: var(--s-6); }
+  .lead .sash-wrap { margin-top: 0; }
+  .orbit__grid { grid-template-columns: 1fr; }
+  .orbit__grid .omap { order: -1; }
+  .orbit__panel [data-panel] { max-height: none; }
+  .month__grid { grid-template-columns: 1fr; }
+  .month__grid > div { padding: var(--s-4) 0; }
+  .month__grid > div + div { border-inline-start: 0; border-top: 1px solid var(--rule); }
+  .inv { grid-template-columns: 1fr; }
+  .inv__img, .inv__panel, .inv__ruler { grid-column: 1; grid-row: auto; }
+  .inv__panel { margin: calc(var(--s-7) * -1) var(--s-4) 0; }
+  .inv__ruler { padding-top: var(--s-5); }
+  .lens__stage { aspect-ratio: 4 / 5; max-height: none; }
+  .lens__stage::before { background: linear-gradient(0deg, rgba(16,18,21,.92) 0%, rgba(16,18,21,.35) 55%, rgba(16,18,21,.55) 100%); }
+  .politics__lead { grid-template-columns: 1fr; }
+}
+@media (max-width: 600px) {
+  .lead__mast > :nth-child(2) { display: none; }
+  .lead__visual { aspect-ratio: 1 / 1; margin-inline: calc(var(--gutter) * -1); }
+  .lead .sash__more { display: none; }
+  .lead .sash__label .live-tag { gap: 6px; }
+  .also__grid, .covers, .politics__rows { grid-template-columns: 1fr; }
+  .places a { grid-template-columns: 60px minmax(0, 1fr) auto; }
+  .places .frame { width: 60px; }
+}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">تخط إلى المحتوى</a>
+<header data-ribbon data-current="home"></header>
+
+<aside class="breaking is-entering" aria-label="خبر عاجل">
+  <div class="wrap breaking__in">
+    <span class="breaking__label"><span class="pulse" aria-hidden="true"></span>عاجل</span>
+    <p class="breaking__text"><a href="live.html">الاحتلال يبعد 4 من حراس المسجد الأقصى لمدة أسبوع بعد اعتقالهم من باحات المسجد صباح اليوم</a></p>
+    <time class="breaking__time" datetime="2026-10-02T09:58">09:58</time>
+    <button class="breaking__close" type="button" aria-label="إخفاء الخبر العاجل"><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18" stroke="currentColor" stroke-width="1.8"/></svg></button>
+  </div>
+</aside>
+
+<main id="main">
+
+  <!-- ===================== Lead: «تحت القبة» ===================== -->
+  <section class="night lead" aria-labelledby="lead-h">
+    <div class="wrap">
+      <div class="lead__mast">
+        <span><b data-date>الاثنين 28 سبتمبر 2026</b> · <span data-hijri></span></span>
+        <span>الطبعة الرقمية · العدد 2841</span>
+        <span>آخر تحديث <b data-clock></b> بتوقيت القدس</span>
+      </div>
+      <div class="lead__grid">
+        <div class="lead__head">
+          <h1 id="lead-h" class="hl-display"><a href="article.html" class="hl"><span class="hl-u">ثالث أيام العرش: إبعاد المصلين عن المصلى القبلي</span></a></h1>
+        </div>
+
+        <figure class="lead__visual">
+          <div class="dome-frame">
+            <span class="dome-pin">صحن قبة الصخرة · 08:12</span>
+            <div class="dome-frame__clip grain">
+              <img src="assets/img/oldcity-1.jpg" srcset="assets/img/oldcity-1-800.jpg 800w, assets/img/oldcity-1.jpg 1200w" sizes="(max-width: 900px) 100vw, 56vw" width="1200" height="1600" alt="أطفال يلعبون على بلاط صحن قبة الصخرة صباح الاثنين قبل بدء الاقتحام الأول" fetchpriority="high" style="object-position: 50% 26%">
+            </div>
+            <svg class="dome-meridians" viewBox="0 0 100 40" preserveAspectRatio="none" aria-hidden="true">
+              <path d="M50 0 V40"/><path d="M50 0 C39 8 32.5 22 31.5 40"/><path d="M50 0 C61 8 67.5 22 68.5 40"/><path d="M50 0 C25 6 13 21 11 40"/><path d="M50 0 C75 6 87 21 89 40"/>
+              <path d="M12 14 Q50 19.5 88 14"/><path d="M2.6 27 Q50 33.5 97.4 27"/>
+            </svg>
+          </div>
+          <figcaption class="lead__figure">
+            <p class="madd"><span aria-hidden="true">مستـــــ<span class="madd__fig">180</span>ـــــوطنا</span><span class="sr">180 مستوطنا</span><span class="madd__tail">اقتحموا الأقصى حتى العاشرة صباحا، بحسب رصد العاصمة</span></p>
+          </figcaption>
+        </figure>
+
+        <div class="lead__body">
+          <p class="dek">طقوس علنية في الساحة الشرقية بحماية مشددة، وقيود على أعمار المصلين عند أبواب البلدة القديمة.</p>
+          <p class="placeline"><b>المسجد الأقصى</b><time datetime="2026-10-02T09:40">09:40</time><span>دعاء ك. ومحمد ع.</span><span>6 دقائق قراءة</span></p>
+          <div class="lead__actions">
+            <a class="btn" href="article.html">اقرأ القصة كاملة</a>
+            <a class="btn btn--quiet" href="live.html">التغطية المباشرة<svg class="i-dir" viewBox="0 0 24 24" aria-hidden="true"><path d="M19 12H5m6-6-6 6 6 6" fill="none" stroke="currentColor" stroke-width="1.8"/></svg></a>
+            <span class="ai-mark"><span class="ai-glyph" aria-hidden="true"></span>ملخص آلي راجعه المحرر</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="wrap sash-wrap">
+      <nav class="sash" aria-label="الآن في القدس: آخر التحديثات">
+        <div class="sash__label"><b>الآن في القدس</b><span class="live-tag"><span class="pulse" aria-hidden="true"></span>مباشر · <span data-stream-count>12</span> تحديثا</span></div>
+        <ol class="sash__list">
+          <li><a href="live.html"><time>09:31</time><small data-ago="41"></small><span>الحصيلة حتى 09:30: 112 مقتحما</span></a></li>
+          <li><a href="live.html"><time>08:47</time><small data-ago="85"></small><span>احتجاز هويات شبان عند باب الأسباط</span></a></li>
+          <li><a href="live.html"><time>08:15</time><small data-ago="117"></small><span>الشرطة تحدد أعمار المصلين عند ثلاثة أبواب</span></a></li>
+          <li><a href="live.html"><time>07:15</time><small data-ago="177"></small><span>إخطارات هدم لثلاثة منازل في وادي قدوم</span></a></li>
+        </ol>
+        <a class="sash__more" href="live.html">كل التحديثات<svg class="i-dir" viewBox="0 0 24 24" aria-hidden="true"><path d="M19 12H5m6-6-6 6 6 6" fill="none" stroke="currentColor" stroke-width="1.8"/></svg></a>
+      </nav>
+    </div>
+  </section>
+
+  <!-- ===================== Also on the front page ===================== -->
+  <section class="also" aria-label="أيضا في الأولى">
+    <div class="wrap also__grid">
+      <article class="feature">
+        <a href="article.html" class="frame r-3x2" tabindex="-1" aria-hidden="true"><img src="assets/img/oldcity-2.jpg" srcset="assets/img/oldcity-2-800.jpg 800w, assets/img/oldcity-2.jpg 1280w" sizes="(max-width: 1100px) 100vw, 48vw" width="1280" height="759" alt="" style="object-position: 50% 30%"></a>
+        <h2 class="hl-2"><a href="article.html" class="hl"><span class="hl-u">تحت حماية الشرطة: الجلوس الجماعي في الساحة الشرقية صار محطة ثابتة في مسار الاقتحام</span></a></h2>
+        <p class="dek">رصدت كاميرا العاصمة المجموعات نفسها تجلس قرب باب الرحمة ثلاثة أسابيع متتالية، في وقت تمنع فيه الشرطة المصلين من الاقتراب.</p>
+        <p class="placeline"><b>الساحة الشرقية</b><span>تقرير مصور</span><span>محمد ع.</span><time>08:40</time></p>
+      </article>
+
+      <div class="also__pair">
+        <article class="story">
+          <a href="article.html" class="frame r-3x2" tabindex="-1" aria-hidden="true"><img src="assets/img/oldcity-3-480.jpg" srcset="assets/img/oldcity-3-480.jpg 480w, assets/img/oldcity-3-800.jpg 800w" sizes="(max-width: 600px) 100vw, 24vw" width="800" height="600" alt="" style="object-position: 62% 55%"></a>
+          <h3 class="hl-4"><a href="article.html" class="hl"><span class="hl-u">40 مستوطنا يعبرون الباحات خلف الشرطة في المجموعة الأولى</span></a></h3>
+          <p class="placeline"><b>باحات الأقصى</b><time>07:40</time></p>
+        </article>
+        <article class="story">
+          <a href="jerusalem.html" class="frame r-3x2 locator" data-locator="silwan" tabindex="-1" aria-hidden="true"></a>
+          <h3 class="hl-4"><a href="article.html" class="hl"><span class="hl-u">وادي قدوم: ثلاثة إخطارات جديدة ترفع المهدد بالهدم إلى 22 منزلا</span></a></h3>
+          <p class="placeline"><b>سلوان</b><time>07:20</time></p>
+        </article>
+      </div>
+
+      <aside class="mostread" aria-labelledby="mr-h">
+        <div class="mostread__head"><h2 id="mr-h">الأكثر قراءة</h2><span class="muted" style="font-size:var(--fs-meta)">آخر 24 ساعة</span></div>
+        <ol class="ranked">
+          <li><a href="article.html">الاحتلال يبعد 4 من حراس الأقصى لأسبوع</a><span class="meta"><span>3,912 قارئا الآن</span></span></li>
+          <li><a href="article.html">ما الذي تغير في مسار الاقتحامات منذ 2023؟</a><span class="meta"><span>2,804 قارئا</span></span></li>
+          <li><a href="article.html">عائلة الرجبي: 40 عاما في البيت و21 يوما للإخلاء</a><span class="meta"><span>1,220 قارئا</span></span></li>
+          <li><a href="article.html">محكمة الاحتلال تمدد اعتقال 3 أطفال من العيسوية</a><span class="meta"><span>980 قارئا</span></span></li>
+          <li><a href="article.html">الأردن يستدعي سفير الاحتلال</a><span class="meta"><span>744 قارئا</span></span></li>
+        </ol>
+      </aside>
+    </div>
+  </section>
+
+  <!-- ===================== Jerusalem orbit ===================== -->
+  <section class="night orbit" aria-labelledby="orbit-h">
+    <div class="dome-horizon" aria-hidden="true" data-dome-horizon></div>
+    <div class="wrap">
+      <div class="orbit__grid">
+        <div class="orbit__panel">
+          <div class="orbit__intro">
+            <h2 id="orbit-h" class="hl-1">مدار القدس</h2>
+            <p class="dek">المدينة مرسومة كما هي، وفي مركزها قبة الصخرة. كل دائرة مسافة حقيقية من الأقصى، وكل خبر مثبت في مكانه. اقترب حتى أبواب المسجد لترى حالتها الآن.</p>
+          </div>
+          <div class="tabs" role="tablist" aria-label="مستوى الخريطة" id="orbit-tabs">
+            <button role="tab" aria-selected="true" data-view="city">المدينة</button>
+            <button role="tab" aria-selected="false" tabindex="-1" data-view="old">البلدة القديمة</button>
+            <button role="tab" aria-selected="false" tabindex="-1" data-view="aqsa">الأقصى الآن</button>
+          </div>
+          <div id="orbit-panel" aria-live="polite"></div>
+          <div class="omap-key"><span aria-hidden="true"><i class="is-hot"></i>نشاط اليوم</span><span aria-hidden="true"><i></i>قصص الأسبوع</span><span aria-hidden="true"><i class="is-ring"></i>المسافة من الأقصى</span><span>خريطة الأساس © مساهمو OpenStreetMap · القصص وحالة الأبواب توضيحية</span></div>
+          <a class="btn btn--line" href="jerusalem.html" style="justify-self:start">ادخل مدار القدس</a>
+        </div>
+        <div class="omap" id="orbit-map" role="group" aria-label="خريطة القدس: البلدة القديمة والأحياء حولها، والمسافات من المسجد الأقصى، وعدد القصص في كل مكان هذا الأسبوع"></div>
+      </div>
+
+      <div class="month" aria-labelledby="month-h">
+        <div class="month__head"><h3 id="month-h">سبتمبر في القدس <span class="muted" style="font-size:var(--fs-meta);font-weight:500">بيانات توضيحية في هذا النموذج</span></h3><a class="more-link" href="jerusalem.html#data">المنهجية والبيانات<svg class="i-dir" viewBox="0 0 24 24" aria-hidden="true"><path d="M19 12H5m6-6-6 6 6 6" fill="none" stroke="currentColor" stroke-width="1.8"/></svg></a></div>
+        <div class="month__grid">
+          <div><p class="madd"><span aria-hidden="true">اقتحــــ<span class="madd__fig">5,412</span>ـــام</span><span class="sr">5,412 اقتحاما</span><span class="madd__tail">دخول مسجل للمستوطنين إلى الأقصى، أعلى من أغسطس بنسبة 38٪</span></p><p class="src">المصدر: رصد العاصمة الميداني</p></div>
+          <div><p class="madd"><span aria-hidden="true">هـــــ<span class="madd__fig">27</span>ـــــدم</span><span class="sr">27 عملية هدم</span><span class="madd__tail">منشأة هدمت أو أجبر أصحابها على هدمها، 11 منها في سلوان</span></p><p class="src">المصدر: رصد العاصمة</p></div>
+          <div><p class="madd"><span aria-hidden="true">اعتقــــ<span class="madd__fig">96</span>ـــال</span><span class="sr">96 حالة اعتقال</span><span class="madd__tail">حالة اعتقال في المدينة، بينها 19 طفلا</span></p><p class="src">المصدر المقترح: نادي الأسير</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== Reports & investigations ===================== -->
+  <section class="reports" aria-labelledby="rep-h">
+    <div class="wrap">
+      <header class="sec-head"><h2 id="rep-h">تقارير وتحقيقات</h2><a class="more-link" href="article.html">كل التقارير<svg class="i-dir" viewBox="0 0 24 24" aria-hidden="true"><path d="M19 12H5m6-6-6 6 6 6" fill="none" stroke="currentColor" stroke-width="1.8"/></svg></a></header>
+      <div class="reports__grid">
+        <article class="inv">
+          <a href="article.html" class="inv__img frame r-4x3 frame--folded" tabindex="-1" aria-hidden="true"><img src="assets/img/aqsa-trees.jpg" srcset="assets/img/aqsa-trees-800.jpg 800w, assets/img/aqsa-trees.jpg 960w" sizes="(max-width: 900px) 100vw, 46vw" loading="lazy" width="960" height="1280" alt="" style="object-position: 50% 52%"></a>
+          <div class="inv__panel">
+            <h3 class="hl-2"><a href="article.html" class="hl"><span class="hl-u">ثلاث سنوات من الطقوس العلنية: كيف تغير مسار الاقتحام في الساحة الشرقية</span></a></h3>
+            <p class="dek" style="font-size:var(--fs-body-sm)">تتبعنا 1,100 اقتحام بالصور والتوقيت. المسار الذي كان يمر في دقائق صار وقوفا طويلا وطقوسا قرب السور الشرقي.</p>
+            <p class="placeline"><b>تحقيق</b><span>رنا س. وفريق البيانات</span><span>14 دقيقة قراءة</span></p>
+          </div>
+          <ol class="inv__ruler ruler" aria-label="فصول التحقيق">
+            <li><b>2023</b><span>المسار القصير</span></li>
+            <li><b>2024</b><span>الوقوف عند باب الرحمة</span></li>
+            <li class="is-key"><b>2025</b><span>الطقوس العلنية</span></li>
+            <li><b>2026</b><span>تحديد أعمار المصلين</span></li>
+          </ol>
+        </article>
+        <div class="covers">
+          <article><a class="cover" href="article.html">
+            <div class="frame r-4x3 locator" data-locator="silwan"></div>
+            <div class="cover__text"><h3 class="cover__h">حي البستان: 88 منزلا تنتظر الجرافات منذ 2005</h3><p class="placeline"><b>ملف مفتوح</b><span>11 قصة</span></p></div>
+          </a></article>
+          <article><a class="cover" href="article.html">
+            <div class="frame r-4x3"><img src="assets/img/oldcity-1-800.jpg" loading="lazy" width="800" height="1067" alt="" style="object-position: 40% 88%"></div>
+            <div class="cover__text"><h3 class="cover__h">أطفال الأقصى: الصلاة تبدأ باللعب</h3><p class="placeline"><b>ملف</b><span>صحن الصخرة</span></p></div>
+          </a></article>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== Lens ===================== -->
+  <section class="night lens" aria-labelledby="lens-h">
+    <div class="lens__stage grain">
+      <img src="assets/img/aqsa-courtyard.jpg" loading="lazy" width="1200" height="1600" alt="عناصر من شرطة الاحتلال ترافق مجموعة مستوطنين بين الأشجار في الساحة الشرقية للمسجد الأقصى">
+      <div class="lens__over">
+        <div class="wrap"><div class="lens__title"><h2 id="lens-h">عدسة العاصمة</h2><p>ما رأته كاميراتنا اليوم، بالترتيب الذي حدث فيه</p></div></div>
+        <div></div>
+        <div class="wrap lens__story">
+          <div><h3><a href="article.html" class="hl"><span class="hl-u">90 دقيقة تحت الزيتون: كاميرا العاصمة ترافق مسار الاقتحام كاملا</span></a></h3><p class="meta"><span>فيديو</span><span>تصوير فريق العاصمة الميداني</span><span>الساحة الشرقية</span></p></div>
+          <a class="play" href="article.html" aria-label="شاهد الفيديو، 3 دقائق و41 ثانية"><span class="play__btn"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M8 5v14l11-7z" fill="currentColor"/></svg></span><span aria-hidden="true">03:41</span></a>
+        </div>
+      </div>
+    </div>
+    <div class="wrap">
+      <div class="contact" data-gallery="lens" aria-label="صباح الاثنين في الأقصى بالصور، افتح أي صورة لعرضها كاملة">
+        <a href="article.html"><span class="frame r-4x5"><img src="assets/img/oldcity-3-480.jpg" loading="lazy" alt="" width="800" height="600" style="object-position: 60% 50%"></span><span class="cap"><time>07:40</time><span>المجموعة الأولى تعبر الباحات</span></span></a>
+        <a href="article.html"><span class="frame r-4x5"><img src="assets/img/oldcity-1-480.jpg" loading="lazy" alt="" width="800" height="1067" style="object-position: 60% 20%"></span><span class="cap"><time>08:12</time><span>صحن الصخرة قبل الاقتحام</span></span></a>
+        <a href="article.html"><span class="frame r-4x5"><img src="assets/img/oldcity-2-480.jpg" loading="lazy" alt="" width="800" height="600" style="object-position: 30% 50%"></span><span class="cap"><time>08:40</time><span>جلوس جماعي في الساحة الشرقية</span></span></a>
+        <a href="article.html"><span class="frame r-4x5"><img src="assets/img/aqsa-trees-480.jpg" loading="lazy" alt="" width="800" height="1067" style="object-position: 70% 60%"></span><span class="cap"><time>09:02</time><span>طقوس قرب السور الشرقي</span></span></a>
+        <a href="article.html"><span class="frame r-4x5"><img src="assets/img/aqsa-courtyard-480.jpg" loading="lazy" alt="" width="800" height="1067" style="object-position: 40% 62%"></span><span class="cap"><time>09:31</time><span>الشرطة ترافق المجموعة الأخيرة</span></span></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== Voices: analysis · politics ===================== -->
+  <section class="voices" aria-label="تحليل وسياسة">
+    <div class="wrap voices__grid">
+      <div>
+        <header class="sec-head"><h2>تحليل ورأي</h2><a class="more-link" href="article.html">كل التحليلات<svg class="i-dir" viewBox="0 0 24 24" aria-hidden="true"><path d="M19 12H5m6-6-6 6 6 6" fill="none" stroke="currentColor" stroke-width="1.8"/></svg></a></header>
+        <div class="opinion">
+          <article>
+            <span class="arch-ava" aria-hidden="true">ن ع</span>
+            <span class="who"><b>نبيل ع.</b> · باحث في شؤون القدس</span>
+            <h3 class="hl-3"><a href="article.html" class="hl"><span class="hl-u">لماذا يختار الاحتلال موسم الأعياد لتثبيت وقائع جديدة في الأقصى؟</span></a></h3>
+            <blockquote class="pull pull--inline"><p>التقسيم الزماني لم يعد مشروعا. صار جدولا يعلق على أبواب المسجد.</p></blockquote>
+          </article>
+          <article>
+            <span class="arch-ava" aria-hidden="true">ر س</span>
+            <span class="who"><b>رنا س.</b> · صحفية بيانات</span>
+            <h3 class="hl-4"><a href="article.html" class="hl"><span class="hl-u">ميزانية «الخطة الخماسية» لشرقي القدس: أين تذهب الأموال فعلا؟</span></a></h3>
+          </article>
+          <article>
+            <span class="arch-ava" aria-hidden="true">ع ح</span>
+            <span class="who"><b>عمر ح.</b> · محرر الشؤون المقدسية</span>
+            <h3 class="hl-4"><a href="article.html" class="hl"><span class="hl-u">بعد قرار الأعمار: هل تعود الصلاة على الأبواب أداة احتجاج؟</span></a></h3>
+          </article>
+        </div>
+      </div>
+      <div>
+        <header class="sec-head"><h2>سياسة</h2><a class="more-link" href="article.html">المزيد<svg class="i-dir" viewBox="0 0 24 24" aria-hidden="true"><path d="M19 12H5m6-6-6 6 6 6" fill="none" stroke="currentColor" stroke-width="1.8"/></svg></a></header>
+        <div class="politics">
+          <article class="politics__lead">
+            <a href="article.html" class="frame r-4x3" tabindex="-1" aria-hidden="true"><img src="assets/img/oldcity-1-480.jpg" srcset="assets/img/oldcity-1-480.jpg 480w, assets/img/oldcity-1-800.jpg 800w" sizes="(max-width: 900px) 100vw, 26vw" loading="lazy" width="800" height="1067" alt="" style="object-position: 50% 12%"></a>
+            <div class="stack">
+              <h3 class="hl-3"><a href="article.html" class="hl"><span class="hl-u">الأردن يستدعي سفير الاحتلال احتجاجا على «المساس بالوضع القائم»</span></a></h3>
+              <p class="dek" style="font-size:var(--fs-body-sm)">الخارجية الأردنية: الأوقاف الإسلامية صاحبة الولاية الحصرية على إدارة شؤون المسجد.</p>
+              <p class="placeline"><b>عمان</b><time>10:05</time></p>
+            </div>
+          </article>
+          <div class="politics__rows">
+            <article class="story"><h3 class="hl-5"><a href="article.html" class="hl"><span class="hl-u">محافظة القدس تطالب بتدخل دولي عاجل لوقف إبعاد الحراس</span></a></h3><p class="placeline"><b>رام الله</b><time>09:50</time></p></article>
+            <article class="story"><h3 class="hl-5"><a href="article.html" class="hl"><span class="hl-u">مشروع قانون لتوسيع صلاحيات بلدية الاحتلال في البلدة القديمة يمر بالقراءة الأولى</span></a></h3><p class="placeline"><b>الكنيست</b><time>أمس</time></p></article>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer data-coda></footer>
+<script src="assets/js/jerusalem-geo.js?v=3" defer></script>
+<script src="assets/js/asima.js?v=17" defer></script>
+<script src="assets/js/jerusalem-map.js?v=5" defer></script>
+<script>
+  addEventListener('DOMContentLoaded', () => {
+    window.AsimaMap?.mount(document.getElementById('orbit-map'), { panel: document.getElementById('orbit-panel'), tabs: document.getElementById('orbit-tabs') });
+  });
+</script>
+</body>
+</html>

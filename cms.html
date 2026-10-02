@@ -1,0 +1,812 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>غرفة التحرير — العاصمة</title>
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Alexandria:wght@300;400;500;600;700;800&family=Noto+Naskh+Arabic:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap">
+<link rel="stylesheet" href="assets/css/asima.css?v=17">
+<style>
+  /* CMS = the same system, denser. Night rail (the ribbon turned vertical), limestone desk. */
+  body { font-size: .9rem; }
+  .cms { display: grid; grid-template-columns: 248px minmax(0, 1fr); min-height: 100vh; }
+  .side-rail { background: var(--night); color: var(--night-fg); position: sticky; top: 0; height: 100vh; overflow-y: auto; display: flex; flex-direction: column; scrollbar-width: thin; }
+  .side-rail__brand { display: flex; align-items: center; gap: 10px; padding: 16px 18px; border-bottom: 1px solid rgba(236,233,226,.12); }
+  .side-rail__brand img { height: 34px; width: auto; }
+  .side-rail__brand span { font-size: .8rem; color: rgba(236,233,226,.6); display: block; }
+  .side-rail__brand b { font-weight: 700; font-size: .9rem; }
+  .side-rail nav { padding: 10px 0; display: grid; }
+  .side-rail h6 { font-size: .8rem; font-weight: 600; color: rgba(236,233,226,.45); padding: 14px 18px 6px; margin: 0; }
+  .side-rail button { display: flex; align-items: center; gap: 12px; width: 100%; padding: 9px 18px; background: none; border: 0; color: rgba(236,233,226,.75); text-align: start; font-size: .86rem; position: relative; min-height: 40px; }
+  .side-rail button:hover { color: #fff; background: rgba(236,233,226,.05); }
+  .side-rail button[aria-current="page"] { color: #fff; background: rgba(236,233,226,.1); font-weight: 700; } .side-rail button[aria-current="page"] svg { color: var(--gold); opacity: 1; }
+  .side-rail button .n { margin-inline-start: auto; font-size: .8rem; color: rgba(236,233,226,.55); font-variant-numeric: tabular-nums; }
+  .side-rail button .n.alert { background: var(--gold); color: #111316; padding: 0 6px; }
+  .side-rail svg { width: 18px; height: 18px; flex: none; opacity: .85; }
+  .side-rail__me { margin-top: auto; padding: 14px 18px; border-top: 1px solid rgba(236,233,226,.12); display: flex; gap: 10px; align-items: center; font-size: .8rem; }
+  .side-rail__me .mono-gram { background: var(--gold); color: #111316; width: 34px; height: 34px; font-size: .78rem; }
+
+  .desk { min-width: 0; display: flex; flex-direction: column; }
+  .topbar { position: sticky; top: 0; z-index: 30; display: flex; align-items: center; gap: 12px; padding: 10px 24px; background: var(--bg); border-bottom: 1px solid var(--rule); min-height: 60px; }
+  .topbar h1 { font-size: 1.15rem; font-weight: 800; }
+  .topbar .crumb { font-size: var(--t-meta); color: var(--ink-3); }
+  .topbar__search { margin-inline-start: auto; display: flex; align-items: center; gap: 8px; background: var(--sheet); box-shadow: inset 0 0 0 1px var(--rule); padding-inline: 12px; min-height: 40px; width: min(340px, 34vw); color: var(--ink-3); font-size: var(--t-sm); border: 0; }
+  .topbar__search svg { width: 16px; height: 16px; }
+  .topbar__search kbd { margin-inline-start: auto; }
+  .menu-btn { display: none; }
+  .view { padding: 24px; display: grid; gap: 24px; align-content: start; }
+  .view[hidden] { display: none; }
+
+  .panel { background: var(--sheet); box-shadow: inset 0 0 0 1px var(--rule); min-width: 0; }
+  .panel__head { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 14px 18px; border-bottom: 1px solid var(--rule); flex-wrap: wrap; }
+  .panel__head h2, .panel__head h3 { font-size: 1rem; font-weight: 800; }
+  .panel__body { padding: 16px 18px; }
+  .panel--flush .panel__body { padding: 0; }
+
+  .kpis { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 0; background: var(--sheet); box-shadow: inset 0 0 0 1px var(--rule); }
+  .kpi { padding: 16px 18px; display: grid; gap: 4px; }
+  .kpi + .kpi { border-inline-start: 1px solid var(--rule); }
+  .kpi dt { font-size: var(--t-meta); color: var(--ink-3); }
+  .kpi dd { margin: 0; font-weight: 800; font-size: 1.9rem; line-height: 1.2; font-variant-numeric: tabular-nums; }
+  .kpi small { font-size: var(--t-meta); color: var(--ink-2); }
+  .kpi--gold { box-shadow: inset 0 3px 0 var(--gold); }
+
+  .g-2 { display: grid; grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr); gap: 24px; align-items: start; }
+  .g-3 { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; align-items: start; }
+
+  .tbl-wrap { overflow-x: auto; }
+  .tbl { width: 100%; border-collapse: collapse; font-size: .84rem; }
+  .tbl th { text-align: start; font-weight: 600; font-size: .8rem; color: var(--ink-3); padding: 10px 14px; border-bottom: 1px solid var(--rule-strong); white-space: nowrap; }
+  .tbl td { padding: 12px 14px; border-bottom: 1px solid var(--rule); vertical-align: middle; }
+  .tbl tr:hover td { background: color-mix(in srgb, var(--sunk) 55%, transparent); }
+  .tbl .t { font-weight: 600; line-height: 1.45; min-width: 260px; }
+  .tbl .mono { font-size: .8rem; color: var(--ink-2); white-space: nowrap; }
+  .mix { display: flex; width: 72px; height: 6px; }
+  .mix i:first-child { background: repeating-linear-gradient(90deg, var(--silver) 0 3px, transparent 3px 5px); }
+  .mix i:last-child { background: var(--ink); }
+
+  .queue-item { display: grid; grid-template-columns: minmax(0, 1fr) 200px auto; gap: 16px; align-items: center; padding: 14px 18px; border-bottom: 1px solid var(--rule); }
+  .queue-item h3 { font-size: .98rem; font-weight: 700; line-height: 1.55; }
+  .queue-item .meta { margin-top: 4px; }
+
+  .signal { display: grid; grid-template-columns: 20px minmax(0, 1fr); gap: 12px; padding: 12px 18px; border-bottom: 1px solid var(--rule); }
+  .signal i { width: 18px; height: 10px; margin-top: .5em; border: 1.5px dashed var(--silver); border-bottom: 0; border-radius: 9px 9px 0 0 / 10px 10px 0 0; }
+  .signal.warn i { border: 0; background: var(--gold); -webkit-mask: var(--dome-mask) center / contain no-repeat; mask: var(--dome-mask) center / contain no-repeat; }
+  .signal b { font-size: .88rem; display: block; line-height: 1.5; }
+  .signal span { font-size: var(--t-meta); color: var(--ink-3); }
+  .signal .row { margin-top: 8px; gap: 6px; }
+
+  /* Editor */
+  .editor { display: grid; grid-template-columns: minmax(0, 1fr) 380px; gap: 0; min-height: calc(100vh - 60px); }
+  .editor__doc { padding: 28px clamp(16px, 4vw, 56px) 120px; padding-inline-start: 148px; min-width: 0; }
+  @media (max-width: 1200px) { .editor__doc { padding-inline-start: clamp(16px, 4vw, 56px); } }
+  .editor__aside { background: var(--sheet); border-inline-start: 1px solid var(--rule); min-width: 0; position: sticky; top: 60px; height: calc(100vh - 60px); overflow-y: auto; }
+  .doc-status { display: grid; gap: 10px; margin-bottom: 22px; }
+  .doc-title { font-family: var(--f-display); font-weight: 800; font-size: clamp(1.6rem, 1.1rem + 1.6vw, 2.4rem); line-height: 1.32; border: 0; background: none; width: 100%; resize: none; outline: none; color: var(--ink); padding: 0; field-sizing: content; min-height: 1.4em; }
+  .doc-dek { font-family: var(--f-display); font-weight: 300; font-size: 1.15rem; line-height: 1.6; border: 0; background: none; width: 100%; resize: none; outline: none; color: var(--ink-2); padding: 0; margin-top: 10px; field-sizing: content; }
+  .doc-title:focus, .doc-dek:focus { box-shadow: inset -3px 0 0 var(--gold); }
+  .doc-body { margin-top: 24px; display: grid; gap: 4px; max-width: 72ch; }
+  .para { position: relative; padding: 8px 0; padding-inline-start: 22px; font-family: var(--f-read); font-size: 1.1rem; line-height: 1.95; outline: none; }
+  .para::before { content: ""; position: absolute; inset-inline-start: 0; top: 12px; bottom: 12px; width: 3px; }
+  .para[data-p="ai"]::before { background: repeating-linear-gradient(180deg, var(--silver) 0 4px, transparent 4px 8px); }
+  .para[data-p="human"]::before { background: var(--ink); }
+  .para[data-p="verified"]::before { background: var(--gold); }
+  .para:focus { background: color-mix(in srgb, var(--gold) 6%, transparent); }
+  .para__tag { position: absolute; inset-inline-start: -116px; top: 12px; width: 100px; font-family: var(--f-display); font-size: .8rem; color: var(--ink-3); text-align: end; line-height: 1.4; }
+  .para h2 { font-family: var(--f-display); font-size: 1.4rem; font-weight: 800; }
+  del.sug { text-decoration: line-through; text-decoration-color: var(--alert); color: var(--ink-3); background: color-mix(in srgb, var(--alert) 8%, transparent); }
+  ins.sug { text-decoration: none; background: color-mix(in srgb, var(--silver) 22%, transparent); box-shadow: inset 0 -2px 0 var(--silver); }
+  .sug-bar { display: inline-flex; gap: 2px; vertical-align: middle; margin-inline-start: 6px; font-family: var(--f-display); }
+  .sug-bar button { font-size: .8rem; border: 0; padding: 2px 8px; background: var(--ink); color: var(--bg); }
+  .sug-bar button + button { background: var(--sunk); color: var(--ink); }
+  .flag { box-shadow: inset 0 -2px 0 var(--gold); background: color-mix(in srgb, var(--gold) 14%, transparent); cursor: help; }
+
+  .actionbar { position: sticky; bottom: 0; z-index: 20; display: flex; align-items: center; gap: 12px; flex-wrap: wrap; padding: 12px 24px; background: var(--night); color: var(--night-fg); --ink: #ECE9E2; --ink-2: #BDBAB2; --ink-3: #8E8B85; --sunk: #2a2d33; }
+  .actionbar .pipeline { flex: 1; min-width: 260px; max-width: 520px; }
+  .actionbar .btn--line { --b-fg: #ECE9E2; box-shadow: inset 0 0 0 1.5px rgba(236,233,226,.6); }
+  .actionbar .btn--line:hover { --b-bg: #ECE9E2; --b-fg: #111316; }
+
+  .ai-block { border-bottom: 1px solid var(--rule); padding: 16px 18px; display: grid; gap: 10px; }
+  .ai-block h3 { font-size: .86rem; font-weight: 800; display: flex; justify-content: space-between; gap: 8px; align-items: center; }
+  .ai-block h3 small { font-weight: 400; font-size: .8rem; color: var(--ink-3); }
+  .opt { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 8px; align-items: start; padding: 10px 12px; box-shadow: inset 0 0 0 1px var(--rule); background: var(--bg); text-align: start; border: 0; width: 100%; color: var(--ink); }
+  .opt:hover { box-shadow: inset 0 0 0 1px var(--ink); }
+  .opt[aria-pressed="true"] { box-shadow: inset 0 0 0 2px var(--gold); }
+  .opt b { font-weight: 600; font-size: .86rem; line-height: 1.5; }
+  .opt .score { font-family: var(--f-mono); font-size: .8rem; color: var(--ink-3); }
+  .chips { display: flex; flex-wrap: wrap; gap: 6px; }
+  .chip { font-size: .8rem; padding: 4px 10px; box-shadow: inset 0 0 0 1px var(--rule-strong); background: none; border: 0; color: var(--ink); display: inline-flex; gap: 6px; align-items: center; }
+  .chip.sug { box-shadow: inset 0 0 0 1px var(--silver); border-style: dashed; color: var(--ink-2); background: repeating-linear-gradient(90deg, transparent 0 6px, var(--silver-soft) 6px 7px); }
+  .chip.on { background: var(--ink); color: var(--bg); box-shadow: none; }
+  .ent { display: grid; grid-template-columns: 64px minmax(0, 1fr); gap: 6px 10px; font-size: .8rem; }
+  .ent dt { color: var(--ink-3); }
+  .ent dd { margin: 0; }
+  .serp { padding: 12px; background: #fff; color: #202124; box-shadow: inset 0 0 0 1px var(--rule); font-family: Arial, sans-serif; direction: rtl; }
+  .serp .u { font-size: .8rem; color: #4d5156; direction: ltr; text-align: right; }
+  .serp .t { color: #1a0dab; font-size: 1rem; line-height: 1.4; margin-top: 2px; }
+  .serp .d { font-size: .8rem; color: #4d5156; line-height: 1.5; margin-top: 2px; }
+  .meter { height: 4px; background: var(--sunk); position: relative; }
+  .meter i { position: absolute; inset-block: 0; inset-inline-start: 0; background: var(--ok); }
+
+  /* Kanban */
+  .board { display: grid; grid-template-columns: repeat(5, minmax(220px, 1fr)); gap: 12px; overflow-x: auto; padding-bottom: 8px; }
+  .col { background: var(--sunk); min-width: 0; display: grid; align-content: start; gap: 8px; padding: 10px; }
+  .col__head { display: flex; justify-content: space-between; align-items: center; padding: 4px 4px 8px; border-bottom: 3px solid var(--ink); }
+  .col__head.ai { border-image: repeating-linear-gradient(90deg, var(--silver) 0 6px, transparent 6px 9px) 1; }
+  .col__head.now { border-color: var(--gold); }
+  .col__head b { font-size: .86rem; }
+  .card { background: var(--sheet); padding: 12px; box-shadow: inset 0 0 0 1px var(--rule); display: grid; gap: 8px; }
+  .card h5 { font-size: .86rem; font-weight: 700; line-height: 1.5; }
+  .card .meta { font-size: .8rem; }
+  .card__who { display: flex; justify-content: space-between; align-items: center; font-size: .8rem; color: var(--ink-3); }
+  .card__who .mono-gram { width: 24px; height: 28px; font-size: .8rem; padding-bottom: 4px; border-radius: 12px 12px 0 0 / 13px 13px 0 0; }
+
+  /* Media */
+  .media-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 12px; }
+  .media-grid figure { display: grid; gap: 6px; }
+  .media-grid button { border: 0; padding: 0; background: none; text-align: start; color: inherit; }
+  .media-grid button[aria-pressed="true"] .frame { outline: 3px solid var(--gold); outline-offset: 2px; }
+  .crops { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px; }
+  .crops .frame { background: var(--sunk); }
+  .crops span { font-size: .8rem; color: var(--ink-3); }
+  .focal { position: absolute; z-index: 2; width: 22px; height: 22px; border: 2px solid var(--gold); border-radius: 50%; transform: translate(50%, -50%); box-shadow: 0 0 0 2px rgba(0,0,0,.4); }
+
+  /* Breaking composer */
+  .levels { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; }
+  .levels label { display: grid; gap: 4px; padding: 12px; box-shadow: inset 0 0 0 1px var(--rule); cursor: pointer; background: var(--bg); }
+  .levels input { position: absolute; opacity: 0; }
+  .levels label:has(input:checked) { box-shadow: inset 0 0 0 2px var(--gold); }
+  .levels label:has(input:focus-visible) { outline: 2px solid var(--gold); outline-offset: 2px; }
+  .levels b { font-size: .9rem; }
+  .levels span { font-size: .8rem; color: var(--ink-3); }
+  .counter { font-family: var(--f-mono); font-size: .8rem; color: var(--ink-3); }
+  .counter.over { color: var(--alert); font-weight: 700; }
+
+  /* Schedule */
+  .day { position: relative; display: grid; grid-template-columns: 56px minmax(0, 1fr); }
+  .day__h { font-family: var(--f-mono); font-size: .8rem; color: var(--ink-3); height: 52px; border-top: 1px solid var(--rule); padding-top: 4px; direction: ltr; text-align: end; padding-inline-end: 10px; }
+  .day__lane { position: relative; border-inline-start: 1px solid var(--rule); }
+  .day__lane .slot { height: 52px; border-top: 1px solid var(--rule); }
+  .ev { position: absolute; inset-inline: 8px 8px; padding: 6px 10px; background: var(--sheet); box-shadow: inset 0 0 0 1px var(--rule); font-size: .8rem; line-height: 1.5; overflow: hidden; }
+  .ev b { display: block; font-weight: 700; }
+  .ev.gold { background: color-mix(in srgb, var(--gold) 16%, var(--sheet)); }
+  .ev.ai { background: repeating-linear-gradient(135deg, var(--sheet) 0 7px, var(--silver-soft) 7px 9px); }
+  .now-line { position: absolute; inset-inline: 0; height: 2px; background: var(--gold); z-index: 2; }
+  .now-line::before { content: attr(data-t); position: absolute; inset-inline-start: -54px; top: -9px; font-family: var(--f-mono); font-size: .8rem; background: var(--gold); color: #111316; padding: 0 4px; }
+
+  /* Analytics */
+  .chart-h { width: 100%; height: auto; }
+  .chart-h .area { fill: color-mix(in srgb, var(--gold) 22%, transparent); }
+  .chart-h .line { fill: none; stroke: var(--gold-deep); stroke-width: 2; }
+  .chart-h .grid { stroke: var(--rule); }
+  .chart-h text { font: 500 11.5px var(--f-display); fill: var(--ink-3); }
+  .chart-h .end { fill: var(--gold-deep); }
+  .hbar { display: grid; grid-template-columns: minmax(0, 1fr) 54px; gap: 4px 12px; align-items: center; font-size: .82rem; }
+  .hbar .b { grid-column: 1 / -1; height: 6px; background: var(--sunk); }
+  .hbar .b i { display: block; height: 100%; background: var(--ink); }
+  .hbar .b i.g { background: var(--gold); }
+  .hbar .v { font-family: var(--f-mono); font-size: .8rem; text-align: end; }
+
+  .perm { width: 100%; border-collapse: collapse; font-size: .84rem; }
+  .perm th, .perm td { padding: 12px 14px; border-bottom: 1px solid var(--rule); text-align: start; }
+  .perm th { font-size: .8rem; color: var(--ink-3); font-weight: 600; border-bottom-color: var(--rule-strong); }
+  .perm td.c { text-align: center; }
+  .perm .yes::before { content: ""; display: inline-block; width: 10px; height: 10px; background: var(--ink); }
+  .perm .sug-only::before { content: ""; display: inline-block; width: 10px; height: 10px; background: repeating-linear-gradient(90deg, var(--silver) 0 3px, transparent 3px 5px); box-shadow: inset 0 0 0 1px var(--silver); }
+  .perm .no::before { content: "—"; color: var(--ink-3); }
+
+  .tree li { padding: 8px 0; border-bottom: 1px solid var(--rule); display: flex; justify-content: space-between; gap: 10px; align-items: center; font-size: .86rem; }
+  .tree li.sub { padding-inline-start: 22px; }
+  .tree li.sub::before { content: "└"; color: var(--ink-3); margin-inline-end: 8px; font-family: var(--f-mono); }
+  .tree .mono { color: var(--ink-3); font-size: .8rem; margin-inline-start: auto; }
+
+  .scrim { display: none; }
+  @media (max-width: 1200px) {
+    .editor { grid-template-columns: 1fr; }
+    .editor__aside { position: static; height: auto; border-inline-start: 0; border-top: 1px solid var(--rule); }
+    .para__tag { position: static; display: block; width: auto; text-align: start; margin-bottom: 2px; }
+  }
+  @media (max-width: 1000px) {
+    .cms { grid-template-columns: 1fr; }
+    .side-rail { position: fixed; inset-block: 0; inset-inline-start: 0; width: 280px; z-index: 70; transform: translateX(100%); transition: transform var(--d-3) var(--ease); }
+    .side-rail:not(.is-open) { visibility: hidden; transition: transform var(--d-3) var(--ease), visibility 0s var(--d-3); }
+    .side-rail.is-open { transform: none; }
+    .scrim.is-open { display: block; position: fixed; inset: 0; z-index: 65; background: var(--scrim); }
+    .menu-btn { display: inline-grid; }
+    .g-2, .g-3 { grid-template-columns: 1fr; }
+    .kpis { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .kpi:nth-child(3) { border-inline-start: 0; }
+    .kpi:nth-child(n+3) { border-top: 1px solid var(--rule); }
+    .queue-item { grid-template-columns: 1fr; }
+    .topbar__search { width: auto; }
+    .topbar__search span, .topbar__search kbd { display: none; }
+  }
+  @media (max-width: 560px) {
+    .view { padding: 16px; }
+    .topbar { padding-inline: 12px; }
+    .levels, .crops { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .actionbar { padding-inline: 12px; }
+    .actionbar .pipeline { order: -1; flex-basis: 100%; }
+  }
+</style>
+</head>
+<body>
+<a class="skip" href="#desk">تخط إلى مساحة العمل</a>
+<div class="cms">
+  <aside class="side-rail" id="rail" aria-label="أقسام غرفة التحرير">
+    <div class="side-rail__brand"><img src="assets/img/logo-mark.png" width="25" height="34" alt=""><div><b>غرفة التحرير</b><span>العاصمة · نسخة المحررين</span></div></div>
+    <nav id="nav"></nav>
+    <div class="side-rail__me"><span class="mono-gram">ع ح</span><div><b style="font-weight:600">عمر ح.</b><div style="color:rgba(236,233,226,.66);font-size:.8rem">محرر مناوب · حتى 16:00</div></div></div>
+  </aside>
+  <div class="scrim" id="scrim"></div>
+
+  <div class="desk" id="desk">
+    <header class="topbar">
+      <button class="icon-btn menu-btn" type="button" id="menuBtn" aria-label="فتح القائمة" aria-controls="rail" aria-expanded="false" data-icon="menu"></button>
+      <div><div class="crumb" id="crumb">غرفة التحرير</div><h1 id="vt">لوحة التحرير</h1></div>
+      <button class="topbar__search" type="button" onclick="asima.toast('بحث غرفة التحرير','ابحث في المقالات والوسائط والكتاب. (نموذج)')"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10.5 18a7.5 7.5 0 1 1 0-15 7.5 7.5 0 0 1 0 15Zm5.3-2.2L21 21" fill="none" stroke="currentColor" stroke-width="1.8"/></svg><span>ابحث أو نفذ أمرا…</span><kbd>Ctrl K</kbd></button>
+      <button class="btn btn--sm btn--gold" type="button" data-go="editor">مادة جديدة</button>
+      <a class="btn btn--sm btn--line" href="home.html" style="clip-path:none">الموقع</a>
+    </header>
+
+    <!-- ===== Dashboard ===== -->
+    <section class="view" id="v-dashboard" aria-label="لوحة التحرير">
+      <dl class="kpis">
+        <div class="kpi"><dt>نشر اليوم</dt><dd>38</dd><small>منها 21 عن القدس</small></div>
+        <div class="kpi kpi--gold"><dt>بانتظار المراجعة</dt><dd>7</dd><small>أقدمها منذ 34 دقيقة</small></div>
+        <div class="kpi"><dt>مسودات آلية جديدة</dt><dd>12</dd><small>من البرقيات والمراسلين</small></div>
+        <div class="kpi"><dt>زمن النشر الوسيط</dt><dd class="mono" style="font-size:1.6rem">18<span style="font-size:.9rem"> د</span></dd><small>من المسودة إلى النشر</small></div>
+      </dl>
+      <div class="g-2">
+        <div class="panel panel--flush">
+          <div class="panel__head"><h2>طابور المراجعة</h2><div class="row" style="gap:6px"><button class="btn btn--sm btn--line" type="button" data-go="review">لوحة المراجعة</button></div></div>
+          <div class="panel__body" id="queue"></div>
+        </div>
+        <div class="stack">
+          <div class="panel panel--flush">
+            <div class="panel__head"><h2>إشارات المساعد</h2><span class="ai-mark"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="3.5" width="17" height="17" fill="none" stroke="currentColor" stroke-width="1.6" stroke-dasharray="2.4 2.4"/></svg>اقتراحات، لا قرارات</span></div>
+            <div class="panel__body">
+              <div class="signal warn"><i></i><div><b>تكرار محتمل: مادتان عن إبعاد الحراس</b><span>تشابه 86٪ بين «إبعاد 4 حراس» و«قرار إبعاد حراس الأوقاف»</span><div class="row"><button class="btn btn--sm" type="button" onclick="asima.toast('دمجت المادتان','الأحدث صار تحديثا داخل الأصل.')">ادمج</button><button class="btn btn--sm btn--quiet" type="button">ليستا مكررتين</button></div></div></div>
+              <div class="signal"><i></i><div><b>قصة صاعدة: «باب الأسباط»</b><span>9 إشارات من المراسلين ووسائل التواصل خلال ساعة</span><div class="row"><button class="btn btn--sm btn--line" type="button" data-go="editor">ابدأ مسودة</button></div></div></div>
+              <div class="signal warn"><i></i><div><b>رقم يحتاج تحقق</b><span>«121 مقتحما» في تحديث 09:31 يخالف الرصد الميداني (112)</span><div class="row"><button class="btn btn--sm" type="button" data-go="live">افتح التغطية</button></div></div></div>
+            </div>
+          </div>
+          <div class="panel">
+            <div class="panel__head"><h2>مباشر الآن</h2><span class="live-tag"><span class="pulse"></span>الأقصى في موسم الأعياد</span></div>
+            <div class="panel__body stack" style="gap:8px"><span class="meta"><span>24 تحديثا</span><span>آخرها 09:58</span><span>3 محررين</span></span><button class="btn btn--sm" type="button" data-go="live">أضف تحديثا</button></div>
+          </div>
+        </div>
+      </div>
+      <div class="g-3">
+        <div class="panel"><div class="panel__head"><h3>على الموقع الآن</h3><span class="mono muted">10:42</span></div><div class="panel__body stack" style="gap:12px">
+          <div class="hbar"><span>إبعاد 4 حراس</span><span class="v">3,912</span><span class="b"><i class="g" style="width:100%"></i></span></div>
+          <div class="hbar"><span>180 مستوطنا يقتحمون</span><span class="v">2,804</span><span class="b"><i style="width:72%"></i></span></div>
+          <div class="hbar"><span>عائلة الرجبي</span><span class="v">1,220</span><span class="b"><i style="width:31%"></i></span></div>
+        </div></div>
+        <div class="panel"><div class="panel__head"><h3>المجدول اليوم</h3><button class="btn btn--sm btn--quiet" type="button" data-go="scheduled">الجدول</button></div><div class="panel__body"><ol class="ledger">
+          <li class="ledger__item"><span class="ledger__time">12:00</span><span class="ledger__node"></span><div class="ledger__body"><h4>نشرة الظهيرة</h4></div></li>
+          <li class="ledger__item is-key"><span class="ledger__time">14:30</span><span class="ledger__node"></span><div class="ledger__body"><h4>تحليل: التقسيم الزماني</h4></div></li>
+          <li class="ledger__item"><span class="ledger__time">18:00</span><span class="ledger__node"></span><div class="ledger__body"><h4>فيديو: 90 دقيقة تحت الزيتون</h4></div></li>
+        </ol></div></div>
+        <div class="panel"><div class="panel__head"><h3>المناوبون</h3></div><div class="panel__body stack" style="gap:12px">
+          <div class="byline"><span class="mono-gram">د.ك</span><div><div class="byline__name">دعاء ك.</div><div class="byline__role">في الباحات · آخر برقية 10:31</div></div></div>
+          <div class="byline"><span class="mono-gram">م.ع</span><div><div class="byline__name">محمد ع.</div><div class="byline__role">تصوير · 14 ملفا جديدا</div></div></div>
+          <div class="byline"><span class="mono-gram">ر.س</span><div><div class="byline__name">رنا س.</div><div class="byline__role">بيانات · من المكتب</div></div></div>
+        </div></div>
+      </div>
+    </section>
+
+    <!-- ===== Articles ===== -->
+    <section class="view" id="v-articles" hidden aria-label="المقالات">
+      <div class="row between">
+        <div class="tabs" role="tablist" aria-label="حالة المقالات">
+          <button role="tab" aria-selected="true">الكل <span class="count">1,284</span></button>
+          <button role="tab" aria-selected="false" tabindex="-1">مسودات آلية <span class="count">12</span></button>
+          <button role="tab" aria-selected="false" tabindex="-1">قيد المراجعة <span class="count">7</span></button>
+          <button role="tab" aria-selected="false" tabindex="-1">مجدولة <span class="count">5</span></button>
+          <button role="tab" aria-selected="false" tabindex="-1">منشورة <span class="count">1,260</span></button>
+        </div>
+        <div class="row" style="gap:8px">
+          <label class="sr" for="fcat">التصنيف</label>
+          <select class="select" id="fcat" style="min-height:38px;width:auto;padding-block:4px"><option>كل التصنيفات</option><option>القدس</option><option>سياسة</option><option>الأسرى</option></select>
+        </div>
+      </div>
+      <div class="panel panel--flush"><div class="tbl-wrap"><table class="tbl" id="articles"><thead><tr><th>العنوان</th><th>الحالة</th><th>الإعداد <span class="sr">نسبة العمل الآلي إلى البشري</span></th><th>الكاتب</th><th>آخر تعديل</th><th>المراجع</th><th><span class="sr">إجراءات</span></th></tr></thead><tbody></tbody></table></div></div>
+      <div class="row between"><span class="muted" style="font-size:var(--t-sm)">1–8 من 1,284</span><nav class="pager" aria-label="الصفحات"><a href="#" aria-current="page">1</a><a href="#">2</a><a href="#">3</a><span>…</span><a href="#">161</a></nav></div>
+      <div class="prov-key"><span><i class="k-ai"></i>نسبة الصياغة الآلية</span><span><i class="k-human"></i>نسبة التحرير البشري</span></div>
+    </section>
+
+    <!-- ===== Editor ===== -->
+    <section class="view" id="v-editor" hidden aria-label="محرر المادة" style="padding:0;gap:0">
+      <div class="editor">
+        <div class="editor__doc">
+          <div class="doc-status">
+            <div class="row" style="gap:16px"><span class="status status--edit">قيد التحرير</span><span class="meta"><span>أنشأها المساعد 09:12 من برقيات دعاء ك.</span><span>آخر حفظ <time data-saved>10:41</time></span></span></div>
+            <div class="prov-key"><span><i class="k-ai"></i>صاغها المساعد</span><span><i class="k-human"></i>عدلها محرر</span><span><i class="k-verified"></i>تحقق منها محرر</span></div>
+          </div>
+          <label class="sr" for="dt">العنوان</label>
+          <textarea class="doc-title" id="dt" rows="2">في ثالث أيام «العرش»: 180 مستوطنا يقتحمون الأقصى وإبعاد المصلين عن المصلى القبلي</textarea>
+          <label class="sr" for="dd">الوصف</label>
+          <textarea class="doc-dek" id="dd" rows="2">اقتحامات على فترتين من باب المغاربة بحماية مشددة، وطقوس علنية في الساحة الشرقية.</textarea>
+          <div class="doc-body" id="docBody">
+            <div class="para" data-p="verified" contenteditable="true"><span class="para__tag" contenteditable="false">تحقق: عمر ح.<br>09:33</span>بدأت الاقتحامات عند السابعة والنصف صباحا من باب المغاربة، وهو الباب الوحيد الذي تسيطر عليه شرطة الاحتلال بالكامل منذ عام 1967.</div>
+            <div class="para" data-p="human" contenteditable="true"><span class="para__tag" contenteditable="false">عدلتها: دعاء<br>09:24</span>قال أحد حراس المسجد للعاصمة إن «الوقوف الطويل في الساحة الشرقية صار هو القاعدة، وليس الاستثناء».</div>
+            <div class="para" data-p="ai" contenteditable="true"><span class="para__tag" contenteditable="false">مسودة آلية<br>لم تراجع</span>واعتقلت الشرطة أربعة من حراس الأوقاف من محيط قبة الصخرة <del class="sug">في ساعات الصباح</del><ins class="sug">نحو التاسعة</ins><span class="sug-bar" contenteditable="false"><button type="button" data-acc>اقبل</button><button type="button" data-rej>ارفض</button></span>، واقتادتهم إلى مركز التحقيق في القشلة، وبلغ عدد المقتحمين <span class="flag" title="المساعد: يخالف الرصد الميداني (112 حتى 09:30)">121</span> في الفترة الصباحية.</div>
+            <div class="para" data-p="ai" contenteditable="true"><span class="para__tag" contenteditable="false">مسودة آلية<br>لم تراجع</span>وقالت دائرة الأوقاف الإسلامية في بيان إن ما جرى «اعتداء على صلاحياتها الحصرية».</div>
+          </div>
+        </div>
+
+        <aside class="editor__aside" aria-label="المساعد التحريري">
+          <div class="panel__head" style="background:var(--sheet)"><h2 class="row" style="gap:8px"><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" style="color:var(--silver)"><rect x="3.5" y="3.5" width="17" height="17" fill="none" stroke="currentColor" stroke-width="1.6" stroke-dasharray="2.4 2.4"/><path d="M8 12h8M12 8v8" stroke="currentColor" stroke-width="1.6"/></svg>المساعد التحريري</h2><span class="muted" style="font-size: .8rem">يقترح · المحرر يقرر</span></div>
+          <div class="tabs" role="tablist" aria-label="أدوات المساعد" style="padding-inline:10px;background:var(--sheet)">
+            <button role="tab" aria-selected="true" aria-controls="ai-write" id="t-write">الصياغة</button>
+            <button role="tab" aria-selected="false" tabindex="-1" aria-controls="ai-meta" id="t-meta">الوسوم و SEO</button>
+            <button role="tab" aria-selected="false" tabindex="-1" aria-controls="ai-check" id="t-check">التحقق والربط</button>
+          </div>
+          <div id="ai-write" role="tabpanel" aria-labelledby="t-write">
+            <div class="ai-block">
+              <h3>عناوين مقترحة <small>اختر أو اكتب عنوانك</small></h3>
+              <div class="stack" style="gap:6px" id="hlOpts">
+                <button class="opt" type="button" aria-pressed="false"><b>180 مستوطنا يقتحمون الأقصى في ثالث أيام «العرش» وإبعاد 4 حراس</b><span class="score">68 ح</span></button>
+                <button class="opt" type="button" aria-pressed="false"><b>إبعاد حراس وتحديد أعمار: صباح ثالث في الأقصى تحت الاقتحام</b><span class="score">59 ح</span></button>
+                <button class="opt" type="button" aria-pressed="false"><b>الأقصى صباح الاثنين: 180 مقتحما ومصلون عند الأبواب</b><span class="score">51 ح</span></button>
+              </div>
+              <button class="btn btn--sm btn--quiet" type="button" style="justify-self:start" id="moreHl">اقترح غيرها</button>
+            </div>
+            <div class="ai-block">
+              <h3>الملخص «باختصار» <small>3 نقاط</small></h3>
+              <ul class="stack" style="gap:6px;font-family:var(--f-read);font-size:.95rem;line-height:1.7">
+                <li class="prov prov--ai">180 مستوطنا اقتحموا الأقصى على فترتين حتى العاشرة.</li>
+                <li class="prov prov--ai">الشرطة حددت أعمار المصلين عند ثلاثة أبواب.</li>
+                <li class="prov prov--ai">إبعاد 4 حراس من الأوقاف لمدة أسبوع.</li>
+              </ul>
+              <div class="row" style="gap:6px"><button class="btn btn--sm" type="button" onclick="this.closest('.ai-block').querySelectorAll('.prov').forEach(l=>{l.classList.remove('prov--ai');l.classList.add('prov--verified')});asima.toast('اعتمد الملخص','سجل باسمك في سلسلة الإعداد.')">اعتمد الملخص</button><button class="btn btn--sm btn--line" type="button">حرر</button></div>
+            </div>
+            <div class="ai-block">
+              <h3>إعادة صياغة الفقرة المحددة</h3>
+              <div class="chips"><button class="chip" type="button">أقصر</button><button class="chip" type="button">أوضح</button><button class="chip" type="button">نبرة خبرية محايدة</button><button class="chip" type="button">لنشرة تيليغرام</button></div>
+            </div>
+            <div class="ai-block">
+              <h3>تسلسل زمني مستخرج <small>5 أحداث</small></h3>
+              <ol class="ledger">
+                <li class="ledger__item"><span class="ledger__time">07:30</span><span class="ledger__node"></span><div class="ledger__body"><h4 style="font-size:.84rem">فتح باب المغاربة</h4></div></li>
+                <li class="ledger__item is-key"><span class="ledger__time">09:02</span><span class="ledger__node"></span><div class="ledger__body"><h4 style="font-size:.84rem">اعتقال 4 حراس</h4></div></li>
+                <li class="ledger__item"><span class="ledger__time">09:58</span><span class="ledger__node"></span><div class="ledger__body"><h4 style="font-size:.84rem">قرار الإبعاد</h4></div></li>
+              </ol>
+              <button class="btn btn--sm btn--line" type="button" style="justify-self:start" onclick="asima.toast('أدرج التسلسل في المادة','يظهر بعلامة «آلي» حتى تراجعه.')">أدرج في المادة</button>
+            </div>
+          </div>
+          <div id="ai-meta" role="tabpanel" aria-labelledby="t-meta" hidden>
+            <div class="ai-block">
+              <h3>التصنيف</h3>
+              <div class="chips"><button class="chip on" type="button">القدس › المسجد الأقصى</button><button class="chip sug" type="button">+ الأعياد اليهودية</button></div>
+            </div>
+            <div class="ai-block">
+              <h3>الوسوم <small>المتقطعة = مقترحة</small></h3>
+              <div class="chips" id="tagChips"><button class="chip on" type="button">المسجد_الأقصى</button><button class="chip on" type="button">باب_المغاربة</button><button class="chip sug" type="button">حراس_الأقصى</button><button class="chip sug" type="button">الإبعاد</button><button class="chip sug" type="button">عيد_العرش</button></div>
+            </div>
+            <div class="ai-block">
+              <h3>معاينة نتيجة البحث</h3>
+              <div class="serp"><div class="u">alasima.news › jerusalem › aqsa</div><div class="t">180 مستوطنا يقتحمون الأقصى وإبعاد 4 حراس | العاصمة</div><div class="d">اقتحامات على فترتين من باب المغاربة، وتحديد أعمار المصلين عند ثلاثة أبواب، وإبعاد 4 من حراس الأوقاف لمدة أسبوع.</div></div>
+              <div class="field"><label for="slug">الرابط المختصر</label><input class="input mono" id="slug" dir="ltr" value="aqsa-sukkot-day3-180" style="min-height:38px;font-size:.8rem"></div>
+              <div class="field"><span class="lbl">طول الوصف</span><div class="meter" aria-hidden="true"><i style="width:78%"></i></div><span class="hint">142 حرفا من 160 · مناسب</span></div>
+            </div>
+            <div class="ai-block">
+              <h3>صورة مقترحة <small>من مكتبة اليوم</small></h3>
+              <div class="crops" style="grid-template-columns:repeat(3,1fr)">
+                <button class="opt" type="button" style="padding:0" aria-pressed="true"><span class="frame r-1x1" style="display:block"><img src="assets/img/aqsa-courtyard-800.jpg" alt="الساحة الشرقية" loading="lazy"></span></button>
+                <button class="opt" type="button" style="padding:0" aria-pressed="false"><span class="frame r-1x1" style="display:block"><img src="assets/img/oldcity-2-800.jpg" alt="مستوطنون يجلسون في الساحة الشرقية" loading="lazy"></span></button>
+                <button class="opt" type="button" style="padding:0" aria-pressed="false"><span class="frame r-1x1" style="display:block"><img src="assets/img/aqsa-trees-800.jpg" alt="مستوطنون قرب السور الشرقي" loading="lazy"></span></button>
+              </div>
+              <div class="field"><label for="alt">النص البديل (مقترح)</label><textarea class="textarea" id="alt" style="min-height:70px;font-size:.84rem">مجموعة من المستوطنين يسيرون في الساحة الشرقية للمسجد الأقصى بين أشجار الزيتون، تحرسهم عناصر من الشرطة.</textarea></div>
+            </div>
+          </div>
+          <div id="ai-check" role="tabpanel" aria-labelledby="t-check" hidden>
+            <div class="ai-block">
+              <h3>نقاط تحتاج تحقق <small>2</small></h3>
+              <div class="signal warn" style="padding-inline:0"><i></i><div><b>«121 مقتحما»</b><span>الرصد الميداني 09:31 يقول 112. مصدر الرقم في المسودة: برقية غير مؤكدة.</span><div class="row"><button class="btn btn--sm" type="button" data-fix>استبدل بـ 112</button><button class="btn btn--sm btn--quiet" type="button">أبق وأضف مصدرا</button></div></div></div>
+              <div class="signal" style="padding-inline:0"><i></i><div><b>«منذ عام 1967»</b><span>متسق مع 14 مادة سابقة في الأرشيف.</span></div></div>
+            </div>
+            <div class="ai-block">
+              <h3>أشخاص وأماكن</h3>
+              <dl class="ent"><dt>أماكن</dt><dd>باب المغاربة · قبة الصخرة · القشلة · الساحة الشرقية</dd><dt>جهات</dt><dd>دائرة الأوقاف الإسلامية · شرطة الاحتلال</dd><dt>أشخاص</dt><dd>— لا أسماء (مصدر مجهول بطلبه)</dd></dl>
+            </div>
+            <div class="ai-block">
+              <h3>مواد مرتبطة <small>للربط داخل المادة</small></h3>
+              <label class="check"><input type="checkbox" checked> ما الذي تغير في مسار الاقتحامات منذ 2023؟</label>
+              <label class="check"><input type="checkbox" checked> التغطية المباشرة: الأقصى في موسم الأعياد</label>
+              <label class="check"><input type="checkbox"> الأردن يستدعي سفير الاحتلال</label>
+            </div>
+            <div class="ai-block">
+              <h3>مواد مشابهة منشورة</h3>
+              <div class="signal warn" style="padding-inline:0"><i></i><div><b>«قرار إبعاد حراس الأوقاف» · منشورة 10:02</b><span>تشابه 86٪. يفضل دمجها كتحديث.</span></div></div>
+            </div>
+          </div>
+        </aside>
+      </div>
+      <div class="actionbar">
+        <ol class="pipeline" aria-label="مرحلة المادة">
+          <li class="done ai">مسودة آلية</li><li class="done">مراجعة</li><li class="now">تحرير</li><li>اعتماد</li><li>نشر</li>
+        </ol>
+        <span style="font-size:var(--t-meta);color:#BDBAB2">فقرتان آليتان لم تراجعا</span>
+        <button class="btn btn--sm btn--line" type="button" onclick="asima.toast('حفظت نسخة','يمكن العودة إليها من سجل التعديلات.')">احفظ</button>
+        <button class="btn btn--sm btn--gold" type="button" id="toApprove">أرسل للاعتماد</button>
+      </div>
+    </section>
+
+    <!-- ===== Review board ===== -->
+    <section class="view" id="v-review" hidden aria-label="المراجعة التحريرية">
+      <p class="muted" style="max-width:70ch">كل مادة تمر بخمس محطات. لا يملك المساعد زر «نشر»: المسودة الآلية تحتاج محررا يراجعها، ومحررا ثانيا يعتمدها للأخبار الحساسة.</p>
+      <div class="board" id="board"></div>
+    </section>
+
+    <!-- ===== AI Assistant governance ===== -->
+    <section class="view" id="v-assistant" hidden aria-label="المساعد الذكي">
+      <div class="g-2">
+        <div class="panel panel--flush">
+          <div class="panel__head"><h2>ما الذي يسمح للمساعد بفعله</h2><span class="muted" style="font-size: .8rem">تعدل من رئيس التحرير فقط</span></div>
+          <div class="tbl-wrap"><table class="perm"><thead><tr><th>المهمة</th><th class="c">يقترح</th><th class="c">يكتب مسودة</th><th class="c">ينشر</th></tr></thead><tbody>
+            <tr><td>العناوين والملخص والنقاط</td><td class="c"><span class="yes"></span></td><td class="c"><span class="sug-only"></span></td><td class="c"><span class="no"></span></td></tr>
+            <tr><td>صياغة خبر من برقيات المراسلين</td><td class="c"><span class="yes"></span></td><td class="c"><span class="sug-only"></span></td><td class="c"><span class="no"></span></td></tr>
+            <tr><td>الوسوم والتصنيف و SEO</td><td class="c"><span class="yes"></span></td><td class="c"><span class="yes"></span></td><td class="c"><span class="no"></span></td></tr>
+            <tr><td>النص البديل للصور</td><td class="c"><span class="yes"></span></td><td class="c"><span class="yes"></span></td><td class="c"><span class="no"></span></td></tr>
+            <tr><td>العاجل</td><td class="c"><span class="yes"></span></td><td class="c"><span class="no"></span></td><td class="c"><span class="no"></span></td></tr>
+            <tr><td>التحليل والرأي</td><td class="c"><span class="no"></span></td><td class="c"><span class="no"></span></td><td class="c"><span class="no"></span></td></tr>
+          </tbody></table></div>
+          <div class="panel__body prov-key"><span><i class="k-human" style="width:10px;height:10px"></i>مسموح</span><span><i class="k-ai" style="width:10px;height:10px"></i>مسموح ويعلم آليا حتى يراجعه محرر</span><span>— غير مسموح</span></div>
+        </div>
+        <div class="stack">
+          <div class="panel"><div class="panel__head"><h3>مهام المساعد الجارية</h3></div><div class="panel__body stack" style="gap:12px">
+            <div class="row between"><span>صياغة 3 برقيات من باب الأسباط</span><span class="status status--ai">يعمل</span></div>
+            <div class="row between"><span>نص بديل لـ 14 صورة جديدة</span><span class="status status--review">بانتظارك</span></div>
+            <div class="row between"><span>رصد التكرار في الأرشيف</span><span class="status status--live">مكتمل</span></div>
+          </div></div>
+          <div class="panel"><div class="panel__head"><h3>دقة الاقتراحات هذا الأسبوع</h3></div><div class="panel__body stack" style="gap:12px">
+            <div class="hbar"><span>عناوين قبلت كما هي</span><span class="v">22٪</span><span class="b"><i style="width:22%"></i></span></div>
+            <div class="hbar"><span>عناوين عدلت ثم قبلت</span><span class="v">51٪</span><span class="b"><i style="width:51%"></i></span></div>
+            <div class="hbar"><span>وسوم مقبولة</span><span class="v">84٪</span><span class="b"><i class="g" style="width:84%"></i></span></div>
+            <div class="hbar"><span>أرقام صححت بعد التحقق</span><span class="v">9</span><span class="b"><i style="width:9%"></i></span></div>
+          </div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Media ===== -->
+    <section class="view" id="v-media" hidden aria-label="مكتبة الوسائط">
+      <div class="g-2">
+        <div class="stack">
+          <div class="row between"><div class="tabs" role="tablist" aria-label="نوع الوسائط"><button role="tab" aria-selected="true">صور <span class="count">14 اليوم</span></button><button role="tab" aria-selected="false" tabindex="-1">فيديو</button><button role="tab" aria-selected="false" tabindex="-1">وثائق</button></div><button class="btn btn--sm" type="button" onclick="asima.toast('ارفع الملفات','اسحبها إلى هنا. نقرأ الوقت والإحداثيات من بيانات الصورة.')">ارفع</button></div>
+          <div class="media-grid" id="mediaGrid"></div>
+        </div>
+        <div class="panel">
+          <div class="panel__head"><h3>تفاصيل الصورة</h3><span class="status status--approved">حقوق: العاصمة</span></div>
+          <div class="panel__body stack">
+            <div class="frame r-3x2" style="position:relative"><img src="assets/img/aqsa-courtyard-800.jpg" alt="" id="mPrev"><span class="focal" style="top:58%;right:46%" aria-hidden="true"></span></div>
+            <span class="hint" style="font-size: .8rem;color:var(--ink-3)">نقطة التركيز تحدد القص في كل المقاسات</span>
+            <div class="crops">
+              <div><div class="frame r-4x5"><img src="assets/img/aqsa-courtyard-800.jpg" alt="" style="object-position:46% 58%"></div><span>4:5 رئيسي</span></div>
+              <div><div class="frame r-3x2"><img src="assets/img/aqsa-courtyard-800.jpg" alt="" style="object-position:46% 58%"></div><span>3:2 قياسي</span></div>
+              <div><div class="frame r-16x9"><img src="assets/img/aqsa-courtyard-800.jpg" alt="" style="object-position:46% 58%"></div><span>16:9 فيديو</span></div>
+              <div><div class="frame r-1x1"><img src="assets/img/aqsa-courtyard-800.jpg" alt="" style="object-position:46% 58%"></div><span>1:1 مصغر</span></div>
+            </div>
+            <dl class="ent"><dt>المصور</dt><dd>محمد ع.</dd><dt>الوقت</dt><dd class="mono">28.09.2026 09:06</dd><dt>المكان</dt><dd class="coord">31.7769 ش · 35.2367 ق</dd><dt>الحجم</dt><dd class="mono">1920×2560 · نسخ AVIF/WebP آلية</dd></dl>
+            <div class="field"><label for="malt">النص البديل</label><textarea class="textarea" id="malt" style="min-height:70px">مستوطنون يسيرون في الساحة الشرقية بين أشجار الزيتون بحراسة الشرطة.</textarea><span class="hint">اقترحه المساعد · لم يراجع بعد</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Taxonomy ===== -->
+    <section class="view" id="v-taxonomy" hidden aria-label="التصنيفات والوسوم">
+      <div class="g-2">
+        <div class="panel"><div class="panel__head"><h3>شجرة التصنيفات</h3><button class="btn btn--sm btn--line" type="button">تصنيف جديد</button></div><div class="panel__body"><ul class="tree">
+          <li><b>القدس</b><span class="mono">642</span></li>
+          <li class="sub">المسجد الأقصى<span class="mono">218</span></li>
+          <li class="sub">البلدة القديمة<span class="mono">131</span></li>
+          <li class="sub">سلوان<span class="mono">74</span></li>
+          <li class="sub">الشيخ جراح<span class="mono">52</span></li>
+          <li><b>سياسة</b><span class="mono">301</span></li>
+          <li><b>الأسرى</b><span class="mono">188</span></li>
+          <li><b>الاستيطان</b><span class="mono">97</span></li>
+          <li><b>عدسة</b><span class="mono">56</span></li>
+        </ul></div></div>
+        <div class="stack">
+          <div class="panel panel--flush"><div class="panel__head"><h3>وسوم متشابهة</h3><span class="ai-mark">اكتشفها المساعد</span></div><div class="panel__body">
+            <div class="signal warn"><i></i><div><b>#الأقصى · #المسجد_الأقصى · #الاقصى</b><span>3 وسوم لنفس الموضوع · 412 مادة</span><div class="row"><button class="btn btn--sm" type="button" onclick="asima.toast('دمجت الوسوم','المواد كلها صارت تحت #المسجد_الأقصى، والروابط القديمة تحول تلقائيا.')">ادمج في #المسجد_الأقصى</button></div></div></div>
+            <div class="signal"><i></i><div><b>#باب_العامود · #باب_دمشق</b><span>اسمان للمكان نفسه · 61 مادة</span></div></div>
+          </div></div>
+          <div class="empty"><svg class="empty__glyph" viewBox="0 0 56 56" aria-hidden="true"><rect x="8" y="8" width="40" height="40" fill="none" stroke="currentColor" stroke-dasharray="3 4"/><path d="M20 28h16" stroke="var(--gold)" stroke-width="2"/></svg><h4>لا وسوم يتيمة</h4><p>كل الوسوم مرتبطة بمادة واحدة على الأقل. نراجع هذا أسبوعيا.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Authors ===== -->
+    <section class="view" id="v-authors" hidden aria-label="الكتاب">
+      <div class="panel panel--flush"><div class="tbl-wrap"><table class="tbl"><thead><tr><th>الاسم</th><th>الدور</th><th>الصلاحيات</th><th>مواد هذا الشهر</th><th>الحالة</th></tr></thead><tbody>
+        <tr><td><div class="byline"><span class="mono-gram">ع ح</span><div class="byline__name">عمر ح.</div></div></td><td>محرر الشؤون المقدسية</td><td>تحرير · اعتماد · عاجل</td><td class="mono">64</td><td><span class="status status--live">مناوب</span></td></tr>
+        <tr><td><div class="byline"><span class="mono-gram">د.ك</span><div class="byline__name">دعاء ك.</div></div></td><td>مراسلة · البلدة القديمة</td><td>كتابة · برقيات</td><td class="mono">48</td><td><span class="status status--live">في الميدان</span></td></tr>
+        <tr><td><div class="byline"><span class="mono-gram">م.ع</span><div class="byline__name">محمد ع.</div></div></td><td>مصور</td><td>وسائط</td><td class="mono">212</td><td><span class="status status--live">في الميدان</span></td></tr>
+        <tr><td><div class="byline"><span class="mono-gram">ر.س</span><div class="byline__name">رنا س.</div></div></td><td>صحفية بيانات</td><td>كتابة · رسوم بيانية</td><td class="mono">9</td><td><span class="status status--scheduled">من المكتب</span></td></tr>
+        <tr><td><div class="byline"><span class="mono-gram">ن.ع</span><div class="byline__name">نبيل ع.</div></div></td><td>كاتب رأي</td><td>كتابة فقط</td><td class="mono">4</td><td><span class="status status--scheduled">خارجي</span></td></tr>
+      </tbody></table></div></div>
+    </section>
+
+    <!-- ===== Breaking composer ===== -->
+    <section class="view" id="v-breaking" hidden aria-label="العاجل">
+      <div class="g-2">
+        <form class="panel" id="brkForm" novalidate>
+          <div class="panel__head"><h2>خبر عاجل جديد</h2><span class="muted" style="font-size: .8rem">العاجل لا يكتب آليا</span></div>
+          <div class="panel__body stack">
+            <fieldset style="border:0;padding:0;margin:0" class="stack"><legend class="lbl" style="font-weight:600;font-size:var(--t-sm);margin-bottom:8px">المستوى</legend>
+              <div class="levels">
+                <label><input type="radio" name="lvl" value="1" checked><b>عاجل</b><span>شريط ذهبي على كل الصفحات + إشعار. يحتاج محررين.</span></label>
+                <label><input type="radio" name="lvl" value="2"><b>هام</b><span>شريط داكن على الصفحات ذات الصلة.</span></label>
+                <label><input type="radio" name="lvl" value="3"><b>تحديث</b><span>داخل التغطية المباشرة فقط.</span></label>
+              </div>
+            </fieldset>
+            <div class="field"><label for="brkText">نص الخبر</label><textarea class="textarea" id="brkText" maxlength="160" style="min-height:90px">الاحتلال يبعد 4 من حراس المسجد الأقصى لمدة أسبوع بعد اعتقالهم من باحات المسجد صباح اليوم</textarea><div class="row between"><span class="hint">جملة واحدة. الفعل أولا. بلا صفات.</span><span class="counter" id="brkCount"></span></div></div>
+            <div class="field"><label for="brkLink">يرتبط بـ</label><select class="select" id="brkLink"><option>التغطية المباشرة: الأقصى في موسم الأعياد</option><option>بلا رابط</option></select></div>
+            <div class="row" style="gap:20px"><label class="check"><input type="checkbox" checked> الموقع</label><label class="check"><input type="checkbox" checked> إشعار التطبيق</label><label class="check"><input type="checkbox" checked> تيليغرام</label><label class="check"><input type="checkbox"> واتساب</label></div>
+            <div class="field"><label for="brkTtl">يختفي الشريط بعد</label><select class="select" id="brkTtl"><option>30 دقيقة</option><option selected>ساعة</option><option>3 ساعات</option></select></div>
+          </div>
+          <div class="modal__foot" style="justify-content:space-between"><span class="hint" style="font-size: .8rem;color:var(--ink-3)">الاعتماد الثاني: رئيس التحرير المناوب</span><div class="row"><button class="btn btn--line btn--sm" type="button">احفظ مسودة</button><button class="btn btn--gold btn--sm" type="submit">اطلب الاعتماد</button></div></div>
+        </form>
+        <div class="stack">
+          <span class="lbl" style="font-weight:600;font-size:var(--t-sm)">معاينة على الموقع</span>
+          <div id="brkPrev"></div>
+          <div class="panel"><div class="panel__head"><h3>العاجل النشط</h3></div><div class="panel__body stack" style="gap:10px">
+            <div class="row between"><span><span class="prio prio--2">هام</span>الفترة الثانية تبدأ بعد الظهر</span><span class="mono muted">10:40 · ينتهي 11:40</span></div>
+          </div></div>
+          <div class="empty" style="padding:var(--s-5)"><h4>لا عاجل بانتظار الاعتماد</h4><p>عندما يطلب محرر اعتمادا يظهر هنا ويصلك إشعار.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Live console ===== -->
+    <section class="view" id="v-live" hidden aria-label="التغطية المباشرة">
+      <div class="g-2">
+        <div class="stack">
+          <form class="panel" id="liveForm">
+            <div class="panel__head"><h2>تحديث جديد · الأقصى في موسم الأعياد</h2><span class="live-tag"><span class="pulse"></span>على الهواء</span></div>
+            <div class="panel__body stack">
+              <div class="field"><label for="lvText">النص</label><textarea class="textarea" id="lvText" placeholder="ماذا حدث؟ أين؟ متى؟" style="min-height:90px"></textarea></div>
+              <div class="row" style="gap:16px"><label class="check"><input type="radio" name="lp" checked> تحديث</label><label class="check"><input type="radio" name="lp"> هام</label><label class="check"><input type="radio" name="lp"> تصحيح</label><label class="check"><input type="checkbox"> لحظة مفصلية</label></div>
+              <div class="row between"><button class="btn btn--sm btn--quiet" type="button">أرفق صورة من اليوم</button><button class="btn btn--sm" type="submit">انشر التحديث</button></div>
+            </div>
+          </form>
+          <div class="panel panel--flush"><div class="panel__head"><h3>آخر التحديثات</h3></div><div class="panel__body"><div class="stream" id="lvStream" style="padding-inline:18px">
+            <article class="stream__item stream__item--p1"><div class="stream__t">09:58</div><div><h4><span class="prio prio--1">عاجل</span>إبعاد 4 حراس لأسبوع</h4><span class="meta"><span>ع.ح</span><span>نشر</span></span></div></article>
+            <article class="stream__item stream__item--fix"><div class="stream__t">09:50</div><div><h4><span class="prio" style="background:var(--alert);color:#fff">تصحيح</span>العدد 112 وليس 121</h4></div></article>
+          </div></div></div>
+        </div>
+        <div class="panel panel--flush"><div class="panel__head"><h3>برقيات المراسلين</h3><span class="ai-mark">مرتبة آليا حسب الأهمية</span></div><div class="panel__body">
+          <div class="signal"><i></i><div><b>د.ك 10:31 · «الشرطة تنصب سواتر عند باب المغاربة»</b><span>صورة مرفقة · لم تنشر</span><div class="row"><button class="btn btn--sm" type="button" data-wire>حولها لتحديث</button></div></div></div>
+          <div class="signal"><i></i><div><b>م.ع 10:18 · 6 صور من باب حطة</b><span>المساعد اقترح نصا بديلا</span></div></div>
+          <div class="signal"><i></i><div><b>مصدر محلي 10:05 · «اعتقال شاب من العيسوية»</b><span>مصدر واحد · يحتاج تأكيدا ثانيا</span></div></div>
+        </div></div>
+      </div>
+    </section>
+
+    <!-- ===== Scheduled ===== -->
+    <section class="view" id="v-scheduled" hidden aria-label="النشر المجدول">
+      <div class="g-2">
+        <div class="panel"><div class="panel__head"><h2>الاثنين 28 سبتمبر</h2><div class="row" style="gap:4px"><button class="btn btn--sm btn--line" type="button">السابق</button><button class="btn btn--sm btn--line" type="button">التالي</button></div></div><div class="panel__body"><div class="day" id="day"></div></div></div>
+        <div class="panel"><div class="panel__head"><h3>قواعد الجدولة</h3></div><div class="panel__body stack" style="gap:10px;font-size:var(--t-sm)">
+          <p>لا تنشر مادة مجدولة إذا كان هناك عاجل نشط عن الموضوع نفسه؛ تؤجل وتبلغ صاحبها.</p>
+          <p>المواد الآلية لا تجدول قبل اعتمادها.</p>
+          <p>نشرة الفجر ترسل 06:45 بتوقيت القدس.</p>
+        </div></div>
+      </div>
+    </section>
+
+    <!-- ===== Analytics ===== -->
+    <section class="view" id="v-analytics" hidden aria-label="التحليلات">
+      <dl class="kpis">
+        <div class="kpi"><dt>قراء اليوم</dt><dd>48.2K</dd><small>+12٪ عن الاثنين الماضي</small></div>
+        <div class="kpi kpi--gold"><dt>حصة القدس من القراءة</dt><dd>61٪</dd><small>هدف الربع: 55٪</small></div>
+        <div class="kpi"><dt>متوسط زمن القراءة</dt><dd class="mono" style="font-size:1.6rem">3:12</dd><small>للمقالات الطويلة 5:40</small></div>
+        <div class="kpi"><dt>مشتركو نشرة الفجر</dt><dd>9,418</dd><small>معدل الفتح 47٪</small></div>
+      </dl>
+      <div class="g-2">
+        <div class="panel"><div class="panel__head"><h3>القراء حسب الساعة · اليوم</h3><span class="mono muted">بتوقيت القدس</span></div><div class="panel__body"><svg class="chart-h" id="hourChart" viewBox="0 0 600 220" role="img" aria-label="القراءة حسب الساعة: ذروة عند العاشرة صباحا بنحو 6,200 قارئ"></svg></div></div>
+        <div class="panel"><div class="panel__head"><h3>من أعد ما قرئ</h3></div><div class="panel__body stack" style="gap:12px">
+          <div class="hbar"><span>تحرير بشري كامل</span><span class="v">58٪</span><span class="b"><i style="width:58%"></i></span></div>
+          <div class="hbar"><span>مسودة آلية + تحرير</span><span class="v">39٪</span><span class="b"><i class="g" style="width:39%"></i></span></div>
+          <div class="hbar"><span>آلي مع مراجعة خفيفة (وسوم، بديل)</span><span class="v">3٪</span><span class="b"><i style="width:3%"></i></span></div>
+          <p class="hint" style="font-size: .8rem;color:var(--ink-3)">لا يوجد محتوى منشور بلا مراجعة بشرية.</p>
+        </div></div>
+      </div>
+    </section>
+
+    <!-- ===== Settings ===== -->
+    <section class="view" id="v-settings" hidden aria-label="الإعدادات">
+      <div class="g-2">
+        <div class="panel"><div class="panel__head"><h2>سياسة الشفافية على الموقع</h2></div><div class="panel__body stack">
+          <label class="row between"><span>إظهار «كيف أعد هذا الخبر» في كل مقال</span><input class="switch" type="checkbox" checked></label>
+          <label class="row between"><span>وسم الملخصات الآلية للقارئ</span><input class="switch" type="checkbox" checked></label>
+          <label class="row between"><span>إظهار أسماء المراجعين</span><input class="switch" type="checkbox" checked></label>
+          <label class="row between"><span>السماح للمساعد بترتيب البرقيات</span><input class="switch" type="checkbox" checked></label>
+          <label class="row between"><span>اعتماد ثان لكل مادة عن الأقصى</span><input class="switch" type="checkbox"></label>
+        </div></div>
+        <div class="stack">
+          <div class="panel state-err"><div class="panel__body stack" style="gap:8px"><b>تعذر الاتصال بخدمة الإشعارات</b><span style="font-size:var(--t-sm)">آخر محاولة 10:36. العاجل سيظهر على الموقع، لكن إشعارات التطبيق متوقفة حتى يعود الاتصال.</span><div class="row"><button class="btn btn--sm" type="button" onclick="asima.toast('جاري إعادة المحاولة','سنخبرك عند عودة الخدمة.')">أعد المحاولة</button><button class="btn btn--sm btn--quiet" type="button">تفاصيل تقنية</button></div></div></div>
+          <div class="panel"><div class="panel__head"><h3>حالات التحميل</h3></div><div class="panel__body stack" style="gap:8px"><div class="skel skel-hl" style="width:70%"></div><div class="skel skel-line w80"></div><div class="skel skel-line w60"></div><div class="skel" style="height:120px;margin-top:8px"></div></div></div>
+        </div>
+      </div>
+    </section>
+  </div>
+</div>
+
+<dialog class="modal" id="approveDlg" aria-labelledby="ad-h">
+  <div class="modal__head"><h2 id="ad-h" style="font-size:1.05rem;font-weight:800">إرسال للاعتماد</h2><button class="icon-btn" type="button" data-close aria-label="إغلاق" data-icon="close"></button></div>
+  <div class="modal__body stack">
+    <p>في المادة <b>فقرتان آليتان لم يراجعهما أحد</b> ورقم واحد عليه علامة تحقق.</p>
+    <ol class="pipeline"><li class="done ai">مسودة آلية</li><li class="done">مراجعة</li><li class="done">تحرير</li><li class="now">اعتماد</li><li>نشر</li></ol>
+    <div class="field"><label for="appr">المعتمد</label><select class="select" id="appr"><option>رئيس التحرير المناوب — سامي</option><option>نائبة رئيس التحرير — هبة</option></select></div>
+    <div class="field"><label for="note">ملاحظة</label><textarea class="textarea" id="note" style="min-height:70px" placeholder="ما الذي يجب أن ينتبه له المعتمد؟"></textarea></div>
+  </div>
+  <div class="modal__foot"><button class="btn btn--line btn--sm" type="button" data-close>ارجع للمادة</button><button class="btn btn--gold btn--sm" type="button" id="sendAppr">أرسل رغم ذلك</button></div>
+</dialog>
+
+<script src="assets/js/asima.js?v=17" defer></script>
+<script>
+addEventListener('DOMContentLoaded', () => {
+  const $ = s => document.querySelector(s), $$ = s => [...document.querySelectorAll(s)];
+  const views = [
+    ['', 'التحرير'],
+    ['dashboard', 'لوحة التحرير', 'home'], ['articles', 'المقالات', 'menu', '1,284'], ['editor', 'مادة جديدة', 'ai'], ['review', 'المراجعة', 'save', '7', true], ['assistant', 'المساعد الذكي', 'ai'],
+    ['', 'المحتوى'],
+    ['media', 'مكتبة الوسائط', 'video'], ['taxonomy', 'التصنيفات والوسوم', 'menu'], ['authors', 'الكتاب', 'home'],
+    ['', 'على الهواء'],
+    ['breaking', 'العاجل', 'live'], ['live', 'التغطية المباشرة', 'live', '24'], ['scheduled', 'المجدول', 'save', '5'],
+    ['', 'الإدارة'],
+    ['analytics', 'التحليلات', 'search'], ['settings', 'الإعدادات', 'menu'],
+  ];
+  $('#nav').innerHTML = views.map(([k, t, ic, n, alert]) => k ? `<button type="button" data-go="${k}">${asima.icon(ic)}${t}${n ? `<span class="n ${alert ? 'alert' : ''}">${n}</span>` : ''}</button>` : `<h6>${t}</h6>`).join('');
+  const rail = $('#rail'), scrim = $('#scrim'), menuBtn = $('#menuBtn');
+  const closeRail = () => { rail.classList.remove('is-open'); scrim.classList.remove('is-open'); menuBtn.setAttribute('aria-expanded', 'false'); };
+  menuBtn.onclick = () => { rail.classList.add('is-open'); scrim.classList.add('is-open'); menuBtn.setAttribute('aria-expanded', 'true'); rail.querySelector('button').focus(); };
+  scrim.onclick = closeRail;
+  const go = k => {
+    if (!document.getElementById('v-' + k)) k = 'dashboard';
+    $$('.view').forEach(v => { v.hidden = v.id !== 'v-' + k; });
+    $$('#nav [data-go]').forEach(b => b.toggleAttribute('aria-current', b.dataset.go === k) || b.dataset.go === k && b.setAttribute('aria-current', 'page'));
+    $$('#nav [data-go]').forEach(b => { if (b.dataset.go === k) b.setAttribute('aria-current', 'page'); else b.removeAttribute('aria-current'); });
+    const v = views.find(x => x[0] === k);
+    $('#vt').textContent = v[1];
+    $('#crumb').textContent = k === 'editor' ? 'المقالات › تحرير' : 'غرفة التحرير';
+    document.title = `${v[1]} — غرفة التحرير`;
+    if (location.hash !== '#' + k) history.replaceState(null, '', '#' + k);
+    closeRail(); scrollTo(0, 0);
+  };
+  document.addEventListener('click', e => { const b = e.target.closest('[data-go]'); if (b) go(b.dataset.go); });
+  go(location.hash.slice(1) || 'dashboard');
+  addEventListener('hashchange', () => go(location.hash.slice(1)));
+
+  // queue
+  const q = [
+    ['إبعاد 4 من حراس الأقصى لمدة أسبوع', 'ai', 1, 'د.ك', '34 د'],
+    ['احتجاز هويات عند باب الأسباط', 'human', 2, 'د.ك', '21 د'],
+    ['الأردن يستدعي سفير الاحتلال', 'ai', 2, 'المساعد', '12 د'],
+    ['عائلة الرجبي: 21 يوما للإخلاء', 'human', 3, 'ر.س', '8 د'],
+  ];
+  const pipe = st => `<ol class="pipeline">${['مسودة', 'مراجعة', 'تحرير', 'اعتماد', 'نشر'].map((s, i) => `<li class="${i < st ? 'done' : i === st ? 'now' : ''} ${i === 0 ? 'ai' : ''}"><span class="sr">${s}</span></li>`).join('')}</ol>`;
+  $('#queue').innerHTML = q.map(([t, p, st, who, age]) => `<div class="queue-item"><div><h3>${t}</h3><div class="meta"><span>${p === 'ai' ? 'مسودة آلية' : 'كتابة بشرية'}</span><span>${who}</span><span>ينتظر ${age}</span></div></div>${pipe(st)}<button class="btn btn--sm ${st === 3 ? 'btn--gold' : 'btn--line'}" type="button" data-go="editor">${st === 3 ? 'اعتمد' : 'راجع'}</button></div>`).join('');
+
+  // articles table
+  const rows = [
+    ['180 مستوطنا يقتحمون الأقصى في ثالث أيام «العرش»', 'live', 'منشورة', 35, 'دعاء ك.', '10:12', 'ع.ح'],
+    ['إبعاد 4 من حراس الأقصى لمدة أسبوع', 'review', 'قيد المراجعة', 80, 'المساعد', '09:58', '—'],
+    ['الأردن يستدعي سفير الاحتلال', 'ai', 'مسودة آلية', 100, 'المساعد', '10:05', '—'],
+    ['تحليل: التقسيم الزماني بعد ثلاث سنوات', 'scheduled', 'مجدولة 14:30', 0, 'نبيل ع.', 'أمس', 'ع.ح'],
+    ['عائلة الرجبي: 21 يوما للإخلاء', 'approved', 'معتمدة', 10, 'رنا س.', '09:40', 'هبة'],
+    ['وادي قدوم: ثلاثة إخطارات هدم', 'live', 'منشورة', 45, 'دعاء ك.', '07:20', 'ع.ح'],
+    ['محكمة الاحتلال تمدد اعتقال 3 أطفال', 'edit', 'قيد التحرير', 60, 'المساعد', '09:10', '—'],
+    ['تمرير مشروع قانون صلاحيات البلدية', 'rejected', 'مرفوضة', 100, 'المساعد', 'أمس', 'سامي'],
+  ];
+  $('#articles tbody').innerHTML = rows.map(([t, s, sl, ai, a, u, r]) => `<tr><td class="t"><a href="#editor" data-go="editor">${t}</a></td><td><span class="status status--${s}">${sl}</span></td><td><span class="mix" title="${ai}٪ آلي · ${100 - ai}٪ بشري"><i style="width:${ai}%"></i><i style="width:${100 - ai}%"></i></span></td><td>${a}</td><td class="mono">${u}</td><td>${r}</td><td><button class="icon-btn" type="button" aria-label="خيارات: ${t}" onclick="asima.toast('خيارات المادة','تحرير · نسخ · سجل التعديلات · إلغاء النشر')">⋯</button></td></tr>`).join('');
+
+  // board
+  const cols = [
+    ['مسودة آلية', 'ai', [['الأردن يستدعي سفير الاحتلال', 'المساعد', '10:05'], ['3 برقيات من باب الأسباط', 'المساعد', '10:31']]],
+    ['مراجعة', '', [['إبعاد 4 حراس لأسبوع', 'ع.ح', '09:58'], ['محكمة تمدد اعتقال 3 أطفال', 'ع.ح', '09:10']]],
+    ['تحرير', '', [['احتجاز هويات عند باب الأسباط', 'د.ك', '08:50']]],
+    ['اعتماد', 'now', [['عائلة الرجبي: 21 يوما للإخلاء', 'هبة', '09:40']]],
+    ['منشور اليوم', '', [['180 مستوطنا يقتحمون الأقصى', 'ع.ح', '09:40'], ['وادي قدوم: 3 إخطارات', 'ع.ح', '07:20'], ['نشرة الفجر', 'سامي', '06:45']]],
+  ];
+  $('#board').innerHTML = cols.map(([t, c, cards]) => `<section class="col" aria-label="${t}"><div class="col__head ${c}"><b>${t}</b><span class="mono muted">${cards.length}</span></div>${cards.map(([h, w, tm]) => `<article class="card ${c === 'ai' ? 'prov prov--ai' : ''}"><h5>${h}</h5><div class="card__who"><span class="row" style="gap:6px"><span class="mono-gram">${w === 'المساعد' ? '◌' : w.slice(0, 3)}</span>${w}</span><span class="mono">${tm}</span></div></article>`).join('')}</section>`).join('');
+
+  // media grid
+  const imgs = ['aqsa-courtyard', 'oldcity-1', 'oldcity-2', 'oldcity-3', 'aqsa-trees', 'aqsa-courtyard', 'oldcity-2', 'oldcity-1'];
+  $('#mediaGrid').innerHTML = imgs.map((n, i) => `<figure><button type="button" aria-pressed="${i === 0}"><span class="frame r-1x1" style="display:block"><img src="assets/img/${n}-480.jpg" alt="" loading="lazy" width="480" height="480"></span></button><figcaption class="meta"><span class="mono">${['09:06', '08:12', '08:40', '09:15', '09:02', '09:20', '10:18', '10:22'][i]}</span><span>${i % 3 ? 'م.ع' : 'د.ك'}</span></figcaption></figure>`).join('');
+  $('#mediaGrid').addEventListener('click', e => { const b = e.target.closest('button'); if (!b) return; $$('#mediaGrid button').forEach(x => x.setAttribute('aria-pressed', x === b)); const src = b.querySelector('img').src; $('#mPrev').src = src; $$('.crops img').forEach(i => { if (i.closest('#v-media')) i.src = src; }); });
+
+  // editor interactions
+  $('#docBody').addEventListener('click', e => {
+    const acc = e.target.closest('[data-acc]'), rej = e.target.closest('[data-rej]');
+    if (!acc && !rej) return;
+    const para = e.target.closest('.para'), del = para.querySelector('del.sug'), ins = para.querySelector('ins.sug');
+    if (acc) { del?.remove(); ins?.replaceWith(document.createTextNode(ins.textContent)); }
+    else { ins?.remove(); del?.replaceWith(document.createTextNode(del.textContent)); }
+    e.target.closest('.sug-bar').remove();
+    para.dataset.p = 'human'; para.querySelector('.para__tag').innerHTML = 'عدلها: عمر<br>الآن';
+    para.classList.remove('flash'); void para.offsetWidth; para.classList.add('flash');
+    asima.toast(acc ? 'قبل الاقتراح' : 'رفض الاقتراح', 'الفقرة صارت تحمل اسمك في سلسلة الإعداد.');
+  });
+  $('#docBody').addEventListener('input', e => { const p = e.target.closest('.para'); if (p && p.dataset.p === 'ai') { p.dataset.p = 'human'; p.querySelector('.para__tag').innerHTML = 'عدلها: عمر<br>الآن'; } $('[data-saved]').textContent = 'يحفظ…'; clearTimeout(window.__sv); window.__sv = setTimeout(() => { $('[data-saved]').textContent = asima.time(); }, 700); });
+  document.querySelector('[data-fix]')?.addEventListener('click', () => { const f = $('.flag'); if (f) { f.replaceWith(document.createTextNode('112')); } asima.toast('صحح الرقم', '112 بحسب الرصد الميداني 09:31.'); });
+  $('#hlOpts').addEventListener('click', e => { const o = e.target.closest('.opt'); if (!o) return; $$('#hlOpts .opt').forEach(x => x.setAttribute('aria-pressed', x === o)); $('#dt').value = o.querySelector('b').textContent; asima.toast('تغير العنوان', 'العنوان الأصلي محفوظ في سجل التعديلات.'); });
+  $('#tagChips').addEventListener('click', e => { const c = e.target.closest('.chip'); if (!c) return; c.classList.toggle('on'); c.classList.remove('sug'); });
+  const dlg = $('#approveDlg');
+  $('#toApprove').onclick = () => dlg.showModal();
+  dlg.addEventListener('click', e => { if (e.target.closest('[data-close]') || e.target === dlg) dlg.close(); });
+  $('#sendAppr').onclick = () => {
+    dlg.close();
+    const steps = $$('.actionbar .pipeline li'); steps[2].className = 'done'; steps[3].className = 'now';
+    asima.toast('أرسلت للاعتماد', 'سامي سيصله إشعار. ستعود المادة إليك إن طلب تعديل.');
+  };
+
+  // the assistant drafts in front of the editor, word by word, and can be stopped mid-sentence
+  const sleep = ms => new Promise(r => setTimeout(r, asima.reduceMotion ? 0 : ms));
+  const more = $('#moreHl'); let busy = false, stop = false, round = 0;
+  const drafts = [
+    ['إبعاد المصلين عن القبلي في ثالث أيام العرش', 'باب المغاربة يفتح للمقتحمين وتغلق أبواب المصلين', 'الأقصى في العرش: حراس خارج المسجد ومصلون على الرصيف'],
+    ['ثالث أيام العرش: الشرطة تحدد من يصلي في الأقصى', 'من باب المغاربة إلى القبلي: صباح الاقتحام الثالث'],
+  ];
+  more.onclick = async () => {
+    if (busy) { stop = true; return; }
+    busy = true; stop = false; more.textContent = 'أوقف الكتابة';
+    const box = $('#hlOpts');
+    box.insertAdjacentHTML('beforeend', `<div class="row" data-thinking style="gap:10px;padding:6px 0">${asima.loader()}<span class="muted" style="font-size:var(--fs-small)">المساعد يقرأ المادة ويكتب</span></div>`);
+    await sleep(900);
+    box.querySelector('[data-thinking]')?.remove();
+    for (const text of drafts[round++ % drafts.length]) {
+      if (stop) break;
+      const b = document.createElement('button'); b.className = 'opt'; b.type = 'button'; b.setAttribute('aria-pressed', 'false');
+      b.innerHTML = `<b class="typing"></b><span class="score"></span>`; box.append(b);
+      const out = b.querySelector('b');
+      for (const w of text.split(' ')) { if (stop) break; out.textContent += (out.textContent ? ' ' : '') + w; await sleep(85); }
+      out.classList.remove('typing'); b.querySelector('.score').textContent = `${40 + text.length % 30} ح`;
+      await sleep(160);
+    }
+    busy = false; more.textContent = 'اقترح غيرها';
+    if (stop) asima.toast('أوقفت الكتابة', 'ما كتبه المساعد حتى الآن بقي في القائمة.');
+  };
+
+  // breaking composer
+  const bt = $('#brkText'), bc = $('#brkCount');
+  const renderBrk = () => {
+    const lvl = document.querySelector('[name=lvl]:checked').value, n = bt.value.length;
+    bc.textContent = `${n} / 120`; bc.classList.toggle('over', n > 120);
+    $('#brkPrev').innerHTML = lvl === '3' ? `<div class="stream"><article class="stream__item"><div class="stream__t">الآن</div><div><h4><span class="prio prio--3">تحديث</span>${bt.value || '…'}</h4></div></article></div>`
+      : `<div class="breaking ${lvl === '2' ? 'breaking--p2' : ''}"><div class="breaking__in" style="padding-inline:12px"><span class="breaking__label">${lvl === '1' ? '<span class="pulse"></span>عاجل' : 'هام'}</span><p class="breaking__text">${bt.value || '…'}</p></div></div>`;
+  };
+  bt.addEventListener('input', renderBrk); $$('[name=lvl]').forEach(r => r.addEventListener('change', renderBrk)); renderBrk();
+  $('#brkForm').addEventListener('submit', e => { e.preventDefault(); if (bt.value.length > 120) { bt.setAttribute('aria-invalid', 'true'); asima.toast('النص أطول من 120 حرفا', 'اختصره حتى يظهر كاملا على الموبايل.', 'err'); bt.focus(); return; } bt.removeAttribute('aria-invalid'); asima.toast('طلب الاعتماد', 'ينتظر موافقة رئيس التحرير المناوب.'); });
+
+  // live console
+  $('#liveForm').addEventListener('submit', e => { e.preventDefault(); const t = $('#lvText'); if (!t.value.trim()) { t.setAttribute('aria-invalid', 'true'); t.focus(); asima.toast('اكتب نص التحديث أولا', '', 'err'); return; } t.removeAttribute('aria-invalid'); $('#lvStream').insertAdjacentHTML('afterbegin', `<article class="stream__item is-new"><div class="stream__t">الآن</div><div><h4><span class="prio prio--3">تحديث</span>${t.value.replace(/</g, '&lt;')}</h4><span class="meta"><span>ع.ح</span><span>نشر</span></span></div></article>`); t.value = ''; asima.toast('نشر التحديث', 'ظهر في التغطية المباشرة.'); });
+  $$('[data-wire]').forEach(b => b.addEventListener('click', () => { $('#lvText').value = 'الشرطة تنصب سواتر حديدية عند باب المغاربة استعدادا للفترة الثانية من الاقتحامات'; $('#lvText').focus(); }));
+
+  // schedule day 06–22
+  const day = $('#day'); let hrs = '', slots = '';
+  for (let h = 6; h <= 22; h++) { hrs += `<div class="day__h">${String(h).padStart(2, '0')}:00</div>`; slots += '<div class="slot"></div>'; }
+  const ev = [[6.75, .6, 'نشرة الفجر', 'مرسلة', 'gold'], [12, .8, 'نشرة الظهيرة', 'آلية · تنتظر اعتمادا', 'ai'], [14.5, 1, 'تحليل: التقسيم الزماني', 'نبيل ع.', ''], [18, .9, 'فيديو: 90 دقيقة تحت الزيتون', 'عدسة', 'gold'], [20, .8, 'ملخص اليوم', 'آلي · مسودة', 'ai']];
+  day.innerHTML = `<div>${hrs}</div><div class="day__lane">${slots}${ev.map(([s, d, t, m, c]) => `<div class="ev ${c}" style="top:${(s - 6) * 52 + 2}px;height:${d * 52 - 4}px"><b>${t}</b>${m}</div>`).join('')}<div class="now-line" style="top:${(10.7 - 6) * 52}px" data-t="10:42"></div></div>`;
+  day.style.gridTemplateColumns = '56px minmax(0,1fr)';
+
+  // hourly chart: x = 40 + h*22 (0..24), y = 190 - v/7000*170
+  const vals = [300, 180, 120, 90, 110, 420, 1600, 3100, 4200, 5400, 6200, 4300];
+  const X = h => 40 + h * 22, Y = v => 190 - v / 7000 * 170;
+  const pts = vals.map((v, h) => `${X(h)},${Y(v)}`).join(' ');
+  let g = '';
+  [0, 2000, 4000, 6000].forEach(v => { g += `<line class="grid" x1="40" x2="590" y1="${Y(v)}" y2="${Y(v)}"/><text x="34" y="${Y(v) + 3}" text-anchor="end">${v ? v / 1000 + 'K' : 0}</text>`; });
+  [0, 6, 12, 18, 24].forEach(h => { g += `<text x="${X(h)}" y="208" text-anchor="middle">${String(h).padStart(2, '0')}</text>`; });
+  $('#hourChart').innerHTML = `${g}<polygon class="area" points="${X(0)},190 ${pts} ${X(11)},190"/><polyline class="line" points="${pts}"/><circle class="end" cx="${X(10)}" cy="${Y(6200)}" r="4"/><text x="${X(10)}" y="${Y(6200) - 10}" text-anchor="middle" style="fill:var(--ink);font-weight:600">6.2K</text><text x="${X(11) + 8}" y="${Y(4300) + 4}">الآن</text>`;
+});
+</script>
+</body>
+</html>

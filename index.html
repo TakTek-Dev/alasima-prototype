@@ -1,0 +1,386 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<title>نظام العاصمة الرقمي</title>
+<meta name="description" content="من هوية العاصمة إلى نظام تصميم رقمي: التحليل، الاتجاه، الأسس، المكونات، وسجل المراجعة.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Alexandria:wght@300;400;500;600;700;800&family=Noto+Naskh+Arabic:wght@400;500;700&family=JetBrains+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="assets/css/asima.css?v=17">
+<style>
+  .doc-hero { padding-block: var(--sec) var(--sec-tight); position: relative; overflow: clip; }
+  .doc-hero__grid { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: var(--split-gap); align-items: end; }
+  .doc-hero h1 { font-size: var(--fs-display); line-height: var(--lh-display); font-weight: 800; }
+  .doc-hero h1 em { font-style: normal; color: var(--gold); }
+  .doc-hero .dek { margin-top: var(--s-4); }
+  .pages { display: grid; gap: 0; }
+  .pages a { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 2px 12px; padding-block: 12px; border-top: 1px solid var(--rule); }
+  .pages a:last-child { border-bottom: 1px solid var(--rule); }
+  .pages b { font-weight: 700; font-size: var(--fs-h5); }
+  .pages span { grid-column: 1; font-size: var(--fs-meta); color: var(--ink-3); }
+  .pages svg { grid-row: 1 / span 2; grid-column: 2; align-self: center; width: 20px; height: 20px; }
+  .pages a:hover b { color: var(--gold); }
+
+  .doc { display: grid; grid-template-columns: 220px minmax(0, 1fr); gap: var(--split-gap); padding-block: var(--sec); }
+  .toc { position: sticky; top: calc(var(--ribbon-h) + 24px); align-self: start; display: grid; gap: 2px; font-size: var(--fs-small); }
+  .toc a { padding: 6px 0; color: var(--ink-3); }
+  .toc a:hover { color: var(--ink); }
+  .chapter { padding-bottom: var(--sec); }
+  .chapter > h2 { font-size: var(--fs-h1); line-height: var(--lh-h1); font-weight: 800; margin-bottom: var(--s-3); }
+  .chapter > .dek { margin-bottom: var(--s-6); }
+  .chapter h3 { font-size: var(--fs-h3); font-weight: 800; margin-bottom: var(--s-4); margin-top: var(--s-7); }
+  .prose { font-family: var(--f-read); font-size: var(--fs-body-sm); line-height: var(--lh-body-sm); max-width: 68ch; color: var(--ink-2); }
+  .prose p + p { margin-top: .8em; }
+  .prose b { color: var(--ink); }
+
+  .evidence > *, .forms3 > *, .gallery > *, .doc > * { min-width: 0; }
+  .evidence { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) minmax(0, 1.2fr); gap: var(--col-gap); align-items: start; }
+  .evidence figure { display: grid; gap: 8px; }
+  .evidence .plate { background: var(--night); display: grid; place-items: center; padding: var(--s-6); aspect-ratio: 4 / 5; }
+  .evidence .plate { min-width: 0; }
+  .evidence .plate img { width: 100%; height: 100%; object-fit: contain; }
+  .extract { display: grid; }
+  .extract div { display: grid; grid-template-columns: 110px minmax(0, 1fr); gap: 4px 16px; padding-block: 12px; border-top: 1px solid var(--rule); font-size: var(--fs-small); line-height: 1.75; }
+  .extract dt { font-weight: 700; color: var(--ink); }
+  .extract dd { margin: 0; color: var(--ink-2); }
+
+  .forms3 { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--col-gap); }
+  .form-card { display: grid; gap: var(--s-4); align-content: start; padding-top: var(--s-4); border-top: 4px solid var(--ink); }
+  .form-card .demo { min-height: 120px; display: grid; place-items: center; background: var(--night); padding: var(--s-5); }
+  .form-card h3 { font-size: var(--fs-h3); font-weight: 800; margin: 0; }
+  .form-card p { font-size: var(--fs-small); color: var(--ink-2); line-height: 1.8; }
+
+  .swatches { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: var(--col-gap); }
+  .sw { display: grid; gap: 6px; font-size: var(--fs-meta); }
+  .sw i { height: 72px; display: block; box-shadow: inset 0 0 0 1px var(--rule); }
+  .sw b { font-size: var(--fs-small); color: var(--ink); }
+  .sw code { font-family: var(--f-mono); font-size: .75rem; color: var(--ink-3); }
+
+  .scale { display: grid; }
+  .scale > div { display: grid; grid-template-columns: 130px minmax(0, 1fr); gap: 16px; align-items: baseline; padding-block: 14px; border-top: 1px solid var(--rule); }
+  .scale code { font-family: var(--f-mono); font-size: .75rem; color: var(--ink-3); line-height: 1.6; }
+  .scale code b { display: block; font-family: var(--f-display); color: var(--ink); font-size: var(--fs-small); }
+
+  .spaces { display: flex; align-items: end; gap: 12px; flex-wrap: wrap; }
+  .spaces div { display: grid; gap: 6px; justify-items: center; font-family: var(--f-mono); font-size: .75rem; color: var(--ink-3); }
+  .spaces i { display: block; background: var(--gold); width: 14px; }
+
+  .ratios { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: var(--col-gap); align-items: end; }
+  .ratios figure { display: grid; gap: 6px; }
+  .ratios figcaption { font-size: var(--fs-meta); color: var(--ink-3); line-height: 1.5; }
+  .ratios b { display: block; color: var(--ink); }
+
+  .gallery { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--s-6) var(--col-gap); }
+  .specimen { display: grid; gap: var(--s-4); align-content: start; padding: var(--s-5); background: var(--sheet); box-shadow: inset 0 0 0 1px var(--rule); min-width: 0; }
+  .specimen > header { display: flex; justify-content: space-between; gap: 12px; align-items: baseline; }
+  .specimen > header h3 { font-size: var(--fs-h5); font-weight: 800; margin: 0; }
+  .specimen > header code { font-family: var(--f-mono); font-size: .72rem; color: var(--ink-3); }
+  .specimen.night { box-shadow: none; }
+  .specimen--wide { grid-column: 1 / -1; }
+
+  .audit { display: grid; gap: var(--s-6); }
+  .audit-group h3 { margin-top: 0; display: flex; gap: 12px; align-items: baseline; }
+  .audit-group h3 small { font-size: var(--fs-meta); color: var(--ink-3); font-weight: 500; }
+  .audit-row { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 6px var(--col-gap); padding-block: 14px; border-top: 1px solid var(--rule); font-size: var(--fs-small); line-height: 1.8; }
+  .audit-row b { display: block; color: var(--ink); font-size: var(--fs-ui); }
+  .audit-row p { color: var(--ink-2); }
+  .audit-row .fix { color: var(--ink); }
+  .audit-row .fix::before { content: "التعديل: "; font-weight: 700; color: var(--gold-ink); }
+
+  .test { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: var(--col-gap); }
+  .test div { display: grid; gap: 6px; padding-top: 12px; border-top: 1px solid var(--rule); font-size: var(--fs-small); line-height: 1.75; color: var(--ink-2); }
+  .test b { color: var(--ink); font-size: var(--fs-ui); }
+
+  @media (max-width: 1100px) {
+    .doc { grid-template-columns: 1fr; }
+    .toc { position: static; grid-auto-flow: column; overflow-x: auto; gap: 18px; padding-bottom: 8px; border-bottom: 1px solid var(--rule); }
+    .toc a { white-space: nowrap; }
+    .ratios { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    .test { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  }
+  @media (max-width: 800px) {
+    .doc-hero__grid, .evidence, .forms3, .gallery, .audit-row { grid-template-columns: 1fr; }
+    .scale > div { grid-template-columns: 1fr; gap: 4px; }
+  }
+  @media (max-width: 520px) { .ratios, .test { grid-template-columns: 1fr 1fr; } }
+</style>
+</head>
+<body>
+<a class="skip" href="#main">تخط إلى المحتوى</a>
+<header data-ribbon data-current="system"></header>
+
+<main id="main">
+  <section class="night doc-hero" aria-labelledby="doc-h">
+    <div class="dome-horizon" data-dome-horizon aria-hidden="true"></div>
+    <div class="wrap doc-hero__grid">
+      <div>
+        <h1 id="doc-h">من هوية العاصمة<br><em>إلى نظامها الرقمي</em></h1>
+        <p class="dek">تحليل الهوية، والاتجاه البصري، وأسس التصميم والمكونات، وسجل مراجعة الإطلاق. كل ما هنا مبني بالكود نفسه الذي يبني الصفحات.</p>
+      </div>
+      <nav class="pages" aria-label="صفحات النموذج">
+        <a href="home.html"><b>الصفحة الأولى</b><span>القبة والشريط، ومدار القدس، والتقارير، والعدسة</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19 12H5m6-6-6 6 6 6" fill="none" stroke="currentColor" stroke-width="1.8"/></svg></a>
+        <a href="article.html"><b>صفحة المقال</b><span>قراءة طويلة، تسلسل، مصادر، وكيف أعد الخبر</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19 12H5m6-6-6 6 6 6" fill="none" stroke="currentColor" stroke-width="1.8"/></svg></a>
+        <a href="jerusalem.html"><b>مدار القدس</b><span>الخريطة، فهرس الأماكن، الملفات المفتوحة</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19 12H5m6-6-6 6 6 6" fill="none" stroke="currentColor" stroke-width="1.8"/></svg></a>
+        <a href="live.html"><b>التغطية المباشرة والعاجل</b><span>مستويات الأولوية، التصحيح، التحديثات الحية</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19 12H5m6-6-6 6 6 6" fill="none" stroke="currentColor" stroke-width="1.8"/></svg></a>
+        <a href="cms.html"><b>غرفة التحرير</b><span>المساعد الذكي، المراجعة البشرية، النشر</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19 12H5m6-6-6 6 6 6" fill="none" stroke="currentColor" stroke-width="1.8"/></svg></a>
+      </nav>
+    </div>
+  </section>
+
+  <div class="wrap doc">
+    <nav class="toc" aria-label="فصول الدليل">
+      <a href="#brand">تحليل الهوية</a>
+      <a href="#direction">الاتجاه</a>
+      <a href="#system">الأسس</a>
+      <a href="#components">المكونات</a>
+      <a href="#ai">الذكاء الاصطناعي</a>
+      <a href="#audit">سجل المراجعة</a>
+      <a href="#test">اختبار التعرف</a>
+    </nav>
+
+    <div>
+      <!-- ====== 1. Brand analysis ====== -->
+      <section class="chapter" id="brand" aria-labelledby="brand-h">
+        <h2 id="brand-h">تحليل الهوية</h2>
+        <p class="dek">مجلد «ثيم العاصمة» يحوي ملفا واحدا: تصميم منشور اجتماعي بطبقات فوتوشوب. فككناه طبقة طبقة، واستخرجنا منه كل ما يمكن أن يصير نظاما.</p>
+        <div class="evidence">
+          <figure><div class="plate"><img src="assets/img/logo-full.png" alt="شعار العاصمة: قبة ذهبية مقسمة بخطوط طول وعرض، يلفها شريط أبيض ينطوي على شكل حرف العين، وتحتها كلمة العاصمة" width="382" height="616"></div><figcaption class="cap"><span class="cap__text">الشعار كما ورد في الملف، على أرضية فحمية.</span></figcaption></figure>
+          <figure><div class="frame r-4x5"><img src="brand-source/reference-post.png" alt="منشور العاصمة: صورة غامقة من باحات الأقصى، وفي وسطها كلمة مستوطنا ممدودة بالكشيدة وفي داخلها الرقم 180 بالذهبي" width="800" height="934" loading="lazy"></div><figcaption class="cap"><span class="cap__text">المنشور المرجعي: «مستـــ180ـــوطنا».</span></figcaption></figure>
+          <dl class="extract">
+            <div><dt>الرمز</dt><dd>قبة الصخرة مرسومة ككرة أرضية: بلاطات ذهبية تفصلها خطوط طول وعرض منحنية، وهلال في القمة.</dd></div>
+            <div><dt>الشريط</dt><dd>شريط ورقي أبيض فضي يلف أسفل القبة، ثم ينطوي بزاوية حادة ويستدق في ذيل يكون حرف «ع».</dd></div>
+            <div><dt>اللون</dt><dd>ذهبي القبة <code class="mono">#F0A808</code> إلى <code class="mono">#E8930F</code>، أبيض فضي للشريط، وفحمي <code class="mono">#202030</code> لأرضية الصور.</dd></div>
+            <div><dt>الخط</dt><dd>عائلة Noor بثلاثة أوزان: خفيف للكلمة الممدودة، عادي للسطر، عريض للرقم.</dd></div>
+            <div><dt>الأداة</dt><dd>الكشيدة تمد الكلمة لتحتضن الرقم. هذه أوضح بصمة في منشورات العاصمة.</dd></div>
+            <div><dt>معالجة الصورة</dt><dd>طبقة تدرج داكنة بشفافية 87٪، وحبيبات، وشبكة مائلة خفيفة.</dd></div>
+          </dl>
+        </div>
+      </section>
+
+      <!-- ====== 2. Direction ====== -->
+      <section class="chapter" id="direction" aria-labelledby="dir-h">
+        <h2 id="dir-h">الاتجاه: تحت القبة</h2>
+        <p class="dek">لا نكرر الشعار. نستعير منه ثلاثة أشكال، ونعطي كل شكل وظيفة تحريرية واحدة.</p>
+        <div class="forms3">
+          <article class="form-card">
+            <div class="demo night"><span class="dome-mark" style="width:72px;height:40px"></span></div>
+            <h3>القبة</h3>
+            <p>بلاطات القبة المقسمة تصير علامة لما يهم الآن: الحدث المفصلي في التسلسل، والعاجل، والقسم الأساسي. وملف القبة يصير إطار الصورة الرئيسية في الأولى.</p>
+          </article>
+          <article class="form-card">
+            <div class="demo night" style="padding-inline:0"><div class="sash" style="width:78%;min-height:46px;margin-inline-end:30px"><span class="sash__label" style="min-width:0;padding:10px 14px"><b style="font-size:.85rem">الآن في القدس</b></span><span></span><span></span></div></div>
+            <h3>الشريط</h3>
+            <p>الشريط الذي يلف القبة يصير شريط آخر التحديثات الذي يلف صورة الخبر الرئيسي، وطرفه ينطوي ويستدق مثل ذيل العين. ويتكرر الانطواء في زاوية صور التقارير.</p>
+          </article>
+          <article class="form-card">
+            <div class="demo night"><p class="madd" style="font-size:1.6rem;color:#ECE9E2">مستــ<span class="madd__fig">180</span>ــوطنا</p></div>
+            <h3>المد</h3>
+            <p>الكشيدة من منشورات العاصمة: الرقم يسكن داخل الكلمة. نستخدمها للرقم الذي يلخص اليوم، ولأرقام الشهر في مدار القدس، ولا نستخدمها للزينة.</p>
+          </article>
+        </div>
+        <h3>قواعد الاتجاه</h3>
+        <div class="prose">
+          <p><b>الذهبي هو القبة.</b> يظهر حيث يهم الآن فقط: العاجل، والرقم الرئيسي، وخطوط القبة، والحدث المفصلي، والزر الأساسي. أي استخدام آخر يضعف الإشارة.</p>
+          <p><b>المكان والساعة قبل التصنيف.</b> كل خبر يحمل مكانه ووقته تحت العنوان، والإحداثيات تكتب بالعربية: ش للشمال، ق للشرق.</p>
+          <p><b>مربع بالقانون، والمنحنى للقبة وحدها.</b> لا زوايا مدورة. المنحنيات الوحيدة في النظام هي القبة والقوس، ولذلك تلفت النظر حين تظهر.</p>
+          <p><b>العربية أولا.</b> العين تبدأ من اليمين: العنوان في البداية، والصورة تتبعه، والوقت يقرأ قبل الخبر في الشريط والتسلسل.</p>
+        </div>
+      </section>
+
+      <!-- ====== 3. Foundations ====== -->
+      <section class="chapter" id="system" aria-labelledby="sys-h">
+        <h2 id="sys-h">الأسس</h2>
+        <p class="dek">قيم الرموز الحالية في <code class="mono">assets/css/asima.css</code>. الصفحات والغرفة التحريرية تقرأ من الملف نفسه.</p>
+
+        <h3>اللون</h3>
+        <div class="swatches">
+          <div class="sw"><i style="background:#ECE9E2"></i><b>حجر</b><code>--bg #ECE9E2</code><span>أرضية الطبعة النهارية</span></div>
+          <div class="sw"><i style="background:#14161A"></i><b>حبر</b><code>--ink #14161A</code><span>النص والقواعد</span></div>
+          <div class="sw"><i style="background:#101215"></i><b>ليل</b><code>--night #101215</code><span>الشريط العلوي، الأقسام الليلية، الخاتمة</span></div>
+          <div class="sw"><i style="background:#F0A808"></i><b>ذهبي القبة</b><code>--gold #F0A808</code><span>ما يهم الآن فقط</span></div>
+          <div class="sw"><i style="background:#7E5300"></i><b>ذهبي النص</b><code>--gold-ink #7E5300</code><span>الذهبي كنص على الحجر</span></div>
+          <div class="sw"><i style="background:#8E97A3"></i><b>فضي الشريط</b><code>--silver #8E97A3</code><span>عمل الآلة في غرفة التحرير</span></div>
+          <div class="sw"><i style="background:#B8361E"></i><b>تنبيه</b><code>--alert #B8361E</code><span>الأخطاء والتصحيحات فقط</span></div>
+          <div class="sw"><i style="background:#F7F6F2"></i><b>ورق</b><code>--sheet #F7F6F2</code><span>الأسطح المرتفعة</span></div>
+        </div>
+
+        <h3>الخط والأدوار</h3>
+        <div class="scale">
+          <div><code><b>عرض</b>display · 33–58px · 1.42</code><span class="hl-display" style="font-size:clamp(1.8rem,1.2rem+1.6vw,2.6rem)">180 مستوطنا يقتحمون الأقصى</span></div>
+          <div><code><b>عنوان 1</b>h1 · 30–48px · 1.44</code><span class="hl-1">مدار القدس</span></div>
+          <div><code><b>عنوان 2</b>h2 · 23–31px · 1.5</code><span class="hl-2">تقارير وتحقيقات</span></div>
+          <div><code><b>عنوان 3</b>h3 · 19–23px · 1.58</code><span class="hl-3">لماذا يختار الاحتلال موسم الأعياد؟</span></div>
+          <div><code><b>عنوان 4</b>h4 · 18px · 1.66</code><span class="hl-4">إبعاد 4 حراس عن الأقصى لأسبوع</span></div>
+          <div><code><b>مقدمة</b>lead · 17–19.5px · 1.9</code><span class="dek">اقتحامات على فترتين من باب المغاربة بحماية مشددة.</span></div>
+          <div><code><b>نص القراءة</b>body · Naskh · 18–20px · 2.0</code><span class="read">بدأت الاقتحامات عند السابعة والنصف صباحا من باب المغاربة، وهو الباب الوحيد الذي تسيطر عليه شرطة الاحتلال بالكامل.</span></div>
+          <div><code><b>تعليق الصورة</b>caption · 13.5px · 1.8</code><span class="cap__text" style="font-size:var(--fs-caption);line-height:1.8">أطفال على بلاط صحن قبة الصخرة صباح الاثنين.</span></div>
+          <div><code><b>بيانات</b>meta · 12.8px · 1.6</code><span class="placeline"><b>باب حطة</b><span>شهادات</span><time>08:10</time></span></div>
+        </div>
+        <p class="prose" style="margin-top:var(--s-4)">Alexandria للعناوين والواجهة لأنها الأقرب هندسيا إلى خط Noor وكلمة الشعار، و Noto Naskh Arabic لنص القراءة الطويل. لا تباعد حروف على العربية، ولا تشكيل مضاف، ولا ارتفاع سطر أقل من 1.4 لأي نص عربي يلتف.</p>
+
+        <h3>المسافات والشبكة</h3>
+        <div class="spaces" aria-label="سلم المسافات">
+          <div><i style="height:4px"></i>4</div><div><i style="height:8px"></i>8</div><div><i style="height:12px"></i>12</div><div><i style="height:16px"></i>16</div><div><i style="height:24px"></i>24</div><div><i style="height:32px"></i>32</div><div><i style="height:48px"></i>48</div><div><i style="height:64px"></i>64</div><div><i style="height:96px"></i>96</div>
+        </div>
+        <p class="prose" style="margin-top:var(--s-4)">أساس 4 بكسل. إيقاعان للأقسام: <code class="mono">--sec</code> من 56 إلى 96، و <code class="mono">--sec-tight</code> من 36 إلى 60. الحاوية 1360 بكسل باثني عشر عمودا. التقسيم المزدوج 5 إلى 7 يتكرر في الأولى ومدار القدس والأصوات، لأن العمود الأيمن يقرأ أولا.</p>
+
+        <h3>الصور</h3>
+        <div class="ratios">
+          <figure><div class="frame r-4x5"><img src="assets/img/oldcity-1-800.jpg" alt="" loading="lazy" width="800" height="600" style="object-position:50% 30%"></div><figcaption><b>4:5</b>صورة طولية، شريط العدسة</figcaption></figure>
+          <figure><div class="frame r-4x3"><img src="assets/img/aqsa-courtyard-800.jpg" alt="" loading="lazy" width="800" height="600"></div><figcaption><b>4:3</b>غلاف تقرير</figcaption></figure>
+          <figure><div class="frame r-3x2"><img src="assets/img/oldcity-2-800.jpg" alt="" loading="lazy" width="800" height="600"></div><figcaption><b>3:2</b>صورة قياسية</figcaption></figure>
+          <figure><div class="frame r-1x1"><img src="assets/img/aqsa-trees-800.jpg" alt="" loading="lazy" width="800" height="600"></div><figcaption><b>1:1</b>مصغرة</figcaption></figure>
+          <figure><div class="frame r-16x9"><img src="assets/img/oldcity-3-800.jpg" alt="" loading="lazy" width="800" height="600"></div><figcaption><b>16:9</b>فيديو</figcaption></figure>
+          <figure><div class="frame" style="aspect-ratio:2.35/1"><img src="assets/img/aqsa-trees-800.jpg" alt="" loading="lazy" width="800" height="1067" style="object-position:50% 60%"></div><figcaption><b>2.35:1</b>مسرح العدسة</figcaption></figure>
+        </div>
+        <p class="prose" style="margin-top:var(--s-4)">تشبع منخفض قليلا وتباين أعلى قليلا، كما في منشورات العاصمة. التدرج الداكن يوضع فقط حيث يجلس نص فوق الصورة، والحبيبات للصور الافتتاحية والعدسة. كل صورة تحمل المصور والساعة والمكان. ونقطة التركيز تحدد القص في كل المقاسات من مكتبة الوسائط.</p>
+
+        <h3>الحركة</h3>
+        <div class="prose">
+          <p><b>الوصول إلى الأولى، مرة واحدة:</b> القبة تنهض من أسفل، ثم ترسم خطوط طولها، والعنوان يطلع كلمة كلمة دون أن ينفصل حرف عن حرفه، والشريط ينفرد من اليمين حيث تبدأ القراءة، والكلمة الممدودة تتمدد أمام القارئ بينما يعد الرقم حتى 180. كل ذلك في نحو ثانية ونصف، ولا يمنع النقر.</p>
+          <p><b>الحالة الحية:</b> الشريط يستقبل التحديثات الجديدة فتدخل من اليمين وتفسح لها البقية مكانا. حلقة ذهبية تتنفس حول الأماكن التي يجري فيها شيء اليوم، والأوقات النسبية تتقدم وحدها كل دقيقة.</p>
+          <p><b>الظهور عند التمرير، مرة واحدة:</b> الصور تنكشف من الأسفل، والقاعدة المستدقة ترسم نفسها من اليمين، والخريطة ترسم سورها قبل أن تضيء الأماكن، والأرقام تتمدد وتعد. ما يظهر في الشاشة عند الفتح لا يخفى أبدا.</p>
+          <p><b>التفاعل:</b> صور العدسة تنفتح في عارض كامل تكبر فيه الصورة من مصغرتها، وتتنقل بالأسهم والسحب. تبديل المظهر ينتشر دائرة من الزر نفسه، والانتقال بين الصفحات يقلب الصفحة كورقة بينما يثبت الشريط العلوي. وفي الهاتف يتنحى الشريط العلوي أثناء القراءة نزولا ويعود عند الصعود.</p>
+          <p><b>غرفة التحرير:</b> المساعد يكتب اقتراحاته كلمة كلمة أمام المحرر، ويمكن إيقافه في منتصف الجملة. قبول الاقتراح يومض في الفقرة، وتقدم المادة في مراحلها يتحرك على مسارها.</p>
+          <p><b>ما لا يتحرك عمدا:</b> البحث، لأنه يفتح من لوحة المفاتيح عشرات المرات يوميا. والمنحنيات ثلاثة فقط: خروج قوي للدخول والاستجابة، ودخول وخروج للحركة عبر الشاشة، وخطي للحركة المستمرة. ومع تفضيل تقليل الحركة يتوقف كل ذلك وتبقى الصفحة كاملة.</p>
+        </div>
+      </section>
+
+      <!-- ====== 4. Components ====== -->
+      <section class="chapter" id="components" aria-labelledby="cmp-h">
+        <h2 id="cmp-h">المكونات</h2>
+        <p class="dek">نماذج حية من الملف نفسه. كل مكون يحمل شيئا من القبة أو الشريط أو المد، أو لا يحمل شيئا عن قصد.</p>
+        <div class="gallery">
+          <div class="specimen"><header><h3>الأزرار</h3><code>.btn</code></header>
+            <div class="row" style="gap:10px"><button class="btn btn--gold" type="button">اقرأ القصة كاملة</button><button class="btn" type="button">اشترك</button><button class="btn btn--line" type="button">كل التحديثات</button><button class="btn btn--quiet" type="button">المنهجية</button></div>
+            <div class="row" style="gap:10px"><button class="btn btn--sm" type="button">احفظ</button><button class="btn btn--sm btn--line" type="button" disabled>غير متاح</button></div>
+          </div>
+          <div class="specimen"><header><h3>الحقول والبحث</h3><code>.field · .input</code></header>
+            <div class="field"><label for="d-email">البريد الإلكتروني</label><input class="input" id="d-email" type="email" dir="ltr" style="text-align:right" placeholder="name@mail.com"><span class="hint">نرسل نشرة الفجر فقط.</span></div>
+            <div class="field"><label for="d-err">رقم الهاتف</label><input class="input" id="d-err" aria-invalid="true" value="05x"><span class="err-msg">الرقم ناقص. اكتب 10 أرقام تبدأ بـ 05.</span></div>
+            <button class="btn btn--line btn--sm" type="button" data-search style="justify-self:start">افتح البحث (Ctrl K)</button>
+          </div>
+          <div class="specimen"><header><h3>البيانات تحت العنوان</h3><code>.placeline · .meta</code></header>
+            <h3 class="hl-4">إبعاد 4 حراس عن الأقصى لأسبوع</h3>
+            <p class="placeline"><b>المسجد الأقصى</b><span>خبر</span><time>09:58</time></p>
+            <div class="meta"><span>إعداد <strong>دعاء ك.</strong></span><span>6 دقائق قراءة</span><span class="ai-mark"><span class="ai-glyph" aria-hidden="true"></span>ملخص آلي راجعه المحرر</span></div>
+          </div>
+          <div class="specimen"><header><h3>الكاتب</h3><code>.arch-ava · .byline</code></header>
+            <div class="row" style="gap:20px"><div class="byline"><span class="mono-gram">د ك</span><div><div class="byline__name">دعاء ك.</div><div class="byline__role">مراسلة · البلدة القديمة</div></div></div><span class="arch-ava">ن ع</span></div>
+            <p class="prose" style="font-size:var(--fs-small)">صورة الكاتب أو حروفه داخل قوس القبة، لا في دائرة ولا مربع.</p>
+          </div>
+          <div class="specimen night"><header><h3>العاجل بثلاثة مستويات</h3><code>.breaking · .prio</code></header>
+            <div class="breaking"><div class="breaking__in" style="padding-inline-end:12px"><span class="breaking__label"><span class="pulse"></span>عاجل</span><p class="breaking__text" style="font-size:.95rem">الاحتلال يبعد 4 من حراس الأقصى لمدة أسبوع</p></div></div>
+            <div class="breaking breaking--p2"><div class="breaking__in" style="padding-inline-end:12px"><span class="breaking__label">هام</span><p class="breaking__text" style="font-size:.95rem">الفترة الثانية من الاقتحامات تبدأ بعد الظهر</p></div></div>
+            <p style="font-size:var(--fs-small)"><span class="prio prio--3">تحديث</span>يظهر داخل التغطية المباشرة فقط.</p>
+          </div>
+          <div class="specimen"><header><h3>التسلسل والمسطرة</h3><code>.ledger · .ruler</code></header>
+            <ol class="ledger">
+              <li class="ledger__item"><span class="ledger__time">07:30</span><span class="ledger__node"></span><div class="ledger__body"><h4>فتح باب المغاربة للمقتحمين</h4></div></li>
+              <li class="ledger__item is-key"><span class="ledger__time">09:02</span><span class="ledger__node"></span><div class="ledger__body"><h4>اعتقال 4 حراس قرب قبة الصخرة</h4><p>الحدث المفصلي يحمل القبة.</p></div></li>
+              <li class="ledger__item"><span class="ledger__time">09:31</span><span class="ledger__node"></span><div class="ledger__body"><h4>انتهاء الفترة الصباحية</h4></div></li>
+            </ol>
+            <ol class="ruler"><li><b>2023</b>المسار القصير</li><li><b>2024</b>الوقوف الطويل</li><li class="is-key"><b>2025</b>الطقوس العلنية</li></ol>
+          </div>
+          <div class="specimen"><header><h3>الاقتباس</h3><code>.pull</code></header>
+            <blockquote class="pull" style="margin:0;font-size:var(--fs-h3)"><p>نحن لا نطلب أكثر من الدخول إلى مسجدنا.</p><footer><strong>أبو أحمد</strong>، من سكان حي باب حطة</footer></blockquote>
+          </div>
+          <div class="specimen"><header><h3>الإشعار والنافذة</h3><code>.toast · dialog.modal</code></header>
+            <div class="row" style="gap:10px"><button class="btn btn--sm" type="button" onclick="asima.toast('حفظ للقراءة لاحقا','تجده في قائمة محفوظاتك.')">أظهر إشعارا</button><button class="btn btn--sm btn--line" type="button" onclick="asima.toast('تعذر الحفظ','تحقق من الاتصال ثم أعد المحاولة.','err')">إشعار خطأ</button><button class="btn btn--sm btn--line" type="button" onclick="document.getElementById('demoDlg').showModal()">افتح نافذة</button></div>
+          </div>
+          <div class="specimen"><header><h3>التبويب والترقيم والقائمة</h3><code>.tabs · .pager · .menu</code></header>
+            <div class="tabs" role="tablist" aria-label="مثال تبويب"><button role="tab" aria-selected="true">الكل <span class="count">24</span></button><button role="tab" aria-selected="false" tabindex="-1">عاجل فقط <span class="count">3</span></button><button role="tab" aria-selected="false" tabindex="-1">صور وفيديو</button></div>
+            <nav class="pager" aria-label="مثال ترقيم"><a href="#" aria-current="page">1</a><a href="#">2</a><a href="#">3</a><span>…</span><a href="#">161</a></nav>
+            <div style="position:relative;height:150px"><div class="menu" style="position:static;width:240px"><button type="button">نسخ الرابط</button><button type="button" aria-selected="true">حفظ للقراءة لاحقا</button><hr><button type="button">الإبلاغ عن خطأ</button></div></div>
+          </div>
+          <div class="specimen"><header><h3>الحالات</h3><code>.empty · .dome-loader · .state-err</code></header>
+            <div class="row" style="gap:16px"><span class="dome-loader" role="img" aria-label="جار التحميل"><i></i><i></i><i></i><i></i></span><span class="muted" style="font-size:var(--fs-small)">بلاطات القبة تضيء بترتيب القراءة أثناء التحميل</span></div>
+            <div><div class="skel skel-hl" style="width:70%"></div><div class="skel skel-line w80"></div><div class="skel skel-line w40"></div></div>
+            <div class="empty" style="padding:var(--s-5)"><h4>لا قصص من هذا المكان هذا الأسبوع</h4><p>هذا لا يعني أن شيئا لم يحدث. إذا كان لديك ما نتحقق منه، راسل غرفة الأخبار.</p></div>
+            <div class="state-err" style="padding:var(--s-4)"><b>تعذر تحميل التحديثات</b><p style="font-size:var(--fs-small)">انقطع الاتصال 10:36. نعيد المحاولة كل 30 ثانية.</p></div>
+          </div>
+          <div class="specimen night specimen--wide"><header><h3>الشريط حول الصورة</h3><code>.sash</code></header>
+            <nav class="sash" aria-label="مثال الشريط"><div class="sash__label"><b>الآن في القدس</b><span class="live-tag"><span class="pulse"></span>مباشر</span></div><ol class="sash__list"><li class="is-key"><a href="live.html"><time>09:58</time><small>منذ 3 دقائق</small><span>إبعاد 4 حراس عن الأقصى لأسبوع</span></a></li><li><a href="live.html"><time>09:31</time><small>منذ 30 دقيقة</small><span>انتهاء الفترة الصباحية: 112 مقتحما</span></a></li><li><a href="live.html"><time>08:47</time><small>منذ ساعة</small><span>احتجاز هويات عند باب الأسباط</span></a></li></ol><a class="sash__more" href="live.html">كل التحديثات</a></nav>
+          </div>
+        </div>
+      </section>
+
+      <!-- ====== 5. AI ====== -->
+      <section class="chapter" id="ai" aria-labelledby="ai-h">
+        <h2 id="ai-h">كيف نستخدم الذكاء الاصطناعي</h2>
+        <p class="dek">المساعد يقترح ويصوغ ويستخرج. المحرر يقرر. لا يملك المساعد زر النشر، ولا يكتب العاجل ولا الرأي.</p>
+        <ol class="pipeline" style="max-width:640px" aria-label="مراحل المادة"><li class="done ai">مسودة آلية</li><li class="done">مراجعة</li><li class="now">تحرير</li><li>اعتماد</li><li>نشر</li></ol>
+        <div class="prose" style="margin-top:var(--s-5)">
+          <p><b>في غرفة التحرير:</b> كل فقرة تحمل خطا جانبيا يقول من كتبها. فضي منقط لما صاغه المساعد ولم يراجع، حبر متصل لما عدله محرر، ذهبي لما تحقق منه محرر. الخط معلومة وليس زينة، ولذلك لا يظهر إلا في المحرر.</p>
+          <p><b>للقارئ:</b> كل مقال ينتهي بقسم «كيف أعد هذا الخبر» بالساعة والاسم: متى بدأت المسودة، ومن عدلها، ومن تحقق منها، ومتى نشرت وحدثت. والملخص الآلي يحمل علامة القبة المنقطة الفضية واسم من راجعه.</p>
+        </div>
+      </section>
+
+      <!-- ====== 6. Audit ====== -->
+      <section class="chapter" id="audit" aria-labelledby="audit-h">
+        <h2 id="audit-h">سجل المراجعة قبل الإطلاق</h2>
+        <p class="dek">مراجعة نقدية للنسخة الأولى، بمراجع تصميم مستقل وفحص آلي، ثم ما تغير. الشدة: حرج، عال، متوسط، صقل.</p>
+        <div class="audit" id="auditBody">
+          <div class="audit-group">
+            <h3>حرج <small>يمنع الإطلاق</small></h3>
+            <div class="audit-row"><div><b>الواجهة جدار نص بجانبه عمود فارغ</b><p>عنوان من خمسة أسطر بطول 355 بكسل، والصورة تبدأ تحت خط الطي بـ140 بكسل، وبجانبها فراغ 490 × 465 بكسل. أقوى أداة للعاصمة، الرقم الممدود، محشورة في صندوق جانبي وتكرر رقم العنوان.</p></div><p class="fix">تكوين «تحت القبة»: الصورة داخل ملف القبة بخطوط طولها، والرقم الممدود فوق الصورة كما في منشورات العاصمة، والعنوان قصير بلا تكرار للرقم، والشريط يلف أسفل الصورة بآخر التحديثات. عمودا النص والصورة يملآن الصف نفسه.</p></div>
+            <div class="audit-row"><div><b>ارتفاع السطر العربي ضيق، والتشكيل يتصادم</b><p>عنوان رئيسي بارتفاع 1.22، وتنوين «مستوطنا» يلمس السطر الذي فوقه. 279 علامة تشكيل مضافة في الملفات.</p></div><p class="fix">سلم أدوار بقيم ارتفاع لا تقل عن 1.42 للعناوين و2.0 لنص القراءة، وحذف كل التشكيل المضاف من كل الصفحات.</p></div>
+            <div class="audit-row"><div><b>تسلسل الأحجام مسطح</b><p>العنوان الرئيسي أكبر من عناوين الأقسام بـ1.17 مرة فقط، وشعار الخاتمة أكبر من العنوان الرئيسي.</p></div><p class="fix">عرض 30 إلى 53 بكسل، عنوان قسم 22 إلى 30، عنوان خبر 17 إلى 20، والخاتمة لا تتجاوز عنوان صفحة.</p></div>
+            <div class="audit-row"><div><b>أسماء أهم مكانين على الخريطة مختفية</b><p>قاعدة أقوى تلون أسماء الأماكن بلون الدائرة، فيختفي «الأقصى» و«سلوان».</p></div><p class="fix">أسماء الأماكن بالعاج دائما، والذهبي للدوائر فقط. أسماء الأبواب بالعربية، وسور أقرب إلى خط السور الحقيقي.</p></div>
+          </div>
+          <div class="audit-group">
+            <h3>عال <small>قبل الإطلاق</small></h3>
+            <div class="audit-row"><div><b>41 مربعا بستة معان مختلفة</b><p>مربعات للتصنيف والعنوان الصغير والتسلسل والفواصل والأحرف الأولى، لا علاقة لها بالشعار.</p></div><p class="fix">بلاطة القبة للحدث المفصلي والعاجل فقط، وقوس القبة للكتاب، وخطوط شعرية بدل الفواصل المربعة، والتصنيف كلمة بلا علامة.</p></div>
+            <div class="audit-row"><div><b>الذهبي في 13 موضعا في الشاشة الأولى</b><p>حين يكون كل شيء ذهبيا لا يشير الذهبي إلى شيء.</p></div><p class="fix">الذهبي للعاجل والمباشر والرقم الرئيسي وخطوط القبة والحدث المفصلي. زر القراءة في الواجهة صار عاجيا، وأعداد الشريط العلوي حذفت.</p></div>
+            <div class="audit-row"><div><b>طبقة لاتينية تجعل الصفحة تبدو مترجمة</b><p>إحداثيات N/E، وJLM، وJerusalem، وأسماء أبواب إنجليزية، وأوقات بخط برمجي يفكك الكلمات العربية.</p></div><p class="fix">الوقت بأرقام Alexandria الجدولية، والإحداثيات بالعربية (ش، ق) في تعليقات الصور والخريطة فقط، وفي قمة القبة اسم المكان والساعة بدل الأرقام.</p></div>
+            <div class="audit-row"><div><b>صف أربع بطاقات متطابقة ومناطق بلا صور</b><p>1,430 بكسل بلا صورة، والتحليل والملف المفتوح نص فقط.</p></div><p class="fix">قصة كبيرة بصورة، وقصتان بصور، والأكثر قراءة كقائمة مرتبة. الأحياء بصور مصغرة، والتقارير بغلاف مطوي الزاوية، والعدسة مسرح عريض وشريط صور بالساعة.</p></div>
+            <div class="audit-row"><div><b>الأقسام الليلية تختفي في المظهر الداكن</b><p>نفس لون الخلفية، فيضيع الإيقاع بين الطبعتين.</p></div><p class="fix">الأقسام الليلية تنزل درجة أعمق في المظهر الداكن.</p></div>
+            <div class="audit-row"><div><b>إحداثيات الخاتمة غير مرئية، وروابط الثقة تؤدي إلى صفحة غير موجودة</b><p>تباين 1.03:1 في المظهر الفاتح، وروابط المنهجية وسياسة الذكاء الاصطناعي ترجع 404.</p></div><p class="fix">رموز ألوان الخاتمة مكتملة، وهذه الصفحة صارت وجهة روابط المنهجية والذكاء الاصطناعي ونظام التصميم.</p></div>
+          </div>
+          <div class="audit-group">
+            <h3>متوسط</h3>
+            <div class="audit-row"><div><b>الأشرطة العلوية في الهاتف</b><p>205 بكسل من الأشرطة قبل أي خبر، وبحث ومباشر مكرران في الأعلى وفي الشريط السفلي.</p></div><p class="fix">سطر التاريخ داخل الواجهة ومخفي في الهاتف، والبحث والمباشر في الشريط السفلي فقط، والعاجل سطران كحد أقصى.</p></div>
+            <div class="audit-row"><div><b>أهداف لمس أصغر من 44 بكسل</b><p>35 هدفا، منها روابط «المزيد» بارتفاع 22 بكسل.</p></div><p class="fix">كل روابط النص الإجرائية بارتفاع لا يقل عن 44 بكسل.</p></div>
+            <div class="audit-row"><div><b>قارئ الشاشة يقرأ الكلمة الممدودة مقطعة</b><p>«اقتحــــ» ثم «5,412» ثم «ـــام».</p></div><p class="fix">الشكل الممدود مخفي عن قارئ الشاشة، ومعه نص بديل كامل: «5,412 اقتحاما».</p></div>
+            <div class="audit-row"><div><b>قفزات في مستويات العناوين</b><p>من h2 إلى h4 في التسلسل والخاتمة.</p></div><p class="fix">مستويات متتالية في كل الأقسام.</p></div>
+          </div>
+          <div class="audit-group">
+            <h3>صقل</h3>
+            <div class="audit-row"><div><b>تفاصيل تكشف أن الصفحة مجمعة</b><p>حلقة التركيز ذهبية على الشريط الذهبي، وسطر رابع ظاهر نصفه في العاجل المقصوص، وتنوين في موضعين مختلفين، وشرطات تحت الأكثر قراءة تشبه التسطير.</p></div><p class="fix">حلقة تركيز بالحبر على الأسطح الذهبية، والقص بلا تسرب، وحذف الشرطات، ومؤشر كتابة وتحديد وشريط تمرير بألوان النظام.</p></div>
+            <div class="audit-row"><div><b>جموع عربية خاطئة في الأوقات النسبية</b><p>«منذ 3 د» و«منذ 1 س».</p></div><p class="fix">«منذ 3 دقائق»، «منذ ساعة»، «منذ ساعتين»، «منذ 11 دقيقة».</p></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ====== 7. Recognition test ====== -->
+      <section class="chapter" id="test" aria-labelledby="test-h" style="padding-bottom:0">
+        <h2 id="test-h">اختبار التعرف بلا شعار</h2>
+        <p class="dek">أخفينا الشعار واسم العاصمة من الأولى، وسألنا: ما الذي يبقى ويقول إنها العاصمة؟</p>
+        <div class="test">
+          <div><b>القبة في الصورة الأولى</b>صورة الخبر الرئيسي داخل ملف قبة بخطوط طول ذهبية، وفي قمتها إحداثيات المكان.</div>
+          <div><b>الشريط الملفوف</b>شريط فاتح يلف أسفل القبة بآخر التحديثات، وطرفه ينطوي ويستدق مثل ذيل العين.</div>
+          <div><b>الرقم داخل الكلمة</b>«مستـــ180ـــوطنا» على صورة داكنة، كما في منشورات العاصمة على إنستغرام.</div>
+          <div><b>الذهبي النادر</b>ذهبي واحد للقبة والعاجل والحدث المفصلي فقط، على حجر وفحم.</div>
+          <div><b>المكان والساعة</b>كل خبر تحته مكانه ووقته، والإحداثيات بالعربية.</div>
+          <div><b>القوس للناس</b>الكتاب داخل قوس القبة، لا في دوائر.</div>
+          <div><b>القاعدة المستدقة</b>عناوين الأقسام فوق خط يبدأ عريضا من اليمين وينتهي شعرة، كضربة الكشيدة.</div>
+          <div><b>الليل والحجر</b>إيقاع الأقسام الليلية والنهارية، كطبعتين لصحيفة واحدة.</div>
+        </div>
+      </section>
+    </div>
+  </div>
+</main>
+
+<dialog class="modal" id="demoDlg" aria-labelledby="dd-h">
+  <div class="modal__head"><h2 id="dd-h" style="font-size:var(--fs-h4);font-weight:800">إبلاغ عن خطأ في الخبر</h2><button class="icon-btn" type="button" aria-label="إغلاق" onclick="this.closest('dialog').close()"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18" stroke="currentColor" stroke-width="1.8" fill="none"/></svg></button></div>
+  <div class="modal__body stack"><div class="field"><label for="dd-t">ما الخطأ؟</label><textarea class="textarea" id="dd-t" placeholder="اذكر الفقرة والمعلومة الصحيحة ومصدرها إن وجد."></textarea></div></div>
+  <div class="modal__foot"><button class="btn btn--line btn--sm" type="button" onclick="this.closest('dialog').close()">إلغاء</button><button class="btn btn--gold btn--sm" type="button" onclick="this.closest('dialog').close();asima.toast('وصل بلاغك','يراجعه المحرر المناوب خلال ساعة.')">أرسل البلاغ</button></div>
+</dialog>
+
+<footer data-coda></footer>
+<script src="assets/js/asima.js?v=17" defer></script>
+</body>
+</html>

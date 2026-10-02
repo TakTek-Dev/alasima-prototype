@@ -1,0 +1,194 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<title>مباشر: الأقصى في موسم الأعياد — العاصمة</title>
+<meta name="description" content="تغطية مباشرة لحظة بلحظة من المسجد الأقصى والبلدة القديمة.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Alexandria:wght@300;400;500;600;700;800&family=Noto+Naskh+Arabic:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap">
+<link rel="stylesheet" href="assets/css/asima.css?v=17">
+<style>
+  .live-head { padding-block: var(--s-6) var(--s-7); }
+  .live-head__grid { display: grid; grid-template-columns: minmax(0, 8fr) minmax(0, 4fr); gap: var(--s-7); align-items: end; }
+  .onair { display: inline-flex; align-items: center; gap: 10px; background: var(--gold); color: var(--on-gold); font-weight: 800; padding: 6px 24px 6px 14px; clip-path: polygon(0 0, 100% 0, 100% 100%, 14px 100%); font-size: var(--fs-small); }
+  .live-head h1 { font-size: clamp(2rem, 1.2rem + 3vw, 3.6rem); font-weight: 800; margin-top: var(--s-4); }
+  .live-stats { display: flex; flex-wrap: wrap; gap: 4px 0; margin-top: var(--s-5); border-top: 1px solid var(--rule); }
+  .live-stats div { padding: 12px 0; padding-inline-end: var(--s-5); margin-inline-end: var(--s-5); border-inline-end: 1px solid var(--rule); }
+  .live-stats div:last-child { border: 0; }
+  .live-stats dt { font-size: var(--t-meta); color: var(--ink-3); }
+  .live-stats dd { margin: 0; font-weight: 800; font-size: 1.15rem; font-variant-numeric: tabular-nums; }
+  .desk { display: grid; gap: 10px; }
+  .desk__people { display: flex; gap: 6px; }
+  .desk__people .mono-gram { background: #ECE9E2; color: #111316; }
+
+  .sofar { margin-top: var(--s-6); padding: var(--s-5); background: rgba(236,233,226,.05); }
+  .sofar h2 { font-size: var(--t-4); font-weight: 800; display: flex; gap: 12px; align-items: center; flex-wrap: wrap; justify-content: space-between; }
+  .sofar p { font-family: var(--f-read); font-size: 1.08rem; line-height: 1.9; margin-top: 10px; color: #DCD9D2; }
+
+  .live-body { display: grid; grid-template-columns: minmax(0, 8fr) minmax(0, 4fr); gap: var(--s-7); padding-block: var(--s-6) var(--s-8); }
+  .stream { margin-top: var(--s-3); }
+  .stream__item .frame { margin-top: 12px; max-width: 520px; }
+  .stream__item blockquote { margin-top: 10px; padding-inline-start: 14px; border-inline-start: 3px solid var(--gold); font-family: var(--f-read); font-size: 1.05rem; line-height: 1.8; }
+  .stream__item--fix { background: color-mix(in srgb, var(--alert) 6%, transparent); }
+  .stream__item--fix .prio { color: var(--alert); }
+  .stream__item .madd { font-size: 1.5rem; margin-top: 8px; }
+  .stream__actions { display: flex; gap: 2px; margin-top: 8px; }
+  .stream__actions .icon-btn { width: 36px; height: 36px; color: var(--ink-3); }
+  .stream__actions .icon-btn svg { width: 16px; height: 16px; }
+
+  .side { display: grid; gap: var(--s-7); align-content: start; }
+  .side__sticky { position: sticky; top: calc(var(--ribbon-h) + 24px); display: grid; gap: var(--s-6); }
+  .side h3 { font-size: var(--t-4); font-weight: 800; border-bottom: 3px solid var(--ink); padding-bottom: 10px; margin-bottom: var(--s-3); }
+  .key a { display: grid; grid-template-columns: 52px minmax(0, 1fr); gap: 10px; padding-block: 10px; border-bottom: 1px solid var(--rule); font-size: var(--t-sm); font-weight: 600; line-height: 1.5; }
+  .key time { font-weight: 800; font-size: .85rem; color: var(--ink); text-align: end; font-variant-numeric: tabular-nums; }
+  .signals { display: grid; gap: 12px; }
+  .signals > div { display: grid; grid-template-columns: 72px minmax(0, 1fr); gap: 12px; align-items: center; font-size: var(--t-sm); }
+  .signals .sw { min-height: 30px; display: flex; align-items: center; padding-inline: 8px; font-size: var(--fs-meta); font-weight: 700; }
+
+  .live-body > *, .live-head__grid > * { min-width: 0; }
+  @media (max-width: 1000px) {
+    .live-head__grid, .live-body { grid-template-columns: 1fr; }
+    .side__sticky { position: static; }
+  }
+</style>
+</head>
+<body>
+<a class="skip" href="#stream">تخط إلى التحديثات</a>
+<header data-ribbon data-current="live"></header>
+
+<aside class="breaking breaking--p2" aria-label="خبر هام">
+  <div class="wrap breaking__in">
+    <span class="breaking__label">هام</span>
+    <p class="breaking__text">الفترة الثانية من الاقتحامات تبدأ بعد صلاة الظهر · الشرطة تعزز انتشارها عند باب المغاربة</p>
+    <time class="breaking__time">10:40</time>
+    <button class="breaking__close" type="button" aria-label="إخفاء"><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18" stroke="currentColor" stroke-width="1.8"/></svg></button>
+  </div>
+</aside>
+
+<main id="main">
+  <section class="night live-head" aria-labelledby="live-h">
+    <div class="wrap live-head__grid">
+      <div>
+        <span class="onair"><span class="pulse" aria-hidden="true"></span>مباشر الآن</span>
+        <h1 id="live-h">الأقصى في موسم الأعياد: اقتحامات «العرش» يوما بيوم</h1>
+        <dl class="live-stats">
+          <div><dt>بدأت التغطية</dt><dd>26.09 · 07:12</dd></div>
+          <div><dt>تحديثات</dt><dd data-stream-count>24</dd></div>
+          <div><dt>مقتحمون اليوم</dt><dd style="color:var(--gold)">180</dd></div>
+          <div><dt>آخر تحديث</dt><dd><span data-clock></span></dd></div>
+        </dl>
+      </div>
+      <div class="desk">
+        <span class="muted" style="font-size:var(--t-meta)">غرفة التغطية الآن</span>
+        <div class="desk__people"><span class="mono-gram" title="دعاء ك.">د.ك</span><span class="mono-gram" title="عمر ح.">ع.ح</span><span class="mono-gram" title="محمد ع.">م.ع</span></div>
+        <span style="font-size:var(--t-sm)">مراسلة في الباحات · محرر مناوب · مصور</span>
+      </div>
+    </div>
+    <div class="wrap">
+      <section class="sofar" aria-labelledby="sofar-h">
+        <h2 id="sofar-h">ما نعرفه حتى الآن <span class="ai-mark" style="color:#BDBAB2"><span class="ai-glyph" aria-hidden="true"></span>ملخص آلي يحدث كل 30 دقيقة · راجعه عمر ح. 10:10</span></h2>
+        <p>اقتحم 180 مستوطنا المسجد الأقصى منذ السابعة والنصف صباحا، واعتقلت الشرطة 4 حراس وأبعدتهم أسبوعا. يمنع من هم دون الأربعين من الدخول عند ثلاثة أبواب. الفترة الثانية تبدأ بعد الظهر.</p>
+      </section>
+    </div>
+  </section>
+
+  <div class="wrap live-body">
+    <section aria-labelledby="st-h">
+      <div class="row between" style="align-items:end">
+        <h2 id="st-h" class="hl-3">التحديثات</h2>
+        <span class="muted" style="font-size:var(--t-meta)">الأحدث في الأعلى · تصل تلقائيا</span>
+      </div>
+      <div class="tabs" role="tablist" aria-label="تصفية التحديثات" style="margin-top:var(--s-3)">
+        <button role="tab" aria-selected="true" data-f="all">الكل <span class="count">24</span></button>
+        <button role="tab" aria-selected="false" tabindex="-1" data-f="p1">عاجل فقط <span class="count">3</span></button>
+        <button role="tab" aria-selected="false" tabindex="-1" data-f="media">صور وفيديو <span class="count">6</span></button>
+        <button role="tab" aria-selected="false" tabindex="-1" data-f="official">بيانات رسمية <span class="count">4</span></button>
+      </div>
+      <div class="stream" id="stream" data-stream>
+        <article class="stream__item stream__item--p1" data-t="p1">
+          <div class="stream__t">09:58<small data-ago="14"></small></div>
+          <div><h3><span class="prio prio--1">عاجل</span>إبعاد 4 من حراس الأقصى لمدة أسبوع بعد التحقيق معهم في القشلة</h3><p>الحراس هم من طاقم الأوقاف الصباحي، واعتقلوا قرب قبة الصخرة.</p>
+            <div class="meta" style="margin-top:6px"><span>القشلة، باب الخليل</span><span>دعاء ك.</span></div>
+            <div class="stream__actions"><button class="icon-btn" type="button" aria-label="نسخ رابط هذا التحديث" data-copy data-icon="copy"></button><a class="icon-btn" href="#" aria-label="مشاركة" data-icon="share"></a></div></div>
+        </article>
+        <article class="stream__item stream__item--fix" data-t="official">
+          <div class="stream__t">09:50<small data-ago="22"></small></div>
+          <div><h3><span class="prio">تصحيح</span>حصيلة المقتحمين حتى 09:30 هي 112 وليس 121 كما ورد في تحديث 09:31</h3><p>صححنا الرقم بعد مطابقة الرصد الميداني مع إحصاء الأوقاف.</p></div>
+        </article>
+        <article class="stream__item" data-t="media">
+          <div class="stream__t">09:31<small data-ago="41"></small></div>
+          <div><h3><span class="prio prio--3">تحديث</span>الحصيلة حتى التاسعة والنصف</h3>
+            <p class="madd">مستــ<span class="madd__fig">112</span>ـــوطنا<span class="madd__tail">حتى 09:30</span></p>
+            <a href="article.html" class="frame r-3x2"><img src="assets/img/aqsa-courtyard-800.jpg" loading="lazy" width="800" height="1067" alt="مستوطنون يغادرون الساحة الشرقية باتجاه باب السلسلة" style="object-position:50% 60%"></a>
+            <p class="cap"><span class="cap__credit">محمد ع.</span><span class="coord">09:28 · 31.7769 ش · 35.2367 ق</span></p>
+          </div>
+        </article>
+        <article class="stream__item" data-t="official">
+          <div class="stream__t">09:20<small data-ago="52"></small></div>
+          <div><h3><span class="prio prio--2">هام</span>الأوقاف الإسلامية: ما يجري «اعتداء على صلاحياتنا الحصرية»</h3>
+            <blockquote>نحمل سلطات الاحتلال المسؤولية الكاملة عن المساس بحراس المسجد، وهم موظفون رسميون يؤدون عملهم.</blockquote>
+            <div class="meta" style="margin-top:6px"><span>بيان رسمي</span><span>دائرة الأوقاف الإسلامية</span></div></div>
+        </article>
+        <article class="stream__item" data-t="media">
+          <div class="stream__t">09:02<small data-ago="70"></small></div>
+          <div><h3><span class="prio prio--2">هام</span>فيديو: مستوطنون يؤدون طقوسا قرب السور الشرقي</h3>
+            <a href="article.html" class="frame r-16x9 frame--shade"><img src="assets/img/aqsa-trees-800.jpg" loading="lazy" width="800" height="1067" alt="مستوطنون قرب الحجارة القديمة عند السور الشرقي للمسجد الأقصى" style="object-position:50% 50%"><div class="play"><span class="play__btn"><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M8 5v14l11-7z" fill="currentColor"/></svg></span><span>00:48</span></div></a>
+          </div>
+        </article>
+        <article class="stream__item" data-t="all">
+          <div class="stream__t">08:47<small data-ago="85"></small></div>
+          <div><h3><span class="prio prio--3">تحديث</span>احتجاز هويات شبان عند باب الأسباط ومنعهم من الدخول</h3><p>الشبان يؤدون صلاة الضحى في الطريق المؤدي إلى الباب.</p></div>
+        </article>
+        <article class="stream__item stream__item--p1" data-t="p1">
+          <div class="stream__t">07:30<small data-ago="162"></small></div>
+          <div><h3><span class="prio prio--1">عاجل</span>بدء الاقتحامات من باب المغاربة</h3></div>
+        </article>
+      </div>
+      <div class="stack" style="margin-top:var(--s-5)">
+        <div class="skel skel-hl" style="width:70%"></div><div class="skel skel-line w80"></div><div class="skel skel-line w40"></div>
+        <button class="btn btn--line" type="button" style="justify-self:start" onclick="asima.toast('هذه نهاية تحديثات اليوم','تحديثات الأيام السابقة في أرشيف التغطية.')">تحديثات أقدم</button>
+      </div>
+    </section>
+
+    <aside class="side" aria-label="لحظات مفصلية ودليل الإشارات">
+      <div class="side__sticky">
+        <div class="key">
+          <h3>لحظات مفصلية</h3>
+          <a href="#stream"><time>09:58</time>إبعاد 4 حراس لأسبوع</a>
+          <a href="#stream"><time>09:31</time>112 مقتحما حتى 09:30</a>
+          <a href="#stream"><time>07:30</time>بدء الاقتحامات</a>
+          <a href="#stream"><time>أمس</time>166 مقتحما في ثاني أيام العيد</a>
+        </div>
+        <div>
+          <h3>دليل الإشارات</h3>
+          <div class="signals">
+            <div><span class="sw" style="background:var(--gold);color:var(--on-gold)">عاجل</span><span>حدث يغير الصورة. يظهر شريطا ذهبيا أعلى كل الصفحات.</span></div>
+            <div><span class="sw" style="background:var(--night);color:#ECE9E2;box-shadow:inset 0 -3px 0 var(--gold)">هام</span><span>تطور مهم في قصة جارية. شريط داكن بخط ذهبي.</span></div>
+            <div><span class="sw" style="color:var(--ink-3)">تحديث</span><span>معلومة إضافية داخل التغطية فقط.</span></div>
+            <div><span class="sw" style="background:color-mix(in srgb,var(--alert) 12%,transparent);color:var(--alert)">تصحيح</span><span>نعلن الخطأ في مكانه ولا نحذفه.</span></div>
+          </div>
+        </div>
+        <a class="btn btn--gold" href="jerusalem.html">افتح مدار القدس</a>
+      </div>
+    </aside>
+  </div>
+</main>
+
+<footer data-coda></footer>
+<script src="assets/js/asima.js?v=17" defer></script>
+<script>
+  addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('[data-f]').forEach(tab => tab.addEventListener('click', () => {
+      const f = tab.dataset.f;
+      const s = document.getElementById('stream');
+      const apply = () => document.querySelectorAll('#stream .stream__item').forEach(it => { it.hidden = !(f === 'all' || it.dataset.t === f); });
+      if (asima.reduceMotion) { apply(); return; }
+      s.classList.add('is-switching'); setTimeout(() => { apply(); s.classList.remove('is-switching'); }, 150);
+    }));
+  });
+</script>
+</body>
+</html>

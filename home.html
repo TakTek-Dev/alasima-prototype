@@ -10,7 +10,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Alexandria:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400&display=swap">
 <link rel="preload" as="image" href="assets/img/oldcity-1.jpg" fetchpriority="high">
-<link rel="stylesheet" href="assets/css/asima.css?v=17">
+<link rel="stylesheet" href="assets/css/asima.css?v=19">
 <style>
 /* ===================== Home — «تحت القبة» =====================
    Spatial thesis: one lead composition (headline → dome photo → figure), wrapped by the
@@ -104,6 +104,17 @@
 .contact time { font-weight: 700; color: var(--ink); font-variant-numeric: tabular-nums; }
 
 /* ---- Voices: analysis · politics ---- */
+/* ---- Prisoners: the brand's prisoner post, on the page ---- */
+.prisoners { padding-block: var(--sec-tight) var(--sec); }
+.prisoners__more { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--col-gap); margin-top: var(--s-5); }
+.prisoners__more article { display: grid; gap: 8px; align-content: start; padding-top: var(--s-4); border-top: 1px solid var(--rule); }
+.prisoners__more h3 { font-size: var(--fs-h4); font-weight: 700; line-height: var(--lh-h4); }
+@media (max-width: 900px) { .prisoners__more { grid-template-columns: minmax(0, 1fr); } }
+/* the month's figures sit on the square grid of the count posts */
+.month { position: relative; isolation: isolate; }
+.month::before { content: ""; position: absolute; inset: 0; z-index: -1; background: url(assets/img/grid-square.webp) 0 0 / 198px; opacity: .07; pointer-events: none;
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 22%, #000 78%, transparent); mask-image: linear-gradient(90deg, transparent, #000 22%, #000 78%, transparent); }
+
 .voices { padding-block: var(--sec); }
 .voices__grid { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: var(--s-7) clamp(28px, 4vw, 64px); }
 .opinion { display: grid; }
@@ -326,6 +337,36 @@
             <div class="cover__text"><h3 class="cover__h">أطفال الأقصى: الصلاة تبدأ باللعب</h3><p class="placeline"><b>ملف</b><span>صحن الصخرة</span></p></div>
           </a></article>
         </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== Prisoners ===================== -->
+  <section class="prisoners" aria-labelledby="cap-h">
+    <div class="wrap">
+      <header class="sec-head"><h2 id="cap-h">الأسرى</h2><a class="more-link" href="article.html">كل ملفات الأسرى<svg class="i-dir" viewBox="0 0 24 24" aria-hidden="true"><path d="M19 12H5m6-6-6 6 6 6" fill="none" stroke="currentColor" stroke-width="1.8"/></svg></a></header>
+      <article class="captive" data-reveal aria-labelledby="cap-lead">
+        <img class="captive__cell" src="assets/img/cell-1200.jpg" srcset="assets/img/cell-800.jpg 800w, assets/img/cell-1200.jpg 1200w, assets/img/cell.jpg 1800w" sizes="(max-width: 900px) 100vw, 94vw" width="1800" height="1079" alt="" loading="lazy">
+        <span class="captive__glow" aria-hidden="true"></span>
+        <span class="captive__tex" aria-hidden="true"></span>
+        <img class="captive__wire" src="assets/img/wire.webp" width="1100" height="383" alt="" loading="lazy">
+        <span class="captive__tab" aria-hidden="true"><img src="assets/img/logo-full.png" width="382" height="616" alt=""></span>
+        <div class="captive__text">
+          <p class="madd captive__count"><span aria-hidden="true">تأجيـــــ<span class="madd__fig">25</span>ـــــلا</span><span class="sr">25 تأجيلا</span></p>
+          <h3 id="cap-lead"><a href="article.html" class="hl"><b>الاحتلال يؤجل محاكمة</b> <span class="hl-u">الأسير المقدسي فادي أبو غربية</span></a></h3>
+          <p class="captive__meta">للمرة الخامسة والعشرين · نشر في 29 يوليو 2025 · من أرشيف العاصمة</p>
+          <a class="captive__more" href="article.html">افتح ملف القضية<svg class="i-dir" viewBox="0 0 24 24" aria-hidden="true"><path d="M19 12H5m6-6-6 6 6 6" fill="none" stroke="currentColor" stroke-width="1.8"/></svg></a>
+        </div>
+        <figure class="captive__print"><img src="assets/img/captive-fadi.jpg" srcset="assets/img/captive-fadi-480.jpg 480w, assets/img/captive-fadi.jpg 720w" sizes="(max-width: 900px) 64vw, 340px" width="720" height="1135" alt="الأسير المقدسي فادي أبو غربية" loading="lazy"></figure>
+        <figure class="captive__film">
+          <div class="film" aria-hidden="true"><img src="assets/img/captive-2-480.jpg" width="480" height="482" alt="" loading="lazy"><img src="assets/img/captive-3-480.jpg" width="480" height="617" alt="" loading="lazy"><img src="assets/img/captive-4-480.jpg" width="480" height="661" alt="" loading="lazy"></div>
+          <figcaption>صور من ملفات الأسرى في أرشيف العاصمة</figcaption>
+        </figure>
+      </article>
+      <div class="prisoners__more">
+        <article><h3><a href="article.html" class="hl"><span class="hl-u">تمديد الاعتقال الإداري لشاب من العيسوية للمرة الثالثة</span></a></h3><p class="placeline"><b>الاعتقال الإداري</b><span>الخميس</span></p></article>
+        <article><h3><a href="article.html" class="hl"><span class="hl-u">حبس منزلي لطفلين من سلوان بانتظار جلسة الشهر المقبل</span></a></h3><p class="placeline"><b>أطفال في المحاكم</b><span>الثلاثاء</span></p></article>
+        <article><h3><a href="article.html" class="hl"><span class="hl-u">أمهات الأسرى على باب محكمة الصلح منذ الفجر</span></a></h3><p class="placeline"><b>العائلات</b><span>الأحد</span></p></article>
       </div>
     </div>
   </section>

@@ -9,7 +9,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Alexandria:wght@300;400;500;600;700;800&family=Noto+Naskh+Arabic:wght@400;500;700&family=JetBrains+Mono:wght@400;500&display=swap">
-<link rel="stylesheet" href="assets/css/asima.css?v=17">
+<link rel="stylesheet" href="assets/css/asima.css?v=19">
 <style>
   .doc-hero { padding-block: var(--sec) var(--sec-tight); position: relative; overflow: clip; }
   .doc-hero__grid { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: var(--split-gap); align-items: end; }
@@ -43,6 +43,16 @@
   .evidence .plate { min-width: 0; }
   .evidence .plate img { width: 100%; height: 100%; object-fit: contain; }
   .extract { display: grid; }
+  .lib { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: var(--s-5) var(--col-gap); }
+  .lib figure { display: grid; gap: 8px; align-content: start; }
+  .lib__plate { aspect-ratio: 1; display: grid; place-items: center; padding: var(--s-4); background: var(--night); overflow: hidden; }
+  .lib__plate.is-light { background: #F3EFE6; }
+  .lib__plate.is-photo { padding: 0; }
+  .lib__plate img { max-width: 100%; max-height: 100%; object-fit: contain; }
+  .lib__plate.is-photo img { width: 100%; height: 100%; object-fit: cover; }
+  .lib figcaption { display: grid; gap: 2px; font-size: var(--fs-small); line-height: 1.6; }
+  .lib figcaption span { font-size: var(--fs-meta); color: var(--ink-3); }
+  .lib__note { margin-top: var(--s-5); font-size: var(--fs-small); color: var(--ink-2); max-width: 70ch; }
   .extract div { display: grid; grid-template-columns: 110px minmax(0, 1fr); gap: 4px 16px; padding-block: 12px; border-top: 1px solid var(--rule); font-size: var(--fs-small); line-height: 1.75; }
   .extract dt { font-weight: 700; color: var(--ink); }
   .extract dd { margin: 0; color: var(--ink-2); }
@@ -57,7 +67,7 @@
   .sw { display: grid; gap: 6px; font-size: var(--fs-meta); }
   .sw i { height: 72px; display: block; box-shadow: inset 0 0 0 1px var(--rule); }
   .sw b { font-size: var(--fs-small); color: var(--ink); }
-  .sw code { font-family: var(--f-mono); font-size: .75rem; color: var(--ink-3); }
+  .sw code { direction: ltr; unicode-bidi: isolate; font-family: var(--f-mono); font-size: .75rem; color: var(--ink-3); }
 
   .scale { display: grid; }
   .scale > div { display: grid; grid-template-columns: 130px minmax(0, 1fr); gap: 16px; align-items: baseline; padding-block: 14px; border-top: 1px solid var(--rule); }
@@ -133,6 +143,7 @@
   <div class="wrap doc">
     <nav class="toc" aria-label="فصول الدليل">
       <a href="#brand">تحليل الهوية</a>
+      <a href="#assets">أصول الهوية</a>
       <a href="#direction">الاتجاه</a>
       <a href="#system">الأسس</a>
       <a href="#components">المكونات</a>
@@ -145,7 +156,7 @@
       <!-- ====== 1. Brand analysis ====== -->
       <section class="chapter" id="brand" aria-labelledby="brand-h">
         <h2 id="brand-h">تحليل الهوية</h2>
-        <p class="dek">مجلد «ثيم العاصمة» يحوي ملفا واحدا: تصميم منشور اجتماعي بطبقات فوتوشوب. فككناه طبقة طبقة، واستخرجنا منه كل ما يمكن أن يصير نظاما.</p>
+        <p class="dek">مجلد «ثيم العاصمة» يحوي ملفين بطبقات فوتوشوب: منشور «أعداد المقتحمين»، وقالب «الأسير». فككناهما طبقة طبقة، واستخرجنا منهما كل ما يمكن أن يصير نظاما.</p>
         <div class="evidence">
           <figure><div class="plate"><img src="assets/img/logo-full.png" alt="شعار العاصمة: قبة ذهبية مقسمة بخطوط طول وعرض، يلفها شريط أبيض ينطوي على شكل حرف العين، وتحتها كلمة العاصمة" width="382" height="616"></div><figcaption class="cap"><span class="cap__text">الشعار كما ورد في الملف، على أرضية فحمية.</span></figcaption></figure>
           <figure><div class="frame r-4x5"><img src="brand-source/reference-post.png" alt="منشور العاصمة: صورة غامقة من باحات الأقصى، وفي وسطها كلمة مستوطنا ممدودة بالكشيدة وفي داخلها الرقم 180 بالذهبي" width="800" height="934" loading="lazy"></div><figcaption class="cap"><span class="cap__text">المنشور المرجعي: «مستـــ180ـــوطنا».</span></figcaption></figure>
@@ -158,6 +169,43 @@
             <div><dt>معالجة الصورة</dt><dd>طبقة تدرج داكنة بشفافية 87٪، وحبيبات، وشبكة مائلة خفيفة.</dd></div>
           </dl>
         </div>
+        <div class="evidence" style="margin-top:var(--s-7)">
+          <figure><div class="frame r-4x5"><img src="assets/img/tpl-captive.jpg" alt="قالب الأسير: زنزانة بضوء دافئ من نافذة بقضبان، وصورة الأسير في إطار ورقي، وعنوان بسطرين ذهبي وأبيض، وسلك شائك في الزاوية" width="720" height="900" loading="lazy"></div><figcaption class="cap"><span class="cap__text">قالب الأسير كما ورد في الملف الثاني: «للمرة الـ25!».</span></figcaption></figure>
+          <figure><div class="frame r-4x5"><img src="assets/img/cell-800.jpg" alt="" width="800" height="480" loading="lazy" style="object-position:58% 50%"></div><figcaption class="cap"><span class="cap__text">صورة الزنزانة في الطبقات، قبل التلوين الدافئ.</span></figcaption></figure>
+          <dl class="extract">
+            <div><dt>الأرضية</dt><dd>زنزانة يدخلها الضوء من نافذة بقضبان، ملونة بدرجة كهرمانية، ووهج برتقالي في الزاوية.</dd></div>
+            <div><dt>الصورة</dt><dd>وجه الأسير مطبوع على ورق فاتح بإطار متساو، كأنه صورة معلقة.</dd></div>
+            <div><dt>العنوان</dt><dd>سطران: الحدث بالذهبي البرتقالي <code class="mono">#FFB85D</code>، والاسم بالأبيض، بخط <bdi>Boutros News</bdi> العريض.</dd></div>
+            <div><dt>الإشارة</dt><dd>رقم في سطر قصير فوق الصورة: «للمرة الـ25!». على الموقع صار الرقم داخل كلمة ممدودة: «تأجيـ25ـلا».</dd></div>
+            <div><dt>اللسان</dt><dd>شريط داكن معلق من الحافة العليا يحمل الشعار. صار توقيعا ثابتا لقوالب العاصمة على الموقع.</dd></div>
+            <div><dt>الزخارف</dt><dd>سلك شائك، وشريط فيلم مائل، وخامة نقطية. نأخذ منها ما يحمل معنى ونترك الباقي في المكتبة.</dd></div>
+          </dl>
+        </div>
+      </section>
+
+      <!-- ====== 1b. Asset library ====== -->
+      <section class="chapter" id="assets" aria-labelledby="assets-h">
+        <h2 id="assets-h">أصول الهوية</h2>
+        <p class="dek">كل صورة وطبقة في الملفين، وأين تعيش الآن في الموقع. الخطان التجاريان في الملفين لا ينشران على الويب بلا ترخيص: <bdi>Noor</bdi> في منشور المقتحمين، و<bdi>Boutros News</bdi> في قالب الأسير. حل محلهما <bdi>Alexandria</bdi> بالأوزان نفسها.</p>
+        <div class="lib">
+          <figure><div class="lib__plate"><img src="assets/img/logo-full.png" alt="" width="382" height="616" loading="lazy"></div><figcaption><b>الشعار الفاتح</b><span>الملفان · لسان القوالب، ورأس غرفة التحرير</span></figcaption></figure>
+          <figure><div class="lib__plate is-photo"><img src="assets/img/oldcity-1-480.jpg" alt="" width="480" height="640" loading="lazy"></div><figcaption><b>5 صور من الباحات</b><span>منشور المقتحمين · الأولى والمقال والمباشر والعدسة والمكتبة</span></figcaption></figure>
+          <figure><div class="lib__plate is-photo"><img src="assets/img/cell-800.jpg" alt="" width="800" height="480" loading="lazy"></div><figcaption><b>الزنزانة</b><span>قالب الأسير · أرضية لوحة الأسرى في الأولى</span></figcaption></figure>
+          <figure><div class="lib__plate is-photo"><img src="assets/img/captive-fadi-480.jpg" alt="" width="480" height="757" loading="lazy"></div><figcaption><b>صورة الأسير</b><span>قالب الأسير · الصورة المطبوعة في لوحة الأسرى</span></figcaption></figure>
+          <figure><div class="lib__plate is-photo"><img src="assets/img/captive-3-480.jpg" alt="" width="480" height="617" loading="lazy"></div><figcaption><b>3 صور من الأرشيف</b><span>قالب الأسير · شريط الفيلم، ومكتبة الوسائط</span></figcaption></figure>
+          <figure><div class="lib__plate"><img src="assets/img/wire.webp" alt="" width="1100" height="383" loading="lazy"></div><figcaption><b>السلك الشائك</b><span>قالب الأسير · زاوية لوحة الأسرى</span></figcaption></figure>
+          <figure><div class="lib__plate"><img src="assets/img/film.webp" alt="" width="531" height="715" loading="lazy" style="max-height:78%"></div><figcaption><b>شريط الفيلم</b><span>قالب الأسير · أعيد رسمه بالكود ليحمل صور الأرشيف</span></figcaption></figure>
+          <figure><div class="lib__plate"><img src="assets/img/glow.webp" alt="" width="320" height="320" loading="lazy"></div><figcaption><b>الوهج</b><span>قالب الأسير · ضوء النافذة في لوحة الأسرى</span></figcaption></figure>
+          <figure><div class="lib__plate is-light"><img src="assets/img/halftone.webp" alt="" width="520" height="520" loading="lazy"></div><figcaption><b>الخامة النقطية</b><span>قالب الأسير · سطح لوحة الأسرى</span></figcaption></figure>
+          <figure><div class="lib__plate"><img src="assets/img/grid-tilt.webp" alt="" width="617" height="619" loading="lazy" style="opacity:.6"></div><figcaption><b>الشبكة المائلة</b><span>منشور المقتحمين · بطاقة العدد في المقال</span></figcaption></figure>
+          <figure><div class="lib__plate"><img src="assets/img/grid-square.webp" alt="" width="660" height="662" loading="lazy" style="opacity:.5"></div><figcaption><b>الشبكة المستقيمة</b><span>منشور المقتحمين · خلف أرقام الشهر في الأولى</span></figcaption></figure>
+          <figure><div class="lib__plate"><img src="assets/img/embers.webp" alt="" width="800" height="522" loading="lazy"></div><figcaption><b>الشرر</b><span>منشور المقتحمين · زاوية بطاقة العدد، بخفوت</span></figcaption></figure>
+          <figure><div class="lib__plate"><img src="assets/img/bokeh.webp" alt="" width="1100" height="779" loading="lazy"></div><figcaption><b>الغبار المضيء</b><span>منشور المقتحمين · فوق صورة بطاقة العدد</span></figcaption></figure>
+          <figure><div class="lib__plate"><img src="assets/img/noise.webp" alt="" width="256" height="256" loading="lazy" style="width:60%;opacity:.7"></div><figcaption><b>الحبيبات</b><span>منشور المقتحمين · حبيبات بطاقة العدد</span></figcaption></figure>
+          <figure><div class="lib__plate"><img src="assets/img/alert.webp" alt="" width="186" height="166" loading="lazy" style="width:44%"></div><figcaption><b>علامة التحذير</b><span>منشور المقتحمين · حواف بطاقة العدد، وإشارات التحقق</span></figcaption></figure>
+          <figure><div class="lib__plate is-photo"><img src="assets/img/tpl-count.jpg" alt="" width="720" height="841" loading="lazy"></div><figcaption><b>المنشوران كاملين</b><span>قوالب النشر في غرفة التحرير</span></figcaption></figure>
+        </div>
+        <p class="lib__note">طبقات بلا محتوى بصري لم ننقلها: خلفيتان بيضاوان، وظل الورقة الذي صار ظلا بالكود، وطبقة ضبط الألوان التي صارت مرشحا على صورة الزنزانة.</p>
       </section>
 
       <!-- ====== 2. Direction ====== -->

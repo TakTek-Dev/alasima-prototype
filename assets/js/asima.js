@@ -9,8 +9,9 @@
     get(k) { try { return localStorage.getItem(k); } catch { return null; } },
     set(k, v) { try { localStorage.setItem(k, v); } catch { /* storage blocked */ } },
   };
-  // the prototype is one news morning: Monday 28 September 2026, 10:12 in Jerusalem; the clock runs on from it while the page is open
-  const EDITION = Date.parse('2026-09-28T10:12:00+03:00'), BORN = Date.now();
+  // the prototype is one real news day: Thursday 9 October 2025, the third day of Sukkot, at 20:30 in Jerusalem;
+  // its stories, times and figures come from Al-Asima's Telegram channel. The clock runs on from it while the page is open.
+  const EDITION = Date.parse('2025-10-09T20:30:00+03:00'), BORN = Date.now();
   const editionNow = () => new Date(EDITION + Date.now() - BORN);
   const jlmTime = () => new Intl.DateTimeFormat('en-GB', { timeZone: 'Asia/Jerusalem', hour: '2-digit', minute: '2-digit', hour12: false }).format(editionNow());
 
@@ -67,10 +68,23 @@
   // with the real geodata on the page, the tile is drawn to scale in metres, with the orbit rings around al-Aqsa;
   // a far place shares the tile with the Old City, so its distance reads at a glance
   function geoLocator(G, key, label) {
-    const p = G.places.find(p => p.k === key), g = G.cityGates.find(g => g.k === key);
-    const [x, y] = p ? [p.x, p.y] : g ? g.xy : [0, 0];
-    const d = Math.hypot(x, y), S = Math.max(1500, d + 1300), [cx, cy] = d < 600 ? [x, y] : [x / 2, y / 2], k = S / 460;
-    const pts = a => a.map(q => q.join(',')).join(' ');
+    const p = G.places.find(p => p.k === key), g = G.cityGates.find(g => g.k === key), ext = window.AsimaMap?.xyOf?.(key);
+    const [x, y] = ext || (p ? [p.x, p.y] : g ? g.xy : [0, 0]);
+    const d = Math.hypot(x, y), pts = a => a.map(q => q.join(',')).join(' ');
+    if (d > 3200) {
+      // too far to share a tile with the Old City: the place sits on its own orbit, with an arrow home to al-Aqsa
+      const S = 2800, k = S / 460, a = Math.atan2(-y, -x), ex = x + Math.cos(a) * S * .22, ey = y + Math.sin(a) * S * .22;
+      const km = (d / 1000).toFixed(1).replace('.0', '');
+      return `<svg viewBox="${x - S / 2} ${y - S / 2} ${S} ${S}" preserveAspectRatio="xMidYMid meet" aria-hidden="true">`
+        + `<rect x="${x - S * 2}" y="${y - S * 2}" width="${S * 4}" height="${S * 4}" fill="#101215"/>`
+        + `<circle cx="0" cy="0" r="${d}" fill="none" stroke="rgba(240,168,8,.45)" stroke-width="1" stroke-dasharray="3 5" vector-effect="non-scaling-stroke"/>`
+        + `<path d="M${x} ${y} L${ex} ${ey}" stroke="rgba(236,233,226,.35)" stroke-width="1" vector-effect="non-scaling-stroke"/>`
+        + `<path d="M0 ${-22 * k} L${18 * k} ${12 * k} L${-18 * k} ${12 * k} Z" transform="translate(${ex} ${ey}) rotate(${a * 180 / Math.PI + 90})" fill="rgba(236,233,226,.7)"/>`
+        + `<text x="${ex}" y="${ey + (ey > y ? 62 : -40) * k}" text-anchor="middle" fill="#ECE9E2" font-family="Alexandria, sans-serif" font-weight="700" font-size="${44 * k}" direction="rtl">الأقصى · ${km} كم</text>`
+        + `<path d="M${x - 28 * k} ${y + 9 * k} A${28 * k} ${30 * k} 0 0 1 ${x + 28 * k} ${y + 9 * k} Z" fill="#F0A808"/>`
+        + `</svg>`;
+    }
+    const S = Math.max(1500, d + 1300), [cx, cy] = d < 600 ? [x, y] : [x / 2, y / 2], k = S / 460;
     const rings = [500, 1000, 2000, 3000, 4000].filter(r => r < S).map(r => `<circle cx="0" cy="0" r="${r}" fill="none" stroke="rgba(236,233,226,.16)" stroke-width="1" stroke-dasharray="3 5" vector-effect="non-scaling-stroke"/>`).join('');
     return `<svg viewBox="${cx - S / 2} ${cy - S / 2} ${S} ${S}" preserveAspectRatio="xMidYMid meet" aria-hidden="true">`
       + `<rect x="${cx - S * 2}" y="${cy - S * 2}" width="${S * 4}" height="${S * 4}" fill="#101215"/>` + rings
@@ -342,9 +356,9 @@
 
   /* ---------- simulated live stream ---------- */
   const incoming = [
-    { p: 2, h: 'شرطة الاحتلال تغلق باب السلسلة أمام المصلين لنحو ساعة', d: 'شهود عيان: الإغلاق تزامن مع خروج مجموعة المقتحمين من باب السلسلة.', place: 'باب السلسلة' },
-    { p: 3, h: 'محافظة القدس: ارتفاع عدد المقتحمين منذ الصباح إلى 214', d: 'الرقم يشمل الفترتين الصباحية وما بعد الظهر حتى الساعة الحالية.', place: 'المسجد الأقصى' },
-    { p: 1, h: 'اعتقال حارس في المسجد الأقصى من عند المصلى القبلي', d: 'التفاصيل تتابع وسنحدث هذا الخبر خلال دقائق.', place: 'المصلى القبلي' },
+    { p: 3, h: 'مئات المستوطنين يقتحمون حائط البراق ويؤدون طقوسا تلمودية في ثالث أيام العرش', d: 'الاحتفالات تتواصل وأصواتها تصل إلى ساحات المسجد الأقصى.', place: 'حائط البراق' },
+    { p: 2, h: 'زجاجات خمور ملقاة على الأرض عند باب القطانين خلال احتفالات المستوطنين', d: 'باب القطانين أحد أبواب المسجد الأقصى المبارك.', place: 'باب القطانين' },
+    { p: 1, h: 'جيش الاحتلال يحضر لتفجير منزل الشهيد محمد طه في بلدة قطنة', d: 'تعزيزات لقوات الاحتلال وصلت البلدة شمال غرب القدس المحتلة.', place: 'قطنة' },
   ];
   const prioLabel = ['', 'عاجل', 'هام', 'تحديث'];
   function initStream() {
@@ -489,9 +503,9 @@
 
   /* The sash takes new updates as they are published (simulated feed in this prototype) */
   const sashFeed = [
-    'الشرطة تغلق باب السلسلة أمام المصلين لنحو ساعة',
-    'محافظة القدس: ارتفاع عدد المقتحمين منذ الصباح إلى 214',
-    'إعادة فتح باب السلسلة بعد خروج المجموعة الأخيرة',
+    'مئات المستوطنين يقتحمون حائط البراق ويؤدون طقوسا تلمودية',
+    'تعزيزات لقوات الاحتلال تصل بلدة قطنة شمال غرب القدس',
+    'زجاجات خمور ملقاة عند باب القطانين بعد احتفالات المستوطنين',
   ];
   function initSashTicker() {
     const list = $('.lead .sash__list');
@@ -618,15 +632,7 @@
 
   window.asima = { toast, icon, ago, time: jlmTime, globeSVG, domeSVG, loader, locator: locatorSVG, stretch, splitWords, reduceMotion, rings: initMapRings };
 
-  // a design prototype on a public link says so on every page, before the masthead
-  function mountProtoNote() {
-    const note = '<p class="proto-note" role="note">نموذج تصميم · المحتوى توضيحي وليس أخبارا منشورة</p>';
-    const skip = $('.skip');
-    if (skip) skip.insertAdjacentHTML('afterend', note); else document.body.insertAdjacentHTML('afterbegin', note);
-  }
-
   initTheme();
-  mountProtoNote();
   mountRibbon();
   mountCoda();
   mountSearch();

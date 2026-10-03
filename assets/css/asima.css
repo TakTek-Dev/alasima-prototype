@@ -845,6 +845,8 @@ html.theme-vt::view-transition-group(site-ribbon), html.theme-vt::view-transitio
 .omap__gate.is-incursion { color: var(--gold); }
 .omap__gate.is-incursion i { background: var(--gold); }
 .omap__gate.is-sealed { color: rgba(236,233,226,.45); }
+.omap__gate.is-crowd { color: var(--gold); }
+.omap__gate.is-crowd i { border-style: dashed; background: rgba(240,168,8,.38); }
 .omap__gate.is-sealed i { border-style: dotted; }
 .omap__gate:hover i, .omap__gate:focus-visible i, .omap__gate.is-active i { scale: 1.25; }
 .omap__gate:focus-visible { outline: none; }
@@ -871,6 +873,7 @@ html.theme-vt::view-transition-group(site-ribbon), html.theme-vt::view-transitio
 .omap__card-status.is-closed { color: #B8361E; }
 .omap__card-status.is-open { color: #2D7A57; }
 .omap__card-status.is-sealed { color: #4C5057; }
+.omap__card-status.is-crowd { color: #7E5300; }
 
 /* the panel beside the map: same data, readable as a list */
 .omap__list { display: grid; }
@@ -891,6 +894,8 @@ html.theme-vt::view-transition-group(site-ribbon), html.theme-vt::view-transitio
 .omap__glyph.is-closed { background: #FF8B70; }
 .omap__glyph.is-sealed, .omap__st.is-sealed { color: rgba(236,233,226,.5); }
 .omap__glyph.is-sealed { border-style: dotted; }
+.omap__glyph.is-crowd, .omap__st.is-crowd { color: var(--gold); }
+.omap__glyph.is-crowd { border-style: dashed; background: rgba(240,168,8,.38); }
 .omap__st { font-size: var(--fs-meta); font-weight: 800; white-space: nowrap; }
 .omap__now { display: grid; gap: 2px; padding-bottom: var(--s-4); margin-bottom: var(--s-2); border-bottom: 1px solid var(--rule); }
 .omap__now .madd { font-size: 1.9rem; color: #ECE9E2; }
@@ -922,8 +927,6 @@ html.theme-vt::view-transition-group(site-ribbon), html.theme-vt::view-transitio
 .omap-key i.is-hot { background: var(--gold); box-shadow: none; }
 .omap-key i.is-ring { box-shadow: none; border: 1px dashed rgba(240,168,8,.6); }
 
-/* prototype note — this build is shown on a public link; its news, figures and names are illustrative */
-.proto-note { margin: 0; padding: 5px 16px; background: #ECE9E2; color: #101215; border-bottom: 1px solid rgba(16,18,21,.14); font-family: var(--f-display); font-size: var(--fs-meta); font-weight: 600; line-height: 1.6; text-align: center; }
 
 /* ---------- 21. Templates carried over from the brand's own social posts ----------
    «قالب الأسير» → .captive  ·  «أعداد المقتحمين» → .count-card

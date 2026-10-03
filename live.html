@@ -9,7 +9,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Alexandria:wght@300;400;500;600;700;800&family=Noto+Naskh+Arabic:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap">
-<link rel="stylesheet" href="assets/css/asima.css?v=19">
+<link rel="stylesheet" href="assets/css/asima.css?v=21">
 <style>
   .live-head { padding-block: var(--s-6) var(--s-7); }
   .live-head__grid { display: grid; grid-template-columns: minmax(0, 8fr) minmax(0, 4fr); gap: var(--s-7); align-items: end; }
@@ -53,6 +53,12 @@
     .live-head__grid, .live-body { grid-template-columns: 1fr; }
     .side__sticky { position: static; }
   }
+  .vid { display: flex; align-items: center; gap: 12px; margin-top: 10px; font-size: var(--fs-small); font-weight: 600; color: var(--ink-2); }
+  .vid__thumb { position: relative; flex: none; width: 176px; aspect-ratio: 16 / 9; overflow: hidden; background: #0C0E11; }
+  .vid__thumb.is-tall { width: 92px; aspect-ratio: 9 / 16; }
+  .vid__thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .vid__play { position: absolute; inset: 0; display: grid; place-items: center; color: #fff; background: linear-gradient(0deg, rgba(0,0,0,.45), rgba(0,0,0,.1)); }
+  .vid:hover .vid__lbl { color: var(--gold-ink); }
 </style>
 </head>
 <body>
@@ -62,8 +68,8 @@
 <aside class="breaking breaking--p2" aria-label="خبر هام">
   <div class="wrap breaking__in">
     <span class="breaking__label">هام</span>
-    <p class="breaking__text">الفترة الثانية من الاقتحامات تبدأ بعد صلاة الظهر · الشرطة تعزز انتشارها عند باب المغاربة</p>
-    <time class="breaking__time">10:40</time>
+    <p class="breaking__text">مئات المستوطنين يحتشدون عند باب القطانين ويحاولون اقتحامه · احتفالات المستوطنين تتواصل عند حائط البراق</p>
+    <time class="breaking__time">19:03</time>
     <button class="breaking__close" type="button" aria-label="إخفاء"><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18" stroke="currentColor" stroke-width="1.8"/></svg></button>
   </div>
 </aside>
@@ -75,9 +81,9 @@
         <span class="onair"><span class="pulse" aria-hidden="true"></span>مباشر الآن</span>
         <h1 id="live-h">الأقصى في موسم الأعياد: اقتحامات «العرش» يوما بيوم</h1>
         <dl class="live-stats">
-          <div><dt>بدأت التغطية</dt><dd>26.09 · 07:12</dd></div>
-          <div><dt>تحديثات</dt><dd data-stream-count>24</dd></div>
-          <div><dt>مقتحمون اليوم</dt><dd style="color:var(--gold)">180</dd></div>
+          <div><dt>بدأت التغطية</dt><dd>07.10 · أول أيام العيد</dd></div>
+          <div><dt>تحديثات اليوم</dt><dd data-stream-count>60</dd></div>
+          <div><dt>مقتحمون اليوم</dt><dd style="color:var(--gold)">1765</dd></div>
           <div><dt>آخر تحديث</dt><dd><span data-clock></span></dd></div>
         </dl>
       </div>
@@ -89,8 +95,8 @@
     </div>
     <div class="wrap">
       <section class="sofar" aria-labelledby="sofar-h">
-        <h2 id="sofar-h">ما نعرفه حتى الآن <span class="ai-mark" style="color:#BDBAB2"><span class="ai-glyph" aria-hidden="true"></span>ملخص آلي يحدث كل 30 دقيقة · راجعه عمر ح. 10:10</span></h2>
-        <p>اقتحم 180 مستوطنا المسجد الأقصى منذ السابعة والنصف صباحا، واعتقلت الشرطة 4 حراس وأبعدتهم أسبوعا. يمنع من هم دون الأربعين من الدخول عند ثلاثة أبواب. الفترة الثانية تبدأ بعد الظهر.</p>
+        <h2 id="sofar-h">ما نعرفه حتى الآن <span class="ai-mark" style="color:#BDBAB2"><span class="ai-glyph" aria-hidden="true"></span>ملخص آلي يحدث كل 30 دقيقة · راجعه المحرر المناوب 20:20</span></h2>
+        <p>اقتحم 1765 مستوطنا المسجد الأقصى في ثالث أيام «العرش»، إضافة إلى 316 تحت مسمى السياحة، ليصل العدد خلال ثلاثة أيام إلى 4060. شارك حاخامات في الاقتحام، وأدخل مستوطن قربانا نباتيا وأدى سجودا علنيا قرب باب الرحمة. ومساء احتشد مئات المستوطنين عند باب القطانين وحاولوا اقتحامه.</p>
       </section>
     </div>
   </section>
@@ -102,49 +108,116 @@
         <span class="muted" style="font-size:var(--t-meta)">الأحدث في الأعلى · تصل تلقائيا</span>
       </div>
       <div class="tabs" role="tablist" aria-label="تصفية التحديثات" style="margin-top:var(--s-3)">
-        <button role="tab" aria-selected="true" data-f="all">الكل <span class="count">24</span></button>
-        <button role="tab" aria-selected="false" tabindex="-1" data-f="p1">عاجل فقط <span class="count">3</span></button>
-        <button role="tab" aria-selected="false" tabindex="-1" data-f="media">صور وفيديو <span class="count">6</span></button>
-        <button role="tab" aria-selected="false" tabindex="-1" data-f="official">بيانات رسمية <span class="count">4</span></button>
+        <button role="tab" aria-selected="true" data-f="all">الكل <span class="count">16</span></button>
+        <button role="tab" aria-selected="false" tabindex="-1" data-f="p1">عاجل فقط <span class="count">2</span></button>
+        <button role="tab" aria-selected="false" tabindex="-1" data-f="media">صور وفيديو <span class="count">7</span></button>
+        <button role="tab" aria-selected="false" tabindex="-1" data-f="official">بيانات رسمية <span class="count">2</span></button>
       </div>
       <div class="stream" id="stream" data-stream>
-        <article class="stream__item stream__item--p1" data-t="p1">
-          <div class="stream__t">09:58<small data-ago="14"></small></div>
-          <div><h3><span class="prio prio--1">عاجل</span>إبعاد 4 من حراس الأقصى لمدة أسبوع بعد التحقيق معهم في القشلة</h3><p>الحراس هم من طاقم الأوقاف الصباحي، واعتقلوا قرب قبة الصخرة.</p>
-            <div class="meta" style="margin-top:6px"><span>القشلة، باب الخليل</span><span>دعاء ك.</span></div>
+        <article class="stream__item" data-t="media">
+          <div class="stream__t">20:15<small data-ago="15"></small></div>
+          <div><h3><span class="prio prio--3">تحديث</span>مئات المستوطنين يقتحمون حائط البراق ويؤدون طقوسا تلمودية في ثالث أيام العرش</h3>
+            <a href="article.html" class="vid"><span class="vid__thumb"><img src="assets/img/d9-v-buraq-night.jpg" width="320" height="176" loading="lazy" alt="مستوطنون عند حائط البراق ليلا"><span class="vid__play" aria-hidden="true"><svg viewBox="0 0 24 24" width="18" height="18"><path d="M8 5v14l11-7z" fill="currentColor"/></svg></span></span><span class="vid__lbl">فيديو من الباحات</span></a>
+            <div class="meta" style="margin-top:6px"><span>حائط البراق</span></div>
             <div class="stream__actions"><button class="icon-btn" type="button" aria-label="نسخ رابط هذا التحديث" data-copy data-icon="copy"></button><a class="icon-btn" href="#" aria-label="مشاركة" data-icon="share"></a></div></div>
         </article>
-        <article class="stream__item stream__item--fix" data-t="official">
-          <div class="stream__t">09:50<small data-ago="22"></small></div>
-          <div><h3><span class="prio">تصحيح</span>حصيلة المقتحمين حتى 09:30 هي 112 وليس 121 كما ورد في تحديث 09:31</h3><p>صححنا الرقم بعد مطابقة الرصد الميداني مع إحصاء الأوقاف.</p></div>
-        </article>
         <article class="stream__item" data-t="media">
-          <div class="stream__t">09:31<small data-ago="41"></small></div>
-          <div><h3><span class="prio prio--3">تحديث</span>الحصيلة حتى التاسعة والنصف</h3>
-            <p class="madd">مستــ<span class="madd__fig">112</span>ـــوطنا<span class="madd__tail">حتى 09:30</span></p>
-            <a href="article.html" class="frame r-3x2"><img src="assets/img/aqsa-courtyard-800.jpg" loading="lazy" width="800" height="1067" alt="مستوطنون يغادرون الساحة الشرقية باتجاه باب السلسلة" style="object-position:50% 60%"></a>
-            <p class="cap"><span class="cap__credit">محمد ع.</span><span class="coord">09:28 · 31.7769 ش · 35.2367 ق</span></p>
-          </div>
-        </article>
-        <article class="stream__item" data-t="official">
-          <div class="stream__t">09:20<small data-ago="52"></small></div>
-          <div><h3><span class="prio prio--2">هام</span>الأوقاف الإسلامية: ما يجري «اعتداء على صلاحياتنا الحصرية»</h3>
-            <blockquote>نحمل سلطات الاحتلال المسؤولية الكاملة عن المساس بحراس المسجد، وهم موظفون رسميون يؤدون عملهم.</blockquote>
-            <div class="meta" style="margin-top:6px"><span>بيان رسمي</span><span>دائرة الأوقاف الإسلامية</span></div></div>
-        </article>
-        <article class="stream__item" data-t="media">
-          <div class="stream__t">09:02<small data-ago="70"></small></div>
-          <div><h3><span class="prio prio--2">هام</span>فيديو: مستوطنون يؤدون طقوسا قرب السور الشرقي</h3>
-            <a href="article.html" class="frame r-16x9 frame--shade"><img src="assets/img/aqsa-trees-800.jpg" loading="lazy" width="800" height="1067" alt="مستوطنون قرب الحجارة القديمة عند السور الشرقي للمسجد الأقصى" style="object-position:50% 50%"><div class="play"><span class="play__btn"><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M8 5v14l11-7z" fill="currentColor"/></svg></span><span>00:48</span></div></a>
-          </div>
-        </article>
-        <article class="stream__item" data-t="all">
-          <div class="stream__t">08:47<small data-ago="85"></small></div>
-          <div><h3><span class="prio prio--3">تحديث</span>احتجاز هويات شبان عند باب الأسباط ومنعهم من الدخول</h3><p>الشبان يؤدون صلاة الضحى في الطريق المؤدي إلى الباب.</p></div>
+          <div class="stream__t">20:08<small data-ago="22"></small></div>
+          <div><h3><span class="prio prio--2">هام</span>تمهيدا لزيارة ترامب: الاحتلال يعلق أعلام الولايات المتحدة في القدس ويضيء الكنيست بالعلم الأمريكي</h3>
+            <a href="article.html" class="frame r-3x2"><img src="assets/img/d9-knesset.jpg" loading="lazy" width="800" height="534" alt="مبنى الكنيست مضاء بألوان العلم الأمريكي ليلا" style="object-position:50% 50%"></a>
+            <p class="cap"><span class="cap__credit">العاصمة</span><span>القدس</span></p>
+            <div class="stream__actions"><button class="icon-btn" type="button" aria-label="نسخ رابط هذا التحديث" data-copy data-icon="copy"></button><a class="icon-btn" href="#" aria-label="مشاركة" data-icon="share"></a></div></div>
         </article>
         <article class="stream__item stream__item--p1" data-t="p1">
-          <div class="stream__t">07:30<small data-ago="162"></small></div>
-          <div><h3><span class="prio prio--1">عاجل</span>بدء الاقتحامات من باب المغاربة</h3></div>
+          <div class="stream__t">19:03<small data-ago="87"></small></div>
+          <div><h3><span class="prio prio--1">عاجل</span>مئات المستوطنين يحتشدون عند باب القطانين، أحد أبواب المسجد الأقصى، ويحاولون اقتحامه</h3>
+            <a href="article.html" class="vid"><span class="vid__thumb is-tall"><img src="assets/img/d9-v-qattanin.jpg" width="175" height="320" loading="lazy" alt="مستوطنون عند باب القطانين"><span class="vid__play" aria-hidden="true"><svg viewBox="0 0 24 24" width="18" height="18"><path d="M8 5v14l11-7z" fill="currentColor"/></svg></span></span><span class="vid__lbl">فيديو من الباحات</span></a>
+            <div class="meta" style="margin-top:6px"><span>باب القطانين</span></div>
+            <div class="stream__actions"><button class="icon-btn" type="button" aria-label="نسخ رابط هذا التحديث" data-copy data-icon="copy"></button><a class="icon-btn" href="#" aria-label="مشاركة" data-icon="share"></a></div></div>
+        </article>
+        <article class="stream__item" data-t="media">
+          <div class="stream__t">17:25<small data-ago="185"></small></div>
+          <div><h3><span class="prio prio--3">تحديث</span>قوات الاحتلال تتمركز عند باب الساهرة</h3>
+            <a href="article.html" class="frame r-3x2"><img src="assets/img/d9-sahira.jpg" loading="lazy" width="600" height="800" alt="دراجات وعناصر لقوات الاحتلال أمام باب الساهرة" style="object-position:50% 62%"></a>
+            <p class="cap"><span class="cap__credit">العاصمة</span><span>باب الساهرة</span></p>
+            <div class="stream__actions"><button class="icon-btn" type="button" aria-label="نسخ رابط هذا التحديث" data-copy data-icon="copy"></button><a class="icon-btn" href="#" aria-label="مشاركة" data-icon="share"></a></div></div>
+        </article>
+        <article class="stream__item" data-t="media">
+          <div class="stream__t">16:12<small data-ago="258"></small></div>
+          <div><h3><span class="prio prio--2">هام</span>في ثالث أيام العرش.. هكذا مر اليوم على المسجد الأقصى: «مستباح وأهله مبعدون»</h3>
+            <a href="article.html" class="vid"><span class="vid__thumb is-tall"><img src="assets/img/d9-v-day.jpg" width="240" height="320" loading="lazy" alt="مستوطنون يرقصون في ساحات المسجد الأقصى"><span class="vid__play" aria-hidden="true"><svg viewBox="0 0 24 24" width="18" height="18"><path d="M8 5v14l11-7z" fill="currentColor"/></svg></span></span><span class="vid__lbl">فيديو من الباحات</span></a>
+            <div class="meta" style="margin-top:6px"><span>المسجد الأقصى</span><span>تقرير مصور</span></div>
+            <div class="stream__actions"><button class="icon-btn" type="button" aria-label="نسخ رابط هذا التحديث" data-copy data-icon="copy"></button><a class="icon-btn" href="#" aria-label="مشاركة" data-icon="share"></a></div></div>
+        </article>
+        <article class="stream__item" data-t="all">
+          <div class="stream__t">15:56<small data-ago="274"></small></div>
+          <div><h3><span class="prio prio--2">هام</span>4060 مستوطنا اقتحموا الأقصى خلال ثلاثة أيام فقط من عيد العرش</h3>
+            <p class="madd">مستــ<span class="madd__fig">4060</span>ـــوطنا<span class="madd__tail">في ثلاثة أيام: 537 ثم 1758 ثم 1765</span></p>
+            <div class="stream__actions"><button class="icon-btn" type="button" aria-label="نسخ رابط هذا التحديث" data-copy data-icon="copy"></button><a class="icon-btn" href="#" aria-label="مشاركة" data-icon="share"></a></div></div>
+        </article>
+        <article class="stream__item" data-t="all">
+          <div class="stream__t">15:38<small data-ago="292"></small></div>
+          <div><h3><span class="prio prio--3">تحديث</span>الإفراج عن رئيس اتحاد الجمعيات الخيرية مجدي الزغير بعد احتجازه صباح اليوم من مقر الاتحاد في وادي الجوز</h3>
+            <div class="meta" style="margin-top:6px"><span>وادي الجوز</span></div>
+            <div class="stream__actions"><button class="icon-btn" type="button" aria-label="نسخ رابط هذا التحديث" data-copy data-icon="copy"></button><a class="icon-btn" href="#" aria-label="مشاركة" data-icon="share"></a></div></div>
+        </article>
+        <article class="stream__item" data-t="all">
+          <div class="stream__t">15:29<small data-ago="301"></small></div>
+          <div><h3><span class="prio prio--2">هام</span>1765 مستوطنا اقتحموا المسجد الأقصى في ثالث أيام العرش، و316 تحت مسمى السياحة</h3>
+            <p class="madd">مستــ<span class="madd__fig">1765</span>ـــوطنا<span class="madd__tail">و316 آخرون تحت مسمى السياحة</span></p>
+            <div class="stream__actions"><button class="icon-btn" type="button" aria-label="نسخ رابط هذا التحديث" data-copy data-icon="copy"></button><a class="icon-btn" href="#" aria-label="مشاركة" data-icon="share"></a></div></div>
+        </article>
+        <article class="stream__item stream__item--p1" data-t="p1">
+          <div class="stream__t">15:19<small data-ago="311"></small></div>
+          <div><h3><span class="prio prio--1">عاجل</span>تصعيد خطير: مستوطن يدخل قربانا نباتيا إلى المسجد الأقصى ويؤدي سجودا علنيا ملحميا في الجهة الشرقية</h3><p>الخطوة تطور خطير في مساعي منظمات «الهيكل» لفرض الطقوس التوراتية داخل المسجد، وتكريس واقع تهويدي جديد فيه.</p>
+            <a href="article.html" class="frame r-3x2"><img src="assets/img/d9-prostration.jpg" loading="lazy" width="800" height="533" alt="مستوطن يؤدي سجودا ملحميا قرب باب الرحمة حاملا قربانا نباتيا" style="object-position:50% 46%"></a>
+            <p class="cap"><span class="cap__credit">العاصمة</span><span>قرب باب الرحمة · 13:07</span></p>
+            <div class="stream__actions"><button class="icon-btn" type="button" aria-label="نسخ رابط هذا التحديث" data-copy data-icon="copy"></button><a class="icon-btn" href="#" aria-label="مشاركة" data-icon="share"></a></div></div>
+        </article>
+        <article class="stream__item" data-t="official">
+          <div class="stream__t">14:33<small data-ago="357"></small></div>
+          <div><h3><span class="prio prio--2">هام</span>خطيب الأقصى الشيخ عكرمة صبري للعاصمة: شدوا الرحال إلى المسجد</h3>
+            <blockquote>ندعو أبناء شعبنا في القدس والداخل المحتل وكل من يستطيع الوصول، شد الرحال إلى الأقصى والرباط فيه، دفاعا عن حرمته من التدنيس.</blockquote>
+            <div class="meta" style="margin-top:6px"><span>تصريح خاص للعاصمة</span></div>
+            <div class="stream__actions"><button class="icon-btn" type="button" aria-label="نسخ رابط هذا التحديث" data-copy data-icon="copy"></button><a class="icon-btn" href="#" aria-label="مشاركة" data-icon="share"></a></div></div>
+        </article>
+        <article class="stream__item" data-t="all">
+          <div class="stream__t">12:04<small data-ago="506"></small></div>
+          <div><h3><span class="prio prio--3">تحديث</span>1148 مستوطنا اقتحموا الأقصى صبيحة ثالث أيام العرش، و250 تحت مسمى السياحة</h3>
+            <div class="stream__actions"><button class="icon-btn" type="button" aria-label="نسخ رابط هذا التحديث" data-copy data-icon="copy"></button><a class="icon-btn" href="#" aria-label="مشاركة" data-icon="share"></a></div></div>
+        </article>
+        <article class="stream__item" data-t="official">
+          <div class="stream__t">11:19<small data-ago="551"></small></div>
+          <div><h3><span class="prio prio--2">هام</span>محافظة القدس: قوات الاحتلال تحتجز مجدي الزغير رئيس اتحاد الجمعيات الخيرية ويوسف قري الرئيس السابق للاتحاد</h3><p>خلال اقتحام مقر الاتحاد في وادي الجوز لمنع فعالية اجتماعية أعلن عنها، بحجة أنها نشاط لصالح السلطة الفلسطينية.</p>
+            <div class="meta" style="margin-top:6px"><span>بيان رسمي</span><span>محافظة القدس</span></div>
+            <div class="stream__actions"><button class="icon-btn" type="button" aria-label="نسخ رابط هذا التحديث" data-copy data-icon="copy"></button><a class="icon-btn" href="#" aria-label="مشاركة" data-icon="share"></a></div></div>
+        </article>
+        <article class="stream__item" data-t="media">
+          <div class="stream__t">10:19<small data-ago="611"></small></div>
+          <div><h3><span class="prio prio--3">تحديث</span>حاخامات يشاركون في اقتحام ثالث أيام العرش للمسجد الأقصى</h3>
+            <a href="article.html" class="frame r-3x2"><img src="assets/img/d9-rabbis.jpg" loading="lazy" width="600" height="800" alt="حاخامات يشاركون في الاقتحام أمام قبة الصخرة" style="object-position:40% 30%"></a>
+            <p class="cap"><span class="cap__credit">العاصمة</span><span>أمام قبة الصخرة</span></p>
+            <div class="stream__actions"><button class="icon-btn" type="button" aria-label="نسخ رابط هذا التحديث" data-copy data-icon="copy"></button><a class="icon-btn" href="#" aria-label="مشاركة" data-icon="share"></a></div></div>
+        </article>
+        <article class="stream__item" data-t="media">
+          <div class="stream__t">09:09<small data-ago="681"></small></div>
+          <div><h3><span class="prio prio--2">هام</span>انتهاك صارخ: مستوطن يقدم القرابين النباتية خلال اقتحام المسجد الأقصى</h3>
+            <a href="article.html" class="frame r-3x2"><img src="assets/img/d9-offering.jpg" loading="lazy" width="600" height="800" alt="مستوطنون يحملون قرابين نباتية بين أشجار الزيتون" style="object-position:40% 35%"></a>
+            <p class="cap"><span class="cap__credit">العاصمة</span><span>الساحة الشرقية</span></p>
+            <div class="stream__actions"><button class="icon-btn" type="button" aria-label="نسخ رابط هذا التحديث" data-copy data-icon="copy"></button><a class="icon-btn" href="#" aria-label="مشاركة" data-icon="share"></a></div></div>
+        </article>
+        <article class="stream__item" data-t="all">
+          <div class="stream__t">08:13<small data-ago="737"></small></div>
+          <div><h3><span class="prio prio--3">تحديث</span>قوات الاحتلال تغلق الطريق المؤدي إلى باب الأسباط تزامنا مع اقتحامات ساحة البراق</h3>
+            <div class="meta" style="margin-top:6px"><span>باب الأسباط</span></div>
+            <div class="stream__actions"><button class="icon-btn" type="button" aria-label="نسخ رابط هذا التحديث" data-copy data-icon="copy"></button><a class="icon-btn" href="#" aria-label="مشاركة" data-icon="share"></a></div></div>
+        </article>
+        <article class="stream__item" data-t="media">
+          <div class="stream__t">06:45<small data-ago="825"></small></div>
+          <div><h3><span class="prio prio--3">تحديث</span>الأهالي يؤدون صلاة الفجر في المصلى القبلي</h3>
+            <a href="article.html" class="frame r-3x2"><img src="assets/img/d9-fajr.jpg" loading="lazy" width="800" height="373" alt="مصلون في صلاة الفجر داخل المصلى القبلي" style="object-position:50% 50%"></a>
+            <p class="cap"><span class="cap__credit">العاصمة</span><span>المصلى القبلي</span></p>
+            <div class="stream__actions"><button class="icon-btn" type="button" aria-label="نسخ رابط هذا التحديث" data-copy data-icon="copy"></button><a class="icon-btn" href="#" aria-label="مشاركة" data-icon="share"></a></div></div>
         </article>
       </div>
       <div class="stack" style="margin-top:var(--s-5)">
@@ -157,10 +230,12 @@
       <div class="side__sticky">
         <div class="key">
           <h3>لحظات مفصلية</h3>
-          <a href="#stream"><time>09:58</time>إبعاد 4 حراس لأسبوع</a>
-          <a href="#stream"><time>09:31</time>112 مقتحما حتى 09:30</a>
-          <a href="#stream"><time>07:30</time>بدء الاقتحامات</a>
-          <a href="#stream"><time>أمس</time>166 مقتحما في ثاني أيام العيد</a>
+          <a href="#stream"><time>19:03</time>حشد مستوطنين عند باب القطانين</a>
+          <a href="#stream"><time>15:29</time>1765 مقتحما و316 تحت مسمى السياحة</a>
+          <a href="#stream"><time>15:19</time>قربان نباتي وسجود علني في الأقصى</a>
+          <a href="#stream"><time>11:19</time>احتجاز رئيس اتحاد الجمعيات الخيرية</a>
+          <a href="#stream"><time>10:19</time>حاخامات يشاركون في الاقتحام</a>
+          <a href="#stream"><time>أمس</time>بن غفير يتقدم 1758 مقتحما</a>
         </div>
         <div>
           <h3>دليل الإشارات</h3>
@@ -178,7 +253,7 @@
 </main>
 
 <footer data-coda></footer>
-<script src="assets/js/asima.js?v=17" defer></script>
+<script src="assets/js/asima.js?v=20" defer></script>
 <script>
   addEventListener('DOMContentLoaded', () => {
     document.querySelectorAll('[data-f]').forEach(tab => tab.addEventListener('click', () => {

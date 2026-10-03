@@ -10,79 +10,59 @@
   const $$ = (s, r = document) => [...r.querySelectorAll(s)];
   const NS = 'http://www.w3.org/2000/svg';
 
-  /* ---------- editorial layer (prototype data, marked as illustrative on the page) ----------
-     One record of the week feeds the map, its panel, and the hub's index and log, so every count agrees.
-     The edition is frozen at Monday 28 September 2026, 10:12 in Jerusalem; `ago` is minutes before it. */
+  /* ---------- editorial layer ----------
+     The week of 3–9 October 2025 as Al-Asima reported it on Telegram (jerusalem-week.js) feeds the map, its panel,
+     and the hub's index and log, so every count agrees. The edition is Thursday 9 October 2025 at 20:30 in Jerusalem,
+     the third day of Sukkot; `ago` is minutes before it. */
+  const toXY = (lat, lon) => [(lon - GEO.origin[1]) * Math.cos(GEO.origin[0] * Math.PI / 180) * 111320, (GEO.origin[0] - lat) * 110574];
   const gate = k => GEO.cityGates.find(g => g.k === k).xy;
   const place = k => { const p = GEO.places.find(p => p.k === k); return p ? [p.x, p.y] : null; };
   const PLACES = [
     { k: 'aqsa', n: 'المسجد الأقصى', xy: [0, 0] },
+    { k: 'old', n: 'البلدة القديمة', xy: toXY(31.7782872, 35.2319526) },   // OSM node 390305543
     { k: 'silwan', n: 'سلوان', xy: place('silwan') },
     { k: 'amoud', n: 'باب العامود', xy: gate('amoud') },
     { k: 'jarrah', n: 'الشيخ جراح', xy: place('jarrah') },
     { k: 'issawiya', n: 'العيسوية', xy: place('issawiya') },
     { k: 'tur', n: 'الطور', xy: place('tur') },
     { k: 'joz', n: 'وادي الجوز', xy: place('joz') },
-    { k: 'amud', n: 'رأس العمود', xy: place('amud') },
+    { k: 'amud', n: 'رأس العامود', xy: place('amud') },
     { k: 'thawri', n: 'الثوري', xy: place('thawri') },
     { k: 'mukaber', n: 'جبل المكبر', xy: place('mukaber') },
     { k: 'shuafat', n: 'شعفاط', xy: place('shuafat') },
+    { k: 'aqab', n: 'كفر عقب', xy: toXY(31.8748922, 35.2187739) },        // OSM node 332794849
+    { k: 'qalandiya', n: 'قلنديا', xy: toXY(31.8705269, 35.2270457) },     // OSM node 8239864766, the camp
   ];
-  // [place, day or time, minutes before the edition, headline, standfirst, photo]
-  const WEEK = [
-    ['aqsa', '09:58', 14, 'إبعاد 4 من حراس الأقصى لمدة أسبوع', 'القرار سلم في مركز القشلة بعد التحقيق معهم.'],
-    ['aqsa', '10:05', 7, '180 مستوطنا يقتحمون الأقصى في ثالث أيام «العرش»', 'اقتحامات على فترتين وطقوس في الساحة الشرقية.', 'aqsa-courtyard'],
-    ['aqsa', '08:47', 85, 'احتجاز هويات شبان عند باب الأسباط', 'الشرطة تمنع من هم دون الأربعين من الدخول.'],
-    ['silwan', '07:15', 177, 'إخطارات هدم لثلاثة منازل في وادي قدوم', 'يرتفع عدد المنازل المهددة في الحي إلى 22.'],
-    ['amoud', 'أمس', 717, 'إغلاق باب العامود ليلا بعد مواجهات قصيرة', 'التجار: الإغلاق المتكرر يخنق الحركة في السوق.'],
-    ['silwan', 'أمس', 912, 'حفريات جديدة أسفل عين سلوان', 'السكان رصدوا تشققات في جدارين قرب موقع الحفر.'],
-    ['joz', 'أمس', 1032, 'إغلاق مدخل وادي الجوز لساعتين', 'الشرطة أغلقت الطريق المؤدي إلى باب الساهرة دون إعلان مسبق.'],
-    ['aqsa', 'أمس', 1362, '166 مستوطنا يقتحمون الأقصى في ثاني أيام «العرش»', 'الشرطة أخلت المصلى القبلي من المعتكفين قبل الاقتحام.'],
-    ['issawiya', 'أمس', 1902, 'اعتقال 6 شبان في حملة ليلية بالعيسوية', 'بينهم قاصران، بحسب لجنة المتابعة في البلدة.'],
-    ['silwan', 'السبت', 2712, 'سياج جديد حول أرض في حي البستان', 'الأهالي يقولون إن الأرض مزروعة منذ عقود ولم يبلغهم أحد.'],
-    ['shuafat', 'السبت', 3132, 'إغلاق حاجز مخيم شعفاط ساعات الصباح', 'عمال انتظروا أكثر من ساعتين للعبور إلى المدينة.'],
-    ['aqsa', 'الجمعة', 4122, '40 ألفا يؤدون الجمعة في الأقصى رغم القيود', 'الشرطة نصبت حواجز عند أبواب البلدة القديمة منذ الفجر.'],
-    ['amoud', 'الجمعة', 4272, 'تفتيش المصلين عند باب العامود قبل صلاة الجمعة', 'الشرطة أوقفت الشبان على الدرج وفحصت هوياتهم.'],
-    ['amoud', 'الخميس', 5412, 'منع بسطات الباعة على درج باب العامود', 'البلدية تقول إن المنع مؤقت حتى نهاية الأعياد.'],
-    ['thawri', 'الخميس', 5772, 'إخطار بوقف بناء في حي الثوري', 'الإخطار يشمل طابقا ثانيا لمنزل تسكنه عائلة من 7 أفراد.'],
-    ['mukaber', 'الخميس', 5892, 'هدم منشأة تجارية في جبل المكبر', 'صاحبها: دفعنا غرامات مخالفات البناء منذ 2019.'],
-    ['jarrah', 'الأربعاء', 7092, 'وقفة تضامنية مع العائلات المهددة بالإخلاء', 'العشرات رفعوا مفاتيح البيوت أمام المنازل الأربعة.'],
-    ['amud', 'الأربعاء', 7272, 'هدم سور منزل في رأس العمود', 'العائلة تلقت الإخطار قبل يومين فقط.'],
-    ['silwan', 'الأربعاء', 7392, 'عائلة في بطن الهوى: 21 يوما للإخلاء', 'أربعون عاما في البيت، والحكم صدر في جلسة واحدة.'],
-    ['issawiya', 'الثلاثاء', 8412, 'هدم ذاتي لمنزل في العيسوية تجنبا للغرامة', 'صاحب المنزل: الهدم بيدي أرحم من فاتورة الجرافة.'],
-    ['jarrah', 'الثلاثاء', 8592, 'المحكمة العليا تؤجل النظر في إخلاء 4 عائلات', 'الجلسة القادمة في يناير 2027.'],
-    ['aqsa', 'الثلاثاء', 8622, 'ترميم في المصلى المرواني بعد أشهر من المنع', 'الأوقاف: الشرطة سمحت بإدخال المواد بعد مفاوضات.'],
-    ['tur', 'الثلاثاء', 8772, 'مخالفات سير مكثفة على مدخل الطور', 'السكان يصفونها بـ«العقاب الجماعي».'],
-  ].map(([k, when, ago, h, d, img]) => ({ k, when, ago, h, d, img })).sort((a, b) => a.ago - b.ago);
-  // a place is hot when it carried a story in the last four hours
+  const WEEK = (window.ASIMA_WEEK || []).map(([k, when, ago, h, d, img, v, n]) => ({ k, when, ago, h, d, img, v, n })).sort((a, b) => a.ago - b.ago);
+  // only places the week actually reported sit on the map; a place is hot when it carried a story in the last four hours
   const STORIES = PLACES.map(p => {
     const own = WEEK.filter(s => s.k === p.k);
-    return { ...p, count: own.length, hot: own[0].ago < 240, last: [own[0].when, own[0].h] };
-  });
+    return own.length ? { ...p, count: own.length, hot: own[0].ago < 240, last: [own[0].when, own[0].h] } : null;
+  }).filter(Boolean);
   const coord = ([x, y]) => `${(GEO.origin[0] - y / 110574).toFixed(4)} ش · ${(GEO.origin[1] + x / (Math.cos(GEO.origin[0] * Math.PI / 180) * 111320)).toFixed(4)} ق`;
   const STATUS = {
-    open: 'مفتوح', limited: 'مفتوح بقيود', closed: 'مغلق', incursion: 'للمقتحمين', sealed: 'مغلق منذ قرون', checkpoint: 'حاجز تفتيش',
+    open: 'مفتوح', limited: 'مفتوح بقيود', closed: 'مغلق', incursion: 'للمقتحمين', sealed: 'مغلق منذ قرون', checkpoint: 'حاجز تفتيش', crowd: 'حشد مستوطنين',
   };
+  // what the coverage of 9 October recorded at each gate; «لم ترصد قيود» where it recorded nothing
   const AQSA_GATES = {
-    'h-maghariba': ['incursion', 'يفتح للمقتحمين 07:30–11:00 و13:30–14:30', '07:30'],
-    'h-silsila': ['open', 'مخرج المقتحمين، ومفتوح للمصلين', '09:31'],
-    'h-asbat': ['limited', 'احتجاز هويات، والدخول لمن تجاوز 40 عاما', '08:47'],
-    'h-hutta': ['limited', 'تحديد أعمار المصلين', '08:15'],
-    'h-majlis': ['limited', 'تحديد أعمار المصلين', '08:15'],
-    'h-atm': ['closed', 'أغلقته الشرطة صباح اليوم', '09:00'],
-    'h-ghawanima': ['open', 'حركة عادية', '08:00'],
-    'h-hadid': ['open', 'حركة عادية', '08:00'],
-    'h-qattanin': ['open', 'حركة عادية', '08:00'],
-    'h-mathara': ['open', 'حركة عادية', '08:00'],
-    'h-rahma': ['sealed', 'الباب مغلق منذ قرون، ومصلى الرحمة خلفه', ''],
+    'h-maghariba': ['incursion', 'دخل منه 1765 مستوطنا على فترتين، و316 تحت مسمى السياحة', '15:29'],
+    'h-silsila': ['open', 'مخرج المقتحمين المعتاد', ''],
+    'h-asbat': ['limited', 'أغلقت قوات الاحتلال الطريق المؤدي إليه تزامنا مع الاقتحامات', '08:13'],
+    'h-hutta': ['open', 'لم ترصد قيود', ''],
+    'h-majlis': ['open', 'لم ترصد قيود', ''],
+    'h-atm': ['open', 'لم ترصد قيود', ''],
+    'h-ghawanima': ['open', 'لم ترصد قيود', ''],
+    'h-hadid': ['open', 'لم ترصد قيود', ''],
+    'h-qattanin': ['crowd', 'مئات المستوطنين احتشدوا عنده مساء وحاولوا اقتحامه', '19:03'],
+    'h-mathara': ['open', 'لم ترصد قيود', ''],
+    'h-rahma': ['sealed', 'مغلق منذ قرون. قربه أدى مستوطن سجودا ملحميا حاملا قربانا نباتيا', '13:07'],
   };
   const CITY_GATES = {
-    amoud: ['checkpoint', 'تفتيش الشبان على الدرج', '09:10'], sahira: ['open', 'حركة عادية', ''], asbat: ['limited', 'احتجاز هويات', '08:47'],
-    rahma: ['sealed', 'مغلق منذ قرون', ''], magharibaCity: ['open', 'حركة عادية', ''], nabi: ['open', 'حركة عادية', ''],
-    khalil: ['open', 'حركة عادية', ''], jadid: ['open', 'حركة عادية', ''],
+    amoud: ['open', 'مسار المستوطنين نحو حائط البراق مساء', '17:25'], sahira: ['checkpoint', 'قوات الاحتلال تتمركز عنده', '17:25'],
+    asbat: ['limited', 'الطريق المؤدي إليه مغلق', '08:13'], rahma: ['sealed', 'مغلق منذ قرون', ''],
+    magharibaCity: ['open', 'لم ترصد قيود', ''], nabi: ['open', 'لم ترصد قيود', ''], khalil: ['open', 'لم ترصد قيود', ''], jadid: ['open', 'لم ترصد قيود', ''],
   };
   // the settlers' usual path today: in at al-Maghariba, along the south and the eastern courtyard, out at al-Silsila
-  const toXY = (lat, lon) => [(lon - GEO.origin[1]) * Math.cos(GEO.origin[0] * Math.PI / 180) * 111320, (GEO.origin[0] - lat) * 110574];
   const ROUTE = [[31.77638, 35.23451], [31.77622, 35.23515], [31.77648, 35.23622], [31.77760, 35.23668], [31.77900, 35.23672], [31.77985, 35.23630], [31.77985, 35.23470], [31.77905, 35.23432], [31.77800, 35.23448], [31.77729, 35.23434]].map(([a, b]) => toXY(a, b));
 
   const VIEWS = {
@@ -192,14 +172,14 @@
     // al-Aqsa gates (al-Aqsa level)
     GEO.haramGates.forEach(gt => {
       const [st, note, t] = AQSA_GATES[gt.k] || ['open', '', ''];
-      const minor = ['h-hadid', 'h-qattanin', 'h-mathara', 'h-ghawanima'].includes(gt.k);
+      const minor = ['h-hadid', 'h-mathara', 'h-ghawanima'].includes(gt.k);   // al-Qattanin carries the evening's story, so it keeps its name
       // on the map the al-Aqsa gates drop the word «باب» — the context says it, and the north side has no room for it
       const sd = gt.xy[0] < -40 ? 'is-w' : gt.xy[0] > 150 ? 'is-e' : 'is-n';
       const b = makeBtn(`omap__gate is-${st} ${sd}${minor ? ' is-minor' : ''}`, `<i></i><span>${gt.n.replace(/^باب /, '')}</span>`, `${gt.n}: ${STATUS[st]}${note ? '، ' + note : ''}`);
       b.dataset.k = gt.k;
       items.push({ el: b, xy: gt.xy, kind: 'gate', side: sd, data: { n: gt.n, st, note, t }, onlyIn: ['aqsa'] });
     });
-    const routeTags = [addLabel(ROUTE[0], 'دخول 07:30', 'is-route'), addLabel(ROUTE[ROUTE.length - 1], 'خروج', 'is-route')];
+    const routeTags = [addLabel(ROUTE[0], 'دخول', 'is-route'), addLabel(ROUTE[ROUTE.length - 1], 'خروج', 'is-route')];
     items.slice(-2).forEach(it => { it.onlyIn = ['aqsa']; });
 
     /* ---------- camera ---------- */
@@ -354,7 +334,7 @@
         <div data-panel="city"><ol class="omap__list">${sorted.map(s => `<li><button type="button" data-k="${s.k}"><b>${s.n}</b><span class="omap__count">${s.count}</span><small>${s.last[1]}</small></button></li>`).join('')}</ol></div>
         <div data-panel="old" hidden><ol class="omap__list">${GEO.cityGates.map(gt => gateRow(gt.k, gt.n, CITY_GATES[gt.k])).join('')}</ol></div>
         <div data-panel="aqsa" hidden>
-          <p class="omap__now"><span class="madd"><span aria-hidden="true">مستـــ<span class="madd__fig">180</span>ـــوطنا</span><span class="sr">180 مستوطنا</span></span><span>اقتحموا الأقصى حتى 10:00 · الفترة الثانية 13:30–14:30</span></p>
+          <p class="omap__now"><span class="madd"><span aria-hidden="true">مستـــ<span class="madd__fig">1765</span>ـــوطنا</span><span class="sr">1765 مستوطنا</span></span><span>اقتحموا الأقصى في ثالث أيام العرش، و316 تحت مسمى السياحة</span></p>
           <ol class="omap__list is-gates">${GEO.haramGates.map(gt => gateRow(gt.k, gt.n, AQSA_GATES[gt.k])).join('')}</ol>
         </div>`;
       const focusItem = k => { const it = items.find(i => i.el.dataset?.k === k && !i.el.hidden); if (it) showCard(it); };
@@ -397,5 +377,7 @@
     mount,
     week: WEEK,
     places: STORIES.map(s => ({ k: s.k, n: s.n, count: s.count, hot: s.hot, coord: coord(s.xy) })),
+    elsewhere: WEEK.filter(s => s.k === 'other').length,
+    xyOf: k => PLACES.find(p => p.k === k)?.xy,
   };
 })();

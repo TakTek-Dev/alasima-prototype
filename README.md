@@ -3,7 +3,7 @@
 Interactive design prototype for «العاصمة» (Al-Asima News Network), a Jerusalem-focused Arabic news outlet.
 Static HTML, CSS and vanilla JavaScript, right-to-left, no build step.
 
-**Every news item, figure and name in these pages is illustrative.** This is a design prototype, not a published news site.
+The pages show one real news day: **Thursday 9 October 2025**, the third day of Sukkot, as Al-Asima covered it on its Telegram channel (t.me/AlasimaN). Headlines, figures, times and photographs of that day come from the channel; opinion columns and a few open-file modules are illustrative. This is a design prototype, not a live news site.
 
 ## Pages
 

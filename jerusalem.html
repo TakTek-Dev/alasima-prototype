@@ -9,7 +9,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Alexandria:wght@300;400;500;600;700;800&family=Noto+Naskh+Arabic:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap">
-<link rel="stylesheet" href="assets/css/asima.css?v=19">
+<link rel="stylesheet" href="assets/css/asima.css?v=21">
 <style>
   .hub-hero { padding-block: var(--s-7) var(--s-6); position: relative; overflow: hidden; }
   .hub-hero__globe { position: absolute; inset-inline-start: -4vw; bottom: 0; width: min(720px, 70vw); aspect-ratio: 2 / 1; color: var(--gold); opacity: .14; pointer-events: none; } .hub-hero__globe svg { width: 100%; height: 100%; }
@@ -37,6 +37,7 @@
   .gaz b { font-weight: 700; font-size: var(--t-4); }
   .gaz .n { font-weight: 800; color: var(--gold); font-size: .95rem; align-self: center; font-variant-numeric: tabular-nums; }
   .gaz .coord { grid-column: 1 / -1; }
+  .locator.is-name { display: grid; place-items: center; padding: 8px; background: #101215; color: #ECE9E2; font-weight: 800; font-size: 1.05rem; text-align: center; }
 
   .feed-wrap { display: grid; grid-template-columns: minmax(0, 8fr) minmax(0, 4fr); gap: var(--s-7); }
   .feed { display: grid; }
@@ -101,10 +102,10 @@
           <div class="coord" style="text-align:end;line-height:2"><b>31.7780 ش · 35.2353 ق</b><br>القدس · <span data-clock></span></div>
         </div>
         <dl class="pulse-row" aria-label="حال المدينة الآن">
-          <div><dt>المسجد الأقصى</dt><dd><span class="sq" aria-hidden="true"></span>مفتوح بقيود على الأعمار</dd></div>
-          <div><dt>باب العامود</dt><dd><span class="sq sq--line" aria-hidden="true"></span>حاجز تفتيش</dd></div>
-          <div><dt>حاجز قلنديا</dt><dd><span class="sq sq--ok" aria-hidden="true"></span>حركة طبيعية</dd></div>
-          <div><dt>آخر تحديث للمدار</dt><dd><span class="num">10:12</span> · <a class="live-tag" href="live.html"><span class="pulse"></span>مباشر</a></dd></div>
+          <div><dt>المسجد الأقصى</dt><dd><span class="sq" aria-hidden="true"></span>1765 مقتحما اليوم</dd></div>
+          <div><dt>باب القطانين</dt><dd><span class="sq sq--line" aria-hidden="true"></span>حشد مستوطنين · 19:03</dd></div>
+          <div><dt>باب الساهرة</dt><dd><span class="sq sq--line" aria-hidden="true"></span>تمركز لقوات الاحتلال</dd></div>
+          <div><dt>آخر تحديث للمدار</dt><dd><span class="num">20:30</span> · <a class="live-tag" href="live.html"><span class="pulse"></span>مباشر</a></dd></div>
         </dl>
       </div>
     </section>
@@ -117,7 +118,7 @@
           <button role="tab" aria-selected="false" tabindex="-1" data-view="aqsa">الأقصى الآن</button>
         </div>
         <div class="omap" id="hub-map" role="group" aria-label="خريطة القدس: البلدة القديمة والأحياء حولها، والمسافات الحقيقية من المسجد الأقصى، وعدد القصص في كل مكان هذا الأسبوع. اختر مكانا لتصفية السجل."></div>
-        <div class="omap-key"><span aria-hidden="true"><i class="is-hot"></i>نشاط اليوم</span><span aria-hidden="true"><i></i>قصص الأسبوع</span><span aria-hidden="true"><i class="is-ring"></i>المسافة من الأقصى</span><span>خريطة الأساس © مساهمو OpenStreetMap · القصص وحالة الأبواب توضيحية</span></div>
+        <div class="omap-key"><span aria-hidden="true"><i class="is-hot"></i>نشاط اليوم</span><span aria-hidden="true"><i></i>قصص الأسبوع</span><span aria-hidden="true"><i class="is-ring"></i>المسافة من الأقصى</span><span>خريطة الأساس © مساهمو OpenStreetMap · القصص من قناة العاصمة على تليجرام · الأبواب كما رصدتها التغطية</span></div>
       </div>
       <div class="gaz">
         <div class="gaz__head"><h2 id="gaz-h">فهرس الأماكن</h2><button type="button" class="btn btn--quiet btn--sm" data-clear style="width:auto;border:0;padding:0 8px">كل القدس</button></div>
@@ -138,19 +139,19 @@
         <div>
           <h3 class="hl-4" style="border-bottom:3px solid var(--ink);padding-bottom:10px;margin-bottom:var(--s-4)">هذا الأسبوع في القدس</h3>
           <ol class="ledger">
-            <li class="ledger__item is-key"><span class="ledger__time">الاثنين<small>28.09</small></span><span class="ledger__node"></span><div class="ledger__body"><h4>180 مقتحما وإبعاد 4 حراس</h4></div></li>
-            <li class="ledger__item"><span class="ledger__time">الأحد<small>27.09</small></span><span class="ledger__node"></span><div class="ledger__body"><h4>إغلاق باب العامود ليلا</h4></div></li>
-            <li class="ledger__item"><span class="ledger__time">الخميس<small>24.09</small></span><span class="ledger__node"></span><div class="ledger__body"><h4>هدم منشأة تجارية في جبل المكبر</h4></div></li>
-            <li class="ledger__item"><span class="ledger__time">الثلاثاء<small>22.09</small></span><span class="ledger__node"></span><div class="ledger__body"><h4>تأجيل قضية الشيخ جراح إلى يناير</h4></div></li>
+            <li class="ledger__item is-key"><span class="ledger__time">الخميس<small>09.10</small></span><span class="ledger__node"></span><div class="ledger__body"><h4>1765 مقتحما، وقربان نباتي وسجود علني في الأقصى</h4></div></li>
+            <li class="ledger__item"><span class="ledger__time">الأربعاء<small>08.10</small></span><span class="ledger__node"></span><div class="ledger__body"><h4>بن غفير يتقدم 1758 مقتحما في ثاني أيام العرش</h4></div></li>
+            <li class="ledger__item"><span class="ledger__time">الأربعاء<small>08.10</small></span><span class="ledger__node"></span><div class="ledger__body"><h4>إصابة الشاب محمود الفروخ برصاص الاحتلال في سلوان</h4></div></li>
+            <li class="ledger__item"><span class="ledger__time">الثلاثاء<small>07.10</small></span><span class="ledger__node"></span><div class="ledger__body"><h4>537 مقتحما في أول أيام العرش</h4></div></li>
           </ol>
         </div>
         <div id="data">
           <h3 class="hl-4" style="border-bottom:3px solid var(--ink);padding-bottom:10px;margin-bottom:var(--s-4)">اقتحامات الأقصى يوميا</h3>
-          <svg class="chart" viewBox="0 0 320 180" role="img" aria-label="عدد المقتحمين يوميا خلال سبعة أيام، أعلاها اليوم 180">
+          <svg class="chart" viewBox="0 0 320 180" role="img" aria-label="عدد المقتحمين يوميا خلال سبعة أيام: صفر يومي الجمعة والسبت، 208 الأحد، 138 الاثنين، 537 الثلاثاء، 1758 الأربعاء، و1765 اليوم">
             <line class="grid" x1="0" x2="320" y1="150" y2="150"/><line class="grid" x1="0" x2="320" y1="100" y2="100"/><line class="grid" x1="0" x2="320" y1="50" y2="50"/>
-            <text x="318" y="47" text-anchor="end">200</text><text x="318" y="97" text-anchor="end">100</text>
+            <text x="318" y="47" text-anchor="end">2000</text><text x="318" y="97" text-anchor="end">1000</text>
           </svg>
-          <p class="fig__src" style="font-size:var(--t-meta);color:var(--ink-3);margin-top:8px">رصد العاصمة الميداني · لا اقتحامات يومي الجمعة والسبت · بيانات توضيحية في هذا النموذج</p>
+          <p class="fig__src" style="font-size:var(--t-meta);color:var(--ink-3);margin-top:8px">كما نشرتها قناة العاصمة يوما بيوم · لا اقتحامات يومي الجمعة والسبت · لا تشمل الداخلين تحت مسمى السياحة</p>
         </div>
       </aside>
     </div>
@@ -160,7 +161,7 @@
     <div class="wrap">
       <header class="sec-head"><div class="sec-head__t"><h2 id="dos-h">ملفات مفتوحة</h2><span class="muted" style="font-size:var(--t-sm)">قضايا نتابعها حتى تغلق</span></div></header>
       <div class="dossiers">
-        <a class="dossier-card" href="article.html"><h3>موسم الأعياد 2026</h3><p class="placeline"><b>المسجد الأقصى</b></p><div class="ticks" aria-hidden="true"><i style="height:30%"></i><i style="height:50%"></i><i style="height:40%"></i><i style="height:70%"></i><i style="height:60%"></i><i class="k" style="height:100%"></i></div><span class="meta"><span>24 تحديثا</span><time>10:12</time></span></a>
+        <a class="dossier-card" href="article.html"><h3>موسم الأعياد 2025</h3><p class="placeline"><b>المسجد الأقصى</b></p><div class="ticks" aria-hidden="true"><i style="height:30%"></i><i style="height:50%"></i><i style="height:40%"></i><i style="height:70%"></i><i style="height:60%"></i><i class="k" style="height:100%"></i></div><span class="meta"><span>4060 مقتحما في 3 أيام</span><time>20:30</time></span></a>
         <a class="dossier-card" href="article.html"><h3>البستان ووادي قدوم</h3><p class="placeline"><b>سلوان</b></p><div class="ticks" aria-hidden="true"><i style="height:20%"></i><i style="height:20%"></i><i class="k" style="height:90%"></i><i style="height:30%"></i><i style="height:25%"></i><i class="k" style="height:60%"></i></div><span class="meta"><span>11 قصة</span><time>07:15</time></span></a>
         <a class="dossier-card" href="article.html"><h3>قضايا الإخلاء أمام المحاكم</h3><p class="placeline"><b>الشيخ جراح</b></p><div class="ticks" aria-hidden="true"><i style="height:60%"></i><i style="height:30%"></i><i style="height:20%"></i><i style="height:20%"></i><i class="k" style="height:50%"></i><i style="height:15%"></i></div><span class="meta"><span>8 قصص</span><time>الثلاثاء</time></span></a>
         <a class="dossier-card" href="article.html"><h3>أطفال القدس في المحاكم</h3><p class="placeline"><b>الأسرى</b></p><div class="ticks" aria-hidden="true"><i style="height:40%"></i><i style="height:45%"></i><i style="height:50%"></i><i style="height:40%"></i><i style="height:55%"></i><i class="k" style="height:70%"></i></div><span class="meta"><span>15 قصة</span><time>أمس</time></span></a>
@@ -170,11 +171,11 @@
 
   <section class="night section" aria-labelledby="arc-h">
     <div class="wrap archive">
-      <div class="archive__year">2000</div>
+      <div class="archive__year">1990</div>
       <div class="stack">
-        <h2 id="arc-h" class="hl-1">28 سبتمبر 2000: اقتحام شارون للأقصى، وبداية انتفاضة الأقصى</h2>
-        <p class="placeline"><b>من الأرشيف</b><span>في مثل هذا اليوم</span></p>
-        <p class="dek">ما الذي بقي من ذلك اليوم في ذاكرة المدينة؟ شهادات من سكان البلدة القديمة بعد 26 عاما.</p>
+        <h2 id="arc-h" class="hl-1">8 أكتوبر 1990: مجزرة الأقصى</h2>
+        <p class="placeline"><b>من الأرشيف</b><span>في مثل هذه الأيام</span></p>
+        <p class="dek">قتلت شرطة الاحتلال نحو عشرين مصليا في باحات المسجد. ما الذي بقي من ذلك اليوم في ذاكرة المدينة بعد 35 عاما؟</p>
         <a class="btn btn--gold" href="article.html" style="justify-self:start">افتح الملف</a>
       </div>
     </div>
@@ -183,25 +184,28 @@
 
 <footer data-coda></footer>
 <script src="assets/js/jerusalem-geo.js?v=3" defer></script>
-<script src="assets/js/asima.js?v=17" defer></script>
-<script src="assets/js/jerusalem-map.js?v=5" defer></script>
+<script src="assets/js/asima.js?v=20" defer></script>
+<script src="assets/js/jerusalem-week.js?v=2" defer></script>
+<script src="assets/js/jerusalem-map.js?v=7" defer></script>
 <script>
 addEventListener('DOMContentLoaded', () => {
   const M = window.AsimaMap; if (!M) return;
   const { places, week } = M;
   const $ = id => document.getElementById(id);
   const placeOf = k => places.find(p => p.k === k);
+  const pname = s => s.k === 'other' ? s.n : placeOf(s.k).n;
   const gaz = $('gaz'), feed = $('feed'), atlas = document.querySelector('.atlas');
-  gaz.innerHTML = places.slice().sort((a, b) => b.count - a.count).map(p => `<button type="button" aria-pressed="false" data-k="${p.k}"><b>${p.n}</b><span class="n">${p.count}</span><span class="coord">${p.coord}</span></button>`).join('');
+  gaz.innerHTML = places.slice().sort((a, b) => b.count - a.count).map(p => `<button type="button" aria-pressed="false" data-k="${p.k}"><b>${p.n}</b><span class="n">${p.count}</span><span class="coord">${p.coord}</span></button>`).join('')
+    + (M.elsewhere ? `<button type="button" aria-pressed="false" data-k="other"><b>أماكن أخرى في المحافظة</b><span class="n">${M.elsewhere}</span><span class="coord">خارج حدود الخريطة</span></button>` : '');
 
   const total = n => n === 1 ? 'قصة واحدة' : n === 2 ? 'قصتان' : `${n} ${n <= 10 ? 'قصص' : 'قصة'}`;
   let current = null, shown = 6, map = null;
   const render = () => {
     const list = week.filter(s => !current || s.k === current);
-    feed.innerHTML = list.slice(0, shown).map(s => `<article><div class="when">${s.when}<small data-ago="${s.ago}">${asima.ago(s.ago)}</small></div><div><h3><a href="article.html" class="hl"><span class="hl-u">${s.h}</span></a></h3><p>${s.d}</p><p class="placeline" style="margin-top:6px"><b>${placeOf(s.k).n}</b></p></div>${s.img ? `<a href="article.html" class="frame" tabindex="-1" aria-hidden="true"><img src="assets/img/${s.img}-800.jpg" loading="lazy" alt="" width="800" height="1067" style="object-position:50% 55%"></a>` : `<a href="article.html" class="frame locator" tabindex="-1" aria-hidden="true">${asima.locator(s.k)}</a>`}</article>`).join('');
+    feed.innerHTML = list.slice(0, shown).map(s => `<article><div class="when">${s.when}<small data-ago="${s.ago}">${asima.ago(s.ago)}</small></div><div><h3><a href="article.html" class="hl"><span class="hl-u">${s.h}</span></a></h3><p>${s.d}</p><p class="placeline" style="margin-top:6px"><b>${pname(s)}</b>${s.v ? '<span>فيديو</span>' : ''}</p></div>${s.img ? `<a href="article.html" class="frame" tabindex="-1" aria-hidden="true"><img src="assets/img/${s.img}-480.jpg" loading="lazy" alt="" width="480" height="640" style="object-position:50% 40%"></a>` : (s.k === 'other' ? `<a href="article.html" class="frame locator is-name" tabindex="-1" aria-hidden="true"><b>${s.n}</b></a>` : `<a href="article.html" class="frame locator" tabindex="-1" aria-hidden="true">${asima.locator(s.k)}</a>`)}</article>`).join('');
     $('feed-count').textContent = list.length > shown ? `${shown} من ${total(list.length)}` : total(list.length);
     $('more').hidden = shown >= list.length;
-    $('feed-scope').textContent = `${current ? placeOf(current).n : 'كل القدس'} · 7 أيام`;
+    $('feed-scope').textContent = `${current === 'other' ? 'أماكن أخرى' : current ? placeOf(current).n : 'كل القدس'} · 7 أيام`;
   };
   // the index toggles a place and pins it on the map; a pin chosen on the map sets the log, and a second click clears it
   const select = (k, fromMap) => {
@@ -223,11 +227,11 @@ addEventListener('DOMContentLoaded', () => {
   };
   render();
 
-  // chart drawn to one scale: y = 150 - v * 0.5 (0..200 → 150..50); no incursions on Friday and Saturday
-  const data = [['22.09', 104], ['23.09', 138], ['24.09', 121], ['25.09', 0, 'جمعة'], ['26.09', 0, 'سبت'], ['27.09', 166], ['28.09', 180]];
+  // chart drawn to one scale: y = 150 - v * 0.05 (0..2000 → 150..50); no incursions on Friday and Saturday
+  const data = [['03.10', 0, 'جمعة'], ['04.10', 0, 'سبت'], ['05.10', 208], ['06.10', 138], ['07.10', 537], ['08.10', 1758], ['09.10', 1765]];
   const svg = document.querySelector('.chart'); const w = 30, gap = 12;
   svg.insertAdjacentHTML('beforeend', data.map(([d, v, off], i) => {
-    const x = 6 + i * (w + gap), h = v * .5, y = 150 - h, last = i === data.length - 1;
+    const x = 6 + i * (w + gap), h = v * .05, y = 150 - h, last = i === data.length - 1;
     return `<rect class="bar ${last ? 'hl' : ''}" x="${x}" y="${y}" width="${w}" height="${h}"/><text x="${x + w / 2}" y="166" text-anchor="middle">${d}</text>${v ? `<text class="val" x="${x + w / 2}" y="${y - 5}" text-anchor="middle">${v}</text>` : `<text x="${x + w / 2}" y="145" text-anchor="middle">${off}</text>`}`;
   }).join(''));
 });

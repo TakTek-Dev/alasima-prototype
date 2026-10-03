@@ -532,6 +532,38 @@
     setTimeout(push, 12000); setInterval(push, 24000);
   }
 
+  /* Sliders — a snap row gets arrows, a count and a progress rule; swipe and keyboard scroll still work.
+     RTL: the row starts at the right, so "next" moves left (negative scrollLeft). */
+  document.querySelectorAll('[data-slider]').forEach(row => {
+    const items = [...row.children];
+    const ctl = document.createElement('div'); ctl.className = 'slider-ctl';
+    ctl.innerHTML = `<button class="slider-ctl__btn" type="button" data-dir="-1" aria-label="السابق">${icon('arrow')}</button>`
+      + `<span class="slider-ctl__track" aria-hidden="true"><i></i></span><span class="slider-ctl__count" aria-live="polite"></span>`
+      + `<button class="slider-ctl__btn" type="button" data-dir="1" aria-label="التالي">${icon('arrow')}</button>`;
+    row.after(ctl);
+    const [prev, next] = ctl.querySelectorAll('button'), bar = ctl.querySelector('i'), count = ctl.querySelector('.slider-ctl__count');
+    const rtl = getComputedStyle(row).direction === 'rtl';
+    const update = () => {
+      const max = row.scrollWidth - row.clientWidth, pos = Math.min(max, Math.abs(row.scrollLeft));
+      const per = Math.max(1, Math.round(row.clientWidth / (items[0].offsetWidth || 1)));
+      const first = Math.min(items.length - per, Math.round(pos / ((items[1]?.offsetLeft != null ? Math.abs(items[1].offsetLeft - items[0].offsetLeft) : 1) || 1)));
+      count.textContent = `${first + 1}–${Math.min(items.length, first + per)} من ${items.length}`;
+      prev.disabled = pos < 4; next.disabled = pos > max - 4;
+      const w = row.clientWidth / row.scrollWidth;
+      bar.style.setProperty('--w', `${(w * 100).toFixed(2)}%`);
+      bar.style.setProperty('--x', `${((rtl ? -1 : 1) * (max ? pos / max : 0) * (1 - w) / w * 100).toFixed(2)}%`);
+      ctl.hidden = max < 4;
+    };
+    ctl.addEventListener('click', e => {
+      const b = e.target.closest('button'); if (!b) return;
+      const step = Math.abs(items[1].offsetLeft - items[0].offsetLeft) * Math.max(1, Math.floor(row.clientWidth / items[0].offsetWidth));
+      row.scrollBy({ left: (rtl ? -1 : 1) * +b.dataset.dir * step });
+    });
+    row.addEventListener('scroll', () => requestAnimationFrame(update), { passive: true });
+    addEventListener('resize', update);
+    update();
+  });
+
   /* Lens viewer — the contact sheet opens into a full photograph that grows out of its own thumbnail */
   function initViewer() {
     const groups = {};

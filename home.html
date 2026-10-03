@@ -10,7 +10,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Markazi+Text:wght@400;500;600;700&family=Noto+Kufi+Arabic:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap">
 <link rel="preload" as="image" href="assets/img/d9-rabbis-2.jpg" fetchpriority="high">
-<link rel="stylesheet" href="assets/css/asima.css?v=27">
+<link rel="stylesheet" href="assets/css/asima.css?v=28">
 <style>
 /* ===================== Home — «تحت القبة» =====================
    Spatial thesis: one lead composition (headline → dome photo → figure), wrapped by the
@@ -99,7 +99,10 @@
 .lens__story .meta { color: #C2BFB7; margin-top: 8px; }
 .lens .play { position: static; }
 .lens__story h3 a { color: #F2F0EB; }
-.contact { display: grid; grid-auto-flow: column; grid-auto-columns: minmax(180px, 1fr); gap: var(--col-gap); margin-top: var(--s-6); overflow-x: auto; scroll-snap-type: x mandatory; padding-bottom: 6px; scrollbar-width: thin; }
+.contact { display: grid; grid-auto-flow: column; grid-auto-columns: calc((100% - var(--col-gap) * 4) / 5); gap: var(--col-gap); margin-top: var(--s-6); overflow-x: auto; scroll-snap-type: x mandatory; scroll-behavior: smooth; scrollbar-width: none; overscroll-behavior-x: contain; }
+.contact::-webkit-scrollbar { display: none; }
+@media (max-width: 900px) { .contact { grid-auto-columns: calc((100% - var(--col-gap) * 2) / 3); } }
+@media (max-width: 560px) { .contact { grid-auto-columns: 62%; } }
 .contact > a { scroll-snap-align: start; display: grid; gap: 8px; }
 .contact .cap { margin: 0; }
 .contact time { font-weight: 700; color: var(--ink); font-variant-numeric: tabular-nums; }
@@ -388,7 +391,7 @@
       </div>
     </div>
     <div class="wrap">
-      <div class="contact" data-gallery="lens" aria-label="ثالث أيام العرش في الأقصى بالصور، افتح أي صورة لعرضها كاملة">
+      <div class="contact" data-gallery="lens" data-slider aria-label="ثالث أيام العرش في الأقصى بالصور، افتح أي صورة لعرضها كاملة">
         <a href="article.html"><span class="frame r-4x5"><img src="assets/img/d9-jarrah-tent-480.jpg" loading="lazy" alt="خيمة عرش نصبها مستوطنون بين منازل الأهالي في الشيخ جراح" width="480" height="640" style="object-position: 50% 50%"></span><span class="cap"><time>08:13</time><span>خيمة عرش بين منازل الشيخ جراح</span></span></a>
         <a href="article.html"><span class="frame r-4x5"><img src="assets/img/d9-offering-480.jpg" loading="lazy" alt="مستوطن يحمل قربانا نباتيا خلال اقتحام المسجد الأقصى" width="480" height="640" style="object-position: 50% 40%"></span><span class="cap"><time>09:09</time><span>قرابين نباتية خلال الاقتحام</span></span></a>
         <a href="article.html"><span class="frame r-4x5"><img src="assets/img/d9-rabbis-480.jpg" loading="lazy" alt="حاخامات يشاركون في اقتحام المسجد الأقصى أمام قبة الصخرة" width="480" height="640" style="object-position: 40% 40%"></span><span class="cap"><time>10:19</time><span>حاخامات يشاركون في الاقتحام</span></span></a>
@@ -446,7 +449,7 @@
 
 <footer data-coda></footer>
 <script src="assets/js/jerusalem-geo.js?v=3" defer></script>
-<script src="assets/js/asima.js?v=22" defer></script>
+<script src="assets/js/asima.js?v=23" defer></script>
 <script src="assets/js/jerusalem-week.js?v=2" defer></script>
 <script src="assets/js/jerusalem-base.js?v=1" defer></script>
 <script src="assets/js/jerusalem-map.js?v=8" defer></script>

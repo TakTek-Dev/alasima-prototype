@@ -8,12 +8,12 @@
 <meta name="description" content="تغطية مباشرة لحظة بلحظة من المسجد الأقصى والبلدة القديمة.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Alexandria:wght@300;400;500;600;700;800&family=Noto+Naskh+Arabic:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap">
-<link rel="stylesheet" href="assets/css/asima.css?v=21">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Markazi+Text:wght@400;500;600;700&family=Noto+Kufi+Arabic:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap">
+<link rel="stylesheet" href="assets/css/asima.css?v=27">
 <style>
   .live-head { padding-block: var(--s-6) var(--s-7); }
   .live-head__grid { display: grid; grid-template-columns: minmax(0, 8fr) minmax(0, 4fr); gap: var(--s-7); align-items: end; }
-  .onair { display: inline-flex; align-items: center; gap: 10px; background: var(--gold); color: var(--on-gold); font-weight: 800; padding: 6px 24px 6px 14px; clip-path: polygon(0 0, 100% 0, 100% 100%, 14px 100%); font-size: var(--fs-small); }
+  .onair { display: inline-flex; align-items: center; gap: 10px; background: var(--accent); color: var(--on-accent); font-weight: 800; padding: 6px 24px 6px 14px; clip-path: polygon(0 0, 100% 0, 100% 100%, 14px 100%); font-size: var(--fs-small); }
   .live-head h1 { font-size: clamp(2rem, 1.2rem + 3vw, 3.6rem); font-weight: 800; margin-top: var(--s-4); }
   .live-stats { display: flex; flex-wrap: wrap; gap: 4px 0; margin-top: var(--s-5); border-top: 1px solid var(--rule); }
   .live-stats div { padding: 12px 0; padding-inline-end: var(--s-5); margin-inline-end: var(--s-5); border-inline-end: 1px solid var(--rule); }
@@ -22,16 +22,15 @@
   .live-stats dd { margin: 0; font-weight: 800; font-size: 1.15rem; font-variant-numeric: tabular-nums; }
   .desk { display: grid; gap: 10px; }
   .desk__people { display: flex; gap: 6px; }
-  .desk__people .mono-gram { background: #ECE9E2; color: #111316; }
 
-  .sofar { margin-top: var(--s-6); padding: var(--s-5); background: rgba(236,233,226,.05); }
+  .sofar { margin-top: var(--s-6); padding: var(--s-5); background: var(--sheet); box-shadow: inset 0 3px 0 var(--accent); }
   .sofar h2 { font-size: var(--t-4); font-weight: 800; display: flex; gap: 12px; align-items: center; flex-wrap: wrap; justify-content: space-between; }
-  .sofar p { font-family: var(--f-read); font-size: 1.08rem; line-height: 1.9; margin-top: 10px; color: #DCD9D2; }
+  .sofar p { font-family: var(--f-read); font-size: 1.26rem; line-height: 1.85; margin-top: 10px; color: var(--ink-2); }
 
   .live-body { display: grid; grid-template-columns: minmax(0, 8fr) minmax(0, 4fr); gap: var(--s-7); padding-block: var(--s-6) var(--s-8); }
   .stream { margin-top: var(--s-3); }
   .stream__item .frame { margin-top: 12px; max-width: 520px; }
-  .stream__item blockquote { margin-top: 10px; padding-inline-start: 14px; border-inline-start: 3px solid var(--gold); font-family: var(--f-read); font-size: 1.05rem; line-height: 1.8; }
+  .stream__item blockquote { margin-top: 10px; padding-inline-start: 14px; border-inline-start: 3px solid var(--accent); font-family: var(--f-read); font-size: 1.22rem; line-height: 1.8; }
   .stream__item--fix { background: color-mix(in srgb, var(--alert) 6%, transparent); }
   .stream__item--fix .prio { color: var(--alert); }
   .stream__item .madd { font-size: 1.5rem; margin-top: 8px; }
@@ -58,7 +57,7 @@
   .vid__thumb.is-tall { width: 92px; aspect-ratio: 9 / 16; }
   .vid__thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
   .vid__play { position: absolute; inset: 0; display: grid; place-items: center; color: #fff; background: linear-gradient(0deg, rgba(0,0,0,.45), rgba(0,0,0,.1)); }
-  .vid:hover .vid__lbl { color: var(--gold-ink); }
+  .vid:hover .vid__lbl { color: var(--accent-ink); }
 </style>
 </head>
 <body>
@@ -83,7 +82,7 @@
         <dl class="live-stats">
           <div><dt>بدأت التغطية</dt><dd>07.10 · أول أيام العيد</dd></div>
           <div><dt>تحديثات اليوم</dt><dd data-stream-count>60</dd></div>
-          <div><dt>مقتحمون اليوم</dt><dd style="color:var(--gold)">1765</dd></div>
+          <div><dt>مقتحمون اليوم</dt><dd style="color:var(--dome-ink)">1765</dd></div>
           <div><dt>آخر تحديث</dt><dd><span data-clock></span></dd></div>
         </dl>
       </div>
@@ -95,7 +94,7 @@
     </div>
     <div class="wrap">
       <section class="sofar" aria-labelledby="sofar-h">
-        <h2 id="sofar-h">ما نعرفه حتى الآن <span class="ai-mark" style="color:#BDBAB2"><span class="ai-glyph" aria-hidden="true"></span>ملخص آلي يحدث كل 30 دقيقة · راجعه المحرر المناوب 20:20</span></h2>
+        <h2 id="sofar-h">ما نعرفه حتى الآن <span class="ai-mark"><span class="ai-glyph" aria-hidden="true"></span>ملخص آلي يحدث كل 30 دقيقة · راجعه المحرر المناوب 20:20</span></h2>
         <p>اقتحم 1765 مستوطنا المسجد الأقصى في ثالث أيام «العرش»، إضافة إلى 316 تحت مسمى السياحة، ليصل العدد خلال ثلاثة أيام إلى 4060. شارك حاخامات في الاقتحام، وأدخل مستوطن قربانا نباتيا وأدى سجودا علنيا قرب باب الرحمة. ومساء احتشد مئات المستوطنين عند باب القطانين وحاولوا اقتحامه.</p>
       </section>
     </div>
@@ -240,8 +239,8 @@
         <div>
           <h3>دليل الإشارات</h3>
           <div class="signals">
-            <div><span class="sw" style="background:var(--gold);color:var(--on-gold)">عاجل</span><span>حدث يغير الصورة. يظهر شريطا ذهبيا أعلى كل الصفحات.</span></div>
-            <div><span class="sw" style="background:var(--night);color:#ECE9E2;box-shadow:inset 0 -3px 0 var(--gold)">هام</span><span>تطور مهم في قصة جارية. شريط داكن بخط ذهبي.</span></div>
+            <div><span class="sw" style="background:var(--accent);color:var(--on-accent)">عاجل</span><span>حدث يغير الصورة. يظهر شريطا أحمر أعلى كل الصفحات.</span></div>
+            <div><span class="sw" style="background:var(--sheet);color:var(--ink);box-shadow:inset 0 -3px 0 var(--accent),inset 0 0 0 1px var(--rule)">هام</span><span>تطور مهم في قصة جارية. شريط ورقي بخط أحمر.</span></div>
             <div><span class="sw" style="color:var(--ink-3)">تحديث</span><span>معلومة إضافية داخل التغطية فقط.</span></div>
             <div><span class="sw" style="background:color-mix(in srgb,var(--alert) 12%,transparent);color:var(--alert)">تصحيح</span><span>نعلن الخطأ في مكانه ولا نحذفه.</span></div>
           </div>
@@ -253,7 +252,7 @@
 </main>
 
 <footer data-coda></footer>
-<script src="assets/js/asima.js?v=20" defer></script>
+<script src="assets/js/asima.js?v=22" defer></script>
 <script>
   addEventListener('DOMContentLoaded', () => {
     document.querySelectorAll('[data-f]').forEach(tab => tab.addEventListener('click', () => {

@@ -8,12 +8,12 @@
 <meta name="description" content="حاخامات في الاقتحام، وقربان نباتي وسجود ملحمي قرب باب الرحمة، و4060 مقتحما في ثلاثة أيام.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Alexandria:wght@300;400;500;600;700;800&family=Noto+Naskh+Arabic:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Markazi+Text:wght@400;500;600;700&family=Noto+Kufi+Arabic:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap">
 <link rel="preload" as="image" href="assets/img/d9-fajr.jpg" fetchpriority="high">
-<link rel="stylesheet" href="assets/css/asima.css?v=21">
+<link rel="stylesheet" href="assets/css/asima.css?v=27">
 <style>
   .progress { position: fixed; top: calc(env(safe-area-inset-top, 0px) + var(--ribbon-h)); inset-inline: 0; height: 3px; z-index: 49; background: transparent; }
-  .progress i { display: block; height: 100%; width: 100%; background: var(--gold); transform-origin: right; transform: scaleX(0); }
+  .progress i { display: block; height: 100%; width: 100%; background: var(--accent); transform-origin: right; transform: scaleX(0); }
 
   .a-head { padding-block: var(--s-7) var(--s-6); }
   .a-head__grid { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: var(--col-gap); }
@@ -41,14 +41,14 @@
   .gist__head { display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; margin-bottom: var(--s-3); }
   .gist__head h2 { font-size: var(--t-4); font-weight: 800; }
   .gist ul { display: grid; gap: 10px; }
-  .gist li { font-family: var(--f-read); font-size: 1.06rem; line-height: 1.9; padding-inline-start: 26px; position: relative; }
+  .gist li { font-family: var(--f-read); font-size: 1.24rem; line-height: 1.9; padding-inline-start: 26px; position: relative; }
   .gist li::before { content: ""; position: absolute; inset-inline-start: 0; top: .95em; width: 14px; height: 2px; background: var(--ink); clip-path: polygon(0 40%, 100% 0, 100% 100%, 0 60%); }
 
-  .read h2 { font-family: var(--f-display); font-size: var(--t-2); font-weight: 800; margin-top: 1.6em; margin-bottom: .5em; line-height: 1.35; }
+  .read h2 { font-family: var(--f-head); font-size: var(--t-2); font-weight: 700; margin-top: 1.6em; margin-bottom: .5em; line-height: 1.35; }
   /* no ::first-letter drop cap: it severs Arabic joins. The lede is set larger instead. */
   .read .drop { font-size: 1.12em; font-weight: 500; }
-  .read a { box-shadow: inset 0 -2px 0 var(--gold); }
-  .read a:hover { background: color-mix(in srgb, var(--gold) 22%, transparent); }
+  .read a { box-shadow: inset 0 -2px 0 var(--accent); }
+  .read a:hover { background: color-mix(in srgb, var(--accent) 22%, transparent); }
   .inline-fig { margin-block: var(--s-6); }
   .inline-madd { margin-block: var(--s-6); padding-block: var(--s-5); border-block: 1px solid var(--rule-strong); }
   .inline-madd .madd { font-size: clamp(1.4rem, 1rem + 1.8vw, 2.3rem); }
@@ -70,14 +70,14 @@
   .how__steps i { width: 3px; justify-self: center; }
   .how__steps .s-ai i { background: repeating-linear-gradient(180deg, var(--silver) 0 4px, transparent 4px 7px); }
   .how__steps .s-human i { background: var(--ink); }
-  .how__steps .s-ok i { background: var(--gold); }
+  .how__steps .s-ok i { background: var(--dome); }
   .how__steps b { font-weight: 700; }
   .how p.note { font-size: var(--t-meta); color: var(--ink-3); margin-top: 10px; }
 
   .comments { margin-top: var(--s-7); }
   .comment { display: grid; grid-template-columns: 40px minmax(0, 1fr); gap: 4px 12px; padding-block: 14px; border-bottom: 1px solid var(--rule); }
   .comment .mono-gram { grid-row: span 2; width: 34px; height: 40px; background: var(--sunk); color: var(--ink); font-size: .8rem; border-radius: 17px 17px 0 0 / 18px 18px 0 0; }
-  .comment p { font-family: var(--f-read); font-size: 1rem; line-height: 1.8; }
+  .comment p { font-family: var(--f-read); font-size: 1.2rem; line-height: 1.8; }
 
   .related h3 { font-size: var(--fs-h4); font-weight: 800; padding-bottom: 12px; position: relative; } .related h3::after { content: ""; position: absolute; inset-inline: 0; bottom: 0; height: 4px; background: var(--ink); clip-path: polygon(0 42%, 100% 0, 100% 100%, 0 58%); }
   .related .story { padding-block: 14px; border-bottom: 1px solid var(--rule); }
@@ -137,7 +137,7 @@
           </div>
           <div class="times">
             <span>نشر <b>09.10.2025 · 15:29</b> بتوقيت القدس</span>
-            <span>حدث <b>20:30</b> · <a href="#how" style="box-shadow:inset 0 -1px 0 var(--gold)">ما الذي تغير؟</a></span>
+            <span>حدث <b>20:30</b> · <a href="#how" style="text-decoration:underline;text-decoration-color:var(--accent);text-underline-offset:5px">ما الذي تغير؟</a></span>
             <span>5 دقائق قراءة · 640 كلمة</span>
           </div>
         </div>
@@ -246,7 +246,7 @@
             <li class="s-human"><time>20:30</time><i></i><span><b>تحديث:</b> حشد المستوطنين عند باب القطانين مساء.</span></li>
           </ol>
           <div class="prov-key" style="margin-top:12px"><span><i class="k-ai"></i>عمل آلي</span><span><i class="k-human"></i>تحرير بشري</span><span><i class="k-verified"></i>اعتماد</span></div>
-          <p class="note">لا ننشر أي مادة دون مراجعة محرر. <a href="index.html#ai" style="box-shadow:inset 0 -1px 0 var(--gold)">سياستنا في استخدام الذكاء الاصطناعي</a></p>
+          <p class="note">لا ننشر أي مادة دون مراجعة محرر. <a href="index.html#ai" style="text-decoration:underline;text-decoration-color:var(--accent);text-underline-offset:5px">سياستنا في استخدام الذكاء الاصطناعي</a></p>
         </section>
 
         <div class="tags" style="margin-top:var(--s-6)" aria-label="الوسوم">
@@ -295,7 +295,7 @@
 </main>
 
 <footer data-coda></footer>
-<script src="assets/js/asima.js?v=20" defer></script>
+<script src="assets/js/asima.js?v=22" defer></script>
 <script>
   addEventListener('DOMContentLoaded', () => {
     // reading progress — transform only, rAF-throttled

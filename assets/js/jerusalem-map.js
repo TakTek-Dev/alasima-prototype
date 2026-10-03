@@ -104,6 +104,21 @@
     const g = (cls) => { const e = document.createElementNS(NS, 'g'); e.setAttribute('class', cls); svg.append(e); return e; };
     const el = (tag, attrs, parent) => { const e = document.createElementNS(NS, tag); for (const k in attrs) e.setAttribute(k, attrs[k]); parent.append(e); return e; };
 
+    // the printed base under the orbit (jerusalem-base.js): built-up land, green, cemeteries, wadis,
+    // streets by class with cased main roads, the separation wall, and the old city's alleys for the closer levels
+    const BASE = window.ASIMA_BASE;
+    if (BASE) {
+      const base = g('omap__base');
+      const basePath = (d, cls) => d && el('path', { d, class: cls }, base);
+      basePath(BASE.land.built, 'b-built'); basePath(BASE.land.green, 'b-green'); basePath(BASE.land.cem, 'b-cem');
+      basePath(BASE.water, 'b-water');
+      basePath(BASE.roads.street, 'b-street'); basePath(BASE.roads.tertiary, 'b-tertiary');
+      basePath(BASE.roads.primary, 'b-primary-case'); basePath(BASE.roads.major, 'b-major-case');
+      basePath(BASE.roads.primary, 'b-primary'); basePath(BASE.roads.major, 'b-major');
+      basePath(BASE.alleys, 'b-alley');
+      basePath(BASE.barrier, 'b-barrier'); basePath(BASE.barrier, 'b-barrier-ticks');
+    }
+
     // graticule — real meridians and parallels every 0.005°
     const grat = g('omap__grat');
     const kx = Math.cos(GEO.origin[0] * Math.PI / 180) * 111320, ky = 110574;
@@ -145,7 +160,13 @@
     addLabel([GEO.qibli.reduce((a, p) => a + p[0], 0) / GEO.qibli.length, GEO.qibli.reduce((a, p) => a + p[1], 0) / GEO.qibli.length + 62], 'المصلى القبلي', 'is-monument', 'aqsa');
     addLabel([262, -20], 'مقبرة باب الرحمة', 'is-quarter', 'aqsa');
     addLabel([420, 140], 'وادي قدرون', 'is-quarter', 'aqsa');
-    [250, 500, 1000, 2000, 3000].forEach(r => { addLabel([-r * .5, r * .866], fmtDist(r), 'is-ring'); items[items.length - 1].ring = r; });
+    [250, 500, 1000, 2000, 3000].forEach(r => { addLabel([r * .87, -r * .49], fmtDist(r), 'is-ring'); items[items.length - 1].ring = r; });
+    // context names from the base: towns and neighbourhoods in the outlet's Arabic, hills, the wall; a name a story pin already carries steps aside
+    (BASE?.names || []).forEach(nm => {
+      if (nm.k && STORIES.some(s => s.k === nm.k)) return;
+      addLabel(nm.xy, nm.n, `is-${nm.c}`);
+      items[items.length - 1].onlyIn = nm.min ? ['old', 'aqsa'] : nm.c === 'region' ? ['city'] : ['city', 'old'];
+    });
     const gratLabels = graticule.map(gr => { const s = document.createElement('span'); s.className = 'omap__grat'; s.dataset.axis = gr.axis; s.textContent = gr.label; labels.append(s); return { el: s, ...gr }; });
 
     const makeBtn = (cls, html, aria) => { const b = document.createElement('button'); b.type = 'button'; b.className = cls; b.innerHTML = html; b.setAttribute('aria-label', aria); layer.append(b); return b; };
@@ -256,7 +277,8 @@
       const gates = shown.filter(i => i.kind === 'gate').map(i => [i, flipGate(i)]);
       // the city view is about places; closer in, the gates lead
       (view === 'city' ? [...pins, ...gates] : [...gates, ...pins]).forEach(([i, turn]) => settle(i, turn));
-      const rank = i => i.el.matches('.is-route, .is-monument') ? 0 : i.el.matches('.is-quarter') ? 1 : 2;
+      const rank = i => i.el.matches('.is-route, .is-monument') ? 0 : i.el.matches('.is-quarter, .is-barrier, .is-checkpoint') ? 1
+        : i.el.matches('.is-town, .is-hood, .is-peak') ? 2 : 3;
       shown.filter(i => i.kind === 'label').sort((a, b) => rank(a) - rank(b)).forEach(i => settle(i));
       gratLabels.forEach(g => { g.el.classList.remove('is-quiet'); if (g.el.hidden) return; const r = rect(g.el); if (free(r)) placed.push(r); else g.el.classList.add('is-quiet'); });
     }

@@ -66,7 +66,8 @@
   const WALL = '172,122 230,112 286,104 330,100 368,98 432,106 438,140 442,178 444,236 446,322 392,330 352,334 318,340 282,346 222,350 178,332 162,300 150,232 160,178';
   const HARAM = '346,190 440,180 446,320 352,334';
   // with the real geodata on the page, the tile is drawn to scale in metres, with the orbit rings around al-Aqsa;
-  // a far place shares the tile with the Old City, so its distance reads at a glance
+  // a far place shares the tile with the Old City, so its distance reads at a glance. Colours live in the stylesheet (.loc__*).
+  const domePath = (x, y, k) => `M${x - 28 * k} ${y + 9 * k} A${28 * k} ${30 * k} 0 0 1 ${x + 28 * k} ${y + 9 * k} Z`;
   function geoLocator(G, key, label) {
     const p = G.places.find(p => p.k === key), g = G.cityGates.find(g => g.k === key), ext = window.AsimaMap?.xyOf?.(key);
     const [x, y] = ext || (p ? [p.x, p.y] : g ? g.xy : [0, 0]);
@@ -76,35 +77,35 @@
       const S = 2800, k = S / 460, a = Math.atan2(-y, -x), ex = x + Math.cos(a) * S * .22, ey = y + Math.sin(a) * S * .22;
       const km = (d / 1000).toFixed(1).replace('.0', '');
       return `<svg viewBox="${x - S / 2} ${y - S / 2} ${S} ${S}" preserveAspectRatio="xMidYMid meet" aria-hidden="true">`
-        + `<rect x="${x - S * 2}" y="${y - S * 2}" width="${S * 4}" height="${S * 4}" fill="#101215"/>`
-        + `<circle cx="0" cy="0" r="${d}" fill="none" stroke="rgba(240,168,8,.45)" stroke-width="1" stroke-dasharray="3 5" vector-effect="non-scaling-stroke"/>`
-        + `<path d="M${x} ${y} L${ex} ${ey}" stroke="rgba(236,233,226,.35)" stroke-width="1" vector-effect="non-scaling-stroke"/>`
-        + `<path d="M0 ${-22 * k} L${18 * k} ${12 * k} L${-18 * k} ${12 * k} Z" transform="translate(${ex} ${ey}) rotate(${a * 180 / Math.PI + 90})" fill="rgba(236,233,226,.7)"/>`
-        + `<text x="${ex}" y="${ey + (ey > y ? 62 : -40) * k}" text-anchor="middle" fill="#ECE9E2" font-family="Alexandria, sans-serif" font-weight="700" font-size="${44 * k}" direction="rtl">الأقصى · ${km} كم</text>`
-        + `<path d="M${x - 28 * k} ${y + 9 * k} A${28 * k} ${30 * k} 0 0 1 ${x + 28 * k} ${y + 9 * k} Z" fill="#F0A808"/>`
+        + `<rect class="loc__bg" x="${x - S * 2}" y="${y - S * 2}" width="${S * 4}" height="${S * 4}"/>`
+        + `<circle class="loc__orbit" cx="0" cy="0" r="${d}"/>`
+        + `<path class="loc__line" d="M${x} ${y} L${ex} ${ey}"/>`
+        + `<path class="loc__arrow" d="M0 ${-22 * k} L${18 * k} ${12 * k} L${-18 * k} ${12 * k} Z" transform="translate(${ex} ${ey}) rotate(${a * 180 / Math.PI + 90})"/>`
+        + `<text class="loc__label" x="${ex}" y="${ey + (ey > y ? 62 : -40) * k}" text-anchor="middle" font-size="${44 * k}" direction="rtl">الأقصى · ${km} كم</text>`
+        + `<path class="loc__mark" d="${domePath(x, y, k)}"/>`
         + `</svg>`;
     }
     const S = Math.max(1500, d + 1300), [cx, cy] = d < 600 ? [x, y] : [x / 2, y / 2], k = S / 460;
-    const rings = [500, 1000, 2000, 3000, 4000].filter(r => r < S).map(r => `<circle cx="0" cy="0" r="${r}" fill="none" stroke="rgba(236,233,226,.16)" stroke-width="1" stroke-dasharray="3 5" vector-effect="non-scaling-stroke"/>`).join('');
+    const rings = [500, 1000, 2000, 3000, 4000].filter(r => r < S).map(r => `<circle class="loc__ring" cx="0" cy="0" r="${r}"/>`).join('');
     return `<svg viewBox="${cx - S / 2} ${cy - S / 2} ${S} ${S}" preserveAspectRatio="xMidYMid meet" aria-hidden="true">`
-      + `<rect x="${cx - S * 2}" y="${cy - S * 2}" width="${S * 4}" height="${S * 4}" fill="#101215"/>` + rings
-      + `<polygon points="${pts(G.wallRing)}" fill="rgba(236,233,226,.05)" stroke="rgba(236,233,226,.55)" stroke-width="1.2" vector-effect="non-scaling-stroke"/>`
-      + `<polygon points="${pts(G.haram)}" fill="rgba(240,168,8,.14)" stroke="rgba(240,168,8,.75)" stroke-width="1" vector-effect="non-scaling-stroke"/>`
-      + `<path d="M${x - 28 * k} ${y + 9 * k} A${28 * k} ${30 * k} 0 0 1 ${x + 28 * k} ${y + 9 * k} Z" fill="#F0A808"/>`
-      + (label ? `<text x="${x}" y="${y + 58 * k}" text-anchor="middle" fill="#ECE9E2" font-family="Alexandria, sans-serif" font-weight="700" font-size="${30 * k}">${label}</text>` : '')
+      + `<rect class="loc__bg" x="${cx - S * 2}" y="${cy - S * 2}" width="${S * 4}" height="${S * 4}"/>` + rings
+      + `<polygon class="loc__wall" points="${pts(G.wallRing)}"/>`
+      + `<polygon class="loc__haram" points="${pts(G.haram)}"/>`
+      + `<path class="loc__mark" d="${domePath(x, y, k)}"/>`
+      + (label ? `<text class="loc__label" x="${x}" y="${y + 58 * k}" text-anchor="middle" font-size="${30 * k}">${label}</text>` : '')
       + `</svg>`;
   }
   function locatorSVG(key, label = '') {
     if (window.ASIMA_GEO) return geoLocator(window.ASIMA_GEO, key, label);
     const [x, y] = PLACES[key] || [300, 220];
-    const ring = r => `<circle cx="${x}" cy="${y}" r="${r}" fill="none" stroke="rgba(236,233,226,.16)" stroke-width="1" vector-effect="non-scaling-stroke"/>`;
+    const ring = r => `<circle class="loc__ring" cx="${x}" cy="${y}" r="${r}"/>`;
     return `<svg viewBox="${x - 230} ${y - 230} 460 460" preserveAspectRatio="xMidYMid slice" aria-hidden="true">`
-      + `<rect x="${x - 400}" y="${y - 400}" width="800" height="800" fill="#101215"/>`
-      + `<polygon points="${WALL}" fill="rgba(236,233,226,.05)" stroke="rgba(236,233,226,.55)" stroke-width="1.2" vector-effect="non-scaling-stroke"/>`
-      + `<polygon points="${HARAM}" fill="rgba(240,168,8,.14)" stroke="rgba(240,168,8,.75)" stroke-width="1" vector-effect="non-scaling-stroke"/>`
+      + `<rect class="loc__bg" x="${x - 400}" y="${y - 400}" width="800" height="800"/>`
+      + `<polygon class="loc__wall" points="${WALL}"/>`
+      + `<polygon class="loc__haram" points="${HARAM}"/>`
       + ring(70) + ring(120)
-      + `<path d="M${x - 28} ${y + 9} A28 30 0 0 1 ${x + 28} ${y + 9} Z" fill="#F0A808"/>`
-      + (label ? `<text x="${x}" y="${y + 58}" text-anchor="middle" fill="#ECE9E2" font-family="Alexandria, sans-serif" font-weight="700" font-size="30">${label}</text>` : '')
+      + `<path class="loc__mark" d="${domePath(x, y, 1)}"/>`
+      + (label ? `<text class="loc__label" x="${x}" y="${y + 58}" text-anchor="middle" font-size="30">${label}</text>` : '')
       + `</svg>`;
   }
 
@@ -130,8 +131,10 @@
     host.innerHTML = `
       <div class="wrap ribbon__in">
         <a class="stamp" href="${base}home.html" aria-label="العاصمة، الصفحة الأولى">
-          <img src="${base}assets/img/logo-mark.png" width="40" height="55" alt="">
-          <img class="stamp__word" src="${base}assets/img/logo-word.png" width="61" height="18" alt="العاصمة">
+          <img class="logo-ink" src="${base}assets/img/logo-mark-ink.png" width="40" height="55" alt="">
+          <img class="logo-light" src="${base}assets/img/logo-mark.png" width="40" height="55" alt="">
+          <img class="stamp__word logo-ink" src="${base}assets/img/logo-word-ink.png" width="61" height="18" alt="العاصمة">
+          <img class="stamp__word logo-light" src="${base}assets/img/logo-word.png" width="61" height="18" alt="العاصمة">
         </a>
         <nav class="rail" aria-label="الأقسام">
           ${pages.map(([h, t, k, core]) => `<a href="${base}${h}" class="${core ? 'is-core' : ''}" ${k === cur ? 'aria-current="page"' : ''}>${t}${counts[k] ? ` <sup>${counts[k]}</sup>` : ''}</a>`).join('')}
@@ -180,7 +183,7 @@
                 <input class="input" id="brief-email" type="email" inputmode="email" autocomplete="email" placeholder="بريدك الإلكتروني" dir="ltr" style="text-align:right">
                 <button class="btn btn--gold" type="submit">اشترك</button>
               </div>
-              <span class="err-msg" role="alert" hidden style="color:#FF8B70;font-size:var(--fs-meta)"></span>
+              <span class="err-msg" role="alert" hidden style="color:var(--accent-ink);font-size:var(--fs-meta)"></span>
             </form>
           </div>
         </div>

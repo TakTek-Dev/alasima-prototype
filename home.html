@@ -8,9 +8,9 @@
 <meta name="description" content="أخبار العاصمة من العاصمة. منصة إعلامية مقدسية تتابع القدس بالمكان والساعة.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Alexandria:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Markazi+Text:wght@400;500;600;700&family=Noto+Kufi+Arabic:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap">
 <link rel="preload" as="image" href="assets/img/d9-rabbis-2.jpg" fetchpriority="high">
-<link rel="stylesheet" href="assets/css/asima.css?v=21">
+<link rel="stylesheet" href="assets/css/asima.css?v=27">
 <style>
 /* ===================== Home — «تحت القبة» =====================
    Spatial thesis: one lead composition (headline → dome photo → figure), wrapped by the
@@ -32,7 +32,7 @@
   column-gap: clamp(28px, 3.6vw, 56px);
 }
 .lead__head { grid-area: head; container-type: inline-size; }
-.lead__head .hl-display { font-size: clamp(1.75rem, 6.9cqi, 3rem); line-height: 1.4; }
+.lead__head .hl-display { font-size: clamp(2.1rem, 8.6cqi, 3.75rem); line-height: 1.28; }
 .lead__body { grid-area: body; display: grid; gap: var(--s-4); align-content: end; padding-top: var(--s-4); padding-bottom: calc(var(--sash-overlap) + var(--s-5)); }
 .lead__body .dek { max-width: 54ch; }
 .lead__actions { display: flex; flex-wrap: wrap; gap: 8px 20px; align-items: center; padding-top: var(--s-1); }
@@ -41,7 +41,7 @@
 .lead__visual .dome-frame { position: absolute; inset: 0; }
 .lead__figure { position: absolute; z-index: 3; inset-inline-start: calc(clamp(28px, 3.6vw, 56px) * -0.6); bottom: calc(var(--sash-overlap) + 18px); max-width: 78%; }
 .lead__figure .madd { font-size: clamp(1.35rem, 0.9rem + 1.3vw, 2.15rem); color: #F2F0EB; text-shadow: 0 2px 22px rgba(0,0,0,.5); }
-.lead__figure .madd__fig { color: var(--gold); }
+.lead__figure .madd__fig { color: var(--dome); }
 .lead__figure .madd__tail { color: #F2F0EB; }
 .lead .sash-wrap { margin-top: calc(var(--sash-overlap) * -1); position: relative; z-index: 4; }
 .lead .sash__list span { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
@@ -61,6 +61,7 @@
 .orbit__grid { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: var(--s-7) clamp(28px, 4vw, 64px); align-items: stretch; }
 .orbit__intro { display: grid; gap: var(--s-4); margin-bottom: var(--s-5); }
 .orbit__intro .dek { color: var(--ink-2); }
+.orbit__map { display: grid; gap: var(--s-3); align-content: start; min-width: 0; }
 .orbit__panel { display: grid; gap: var(--s-4); align-content: start; }
 .orbit__panel .tabs { margin-top: var(--s-2); }
 .orbit__panel [data-panel] { max-height: 470px; overflow-y: auto; scrollbar-width: thin; margin-inline-end: -8px; padding-inline-end: 8px; }
@@ -88,7 +89,7 @@
 .lens__stage { position: relative; aspect-ratio: 2.35 / 1; max-height: 78vh; width: 100%; overflow: hidden; }
 .lens__stage img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 58%; filter: saturate(.8) contrast(1.06); }
 .lens__stage::before { content: ""; position: absolute; inset: 0; z-index: 1; background: linear-gradient(270deg, rgba(16,18,21,.88) 0%, rgba(16,18,21,.5) 34%, rgba(16,18,21,0) 62%), linear-gradient(0deg, rgba(16,18,21,.8) 0%, rgba(16,18,21,0) 40%); }
-.lens__over { position: absolute; inset: 0; z-index: 2; display: grid; grid-template-rows: auto 1fr auto; padding-block: clamp(20px, 3vw, 40px); }
+.lens__over { position: absolute; inset: 0; z-index: 2; display: grid; grid-template-rows: auto 1fr auto; padding-block: clamp(20px, 3vw, 40px); color: #F2F0EB; --ink: #F2F0EB; --ink-2: rgba(242,240,235,.85); --ink-3: rgba(242,240,235,.72); }
 .lens__over .wrap { width: 100%; }
 .lens__title { display: grid; gap: 6px; max-width: 30ch; }
 .lens__title h2 { font-size: var(--fs-h2); font-weight: 800; }
@@ -145,7 +146,7 @@
   .lead__body { padding-top: 0; padding-bottom: var(--s-6); }
   .lead .sash-wrap { margin-top: 0; }
   .orbit__grid { grid-template-columns: 1fr; }
-  .orbit__grid .omap { order: -1; }
+  .orbit__grid .orbit__map { order: -1; }
   .orbit__panel [data-panel] { max-height: none; }
   .month__grid { grid-template-columns: 1fr; }
   .month__grid > div { padding: var(--s-4) 0; }
@@ -291,10 +292,12 @@
             <button role="tab" aria-selected="false" tabindex="-1" data-view="aqsa">الأقصى الآن</button>
           </div>
           <div id="orbit-panel" aria-live="polite"></div>
-          <div class="omap-key"><span aria-hidden="true"><i class="is-hot"></i>نشاط اليوم</span><span aria-hidden="true"><i></i>قصص الأسبوع</span><span aria-hidden="true"><i class="is-ring"></i>المسافة من الأقصى</span><span>خريطة الأساس © مساهمو OpenStreetMap · القصص من قناة العاصمة على تليجرام · الأبواب كما رصدتها التغطية</span></div>
           <a class="btn btn--line" href="jerusalem.html" style="justify-self:start">ادخل مدار القدس</a>
         </div>
-        <div class="omap" id="orbit-map" role="group" aria-label="خريطة القدس: البلدة القديمة والأحياء حولها، والمسافات من المسجد الأقصى، وعدد القصص في كل مكان هذا الأسبوع"></div>
+        <div class="orbit__map">
+          <div class="omap" id="orbit-map" role="group" aria-label="خريطة القدس: البلدة القديمة والأحياء حولها، والمسافات من المسجد الأقصى، وعدد القصص في كل مكان هذا الأسبوع"></div>
+          <div class="omap-key"><span aria-hidden="true"><i class="is-count">12</i>عدد قصص الأسبوع في المكان</span><span aria-hidden="true"><i class="is-hot"></i>خبر في آخر 4 ساعات</span><span aria-hidden="true"><i class="is-ring"></i>المسافة من قبة الصخرة</span><span aria-hidden="true"><i class="is-wall"></i>سور البلدة القديمة</span><span aria-hidden="true"><i class="is-barrier"></i>جدار الفصل</span><span aria-hidden="true"><i class="is-road"></i>طريق رئيسي</span><span class="omap-key__src">خريطة الأساس © مساهمو OpenStreetMap · القصص من قناة العاصمة على تليجرام · الأبواب كما رصدتها التغطية</span></div>
+        </div>
       </div>
 
       <div class="month" aria-labelledby="month-h">
@@ -443,9 +446,10 @@
 
 <footer data-coda></footer>
 <script src="assets/js/jerusalem-geo.js?v=3" defer></script>
-<script src="assets/js/asima.js?v=20" defer></script>
+<script src="assets/js/asima.js?v=22" defer></script>
 <script src="assets/js/jerusalem-week.js?v=2" defer></script>
-<script src="assets/js/jerusalem-map.js?v=7" defer></script>
+<script src="assets/js/jerusalem-base.js?v=1" defer></script>
+<script src="assets/js/jerusalem-map.js?v=8" defer></script>
 <script>
   addEventListener('DOMContentLoaded', () => {
     window.AsimaMap?.mount(document.getElementById('orbit-map'), { panel: document.getElementById('orbit-panel'), tabs: document.getElementById('orbit-tabs') });

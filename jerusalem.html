@@ -8,11 +8,11 @@
 <meta name="description" content="كل ما يجري في القدس، مثبتا على مكانه وساعته.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Alexandria:wght@300;400;500;600;700;800&family=Noto+Naskh+Arabic:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap">
-<link rel="stylesheet" href="assets/css/asima.css?v=21">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Markazi+Text:wght@400;500;600;700&family=Noto+Kufi+Arabic:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap">
+<link rel="stylesheet" href="assets/css/asima.css?v=27">
 <style>
   .hub-hero { padding-block: var(--s-7) var(--s-6); position: relative; overflow: hidden; }
-  .hub-hero__globe { position: absolute; inset-inline-start: -4vw; bottom: 0; width: min(720px, 70vw); aspect-ratio: 2 / 1; color: var(--gold); opacity: .14; pointer-events: none; } .hub-hero__globe svg { width: 100%; height: 100%; }
+  .hub-hero__globe { position: absolute; inset-inline-start: -4vw; bottom: 0; width: min(720px, 70vw); aspect-ratio: 2 / 1; color: var(--ink); opacity: .07; pointer-events: none; } .hub-hero__globe svg { width: 100%; height: 100%; }
   .hub-hero h1 { font-size: clamp(2.8rem, 1.6rem + 4.6vw, 6rem); font-weight: 800; line-height: 1.25; }
   .hub-hero__top { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: var(--s-6); align-items: end; }
   .pulse-row { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); margin-top: var(--s-6); border-top: 1px solid var(--rule-strong); }
@@ -20,7 +20,7 @@
   .pulse-row > div + div { border-inline-start: 1px solid var(--rule); padding-inline-start: var(--s-4); }
   .pulse-row dt { font-size: var(--t-meta); color: var(--ink-3); }
   .pulse-row dd { margin: 0; font-weight: 700; font-size: var(--t-4); display: flex; align-items: center; gap: 8px; }
-  .pulse-row .sq { width: 20px; height: 11px; flex: none; background: var(--gold); -webkit-mask: var(--dome-mask) center / contain no-repeat; mask: var(--dome-mask) center / contain no-repeat; } .pulse-row .sq--line { -webkit-mask-image: var(--arc-mask); mask-image: var(--arc-mask); } .pulse-row .sq--ok { background: #5CC497; }
+  .pulse-row .sq { width: 20px; height: 11px; flex: none; background: var(--dome); -webkit-mask: var(--dome-mask) center / contain no-repeat; mask: var(--dome-mask) center / contain no-repeat; } .pulse-row .sq--line { -webkit-mask-image: var(--arc-mask); mask-image: var(--arc-mask); background: var(--accent); } .pulse-row .sq--ok { background: #5CC497; }
 
   .atlas { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: var(--s-6); padding-bottom: var(--s-8); align-items: start; }
   .atlas__map { display: grid; gap: 14px; min-width: 0; }
@@ -32,12 +32,12 @@
   .gaz__head { display: flex; justify-content: space-between; align-items: baseline; border-bottom: 3px solid var(--ink); padding-bottom: 10px; }
   .gaz__head h2 { font-size: var(--t-3); font-weight: 800; }
   .gaz button { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 2px 12px; width: 100%; padding: 12px 10px; background: none; border: 0; border-bottom: 1px solid var(--rule); text-align: start; color: var(--ink); transition: background var(--d-2); }
-  .gaz button:hover b { color: var(--gold); }
-  .gaz button[aria-pressed="true"] { background: color-mix(in srgb, var(--gold) 10%, transparent); } .gaz button[aria-pressed="true"] b::before { content: ""; display: inline-block; width: 18px; height: 10px; margin-inline-end: 8px; background: var(--gold); -webkit-mask: var(--dome-mask) center / contain no-repeat; mask: var(--dome-mask) center / contain no-repeat; }
+  .gaz button:hover b { color: var(--accent); }
+  .gaz button[aria-pressed="true"] { background: color-mix(in srgb, var(--accent) 10%, transparent); } .gaz button[aria-pressed="true"] b::before { content: ""; display: inline-block; width: 18px; height: 10px; margin-inline-end: 8px; background: var(--accent); -webkit-mask: var(--dome-mask) center / contain no-repeat; mask: var(--dome-mask) center / contain no-repeat; }
   .gaz b { font-weight: 700; font-size: var(--t-4); }
-  .gaz .n { font-weight: 800; color: var(--gold); font-size: .95rem; align-self: center; font-variant-numeric: tabular-nums; }
+  .gaz .n { font-weight: 800; color: var(--accent); font-size: .95rem; align-self: center; font-variant-numeric: tabular-nums; }
   .gaz .coord { grid-column: 1 / -1; }
-  .locator.is-name { display: grid; place-items: center; padding: 8px; background: #101215; color: #ECE9E2; font-weight: 800; font-size: 1.05rem; text-align: center; }
+  .locator.is-name { display: grid; place-items: center; padding: 8px; background: var(--map-bg); color: var(--ink); box-shadow: inset 0 0 0 1px var(--rule); font-family: var(--f-head); font-weight: 700; font-size: 1.2rem; text-align: center; }
 
   .feed-wrap { display: grid; grid-template-columns: minmax(0, 8fr) minmax(0, 4fr); gap: var(--s-7); }
   .feed { display: grid; }
@@ -54,17 +54,17 @@
   .dossier-card h3 { font-size: var(--t-3); font-weight: 800; }
   .dossier-card .ticks { display: flex; gap: 3px; height: 26px; align-items: end; }
   .dossier-card .ticks i { flex: 1; background: var(--ink); opacity: .85; min-height: 3px; }
-  .dossier-card .ticks i.k { background: var(--gold); opacity: 1; }
+  .dossier-card .ticks i.k { background: var(--accent); opacity: 1; }
 
   .chart { width: 100%; height: auto; direction: ltr; }
   .chart .bar { fill: var(--ink-3); }
-  .chart .bar.hl { fill: var(--gold); }
+  .chart .bar.hl { fill: var(--accent); }
   .chart text { font: 500 12px var(--f-display); fill: var(--ink-3); }
   .chart .grid { stroke: var(--rule); }
   .chart .val { font: 800 12px var(--f-display); fill: var(--ink); }
 
   .archive { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: var(--s-7); align-items: center; }
-  .archive__year { font-family: var(--f-display); font-weight: 800; font-size: clamp(4rem, 2rem + 8vw, 9rem); line-height: 1; color: var(--gold); direction: ltr; text-align: end; }
+  .archive__year { font-family: var(--f-display); font-weight: 800; font-size: clamp(4rem, 2rem + 8vw, 9rem); line-height: 1; color: var(--accent); direction: ltr; text-align: end; }
 
   @media (max-width: 1100px) {
     .atlas, .feed-wrap, .archive { grid-template-columns: 1fr; }
@@ -118,7 +118,7 @@
           <button role="tab" aria-selected="false" tabindex="-1" data-view="aqsa">الأقصى الآن</button>
         </div>
         <div class="omap" id="hub-map" role="group" aria-label="خريطة القدس: البلدة القديمة والأحياء حولها، والمسافات الحقيقية من المسجد الأقصى، وعدد القصص في كل مكان هذا الأسبوع. اختر مكانا لتصفية السجل."></div>
-        <div class="omap-key"><span aria-hidden="true"><i class="is-hot"></i>نشاط اليوم</span><span aria-hidden="true"><i></i>قصص الأسبوع</span><span aria-hidden="true"><i class="is-ring"></i>المسافة من الأقصى</span><span>خريطة الأساس © مساهمو OpenStreetMap · القصص من قناة العاصمة على تليجرام · الأبواب كما رصدتها التغطية</span></div>
+        <div class="omap-key"><span aria-hidden="true"><i class="is-count">12</i>عدد قصص الأسبوع في المكان</span><span aria-hidden="true"><i class="is-hot"></i>خبر في آخر 4 ساعات</span><span aria-hidden="true"><i class="is-ring"></i>المسافة من قبة الصخرة</span><span aria-hidden="true"><i class="is-wall"></i>سور البلدة القديمة</span><span aria-hidden="true"><i class="is-barrier"></i>جدار الفصل</span><span aria-hidden="true"><i class="is-road"></i>طريق رئيسي</span><span class="omap-key__src">خريطة الأساس © مساهمو OpenStreetMap · القصص من قناة العاصمة على تليجرام · الأبواب كما رصدتها التغطية</span></div>
       </div>
       <div class="gaz">
         <div class="gaz__head"><h2 id="gaz-h">فهرس الأماكن</h2><button type="button" class="btn btn--quiet btn--sm" data-clear style="width:auto;border:0;padding:0 8px">كل القدس</button></div>
@@ -184,9 +184,10 @@
 
 <footer data-coda></footer>
 <script src="assets/js/jerusalem-geo.js?v=3" defer></script>
-<script src="assets/js/asima.js?v=20" defer></script>
+<script src="assets/js/asima.js?v=22" defer></script>
 <script src="assets/js/jerusalem-week.js?v=2" defer></script>
-<script src="assets/js/jerusalem-map.js?v=7" defer></script>
+<script src="assets/js/jerusalem-base.js?v=1" defer></script>
+<script src="assets/js/jerusalem-map.js?v=8" defer></script>
 <script>
 addEventListener('DOMContentLoaded', () => {
   const M = window.AsimaMap; if (!M) return;

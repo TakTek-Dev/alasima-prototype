@@ -8,13 +8,13 @@
 <meta name="description" content="من هوية العاصمة إلى نظام تصميم رقمي: التحليل، الاتجاه، الأسس، المكونات، وسجل المراجعة.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Alexandria:wght@300;400;500;600;700;800&family=Noto+Naskh+Arabic:wght@400;500;700&family=JetBrains+Mono:wght@400;500&display=swap">
-<link rel="stylesheet" href="assets/css/asima.css?v=21">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Markazi+Text:wght@400;500;600;700&family=Noto+Kufi+Arabic:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap">
+<link rel="stylesheet" href="assets/css/asima.css?v=27">
 <style>
   .doc-hero { padding-block: var(--sec) var(--sec-tight); position: relative; overflow: clip; }
   .doc-hero__grid { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: var(--split-gap); align-items: end; }
   .doc-hero h1 { font-size: var(--fs-display); line-height: var(--lh-display); font-weight: 800; }
-  .doc-hero h1 em { font-style: normal; color: var(--gold); }
+  .doc-hero h1 em { font-style: normal; color: var(--accent); }
   .doc-hero .dek { margin-top: var(--s-4); }
   .pages { display: grid; gap: 0; }
   .pages a { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 2px 12px; padding-block: 12px; border-top: 1px solid var(--rule); }
@@ -22,7 +22,7 @@
   .pages b { font-weight: 700; font-size: var(--fs-h5); }
   .pages span { grid-column: 1; font-size: var(--fs-meta); color: var(--ink-3); }
   .pages svg { grid-row: 1 / span 2; grid-column: 2; align-self: center; width: 20px; height: 20px; }
-  .pages a:hover b { color: var(--gold); }
+  .pages a:hover b { color: var(--accent); }
 
   .doc { display: grid; grid-template-columns: 220px minmax(0, 1fr); gap: var(--split-gap); padding-block: var(--sec); }
   .toc { position: sticky; top: calc(var(--ribbon-h) + 24px); align-self: start; display: grid; gap: 2px; font-size: var(--fs-small); }
@@ -59,7 +59,7 @@
 
   .forms3 { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--col-gap); }
   .form-card { display: grid; gap: var(--s-4); align-content: start; padding-top: var(--s-4); border-top: 4px solid var(--ink); }
-  .form-card .demo { min-height: 120px; display: grid; place-items: center; background: var(--night); padding: var(--s-5); }
+  .form-card .demo { min-height: 120px; display: grid; place-items: center; background: var(--bg-2); padding: var(--s-5); box-shadow: inset 0 0 0 1px var(--rule); }
   .form-card h3 { font-size: var(--fs-h3); font-weight: 800; margin: 0; }
   .form-card p { font-size: var(--fs-small); color: var(--ink-2); line-height: 1.8; }
 
@@ -76,7 +76,7 @@
 
   .spaces { display: flex; align-items: end; gap: 12px; flex-wrap: wrap; }
   .spaces div { display: grid; gap: 6px; justify-items: center; font-family: var(--f-mono); font-size: .75rem; color: var(--ink-3); }
-  .spaces i { display: block; background: var(--gold); width: 14px; }
+  .spaces i { display: block; background: var(--accent); width: 14px; }
 
   .ratios { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: var(--col-gap); align-items: end; }
   .ratios figure { display: grid; gap: 6px; }
@@ -98,7 +98,7 @@
   .audit-row b { display: block; color: var(--ink); font-size: var(--fs-ui); }
   .audit-row p { color: var(--ink-2); }
   .audit-row .fix { color: var(--ink); }
-  .audit-row .fix::before { content: "التعديل: "; font-weight: 700; color: var(--gold-ink); }
+  .audit-row .fix::before { content: "التعديل: "; font-weight: 700; color: var(--accent-ink); }
 
   .test { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: var(--col-gap); }
   .test div { display: grid; gap: 6px; padding-top: 12px; border-top: 1px solid var(--rule); font-size: var(--fs-small); line-height: 1.75; color: var(--ink-2); }
@@ -186,7 +186,7 @@
       <!-- ====== 1b. Asset library ====== -->
       <section class="chapter" id="assets" aria-labelledby="assets-h">
         <h2 id="assets-h">أصول الهوية</h2>
-        <p class="dek">النسخة المعروضة هي يوم الخميس 9 أكتوبر 2025، ثالث أيام «العرش»، كما غطته قناة العاصمة على تليجرام: العناوين والأرقام والتوقيتات والصور منشورات حقيقية من ذلك اليوم، ومقالات الرأي وبعض الملفات المفتوحة توضيحية. وهنا كل صورة وطبقة في ملفي الهوية، وأين تعيش الآن في الموقع. الخطان التجاريان في الملفين لا ينشران على الويب بلا ترخيص: <bdi>Noor</bdi> في منشور المقتحمين، و<bdi>Boutros News</bdi> في قالب الأسير. حل محلهما <bdi>Alexandria</bdi> بالأوزان نفسها.</p>
+        <p class="dek">النسخة المعروضة هي يوم الخميس 9 أكتوبر 2025، ثالث أيام «العرش»، كما غطته قناة العاصمة على تليجرام: العناوين والأرقام والتوقيتات والصور منشورات حقيقية من ذلك اليوم، ومقالات الرأي وبعض الملفات المفتوحة توضيحية. وهنا كل صورة وطبقة في ملفي الهوية، وأين تعيش الآن في الموقع. الخطان التجاريان في الملفين لا ينشران على الويب بلا ترخيص: <bdi>Noor</bdi> في منشور المقتحمين، و<bdi>Boutros News</bdi> في قالب الأسير. حل محلهما <bdi>Markazi Text</bdi> للعناوين و<bdi>Noto Kufi Arabic</bdi> للواجهة والأرقام.</p>
         <div class="lib">
           <figure><div class="lib__plate"><img src="assets/img/logo-full.png" alt="" width="382" height="616" loading="lazy"></div><figcaption><b>الشعار الفاتح</b><span>الملفان · لسان القوالب، ورأس غرفة التحرير</span></figcaption></figure>
           <figure><div class="lib__plate is-photo"><img src="assets/img/d9-rabbis-2-480.jpg" alt="" width="480" height="640" loading="lazy"></div><figcaption><b>صور 9 أكتوبر</b><span>قناة العاصمة على تليجرام · كل صفحات النسخة</span></figcaption></figure>
@@ -225,14 +225,15 @@
             <p>الشريط الذي يلف القبة يصير شريط آخر التحديثات الذي يلف صورة الخبر الرئيسي، وطرفه ينطوي ويستدق مثل ذيل العين. ويتكرر الانطواء في زاوية صور التقارير.</p>
           </article>
           <article class="form-card">
-            <div class="demo night"><p class="madd" style="font-size:1.6rem;color:#ECE9E2">مستــ<span class="madd__fig">180</span>ــوطنا</p></div>
+            <div class="demo night"><p class="madd" style="font-size:1.6rem">مستــ<span class="madd__fig">180</span>ــوطنا</p></div>
             <h3>المد</h3>
             <p>الكشيدة من منشورات العاصمة: الرقم يسكن داخل الكلمة. نستخدمها للرقم الذي يلخص اليوم، ولأرقام الشهر في مدار القدس، ولا نستخدمها للزينة.</p>
           </article>
         </div>
         <h3>قواعد الاتجاه</h3>
         <div class="prose">
-          <p><b>الذهبي هو القبة.</b> يظهر حيث يهم الآن فقط: العاجل، والرقم الرئيسي، وخطوط القبة، والحدث المفصلي، والزر الأساسي. أي استخدام آخر يضعف الإشارة.</p>
+          <p><b>صحيفة مطبوعة، لا شاشة ليلية.</b> أرضية ورق جرائد، وحبر بني أسود، وأعمدة تفصلها خطوط شعرية، وقاعدة مزدوجة تحت الترويسة. لا كتل سوداء إلا الصور والفيديو.</p>
+          <p><b>الأحمر للإشارة، والذهبي للقبة.</b> الأحمر من بطاقات «عاجل» في منشورات العاصمة نفسها: العاجل، والمباشر، والحدث المفصلي، والزر الأساسي. والذهبي لا يظهر إلا في الشعار وعلامات القبة وخطوط طولها والأرقام. أي استخدام آخر يضعف الإشارتين.</p>
           <p><b>المكان والساعة قبل التصنيف.</b> كل خبر يحمل مكانه ووقته تحت العنوان، والإحداثيات تكتب بالعربية: ش للشمال، ق للشرق.</p>
           <p><b>مربع بالقانون، والمنحنى للقبة وحدها.</b> لا زوايا مدورة. المنحنيات الوحيدة في النظام هي القبة والقوس، ولذلك تلفت النظر حين تظهر.</p>
           <p><b>العربية أولا.</b> العين تبدأ من اليمين: العنوان في البداية، والصورة تتبعه، والوقت يقرأ قبل الخبر في الشريط والتسلسل.</p>
@@ -246,29 +247,29 @@
 
         <h3>اللون</h3>
         <div class="swatches">
-          <div class="sw"><i style="background:#ECE9E2"></i><b>حجر</b><code>--bg #ECE9E2</code><span>أرضية الطبعة النهارية</span></div>
-          <div class="sw"><i style="background:#14161A"></i><b>حبر</b><code>--ink #14161A</code><span>النص والقواعد</span></div>
-          <div class="sw"><i style="background:#101215"></i><b>ليل</b><code>--night #101215</code><span>الشريط العلوي، الأقسام الليلية، الخاتمة</span></div>
-          <div class="sw"><i style="background:#F0A808"></i><b>ذهبي القبة</b><code>--gold #F0A808</code><span>ما يهم الآن فقط</span></div>
-          <div class="sw"><i style="background:#7E5300"></i><b>ذهبي النص</b><code>--gold-ink #7E5300</code><span>الذهبي كنص على الحجر</span></div>
+          <div class="sw"><i style="background:#F3EEE4"></i><b>ورق الجرائد</b><code>--bg #F3EEE4</code><span>أرضية الطبعة</span></div>
+          <div class="sw"><i style="background:#ECE5D8"></i><b>ورق أعمق</b><code>--bg-2 #ECE5D8</code><span>الأقسام المتبادلة والخريطة</span></div>
+          <div class="sw"><i style="background:#FAF7F0"></i><b>ورق</b><code>--sheet #FAF7F0</code><span>الأسطح المرتفعة</span></div>
+          <div class="sw"><i style="background:#15110F"></i><b>حبر</b><code>--ink #15110F</code><span>النص والقواعد المزدوجة</span></div>
+          <div class="sw"><i style="background:#A1383B"></i><b>أحمر العاجل</b><code>--accent #A1383B</code><span>العاجل والمباشر والحدث المفصلي</span></div>
+          <div class="sw"><i style="background:#F0A808"></i><b>ذهبي القبة</b><code>--dome #F0A808</code><span>الشعار والقبة والأرقام على الصور</span></div>
+          <div class="sw"><i style="background:#8A5B00"></i><b>ذهبي الأرقام</b><code>--dome-ink #8A5B00</code><span>الرقم الكبير على الورق</span></div>
           <div class="sw"><i style="background:#8E97A3"></i><b>فضي الشريط</b><code>--silver #8E97A3</code><span>عمل الآلة في غرفة التحرير</span></div>
-          <div class="sw"><i style="background:#B8361E"></i><b>تنبيه</b><code>--alert #B8361E</code><span>الأخطاء والتصحيحات فقط</span></div>
-          <div class="sw"><i style="background:#F7F6F2"></i><b>ورق</b><code>--sheet #F7F6F2</code><span>الأسطح المرتفعة</span></div>
         </div>
 
         <h3>الخط والأدوار</h3>
         <div class="scale">
-          <div><code><b>عرض</b>display · 33–58px · 1.42</code><span class="hl-display" style="font-size:clamp(1.8rem,1.2rem+1.6vw,2.6rem)">1765 مستوطنا يقتحمون الأقصى</span></div>
-          <div><code><b>عنوان 1</b>h1 · 30–48px · 1.44</code><span class="hl-1">مدار القدس</span></div>
-          <div><code><b>عنوان 2</b>h2 · 23–31px · 1.5</code><span class="hl-2">تقارير وتحقيقات</span></div>
-          <div><code><b>عنوان 3</b>h3 · 19–23px · 1.58</code><span class="hl-3">لماذا يختار الاحتلال موسم الأعياد؟</span></div>
-          <div><code><b>عنوان 4</b>h4 · 18px · 1.66</code><span class="hl-4">حشد مستوطنين عند باب القطانين</span></div>
-          <div><code><b>مقدمة</b>lead · 17–19.5px · 1.9</code><span class="dek">اقتحامات على فترتين من باب المغاربة بحماية مشددة.</span></div>
-          <div><code><b>نص القراءة</b>body · Naskh · 18–20px · 2.0</code><span class="read">بدأت الاقتحامات عند السابعة والنصف صباحا من باب المغاربة، وهو الباب الوحيد الذي تسيطر عليه شرطة الاحتلال بالكامل.</span></div>
-          <div><code><b>تعليق الصورة</b>caption · 13.5px · 1.8</code><span class="cap__text" style="font-size:var(--fs-caption);line-height:1.8">مستوطن يؤدي سجودا ملحميا قرب باب الرحمة حاملا قربانا نباتيا.</span></div>
-          <div><code><b>بيانات</b>meta · 12.8px · 1.6</code><span class="placeline"><b>باب حطة</b><span>شهادات</span><time>08:10</time></span></div>
+          <div><code><b>عرض</b>display · 34–60px · 1.32</code><span class="hl-display" style="font-size:clamp(1.8rem,1.2rem+1.6vw,2.6rem)">1765 مستوطنا يقتحمون الأقصى</span></div>
+          <div><code><b>عنوان 1</b>h1 · 31–44px · 1.34</code><span class="hl-1">مدار القدس</span></div>
+          <div><code><b>عنوان 2</b>h2 · 26–34px · 1.4</code><span class="hl-2">تقارير وتحقيقات</span></div>
+          <div><code><b>عنوان 3</b>h3 · 22–27px · 1.45</code><span class="hl-3">لماذا يختار الاحتلال موسم الأعياد؟</span></div>
+          <div><code><b>عنوان 4</b>h4 · 20–23px · 1.5</code><span class="hl-4">حشد مستوطنين عند باب القطانين</span></div>
+          <div><code><b>مقدمة</b>lead · 19–22px · 1.7</code><span class="dek">اقتحامات على فترتين من باب المغاربة بحماية مشددة.</span></div>
+          <div><code><b>نص القراءة</b>body · Markazi · 20–23px · 1.85</code><span class="read">بدأت الاقتحامات عند السابعة والنصف صباحا من باب المغاربة، وهو الباب الوحيد الذي تسيطر عليه شرطة الاحتلال بالكامل.</span></div>
+          <div><code><b>تعليق الصورة</b>caption · Kufi · 14px · 1.8</code><span class="cap__text" style="font-size:var(--fs-caption);line-height:1.8">مستوطن يؤدي سجودا ملحميا قرب باب الرحمة حاملا قربانا نباتيا.</span></div>
+          <div><code><b>بيانات</b>meta · Kufi · 13px · 1.6</code><span class="placeline"><b>باب حطة</b><span>شهادات</span><time>08:10</time></span></div>
         </div>
-        <p class="prose" style="margin-top:var(--s-4)">Alexandria للعناوين والواجهة لأنها الأقرب هندسيا إلى خط Noor وكلمة الشعار، و Noto Naskh Arabic لنص القراءة الطويل. لا تباعد حروف على العربية، ولا تشكيل مضاف، ولا ارتفاع سطر أقل من 1.4 لأي نص عربي يلتف.</p>
+        <p class="prose" style="margin-top:var(--s-4)"><bdi>Markazi Text</bdi> للعناوين ونص القراءة: نسخ صحفي بقوام حبر المطبعة، يحمل العنوان الكبير ويريح في الفقرة الطويلة. و <bdi>Noto Kufi Arabic</bdi> للواجهة والبيانات والأوقات: كوفي هندسي قريب من كلمة الشعار، بأرقام جدولية. لا تباعد حروف على العربية، ولا تشكيل مضاف، ولا ارتفاع سطر أقل من 1.3 للعناوين و1.4 لأي نص عربي يلتف.</p>
 
         <h3>المسافات والشبكة</h3>
         <div class="spaces" aria-label="سلم المسافات">
@@ -374,19 +375,23 @@
         <p class="dek">مراجعة نقدية للنسخة الأولى، بمراجع تصميم مستقل وفحص آلي، ثم ما تغير. الشدة: حرج، عال، متوسط، صقل.</p>
         <div class="audit" id="auditBody">
           <div class="audit-group">
+            <h3>اللغة <small>بعد مراجعة النسخة الثانية</small></h3>
+            <div class="audit-row"><div><b>أسود وذهبي لغة عامة لا تخص العاصمة</b><p>الأرضية الفحمية والذهبي يصلحان لأي موقع إخباري، والأحمر الذي تستخدمه العاصمة نفسها في بطاقات «عاجل» لم يظهر في أي صفحة.</p></div><p class="fix">لغة «حبر وأحمر»: ورق جرائد وحبر بني أسود، وأحمر العاجل للإشارة، والذهبي للقبة والأرقام فقط. عناوين ونص بخط Markazi Text، والواجهة بالكوفي، وأعمدة بخطوط شعرية، والأولى تقرأ كصفحة أولى مطبوعة.</p></div>
+          </div>
+          <div class="audit-group">
             <h3>حرج <small>يمنع الإطلاق</small></h3>
             <div class="audit-row"><div><b>الواجهة جدار نص بجانبه عمود فارغ</b><p>عنوان من خمسة أسطر بطول 355 بكسل، والصورة تبدأ تحت خط الطي بـ140 بكسل، وبجانبها فراغ 490 × 465 بكسل. أقوى أداة للعاصمة، الرقم الممدود، محشورة في صندوق جانبي وتكرر رقم العنوان.</p></div><p class="fix">تكوين «تحت القبة»: الصورة داخل ملف القبة بخطوط طولها، والرقم الممدود فوق الصورة كما في منشورات العاصمة، والعنوان قصير بلا تكرار للرقم، والشريط يلف أسفل الصورة بآخر التحديثات. عمودا النص والصورة يملآن الصف نفسه.</p></div>
             <div class="audit-row"><div><b>ارتفاع السطر العربي ضيق، والتشكيل يتصادم</b><p>عنوان رئيسي بارتفاع 1.22، وتنوين «مستوطنا» يلمس السطر الذي فوقه. 279 علامة تشكيل مضافة في الملفات.</p></div><p class="fix">سلم أدوار بقيم ارتفاع لا تقل عن 1.42 للعناوين و2.0 لنص القراءة، وحذف كل التشكيل المضاف من كل الصفحات.</p></div>
             <div class="audit-row"><div><b>تسلسل الأحجام مسطح</b><p>العنوان الرئيسي أكبر من عناوين الأقسام بـ1.17 مرة فقط، وشعار الخاتمة أكبر من العنوان الرئيسي.</p></div><p class="fix">عرض 30 إلى 53 بكسل، عنوان قسم 22 إلى 30، عنوان خبر 17 إلى 20، والخاتمة لا تتجاوز عنوان صفحة.</p></div>
-            <div class="audit-row"><div><b>أسماء أهم مكانين على الخريطة مختفية</b><p>قاعدة أقوى تلون أسماء الأماكن بلون الدائرة، فيختفي «الأقصى» و«سلوان».</p></div><p class="fix">أسماء الأماكن بالعاج دائما، والذهبي للدوائر فقط. أسماء الأبواب بالعربية، وسور أقرب إلى خط السور الحقيقي.</p></div>
+            <div class="audit-row"><div><b>أسماء أهم مكانين على الخريطة مختفية</b><p>قاعدة أقوى تلون أسماء الأماكن بلون الدائرة، فيختفي «الأقصى» و«سلوان».</p></div><p class="fix">أسماء الأماكن بالحبر دائما، واللون للدوائر فقط. أسماء الأبواب بالعربية، وسور أقرب إلى خط السور الحقيقي.</p></div>
           </div>
           <div class="audit-group">
             <h3>عال <small>قبل الإطلاق</small></h3>
             <div class="audit-row"><div><b>41 مربعا بستة معان مختلفة</b><p>مربعات للتصنيف والعنوان الصغير والتسلسل والفواصل والأحرف الأولى، لا علاقة لها بالشعار.</p></div><p class="fix">بلاطة القبة للحدث المفصلي والعاجل فقط، وقوس القبة للكتاب، وخطوط شعرية بدل الفواصل المربعة، والتصنيف كلمة بلا علامة.</p></div>
-            <div class="audit-row"><div><b>الذهبي في 13 موضعا في الشاشة الأولى</b><p>حين يكون كل شيء ذهبيا لا يشير الذهبي إلى شيء.</p></div><p class="fix">الذهبي للعاجل والمباشر والرقم الرئيسي وخطوط القبة والحدث المفصلي. زر القراءة في الواجهة صار عاجيا، وأعداد الشريط العلوي حذفت.</p></div>
-            <div class="audit-row"><div><b>طبقة لاتينية تجعل الصفحة تبدو مترجمة</b><p>إحداثيات N/E، وJLM، وJerusalem، وأسماء أبواب إنجليزية، وأوقات بخط برمجي يفكك الكلمات العربية.</p></div><p class="fix">الوقت بأرقام Alexandria الجدولية، والإحداثيات بالعربية (ش، ق) في تعليقات الصور والخريطة فقط، وفي قمة القبة اسم المكان والساعة بدل الأرقام.</p></div>
+            <div class="audit-row"><div><b>الذهبي في 13 موضعا في الشاشة الأولى</b><p>حين يكون كل شيء ذهبيا لا يشير الذهبي إلى شيء.</p></div><p class="fix">لون واحد للعاجل والمباشر والحدث المفصلي، وهو الأحمر الآن، والذهبي للقبة والأرقام. زر القراءة في الواجهة صار ثانويا، وأعداد الشريط العلوي حذفت.</p></div>
+            <div class="audit-row"><div><b>طبقة لاتينية تجعل الصفحة تبدو مترجمة</b><p>إحداثيات <bdi>N/E</bdi>، و<bdi>JLM</bdi>، و<bdi>Jerusalem</bdi>، وأسماء أبواب إنجليزية، وأوقات بخط برمجي يفكك الكلمات العربية.</p></div><p class="fix">الوقت بأرقام الكوفي الجدولية، والإحداثيات بالعربية (ش، ق) في تعليقات الصور والخريطة فقط، وفي قمة القبة اسم المكان والساعة بدل الأرقام.</p></div>
             <div class="audit-row"><div><b>صف أربع بطاقات متطابقة ومناطق بلا صور</b><p>1,430 بكسل بلا صورة، والتحليل والملف المفتوح نص فقط.</p></div><p class="fix">قصة كبيرة بصورة، وقصتان بصور، والأكثر قراءة كقائمة مرتبة. الأحياء بصور مصغرة، والتقارير بغلاف مطوي الزاوية، والعدسة مسرح عريض وشريط صور بالساعة.</p></div>
-            <div class="audit-row"><div><b>الأقسام الليلية تختفي في المظهر الداكن</b><p>نفس لون الخلفية، فيضيع الإيقاع بين الطبعتين.</p></div><p class="fix">الأقسام الليلية تنزل درجة أعمق في المظهر الداكن.</p></div>
+            <div class="audit-row"><div><b>الأقسام المتبادلة تختفي في المظهر الداكن</b><p>نفس لون الخلفية، فيضيع الإيقاع بين الطبعتين.</p></div><p class="fix">الأقسام المتبادلة تأخذ درجة مختلفة عن الأرضية في المظهر الداكن.</p></div>
             <div class="audit-row"><div><b>إحداثيات الخاتمة غير مرئية، وروابط الثقة تؤدي إلى صفحة غير موجودة</b><p>تباين 1.03:1 في المظهر الفاتح، وروابط المنهجية وسياسة الذكاء الاصطناعي ترجع 404.</p></div><p class="fix">رموز ألوان الخاتمة مكتملة، وهذه الصفحة صارت وجهة روابط المنهجية والذكاء الاصطناعي ونظام التصميم.</p></div>
           </div>
           <div class="audit-group">
@@ -412,11 +417,11 @@
           <div><b>القبة في الصورة الأولى</b>صورة الخبر الرئيسي داخل ملف قبة بخطوط طول ذهبية، وفي قمتها إحداثيات المكان.</div>
           <div><b>الشريط الملفوف</b>شريط فاتح يلف أسفل القبة بآخر التحديثات، وطرفه ينطوي ويستدق مثل ذيل العين.</div>
           <div><b>الرقم داخل الكلمة</b>«مستـــ180ـــوطنا» على صورة داكنة، كما في منشورات العاصمة على إنستغرام.</div>
-          <div><b>الذهبي النادر</b>ذهبي واحد للقبة والعاجل والحدث المفصلي فقط، على حجر وفحم.</div>
+          <div><b>الأحمر والذهبي</b>أحمر «عاجل» العاصمة للإشارة، وذهبي القبة للشعار والأرقام فقط، على ورق جرائد.</div>
           <div><b>المكان والساعة</b>كل خبر تحته مكانه ووقته، والإحداثيات بالعربية.</div>
           <div><b>القوس للناس</b>الكتاب داخل قوس القبة، لا في دوائر.</div>
           <div><b>القاعدة المستدقة</b>عناوين الأقسام فوق خط يبدأ عريضا من اليمين وينتهي شعرة، كضربة الكشيدة.</div>
-          <div><b>الليل والحجر</b>إيقاع الأقسام الليلية والنهارية، كطبعتين لصحيفة واحدة.</div>
+          <div><b>الصفحة المطبوعة</b>أعمدة تفصلها خطوط شعرية، وقاعدة مزدوجة تحت الترويسة، وأولى تقرأ كصفحة أولى مطبوعة.</div>
         </div>
       </section>
     </div>
@@ -430,6 +435,6 @@
 </dialog>
 
 <footer data-coda></footer>
-<script src="assets/js/asima.js?v=20" defer></script>
+<script src="assets/js/asima.js?v=22" defer></script>
 </body>
 </html>

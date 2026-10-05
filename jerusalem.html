@@ -9,7 +9,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Markazi+Text:wght@400;500;600;700&family=Noto+Kufi+Arabic:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap">
-<link rel="stylesheet" href="assets/css/asima.css?v=35">
+<link rel="stylesheet" href="assets/css/asima.css?v=39">
 <style>
   .hub-hero { padding-block: var(--s-7) var(--s-6); position: relative; overflow: hidden; }
   .hub-hero__globe { position: absolute; inset-inline-start: -4vw; bottom: 0; width: min(720px, 70vw); aspect-ratio: 2 / 1; color: var(--ink); opacity: .07; pointer-events: none; } .hub-hero__globe svg { width: 100%; height: 100%; }
@@ -37,7 +37,6 @@
   .gaz b { font-weight: 700; font-size: var(--t-4); }
   .gaz .n { font-weight: 800; color: var(--accent); font-size: .95rem; align-self: center; font-variant-numeric: tabular-nums; }
   .gaz .coord { grid-column: 1 / -1; }
-  .locator.is-name { display: grid; place-items: center; padding: 8px; background: var(--map-bg); color: var(--ink); box-shadow: inset 0 0 0 1px var(--rule); font-family: var(--f-head); font-weight: 700; font-size: 1.2rem; text-align: center; }
 
   .feed-wrap { display: grid; grid-template-columns: minmax(0, 8fr) minmax(0, 4fr); gap: var(--s-7); }
   .feed { display: grid; }
@@ -80,8 +79,16 @@
     .feed article .frame { display: none; }
     .dossiers { grid-template-columns: 1fr; }
     .gaz { max-height: none; }
-    #gaz { grid-template-columns: 1fr 1fr; column-gap: var(--s-4); }
     .gaz .coord { display: none; }
+    /* one column on a phone: each place and each status reads on one line, label at the start and value at the end */
+    #gaz { grid-template-columns: 1fr; }
+    .gaz button { padding: 12px 4px; }
+    .gaz b { font-size: var(--fs-h5); line-height: 1.4; }
+    .pulse-row { grid-template-columns: 1fr; }
+    .pulse-row > div, .pulse-row > div + div { grid-template-columns: auto minmax(0, 1fr); align-items: baseline; gap: 12px; padding: 12px 0; border-inline-start: 0; padding-inline: 0; }
+    .pulse-row > div + div { border-top: 1px solid var(--rule); }
+    .pulse-row dd { justify-content: flex-end; text-align: end; font-size: var(--fs-ui); line-height: 1.5; }
+    .pulse-row .live-tag { padding-block: 10px; margin-block: -10px; }   /* a 44px tap area without moving the row */
   }
 </style>
 </head>
@@ -133,7 +140,7 @@
       <div>
         <header class="sec-head"><div class="sec-head__t"><h2 id="feed-h">سجل المدار</h2><span class="muted" id="feed-scope" style="font-size:var(--t-sm)">كل القدس · 7 أيام</span></div></header>
         <div class="feed" id="feed" aria-live="polite"></div>
-        <div class="feed__status"><span id="feed-count"></span><button class="btn btn--line btn--sm" type="button" id="more">حمل أقدم</button></div>
+        <div class="feed__status"><span id="feed-count"></span><button class="btn btn--line btn--sm" type="button" id="more">اعرض قصصا أقدم</button></div>
       </div>
       <aside class="stack-lg" aria-label="هذا الأسبوع">
         <div>
@@ -184,10 +191,10 @@
 
 <footer data-coda></footer>
 <script src="assets/js/jerusalem-geo.js?v=3" defer></script>
-<script src="assets/js/asima.js?v=26" defer></script>
-<script src="assets/js/jerusalem-week.js?v=2" defer></script>
+<script src="assets/js/asima.js?v=27" defer></script>
+<script src="assets/js/jerusalem-week.js?v=3" defer></script>
 <script src="assets/js/jerusalem-base.js?v=1" defer></script>
-<script src="assets/js/jerusalem-map.js?v=9" defer></script>
+<script src="assets/js/jerusalem-map.js?v=10" defer></script>
 <script>
 addEventListener('DOMContentLoaded', () => {
   const M = window.AsimaMap; if (!M) return;
@@ -203,7 +210,7 @@ addEventListener('DOMContentLoaded', () => {
   let current = null, shown = 6, map = null;
   const render = () => {
     const list = week.filter(s => !current || s.k === current);
-    feed.innerHTML = list.slice(0, shown).map(s => `<article><div class="when">${s.when}<small data-ago="${s.ago}">${asima.ago(s.ago)}</small></div><div><h3><a href="article.html" class="hl"><span class="hl-u">${s.h}</span></a></h3><p>${s.d}</p><p class="placeline" style="margin-top:6px"><b>${pname(s)}</b>${s.v ? '<span>فيديو</span>' : ''}</p></div>${s.img ? `<a href="article.html" class="frame" tabindex="-1" aria-hidden="true"><img src="assets/img/${s.img}-480.jpg" loading="lazy" alt="" width="480" height="640" style="object-position:50% 40%"></a>` : (s.k === 'other' ? `<a href="article.html" class="frame locator is-name" tabindex="-1" aria-hidden="true"><b>${s.n}</b></a>` : `<a href="article.html" class="frame locator" tabindex="-1" aria-hidden="true">${asima.locator(s.k)}</a>`)}</article>`).join('');
+    feed.innerHTML = list.slice(0, shown).map(s => `<article><div class="when">${s.when}<small data-ago="${s.ago}">${asima.ago(s.ago)}</small></div><div><h3><a href="article.html" class="hl"><span class="hl-u">${s.h}</span></a></h3><p>${s.d}</p><p class="placeline" style="margin-top:6px"><b>${pname(s)}</b>${s.v ? '<span>فيديو</span>' : ''}</p></div>${s.img ? `<a href="article.html" class="frame" tabindex="-1" aria-hidden="true"><img src="assets/img/${s.img}-480.jpg" loading="lazy" alt="" width="480" height="640" style="object-position:50% 40%"></a>` : (s.k === 'other' ? `<a href="article.html" class="frame locator" tabindex="-1" aria-hidden="true">${M.xyOfName(s.n) ? asima.locator(null, '', M.xyOfName(s.n)) : asima.locator('city')}</a>` : `<a href="article.html" class="frame locator" tabindex="-1" aria-hidden="true">${asima.locator(s.k)}</a>`)}</article>`).join('');
     $('feed-count').textContent = list.length > shown ? `${shown} من ${total(list.length)}` : total(list.length);
     $('more').hidden = shown >= list.length;
     $('feed-scope').textContent = `${current === 'other' ? 'أماكن أخرى' : current ? placeOf(current).n : 'كل القدس'} · 7 أيام`;
@@ -223,7 +230,7 @@ addEventListener('DOMContentLoaded', () => {
   const heads = { city: 'فهرس الأماكن', old: 'أبواب البلدة القديمة', aqsa: 'الأقصى الآن' };
   $('hub-tabs').addEventListener('click', e => { const v = e.target.closest('[data-view]')?.dataset.view; if (!v) return; atlas.dataset.view = v; $('gaz-h').textContent = heads[v]; });
   $('more').onclick = () => {
-    feed.insertAdjacentHTML('beforeend', `<div class="row" style="padding:18px 0">${asima.loader()}<span class="muted" style="font-size:var(--fs-small)">نحمل قصصا أقدم</span></div>`);
+    feed.insertAdjacentHTML('beforeend', `<div class="row" style="padding:18px 0">${asima.loader()}<span class="muted" style="font-size:var(--fs-small)">جار تحميل قصص أقدم</span></div>`);
     setTimeout(() => { shown += 6; render(); }, 500);
   };
   render();

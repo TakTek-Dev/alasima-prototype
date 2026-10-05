@@ -81,9 +81,10 @@
     return `<g class="loc__base">${layers.map(([k, c = k]) => `<use href="#asima-b-${k}" class="b-${c}"/>`).join('')}</g>`;
   }
   const domePath = (x, y, k) => `M${x - 28 * k} ${y + 9 * k} A${28 * k} ${30 * k} 0 0 1 ${x + 28 * k} ${y + 9 * k} Z`;
-  function geoLocator(G, key, label) {
-    const p = G.places.find(p => p.k === key), g = G.cityGates.find(g => g.k === key), ext = window.AsimaMap?.xyOf?.(key);
-    const [x, y] = ext || (p ? [p.x, p.y] : g ? g.xy : [0, 0]);
+  function geoLocator(G, key, label, at) {
+    const p = G.places.find(p => p.k === key), g = G.cityGates.find(g => g.k === key), ext = key && window.AsimaMap?.xyOf?.(key);
+    const [x, y] = at || ext || (p ? [p.x, p.y] : g ? g.xy : [0, 0]);
+    const mark = key !== 'city';   // a city-wide story: the Old City at the centre, no single place marked
     const d = Math.hypot(x, y), pts = a => a.map(q => q.join(',')).join(' ');
     if (d > 3200) {
       // too far to share a tile with the Old City: the place sits on its own orbit, with an arrow home to al-Aqsa
@@ -104,12 +105,12 @@
       + `<rect class="loc__bg" x="${cx - S * 2}" y="${cy - S * 2}" width="${S * 4}" height="${S * 4}"/>` + baseUse() + rings
       + `<polygon class="loc__wall" points="${pts(G.wallRing)}"/>`
       + `<polygon class="loc__haram" points="${pts(G.haram)}"/>`
-      + `<path class="loc__mark" d="${domePath(x, y, k)}"/>`
+      + (mark ? `<path class="loc__mark" d="${domePath(x, y, k)}"/>` : '')
       + (label ? `<text class="loc__label" x="${x}" y="${y + 58 * k}" text-anchor="middle" font-size="${30 * k}">${label}</text>` : '')
       + `</svg>`;
   }
-  function locatorSVG(key, label = '') {
-    if (window.ASIMA_GEO) return geoLocator(window.ASIMA_GEO, key, label);
+  function locatorSVG(key, label = '', at = null) {
+    if (window.ASIMA_GEO) return geoLocator(window.ASIMA_GEO, key, label, at);
     const [x, y] = PLACES[key] || [300, 220];
     const ring = r => `<circle class="loc__ring" cx="${x}" cy="${y}" r="${r}"/>`;
     return `<svg viewBox="${x - 230} ${y - 230} 460 460" preserveAspectRatio="xMidYMid slice" aria-hidden="true">`

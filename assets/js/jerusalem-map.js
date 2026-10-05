@@ -33,6 +33,13 @@
     { k: 'aqab', n: 'كفر عقب', xy: toXY(31.8748922, 35.2187739) },        // OSM node 332794849
     { k: 'qalandiya', n: 'قلنديا', xy: toXY(31.8705269, 35.2270457) },     // OSM node 8239864766, the camp
   ];
+  // places the coverage names beyond the map, so their stories still get a locator (OSM place nodes, extracted 2026-10-05)
+  const OFFMAP = {
+    'قطنة': toXY(31.83702, 35.12518), 'بيت إكسا': toXY(31.81791, 35.17986), 'الجيب': toXY(31.85103, 35.18233),
+    'الرام': toXY(31.85123, 35.23585), 'جبع': toXY(31.85732, 35.25384), 'حزما': toXY(31.83388, 35.26364),
+    'مخماس': toXY(31.87184, 35.27622), 'عناتا': toXY(31.8083, 35.2573), 'العيزرية': toXY(31.77315, 35.25959),
+    'أبو ديس': toXY(31.76424, 35.25845), 'صور باهر': toXY(31.73791, 35.23143), 'باب الخليل': gate('khalil'),
+  };
   const WEEK = (window.ASIMA_WEEK || []).map(([k, when, ago, h, d, img, v, n]) => ({ k, when, ago, h, d, img, v, n })).sort((a, b) => a.ago - b.ago);
   // only places the week actually reported sit on the map; a place is hot when it carried a story in the last four hours
   const STORIES = PLACES.map(p => {
@@ -419,5 +426,6 @@
     places: STORIES.map(s => ({ k: s.k, n: s.n, count: s.count, hot: s.hot, coord: coord(s.xy) })),
     elsewhere: WEEK.filter(s => s.k === 'other').length,
     xyOf: k => PLACES.find(p => p.k === k)?.xy,
+    xyOfName: n => OFFMAP[n] || null,
   };
 })();

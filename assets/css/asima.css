@@ -4,44 +4,45 @@
      القبة   the segmented dome: markers, timeline nodes, the lead photo's frame
      الشريط  the paper ribbon that wraps the dome and folds into «ع»: the sash, the fold
      المد   the kashida stretch from the brand's posts: figures live inside words
-   «حبر وأحمر»: newsprint ground, brown-black ink, and the red of the network's own «عاجل» cards for what is urgent.
+   «حبر وأحمر»: a white page, neutral ink, and the red of the network's own «عاجل» cards for what is urgent.
    Gold is only the dome: the logo, dome marks, figures set on photographs, the Haram on the map.
    ========================================================================== */
 
 /* ---------- 1. Tokens ---------- */
 :root {
-  /* Color — «حبر وأحمر»: newsprint, brown-black ink, the network's red; gold for the dome alone */
-  --bg: #F3EEE4;            /* newsprint */
-  --bg-2: #ECE5D8;          /* a deeper sheet: alternate sections */
-  --sheet: #FAF7F0;
-  --sunk: #E5DDCF;
-  --ink: #15110F;
-  --ink-2: #3D3632;
-  --ink-3: #665D56;
-  --rule: rgba(21, 17, 15, .16);
-  --rule-strong: rgba(21, 17, 15, .86);
+  /* Color — «حبر وأحمر»: a white page, neutral ink, the network's red; gold for the dome alone.
+     Cool greys only — no warm paper tint, so photographs and the red carry all the colour. */
+  --bg: #FAFAFB;            /* the page */
+  --bg-2: #F0F2F4;          /* alternate sections: a cool grey band */
+  --sheet: #FFFFFF;         /* raised surfaces */
+  --sunk: #E5E8EB;
+  --ink: #121417;
+  --ink-2: #383D43;
+  --ink-3: #5C626A;
+  --rule: rgba(18, 20, 23, .14);
+  --rule-strong: rgba(18, 20, 23, .86);
   --accent: #A1383B;        /* the red of Al-Asima's own «عاجل» cards */
   --accent-deep: #7C2A2C;
-  --accent-ink: #A1383B;    /* red as text on newsprint (AA) */
+  --accent-ink: #A1383B;    /* red as text on the page (AA) */
   --on-accent: #FFFFFF;
   --dome: #F0A808;          /* the dome: logo, dome marks, figures on photographs */
   --dome-deep: #E8930F;
-  --dome-ink: #8A5B00;      /* the dome's gold as figures on newsprint (large text, AA) */
-  --on-dome: #15110F;
+  --dome-ink: #8A5B00;      /* the dome's gold as figures on the page (large text, AA) */
+  --on-dome: #121417;
   --gold: var(--dome); --gold-deep: var(--dome-deep); --gold-ink: var(--dome-ink); --on-gold: var(--on-dome);   /* v1 names */
   --silver: #8E97A3;        /* the ribbon — machine work */
   --silver-soft: rgba(142, 151, 163, .18);
-  --paper: #FAF7F0;         /* the sash surface */
-  --paper-ink: #15110F;
-  --fold: #7C2A2C;          /* the sash's underside where it folds: red on newsprint */
-  --map-bg: #EEE7D9;        /* the printed map */
+  --paper: #FFFFFF;         /* the sash surface */
+  --paper-ink: #121417;
+  --fold: #7C2A2C;          /* the sash's underside where it folds */
+  --map-bg: #EDEFF1;        /* the printed map */
   --alert: #A1383B;
   --on-alert: #FFFFFF;
   --ok: #2D7A57;
-  --scrim: rgba(21, 17, 15, .6);
-  --shade: linear-gradient(180deg, rgba(21,17,15,0) 32%, rgba(21,17,15,.86) 100%);
-  --night: #15110F;         /* now only behind photographs and video */
-  --night-fg: #F3EEE4;
+  --scrim: rgba(18, 20, 23, .6);
+  --shade: linear-gradient(180deg, rgba(18,20,23,0) 32%, rgba(18,20,23,.86) 100%);
+  --night: #121417;         /* only behind photographs and video */
+  --night-fg: #FAFAFB;
 
   /* Type families */
   --f-display: "Noto Kufi Arabic", "Segoe UI", Tahoma, sans-serif;     /* interface: navigation, labels, data */
@@ -99,28 +100,28 @@
 
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
-    --bg: #15110F; --bg-2: #100D0B; --sheet: #1E1916; --sunk: #0E0B0A; --night: #0E0B0A; --map-bg: #1E1916;
-    --ink: #F1EBDF; --ink-2: #CFC6B8; --ink-3: #A0968A;
-    --rule: rgba(241, 235, 223, .14); --rule-strong: rgba(241, 235, 223, .8);
-    --accent: #D9585B; --accent-ink: #E88A8C; --accent-deep: #A1383B; --on-accent: #15110F;
+    --bg: #111315; --bg-2: #0B0C0E; --sheet: #1A1D21; --sunk: #08090A; --night: #08090A; --map-bg: #191C1F;
+    --ink: #ECEEF0; --ink-2: #C3C8CE; --ink-3: #969DA6;
+    --rule: rgba(236, 238, 240, .14); --rule-strong: rgba(236, 238, 240, .8);
+    --accent: #D9585B; --accent-ink: #E88A8C; --accent-deep: #A1383B; --on-accent: #111315;
     --dome-ink: #F0A808; --silver: #9AA3AF; --silver-soft: rgba(154, 163, 175, .16);
-    --paper: #1E1916; --paper-ink: #F1EBDF; --fold: #A1383B;
-    --alert: #E0676A; --on-alert: #15110F; --ok: #5CC497; --scrim: rgba(0,0,0,.7);
+    --paper: #1A1D21; --paper-ink: #ECEEF0; --fold: #A1383B;
+    --alert: #E0676A; --on-alert: #111315; --ok: #5CC497; --scrim: rgba(0,0,0,.7);
     color-scheme: dark;
   }
 }
 :root[data-theme="dark"] {
-  --bg: #15110F; --bg-2: #100D0B; --sheet: #1E1916; --sunk: #0E0B0A; --night: #0E0B0A; --map-bg: #1E1916;
-  --ink: #F1EBDF; --ink-2: #CFC6B8; --ink-3: #A0968A;
-  --rule: rgba(241, 235, 223, .14); --rule-strong: rgba(241, 235, 223, .8);
-  --accent: #D9585B; --accent-ink: #E88A8C; --accent-deep: #A1383B; --on-accent: #15110F;
+  --bg: #111315; --bg-2: #0B0C0E; --sheet: #1A1D21; --sunk: #08090A; --night: #08090A; --map-bg: #191C1F;
+  --ink: #ECEEF0; --ink-2: #C3C8CE; --ink-3: #969DA6;
+  --rule: rgba(236, 238, 240, .14); --rule-strong: rgba(236, 238, 240, .8);
+  --accent: #D9585B; --accent-ink: #E88A8C; --accent-deep: #A1383B; --on-accent: #111315;
   --dome-ink: #F0A808; --silver: #9AA3AF; --silver-soft: rgba(154, 163, 175, .16);
-  --paper: #1E1916; --paper-ink: #F1EBDF; --fold: #A1383B;
-  --alert: #E0676A; --on-alert: #15110F; --ok: #5CC497; --scrim: rgba(0,0,0,.7);
+  --paper: #1A1D21; --paper-ink: #ECEEF0; --fold: #A1383B;
+  --alert: #E0676A; --on-alert: #111315; --ok: #5CC497; --scrim: rgba(0,0,0,.7);
   color-scheme: dark;
 }
 
-/* «الطبعة» — sections once set at night are now a deeper sheet of the same paper: rhythm comes from rules, not from black */
+/* «الطبعة» — sections once set at night are now a cool grey band: rhythm comes from rules, not from black */
 .night { --bg: var(--bg-2); background: var(--bg); color: var(--ink); }
 
 /* ---------- 2. Base ---------- */
@@ -394,7 +395,7 @@ a:focus-visible .frame img { transform: scale(1.025); filter: saturate(1) contra
 @media (hover: hover) and (pointer: fine) { a:hover .frame img, a.frame:hover img { transform: scale(1.025); filter: saturate(1) contrast(1.04); } }
 .r-4x5 { aspect-ratio: 4 / 5; } .r-4x3 { aspect-ratio: 4 / 3; } .r-3x2 { aspect-ratio: 3 / 2; } .r-1x1 { aspect-ratio: 1; } .r-16x9 { aspect-ratio: 16 / 9; } .r-21x9 { aspect-ratio: 21 / 9; }
 .frame--shade::before { content: ""; position: absolute; inset: 0; z-index: 1; background: var(--shade); pointer-events: none; }
-.frame__over { position: absolute; inset-inline: 0; bottom: 0; z-index: 2; padding: var(--s-5); color: #F2F0EB; --ink: #F2F0EB; --ink-2: rgba(242,240,235,.85); --ink-3: rgba(242,240,235,.72); }
+.frame__over { position: absolute; inset-inline: 0; bottom: 0; z-index: 2; padding: var(--s-5); color: #F4F5F6; --ink: #F4F5F6; --ink-2: rgba(244,245,246,.85); --ink-3: rgba(244,245,246,.72); }
 .frame__badge { position: absolute; z-index: 2; top: 0; inset-inline-start: 0; display: flex; align-items: center; gap: 8px; background: var(--night); color: var(--night-fg); font-size: var(--fs-meta); font-weight: 700; padding: 6px 12px 6px 22px; clip-path: polygon(0 0, 100% 0, 100% 100%, 12px 100%); }
 .frame__badge--gold { background: var(--accent); color: var(--on-accent); }
 .cap { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 14px; margin-top: 10px; font-size: var(--fs-meta); color: var(--ink-3); line-height: var(--lh-meta); }
@@ -405,9 +406,10 @@ a:focus-visible .frame img { transform: scale(1.025); filter: saturate(1) contra
 @media (hover: hover) and (pointer: fine) { a:hover .play__btn, .play:hover .play__btn { transform: translateY(-3px); } }
 
 /* Cover — image-led story with the headline set inside the photograph */
-.cover { position: relative; display: block; color: #F2F0EB; }
-.cover .frame::before { content: ""; position: absolute; inset: 0; z-index: 1; background: linear-gradient(180deg, rgba(16,18,21,0) 35%, rgba(16,18,21,.88) 100%); }
-.cover__text { position: absolute; inset-inline: 0; bottom: 0; z-index: 2; display: grid; gap: 6px; padding: var(--s-5); --ink: #F2F0EB; --ink-3: rgba(242,240,235,.72); }
+/* report covers: the picture or map above, the headline under it on the page — nothing written over an image */
+.cover { position: relative; display: grid; gap: var(--s-3); align-content: start; color: var(--ink); }
+.cover__text { display: grid; gap: 6px; }
+@media (hover: hover) and (pointer: fine) { .cover:hover .cover__h { text-decoration: underline; text-decoration-color: var(--accent); text-decoration-thickness: 2px; text-underline-offset: 6px; } }
 .cover__h { font-family: var(--f-head); font-size: var(--fs-h3); font-weight: 700; line-height: var(--lh-h3); text-wrap: balance; }
 
 /* ---------- 9. Story units — rules and rhythm, not boxes ---------- */
@@ -624,7 +626,7 @@ dialog.search::backdrop { background: var(--scrim); }
 .coda__statement { padding-block: var(--s-8) var(--s-7); display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); gap: var(--s-7); align-items: end; }
 .coda__statement h2 { font-family: var(--f-head); font-size: clamp(2.1rem, 1.4rem + 1.9vw, 2.9rem); font-weight: 700; line-height: 1.3; }
 .coda__statement h2 em { font-style: normal; color: var(--accent-ink); }
-.coda__statement p { color: var(--ink-2); max-width: 46ch; font-size: var(--fs-ui); line-height: 1.85; }
+.coda__statement p { color: var(--ink-2); max-width: 46ch; font-size: var(--fs-ui); line-height: 1.85; text-wrap: pretty; }
 .coda__index { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: var(--s-6); padding-block: var(--s-6) var(--s-7); position: relative; }
 .coda__index::before { content: ""; position: absolute; inset-inline: 0; top: 0; height: 4px; background: var(--ink); clip-path: polygon(0 42%, 100% 0, 100% 100%, 0 58%); }
 .coda__index h4 { font-family: var(--f-display); font-size: var(--fs-small); font-weight: 700; color: var(--ink); margin-bottom: 10px; }
@@ -722,15 +724,15 @@ dialog.search::backdrop { background: var(--scrim); }
 /* 19e. Lens — the stage breathes slowly; the contact sheet opens into a viewer */
 .lens__stage img { animation: ken 26s linear infinite alternate; transform-origin: 60% 50%; }
 @keyframes ken { from { transform: scale(1); } to { transform: scale(1.07) translateX(-1.5%); } }
-dialog.viewer { border: 0; padding: 0; margin: auto; width: 100vw; height: 100%; max-width: none; max-height: none; background: #08090B; color: #ECE9E2; overflow: hidden; }
+dialog.viewer { border: 0; padding: 0; margin: auto; width: 100vw; height: 100%; max-width: none; max-height: none; background: #08090B; color: #EDEEF0; overflow: hidden; }
 dialog.viewer::backdrop { background: rgba(8, 9, 11, .97); }
 dialog.viewer[open] { display: grid; grid-template-rows: auto minmax(0, 1fr) auto; }
-.viewer__bar { display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: 12px var(--gutter); font-size: var(--fs-small); color: #C2BFB7; }
-.viewer__bar b { color: #ECE9E2; font-weight: 700; }
+.viewer__bar { display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: 12px var(--gutter); font-size: var(--fs-small); color: #C3C7CC; }
+.viewer__bar b { color: #EDEEF0; font-weight: 700; }
 .viewer__stage { position: relative; display: grid; place-items: center; min-height: 0; padding-inline: clamp(56px, 7vw, 96px); touch-action: pan-y; }
 .viewer__stage img { position: absolute; inset: 0; margin: auto; max-width: calc(100% - 2 * clamp(56px, 7vw, 96px)); max-height: calc(100% - 8px); width: auto; height: auto; object-fit: contain; view-transition-name: lens-photo; transition: opacity 200ms ease, filter 200ms ease; }
 .viewer__stage img.is-swapping { opacity: .55; filter: blur(3px); }
-.viewer__nav { position: absolute; top: 50%; width: 52px; height: 52px; display: grid; place-items: center; transform: translateY(-50%); background: rgba(236,233,226,.08); border: 0; color: #ECE9E2; transition: background var(--d-2) ease, transform 160ms var(--ease); }
+.viewer__nav { position: absolute; top: 50%; width: 52px; height: 52px; display: grid; place-items: center; transform: translateY(-50%); background: rgba(237,238,240,.08); border: 0; color: #EDEEF0; transition: background var(--d-2) ease, transform 160ms var(--ease); }
 .viewer__nav:active { transform: translateY(-50%) scale(.97); }
 .viewer__nav svg { width: 22px; height: 22px; }
 .viewer__nav--next { inset-inline-end: clamp(8px, 2vw, 24px); }
@@ -738,17 +740,17 @@ dialog.viewer[open] { display: grid; grid-template-rows: auto minmax(0, 1fr) aut
 .viewer__nav--prev svg { transform: scaleX(-1); }
 .viewer__cap { display: grid; gap: 4px; padding: 14px var(--gutter) calc(18px + env(safe-area-inset-bottom, 0px)); max-width: 80ch; }
 .viewer__cap time { color: var(--dome); font-weight: 800; font-variant-numeric: tabular-nums; }
-.viewer__cap p { font-size: var(--fs-ui); line-height: 1.8; color: #ECE9E2; }
-.viewer__cap a { color: #ECE9E2; text-decoration: underline; text-decoration-color: var(--accent); text-underline-offset: 6px; font-weight: 700; font-size: var(--fs-small); justify-self: start; }
+.viewer__cap p { font-size: var(--fs-ui); line-height: 1.8; color: #EDEEF0; }
+.viewer__cap a { color: #EDEEF0; text-decoration: underline; text-decoration-color: var(--accent); text-underline-offset: 6px; font-weight: 700; font-size: var(--fs-small); justify-self: start; }
 .viewer__strip { display: flex; gap: 6px; justify-content: center; padding-bottom: 6px; }
-.viewer__strip button { width: 34px; height: 4px; border: 0; padding: 0; background: rgba(236,233,226,.25); transition: background var(--d-2) ease; }
+.viewer__strip button { width: 34px; height: 4px; border: 0; padding: 0; background: rgba(237,238,240,.25); transition: background var(--d-2) ease; }
 .viewer__strip button[aria-current="true"] { background: var(--dome); }
-@media (hover: hover) and (pointer: fine) { .viewer__nav:hover { background: rgba(236,233,226,.16); } }
+@media (hover: hover) and (pointer: fine) { .viewer__nav:hover { background: rgba(237,238,240,.16); } }
 ::view-transition-group(lens-photo) { animation-duration: 420ms; animation-timing-function: var(--ease-in-out); }
 
 /* 19f. Ribbon on scroll — on phones it steps aside while reading down and returns on the way up */
 .ribbon { transition: transform 260ms var(--ease), box-shadow 260ms ease; }
-.ribbon.is-scrolled { box-shadow: 0 12px 24px -20px rgba(21,17,15,.5); }
+.ribbon.is-scrolled { box-shadow: 0 12px 24px -20px rgba(18,20,23,.5); }
 @media (max-width: 860px) { .ribbon.is-away { transform: translateY(-100%); } }
 
 /* 19g. Between pages — the ribbon holds still, the page beneath turns like a sheet */
@@ -786,7 +788,8 @@ html.theme-vt::view-transition-group(site-ribbon), html.theme-vt::view-transitio
 /* ---------- 20. «مدار القدس» — the orbit map, printed ----------
    Real geometry, metres around the Dome, set like a newspaper map: ink lines on paper, the Haram and the Dome in gold,
    today's activity and the incursion route in red. */
-.omap { --m-ink: var(--ink); --m-halo: var(--map-bg); --m-green: #6B7B3E; --m-water: #4E7A93;
+.omap, .locator { --m-ink: var(--ink); --m-halo: var(--map-bg); --m-green: #6B7B3E; --m-water: #4E7A93; }
+.omap {
   position: relative; aspect-ratio: 5 / 6; max-height: 86vh; width: 100%; background: var(--map-bg); overflow: hidden; isolation: isolate; contain: layout paint; color: var(--m-ink); box-shadow: inset 0 0 0 1px var(--rule-strong); }
 .omap__svg { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
 .omap__grat line { stroke: color-mix(in srgb, var(--m-ink) 7%, transparent); stroke-width: 1; vector-effect: non-scaling-stroke; }
@@ -798,22 +801,22 @@ html.theme-vt::view-transition-group(site-ribbon), html.theme-vt::view-transitio
 .omap__dome { fill: var(--dome); }
 .omap__qibli { fill: color-mix(in srgb, var(--m-ink) 45%, transparent); }
 /* the printed base: built-up land as a tint, green and cemeteries, dashed wadis, streets by class with cased main roads */
-.omap__base path { fill: none; stroke-linejoin: round; stroke-linecap: round; vector-effect: non-scaling-stroke; }
-.omap__base .b-built { fill: color-mix(in srgb, var(--m-ink) 6%, transparent); }
-.omap__base .b-green { fill: color-mix(in srgb, var(--m-green) 24%, transparent); }
-.omap__base .b-cem { fill: color-mix(in srgb, var(--m-green) 13%, transparent); stroke: color-mix(in srgb, var(--m-ink) 30%, transparent); stroke-width: .7; stroke-dasharray: 1 2.5; }
-.omap__base .b-water { stroke: color-mix(in srgb, var(--m-water) 75%, transparent); stroke-width: 1; stroke-dasharray: 6 3; }
-.omap__base .b-street { stroke: color-mix(in srgb, var(--m-ink) 15%, transparent); stroke-width: .6; }
-.omap__base .b-tertiary { stroke: color-mix(in srgb, var(--m-ink) 30%, transparent); stroke-width: .9; }
-.omap__base .b-primary-case { stroke: color-mix(in srgb, var(--m-ink) 45%, transparent); stroke-width: 3.2; }
-.omap__base .b-primary { stroke: var(--map-bg); stroke-width: 1.7; }
-.omap__base .b-major-case { stroke: color-mix(in srgb, var(--m-ink) 60%, transparent); stroke-width: 4.4; }
-.omap__base .b-major { stroke: var(--sheet); stroke-width: 2.5; }
-.omap__base .b-alley { stroke: color-mix(in srgb, var(--m-ink) 32%, transparent); stroke-width: .8; opacity: 0; transition: opacity 500ms ease; }
+.omap__base path, .loc__base use { fill: none; stroke-linejoin: round; stroke-linecap: round; vector-effect: non-scaling-stroke; }
+:is(.omap__base, .loc__base) .b-built { fill: color-mix(in srgb, var(--m-ink) 6%, transparent); }
+:is(.omap__base, .loc__base) .b-green { fill: color-mix(in srgb, var(--m-green) 24%, transparent); }
+:is(.omap__base, .loc__base) .b-cem { fill: color-mix(in srgb, var(--m-green) 13%, transparent); stroke: color-mix(in srgb, var(--m-ink) 30%, transparent); stroke-width: .7; stroke-dasharray: 1 2.5; }
+:is(.omap__base, .loc__base) .b-water { stroke: color-mix(in srgb, var(--m-water) 75%, transparent); stroke-width: 1; stroke-dasharray: 6 3; }
+:is(.omap__base, .loc__base) .b-street { stroke: color-mix(in srgb, var(--m-ink) 15%, transparent); stroke-width: .6; }
+:is(.omap__base, .loc__base) .b-tertiary { stroke: color-mix(in srgb, var(--m-ink) 30%, transparent); stroke-width: .9; }
+:is(.omap__base, .loc__base) .b-primary-case { stroke: color-mix(in srgb, var(--m-ink) 45%, transparent); stroke-width: 3.2; }
+:is(.omap__base, .loc__base) .b-primary { stroke: var(--map-bg); stroke-width: 1.7; }
+:is(.omap__base, .loc__base) .b-major-case { stroke: color-mix(in srgb, var(--m-ink) 60%, transparent); stroke-width: 4.4; }
+:is(.omap__base, .loc__base) .b-major { stroke: var(--sheet); stroke-width: 2.5; }
+:is(.omap__base, .loc__base) .b-alley { stroke: color-mix(in srgb, var(--m-ink) 32%, transparent); stroke-width: .8; opacity: 0; transition: opacity 500ms ease; }
 .omap:is([data-view="old"], [data-view="aqsa"]) .omap__base .b-alley { opacity: 1; }
 /* the separation wall: a heavy rule with a comb, the way printed maps draw a barrier */
-.omap__base .b-barrier { stroke: var(--m-ink); stroke-width: 2.2; }
-.omap__base .b-barrier-ticks { stroke: var(--m-ink); stroke-width: 7; stroke-dasharray: 1.5 6; stroke-linecap: butt; }
+:is(.omap__base, .loc__base) .b-barrier { stroke: var(--m-ink); stroke-width: 2.2; }
+:is(.omap__base, .loc__base) .b-barrier-ticks { stroke: var(--m-ink); stroke-width: 7; stroke-dasharray: 1.5 6; stroke-linecap: butt; }
 .omap.js-draw .omap__base { opacity: 0; transition: opacity 900ms ease; }
 .omap.js-draw.is-drawn .omap__base { opacity: 1; }
 .omap__routeg { opacity: 0; transition: opacity 400ms ease; }
@@ -837,12 +840,12 @@ html.theme-vt::view-transition-group(site-ribbon), html.theme-vt::view-transitio
 .omap__lbl { translate: -50% -50%; }
 .omap__lbl.is-quarter { font-size: 13px; font-weight: 600; color: color-mix(in srgb, var(--m-ink) 48%, transparent); }
 .omap__lbl.is-monument { font-size: 12.5px; font-weight: 700; color: var(--dome-ink); text-shadow: 0 0 6px var(--m-halo), 0 0 2px var(--m-halo); }
-.omap__lbl.is-ring { font-size: 12px; font-weight: 600; color: var(--ink-3); background: var(--m-halo); padding: 0 4px; }
+.omap__lbl.is-ring { font-size: 12.5px; font-weight: 600; color: var(--ink-3); background: var(--m-halo); padding: 0 4px; }
 .omap__lbl:is(.is-hood, .is-town, .is-peak, .is-region, .is-checkpoint) { text-shadow: 0 0 6px var(--m-halo), 0 0 3px var(--m-halo), 0 0 2px var(--m-halo); }
 .omap__lbl.is-hood { font-size: 12.5px; font-weight: 600; color: color-mix(in srgb, var(--m-ink) 62%, var(--map-bg)); }
 .omap__lbl.is-town { font-size: 13px; font-weight: 700; color: color-mix(in srgb, var(--m-ink) 66%, var(--map-bg)); }
 .omap__lbl.is-region { font-size: 18px; font-weight: 700; color: color-mix(in srgb, var(--m-ink) 50%, var(--map-bg)); }
-.omap__lbl.is-peak { font-size: 12px; font-weight: 600; color: color-mix(in srgb, var(--m-ink) 66%, var(--map-bg)); }
+.omap__lbl.is-peak { font-size: 12.5px; font-weight: 600; color: color-mix(in srgb, var(--m-ink) 66%, var(--map-bg)); }
 .omap__lbl.is-peak::before { content: "▲"; font-size: 8px; margin-inline-end: 4px; vertical-align: 1px; }
 .omap__lbl.is-checkpoint { font-size: 11.5px; font-weight: 700; color: var(--m-ink); display: inline-flex; align-items: center; gap: 5px; translate: -9px -50%; }
 .omap__lbl.is-checkpoint::before { content: ""; width: 9px; height: 9px; background: var(--m-ink); outline: 2px solid var(--m-halo); order: 2; }
@@ -861,6 +864,22 @@ html.theme-vt::view-transition-group(site-ribbon), html.theme-vt::view-transitio
 .omap__pin span { position: absolute; top: 0; left: calc(var(--s, 24px) / 2 + 8px); translate: 0 -50%; white-space: nowrap; font-size: 13.5px; font-weight: 700; color: var(--m-ink); text-shadow: 0 0 8px var(--m-halo), 0 0 3px var(--m-halo), 0 0 2px var(--m-halo); }
 .omap__pin.is-edge i { scale: .8; }
 .omap__pin.is-edge span::after { content: " · " attr(data-dist); font-weight: 500; color: color-mix(in srgb, var(--m-ink) 62%, transparent); }
+/* beyond the frame: one strip along the top, each place with its bearing, count and distance */
+.omap__off { position: absolute; z-index: 4; inset-inline: 0; top: 0; display: flex; flex-wrap: wrap; align-items: center; gap: 2px 16px; padding: 6px 12px; background: color-mix(in srgb, var(--sheet) 94%, transparent); box-shadow: 0 1px 0 var(--rule-strong); font-family: var(--f-display); }
+.omap__off-lead { font-size: 12px; font-weight: 700; color: var(--ink-3); }
+.omap__off .omap__pin { position: relative; width: auto; height: auto; min-height: 34px; display: inline-flex; align-items: center; gap: 7px; }
+.omap__off .omap__pin::before { content: ""; flex: none; width: 0; height: 0; border-inline: 4px solid transparent; border-bottom: 9px solid var(--accent); rotate: var(--bearing, 0deg); }
+.omap__off .omap__pin i { position: relative; left: auto; top: auto; translate: none; scale: 1; width: 24px; height: 24px; font-size: 11px; }
+.omap__off .omap__pin span { position: static; translate: none; font-size: 13px; text-shadow: none; }
+.omap__off .omap__pin:hover i, .omap__off .omap__pin.is-active i { scale: 1.1; }
+.omap.has-off .omap__north { top: calc(var(--off-h, 46px) + 10px); }
+/* a phone-width map keeps the strip to one line: the arrows say «beyond», the card gives the distance */
+.omap { container: omap / inline-size; }
+@container omap (max-width: 520px) {
+  .omap__off-lead { display: none; }
+  .omap__off { gap: 2px 12px; padding-block: 4px; }
+  .omap__off .omap__pin span::after { content: none; }
+}
 .omap__pin:hover i, .omap__pin:focus-visible i, .omap__pin.is-active i { scale: 1.12; }
 .omap__pin:focus-visible { outline: none; }
 .omap__pin:focus-visible i { outline: 2px solid var(--accent); outline-offset: 3px; }
@@ -891,10 +910,10 @@ html.theme-vt::view-transition-group(site-ribbon), html.theme-vt::view-transitio
 .omap__north { position: absolute; top: 12px; left: 12px; display: grid; justify-items: center; gap: 2px; font-size: 12px; font-weight: 800; color: var(--m-ink); }
 .omap__north i { width: 0; height: 0; border-inline: 5px solid transparent; border-bottom: 14px solid var(--accent); order: -1; }
 .omap__scale { position: absolute; bottom: 30px; left: 12px; display: grid; gap: 4px; font-size: 12px; font-weight: 700; color: var(--m-ink); }
-.omap__scale i { display: block; height: 6px; border: 1.5px solid var(--m-ink); border-top: 0; transition: width 200ms ease; }
+.omap__scale i { display: block; height: 6px; border: 1.5px solid var(--m-ink); border-top: 0; }
 
 /* the card — a cutting that grows from the place it belongs to */
-.omap__card { position: absolute; left: 0; top: 0; z-index: 5; width: max-content; max-width: min(280px, 80%); display: grid; gap: 4px; padding: 12px 14px; background: var(--sheet); color: var(--ink); border-top: 3px solid var(--accent); box-shadow: 0 0 0 1px var(--rule), 0 16px 34px -14px rgba(21,17,15,.45); pointer-events: auto; }
+.omap__card { position: absolute; left: 0; top: 0; z-index: 5; width: max-content; max-width: min(280px, 80%); display: grid; gap: 4px; padding: 12px 14px; background: var(--sheet); color: var(--ink); border-top: 3px solid var(--accent); box-shadow: 0 0 0 1px var(--rule), 0 16px 34px -14px rgba(18,20,23,.45); pointer-events: auto; }
 .omap__card.is-in { animation: card-in 200ms var(--ease); }
 @keyframes card-in { from { opacity: 0; scale: .96; } }
 .omap__card b { font-family: var(--f-head); font-size: 19px; font-weight: 700; line-height: 1.35; }
@@ -969,7 +988,7 @@ html.theme-vt::view-transition-group(site-ribbon), html.theme-vt::view-transitio
    Every image here comes from the designer's two PSDs in «ثيم العاصمة» (see index.html#assets). */
 
 /* the cell: a dark panel lit through the bars; the prisoner printed on paper; the archive on film */
-.captive { --ink: #ECE9E2; --ink-2: rgba(236,233,226,.82); --ink-3: rgba(236,233,226,.66); --gold-ink: var(--gold); --rule: rgba(236,233,226,.16);
+.captive { --ink: #EDEEF0; --ink-2: rgba(237,238,240,.82); --ink-3: rgba(237,238,240,.66); --gold-ink: var(--gold); --rule: rgba(237,238,240,.16);
   position: relative; isolation: isolate; overflow: hidden; display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); grid-template-areas: "text print" "film print";
   min-height: clamp(520px, 44vw, 620px); background: #120E0A; color: var(--ink); }
 .captive__cell { position: absolute; inset: 0; z-index: -3; width: 100%; height: 100%; object-fit: cover; object-position: 56% 30%; filter: sepia(.32) saturate(1.15) brightness(.92); }
@@ -984,7 +1003,7 @@ html.theme-vt::view-transition-group(site-ribbon), html.theme-vt::view-transitio
 .captive__text { grid-area: text; align-self: start; display: grid; gap: var(--s-4); max-width: 36rem; padding: 148px clamp(24px, 4vw, 56px) var(--s-5); }
 .captive__count { font-size: clamp(1.7rem, 1.05rem + 2.1vw, 2.75rem); color: var(--ink); }
 .captive__count .madd__fig { color: var(--gold); }
-.captive h3 { font-size: clamp(1.6rem, 1.15rem + 1.5vw, 2.5rem); font-weight: 800; line-height: 1.45; color: #F2F0EB; }
+.captive h3 { font-size: clamp(1.6rem, 1.15rem + 1.5vw, 2.5rem); font-weight: 800; line-height: 1.45; color: #F4F5F6; }
 .captive h3 .hl-u { font-size: .74em; font-weight: 700; }
 .captive h3 a { color: inherit; }
 .captive h3 b { display: block; color: var(--gold); font-weight: 800; }
@@ -995,7 +1014,7 @@ html.theme-vt::view-transition-group(site-ribbon), html.theme-vt::view-transitio
 .captive__print img { display: block; width: 100%; height: auto; aspect-ratio: 4 / 5; object-fit: cover; object-position: 50% 26%; }
 .captive__film { grid-area: film; align-self: end; display: grid; gap: 8px; justify-items: start; padding: 0 clamp(24px, 4vw, 56px) clamp(28px, 3vw, 40px); rotate: -2deg; }
 .film { display: flex; gap: 8px; padding: 20px 10px; background-color: #0B0907; box-shadow: 0 16px 26px -14px rgba(0,0,0,.8);
-  background-image: repeating-linear-gradient(90deg, rgba(236,233,226,.78) 0 9px, transparent 9px 19px), repeating-linear-gradient(90deg, rgba(236,233,226,.78) 0 9px, transparent 9px 19px);
+  background-image: repeating-linear-gradient(90deg, rgba(237,238,240,.78) 0 9px, transparent 9px 19px), repeating-linear-gradient(90deg, rgba(237,238,240,.78) 0 9px, transparent 9px 19px);
   background-size: 100% 6px; background-position: 0 7px, 0 calc(100% - 7px); background-repeat: no-repeat; }
 .film img { display: block; width: clamp(78px, 8vw, 108px); height: auto; aspect-ratio: 3 / 4; object-fit: cover; object-position: 50% 22%; filter: grayscale(.45) contrast(1.06); transition: filter 200ms ease; }
 @media (hover: hover) and (pointer: fine) { .film img:hover { filter: none; } }
@@ -1019,7 +1038,7 @@ html.theme-vt::view-transition-group(site-ribbon), html.theme-vt::view-transitio
 }
 
 /* the count post on the web: the stretched word, the gold number, the alert signs at the edges */
-.count-card { --ink: #ECE9E2; --ink-2: #D9D5CC; --gold-ink: var(--gold);
+.count-card { --ink: #EDEEF0; --ink-2: #D2D6DB; --gold-ink: var(--gold);
   position: relative; isolation: isolate; overflow: hidden; display: grid; place-items: center; margin-block: var(--s-6); padding: clamp(64px, 8vw, 92px) clamp(20px, 4vw, 48px) clamp(150px, 18vw, 210px); background: #0E1013 url(../img/noise.webp) 0 0 / 256px; background-blend-mode: soft-light; color: var(--ink); text-align: center; }
 .count-card__photo { position: absolute; inset: auto 0 0; z-index: -3; width: 100%; height: 64%; object-fit: cover; object-position: 50% 64%; filter: saturate(.85) brightness(.9);
   -webkit-mask-image: linear-gradient(180deg, transparent 0%, #000 52%); mask-image: linear-gradient(180deg, transparent 0%, #000 52%); }
@@ -1035,7 +1054,7 @@ html.theme-vt::view-transition-group(site-ribbon), html.theme-vt::view-transitio
 
 /* the locator tile, printed like the map */
 .locator .loc__bg { fill: var(--map-bg); }
-.locator .loc__ring { fill: none; stroke: color-mix(in srgb, var(--ink) 26%, transparent); stroke-width: 1; stroke-dasharray: 3 5; }
+.locator .loc__ring { fill: none; stroke: color-mix(in srgb, var(--ink) 58%, transparent); stroke-width: 1.1; stroke-dasharray: 6 4; }
 .locator .loc__orbit { fill: none; stroke: color-mix(in srgb, var(--accent) 60%, transparent); stroke-width: 1; stroke-dasharray: 3 5; }
 .locator .loc__wall { fill: color-mix(in srgb, var(--ink) 5%, transparent); stroke: color-mix(in srgb, var(--ink) 70%, transparent); stroke-width: 1.2; }
 .locator .loc__haram { fill: rgba(240,168,8,.26); stroke: var(--dome-deep); stroke-width: 1; }
@@ -1056,7 +1075,8 @@ html.theme-vt::view-transition-group(site-ribbon), html.theme-vt::view-transitio
 @media (hover: hover) and (pointer: fine) { .slider-ctl__btn:hover:not(:disabled) { background: var(--ink); color: var(--bg); } }
 .slider-ctl__btn:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
 .slider-ctl__track { flex: 1; min-width: 0; height: 2px; background: var(--rule); position: relative; overflow: hidden; }
-.slider-ctl__track i { position: absolute; inset-block: 0; inset-inline-start: 0; width: var(--w, 50%); translate: var(--x, 0) 0; background: var(--accent); transition: translate 300ms var(--ease), width 300ms var(--ease); }
+/* the bar spans the track and is scaled from its reading start, so it animates on the compositor, not through layout */
+.slider-ctl__track i { position: absolute; inset-block: 0; inset-inline-start: 0; width: 100%; transform-origin: right; scale: var(--w, .5) 1; translate: var(--x, 0) 0; background: var(--accent); transition: translate 300ms var(--ease), scale 300ms var(--ease); }
 .slider-ctl__count { font-size: var(--fs-meta); font-weight: 700; color: var(--ink-3); font-variant-numeric: tabular-nums; white-space: nowrap; }
 @media (prefers-reduced-motion: reduce) { [data-slider] { scroll-behavior: auto; } .slider-ctl__track i { transition: none; } }
 

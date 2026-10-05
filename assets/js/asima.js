@@ -67,6 +67,19 @@
   const HARAM = '346,190 440,180 446,320 352,334';
   // with the real geodata on the page, the tile is drawn to scale in metres, with the orbit rings around al-Aqsa;
   // a far place shares the tile with the Old City, so its distance reads at a glance. Colours live in the stylesheet (.loc__*).
+  // the printed base (jerusalem-base.js, where the page loads it): one hidden set of paths that every tile reuses
+  let baseDefs = false;
+  function baseUse() {
+    const B = window.ASIMA_BASE;
+    if (!B) return '';
+    if (!baseDefs) {
+      const d = { built: B.land.built, green: B.land.green, cem: B.land.cem, water: B.water, street: B.roads.street, tertiary: B.roads.tertiary, primary: B.roads.primary, major: B.roads.major, barrier: B.barrier };
+      document.body.insertAdjacentHTML('afterbegin', `<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><defs>${Object.entries(d).map(([k, v]) => `<path id="asima-b-${k}" d="${v}" vector-effect="non-scaling-stroke"/>`).join('')}</defs></svg>`);
+      baseDefs = true;
+    }
+    const layers = [['built'], ['green'], ['cem'], ['water'], ['street'], ['tertiary'], ['primary', 'primary-case'], ['major', 'major-case'], ['primary'], ['major'], ['barrier'], ['barrier', 'barrier-ticks']];
+    return `<g class="loc__base">${layers.map(([k, c = k]) => `<use href="#asima-b-${k}" class="b-${c}"/>`).join('')}</g>`;
+  }
   const domePath = (x, y, k) => `M${x - 28 * k} ${y + 9 * k} A${28 * k} ${30 * k} 0 0 1 ${x + 28 * k} ${y + 9 * k} Z`;
   function geoLocator(G, key, label) {
     const p = G.places.find(p => p.k === key), g = G.cityGates.find(g => g.k === key), ext = window.AsimaMap?.xyOf?.(key);
@@ -88,7 +101,7 @@
     const S = Math.max(1500, d + 1300), [cx, cy] = d < 600 ? [x, y] : [x / 2, y / 2], k = S / 460;
     const rings = [500, 1000, 2000, 3000, 4000].filter(r => r < S).map(r => `<circle class="loc__ring" cx="0" cy="0" r="${r}"/>`).join('');
     return `<svg viewBox="${cx - S / 2} ${cy - S / 2} ${S} ${S}" preserveAspectRatio="xMidYMid meet" aria-hidden="true">`
-      + `<rect class="loc__bg" x="${cx - S * 2}" y="${cy - S * 2}" width="${S * 4}" height="${S * 4}"/>` + rings
+      + `<rect class="loc__bg" x="${cx - S * 2}" y="${cy - S * 2}" width="${S * 4}" height="${S * 4}"/>` + baseUse() + rings
       + `<polygon class="loc__wall" points="${pts(G.wallRing)}"/>`
       + `<polygon class="loc__haram" points="${pts(G.haram)}"/>`
       + `<path class="loc__mark" d="${domePath(x, y, k)}"/>`
@@ -545,13 +558,13 @@
     const rtl = getComputedStyle(row).direction === 'rtl';
     const update = () => {
       const max = row.scrollWidth - row.clientWidth, pos = Math.min(max, Math.abs(row.scrollLeft));
-      const per = Math.max(1, Math.round(row.clientWidth / (items[0].offsetWidth || 1)));
+      const per = Math.max(1, Math.floor(row.clientWidth / (items[0].offsetWidth || 1) + .1));   // whole photos in view; a peeking one is not counted
       const first = Math.min(items.length - per, Math.round(pos / ((items[1]?.offsetLeft != null ? Math.abs(items[1].offsetLeft - items[0].offsetLeft) : 1) || 1)));
-      count.textContent = `${first + 1}–${Math.min(items.length, first + per)} من ${items.length}`;
+      count.textContent = per === 1 ? `${first + 1} من ${items.length}` : `${first + 1}–${Math.min(items.length, first + per)} من ${items.length}`;
       prev.disabled = pos < 4; next.disabled = pos > max - 4;
       const w = row.clientWidth / row.scrollWidth;
-      bar.style.setProperty('--w', `${(w * 100).toFixed(2)}%`);
-      bar.style.setProperty('--x', `${((rtl ? -1 : 1) * (max ? pos / max : 0) * (1 - w) / w * 100).toFixed(2)}%`);
+      bar.style.setProperty('--w', w.toFixed(4));
+      bar.style.setProperty('--x', `${((rtl ? -1 : 1) * (max ? pos / max : 0) * (1 - w) * 100).toFixed(2)}%`);
       ctl.hidden = max < 4;
     };
     ctl.addEventListener('click', e => {
@@ -571,7 +584,7 @@
     if (!Object.keys(groups).length) return;
     const d = document.createElement('dialog');
     d.className = 'viewer'; d.setAttribute('aria-label', 'عارض الصور');
-    d.innerHTML = `<div class="viewer__bar"><span><b>عدسة العاصمة</b> · <span data-n></span></span><button class="icon-btn" type="button" data-close aria-label="إغلاق العارض" style="color:#ECE9E2">${icon('close')}</button></div>
+    d.innerHTML = `<div class="viewer__bar"><span><b>عدسة العاصمة</b> · <span data-n></span></span><button class="icon-btn" type="button" data-close aria-label="إغلاق العارض" style="color:#EDEEF0">${icon('close')}</button></div>
       <div class="viewer__stage"><button class="viewer__nav viewer__nav--prev" type="button" data-step="-1" aria-label="الصورة السابقة">${icon('arrow')}</button><img alt=""><button class="viewer__nav viewer__nav--next" type="button" data-step="1" aria-label="الصورة التالية">${icon('arrow')}</button></div>
       <div class="viewer__cap"><div class="viewer__strip" role="group" aria-label="صور اليوم"></div><time></time><p></p><a href="article.html">اقرأ القصة</a></div>`;
     document.body.append(d);

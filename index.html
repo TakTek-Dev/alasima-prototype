@@ -9,7 +9,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Markazi+Text:wght@400;500;600;700&family=Noto+Kufi+Arabic:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap">
-<link rel="stylesheet" href="assets/css/asima.css?v=28">
+<link rel="stylesheet" href="assets/css/asima.css?v=35">
 <style>
   .doc-hero { padding-block: var(--sec) var(--sec-tight); position: relative; overflow: clip; }
   .doc-hero__grid { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: var(--split-gap); align-items: end; }
@@ -232,7 +232,7 @@
         </div>
         <h3>قواعد الاتجاه</h3>
         <div class="prose">
-          <p><b>صحيفة مطبوعة، لا شاشة ليلية.</b> أرضية ورق جرائد، وحبر بني أسود، وأعمدة تفصلها خطوط شعرية، وقاعدة مزدوجة تحت الترويسة. لا كتل سوداء إلا الصور والفيديو.</p>
+          <p><b>صحيفة مطبوعة، لا شاشة ليلية.</b> صفحة بيضاء، وحبر أسود محايد، وأقسام متبادلة برمادي بارد، وأعمدة تفصلها خطوط شعرية، وقاعدة مزدوجة تحت الترويسة. لا كتل سوداء إلا الصور والفيديو.</p>
           <p><b>الأحمر للإشارة، والذهبي للقبة.</b> الأحمر من بطاقات «عاجل» في منشورات العاصمة نفسها: العاجل، والمباشر، والحدث المفصلي، والزر الأساسي. والذهبي لا يظهر إلا في الشعار وعلامات القبة وخطوط طولها والأرقام. أي استخدام آخر يضعف الإشارتين.</p>
           <p><b>المكان والساعة قبل التصنيف.</b> كل خبر يحمل مكانه ووقته تحت العنوان، والإحداثيات تكتب بالعربية: ش للشمال، ق للشرق.</p>
           <p><b>مربع بالقانون، والمنحنى للقبة وحدها.</b> لا زوايا مدورة. المنحنيات الوحيدة في النظام هي القبة والقوس، ولذلك تلفت النظر حين تظهر.</p>
@@ -247,10 +247,10 @@
 
         <h3>اللون</h3>
         <div class="swatches">
-          <div class="sw"><i style="background:#F3EEE4"></i><b>ورق الجرائد</b><code>--bg #F3EEE4</code><span>أرضية الطبعة</span></div>
-          <div class="sw"><i style="background:#ECE5D8"></i><b>ورق أعمق</b><code>--bg-2 #ECE5D8</code><span>الأقسام المتبادلة والخريطة</span></div>
-          <div class="sw"><i style="background:#FAF7F0"></i><b>ورق</b><code>--sheet #FAF7F0</code><span>الأسطح المرتفعة</span></div>
-          <div class="sw"><i style="background:#15110F"></i><b>حبر</b><code>--ink #15110F</code><span>النص والقواعد المزدوجة</span></div>
+          <div class="sw"><i style="background:#FAFAFB"></i><b>الصفحة</b><code>--bg #FAFAFB</code><span>أرضية الطبعة</span></div>
+          <div class="sw"><i style="background:#F0F2F4"></i><b>رمادي الأقسام</b><code>--bg-2 #F0F2F4</code><span>الأقسام المتبادلة</span></div>
+          <div class="sw"><i style="background:#FFFFFF"></i><b>أبيض</b><code>--sheet #FFFFFF</code><span>الأسطح المرتفعة</span></div>
+          <div class="sw"><i style="background:#121417"></i><b>حبر</b><code>--ink #121417</code><span>النص والقواعد المزدوجة</span></div>
           <div class="sw"><i style="background:#A1383B"></i><b>أحمر العاجل</b><code>--accent #A1383B</code><span>العاجل والمباشر والحدث المفصلي</span></div>
           <div class="sw"><i style="background:#F0A808"></i><b>ذهبي القبة</b><code>--dome #F0A808</code><span>الشعار والقبة والأرقام على الصور</span></div>
           <div class="sw"><i style="background:#8A5B00"></i><b>ذهبي الأرقام</b><code>--dome-ink #8A5B00</code><span>الرقم الكبير على الورق</span></div>
@@ -376,7 +376,7 @@
         <div class="audit" id="auditBody">
           <div class="audit-group">
             <h3>اللغة <small>بعد مراجعة النسخة الثانية</small></h3>
-            <div class="audit-row"><div><b>أسود وذهبي لغة عامة لا تخص العاصمة</b><p>الأرضية الفحمية والذهبي يصلحان لأي موقع إخباري، والأحمر الذي تستخدمه العاصمة نفسها في بطاقات «عاجل» لم يظهر في أي صفحة.</p></div><p class="fix">لغة «حبر وأحمر»: ورق جرائد وحبر بني أسود، وأحمر العاجل للإشارة، والذهبي للقبة والأرقام فقط. عناوين ونص بخط Markazi Text، والواجهة بالكوفي، وأعمدة بخطوط شعرية، والأولى تقرأ كصفحة أولى مطبوعة.</p></div>
+            <div class="audit-row"><div><b>أسود وذهبي لغة عامة لا تخص العاصمة</b><p>الأرضية الفحمية والذهبي يصلحان لأي موقع إخباري، والأحمر الذي تستخدمه العاصمة نفسها في بطاقات «عاجل» لم يظهر في أي صفحة.</p></div><p class="fix">لغة «حبر وأحمر»: صفحة بيضاء وحبر محايد (بعد تجربة أرضية ورق جرائد بيج استبعدت)، وأحمر العاجل للإشارة، والذهبي للقبة والأرقام فقط. عناوين ونص بخط Markazi Text، والواجهة بالكوفي، وأعمدة بخطوط شعرية، والأولى تقرأ كصفحة أولى مطبوعة.</p></div>
           </div>
           <div class="audit-group">
             <h3>حرج <small>يمنع الإطلاق</small></h3>
@@ -417,7 +417,7 @@
           <div><b>القبة في الصورة الأولى</b>صورة الخبر الرئيسي داخل ملف قبة بخطوط طول ذهبية، وفي قمتها إحداثيات المكان.</div>
           <div><b>الشريط الملفوف</b>شريط فاتح يلف أسفل القبة بآخر التحديثات، وطرفه ينطوي ويستدق مثل ذيل العين.</div>
           <div><b>الرقم داخل الكلمة</b>«مستـــ180ـــوطنا» على صورة داكنة، كما في منشورات العاصمة على إنستغرام.</div>
-          <div><b>الأحمر والذهبي</b>أحمر «عاجل» العاصمة للإشارة، وذهبي القبة للشعار والأرقام فقط، على ورق جرائد.</div>
+          <div><b>الأحمر والذهبي</b>أحمر «عاجل» العاصمة للإشارة، وذهبي القبة للشعار والأرقام فقط، على صفحة بيضاء.</div>
           <div><b>المكان والساعة</b>كل خبر تحته مكانه ووقته، والإحداثيات بالعربية.</div>
           <div><b>القوس للناس</b>الكتاب داخل قوس القبة، لا في دوائر.</div>
           <div><b>القاعدة المستدقة</b>عناوين الأقسام فوق خط يبدأ عريضا من اليمين وينتهي شعرة، كضربة الكشيدة.</div>
@@ -435,6 +435,6 @@
 </dialog>
 
 <footer data-coda></footer>
-<script src="assets/js/asima.js?v=23" defer></script>
+<script src="assets/js/asima.js?v=26" defer></script>
 </body>
 </html>

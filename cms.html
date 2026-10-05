@@ -8,7 +8,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Markazi+Text:wght@400;500;600;700&family=Noto+Kufi+Arabic:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap">
-<link rel="stylesheet" href="assets/css/asima.css?v=28">
+<link rel="stylesheet" href="assets/css/asima.css?v=35">
 <style>
   /* CMS = the same system, denser. Night rail (the ribbon turned vertical), limestone desk. */
   body { font-size: .9rem; }
@@ -28,7 +28,7 @@
   .side-rail svg { width: 18px; height: 18px; flex: none; opacity: .85; }
   .side-rail__me { margin-top: auto; padding: 14px 18px; border-top: 1px solid var(--rule); display: flex; gap: 10px; align-items: center; font-size: .8rem; }
   .side-rail__site { margin-inline-start: auto; display: inline-flex; align-items: center; min-height: 44px; font-weight: 700; color: var(--ink); text-decoration: underline; text-decoration-color: var(--accent); text-underline-offset: 5px; }
-  .side-rail__me .mono-gram { background: var(--dome); color: var(--on-dome); width: 34px; height: 34px; font-size: .78rem; }
+  .side-rail__me .mono-gram { background: var(--dome); color: var(--on-dome); width: 34px; height: 34px; font-size: .8125rem; }
 
   .desk { min-width: 0; display: flex; flex-direction: column; }
   .topbar { position: sticky; top: 0; z-index: 30; display: flex; align-items: center; gap: 12px; padding: 10px 24px; background: var(--bg); border-bottom: 1px solid var(--rule); min-height: 60px; }
@@ -108,7 +108,7 @@
   .sug-bar button + button { background: var(--sunk); color: var(--ink); }
   .flag { box-shadow: inset 0 -2px 0 var(--accent); background: color-mix(in srgb, var(--accent) 14%, transparent); cursor: help; }
 
-  .actionbar { position: sticky; bottom: 0; z-index: 20; display: flex; align-items: center; gap: 12px; flex-wrap: wrap; padding: 12px 24px; background: var(--sheet); color: var(--ink); box-shadow: 0 -1px 0 var(--rule-strong), 0 -10px 24px -18px rgba(21,17,15,.4); }
+  .actionbar { position: sticky; bottom: 0; z-index: 20; display: flex; align-items: center; gap: 12px; flex-wrap: wrap; padding: 12px 24px; background: var(--sheet); color: var(--ink); box-shadow: 0 -1px 0 var(--rule-strong), 0 -10px 24px -18px rgba(18,20,23,.4); }
   .actionbar .pipeline { flex: 1; min-width: 260px; max-width: 520px; }
 
   .ai-block { border-bottom: 1px solid var(--rule); padding: 16px 18px; display: grid; gap: 10px; }
@@ -448,7 +448,7 @@
         <ol class="pipeline" aria-label="مرحلة المادة">
           <li class="done ai">مسودة آلية</li><li class="done">مراجعة</li><li class="now">تحرير</li><li>اعتماد</li><li>نشر</li>
         </ol>
-        <span style="font-size:var(--t-meta);color:#BDBAB2">فقرتان آليتان لم تراجعا</span>
+        <span style="font-size:var(--t-meta);color:#C3C7CC">فقرتان آليتان لم تراجعا</span>
         <button class="btn btn--sm btn--line" type="button" onclick="asima.toast('حفظت نسخة','يمكن العودة إليها من سجل التعديلات.')">احفظ</button>
         <button class="btn btn--sm btn--gold" type="button" id="toApprove">أرسل للاعتماد</button>
       </div>
@@ -668,7 +668,7 @@
   <div class="modal__foot"><button class="btn btn--line btn--sm" type="button" data-close>ارجع للمادة</button><button class="btn btn--gold btn--sm" type="button" id="sendAppr">أرسل رغم ذلك</button></div>
 </dialog>
 
-<script src="assets/js/asima.js?v=23" defer></script>
+<script src="assets/js/asima.js?v=26" defer></script>
 <script>
 addEventListener('DOMContentLoaded', () => {
   const $ = s => document.querySelector(s), $$ = s => [...document.querySelectorAll(s)];

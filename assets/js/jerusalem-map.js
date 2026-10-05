@@ -151,7 +151,11 @@
     chrome.innerHTML = `<span class="omap__north" aria-hidden="true">ش<i></i></span>
       <span class="omap__scale" aria-hidden="true"><i></i><b></b></span>
 `;
-    root.append(svg, labels, layer, card, chrome);
+    // places beyond the frame (Shuafat, Qalandiya, Kafr Aqab…) gather in one strip along the top, each with its bearing and
+    // distance — pinned to the frame edge they would pile onto each other and lose their names on narrow screens
+    const offBar = document.createElement('div'); offBar.className = 'omap__off'; offBar.hidden = true;
+    offBar.innerHTML = '<span class="omap__off-lead">خارج الإطار</span>';
+    root.append(svg, labels, layer, card, chrome, offBar);
 
     const items = [];
     const addLabel = (xy, text, cls, minView) => { const s = document.createElement('span'); s.className = `omap__lbl ${cls || ''}`; s.textContent = text; labels.append(s); items.push({ el: s, xy, minView, kind: 'label' }); return s; };
@@ -224,17 +228,26 @@
         if (it.minView === 'aqsa') show = view === 'aqsa';
         if (it.ring) { const rpx = it.ring * scale; show = rpx > 34 && rpx < Math.max(W, H) * 0.95; }
         const inside = px > 14 && px < W - 14 && py > 14 && py < H - 14;
-        it.el.classList.remove('is-edge');
-        if (it.edge && show && !inside && view === 'city') {
-          // off the map: pin the place to the frame edge, along the bearing from the Dome, with its distance
-          const [cx, cy] = project([0, 0]); const dx = px - cx, dy = py - cy, padX = 70, padY = 46;
-          const t = Math.min(dx ? ((dx > 0 ? W - padX : padX) - cx) / dx : Infinity, dy ? ((dy > 0 ? H - padY : padY) - cy) / dy : Infinity);
-          px = cx + dx * t; py = cy + dy * t; it.el.classList.add('is-edge');
-          it.el.style.setProperty('--bearing', `${Math.atan2(dy, dx)}rad`);
-        } else if (!inside) show = false;
+        // beyond the frame at the city level: the place moves into the strip (only once the camera settles, so travel stays cheap)
+        if (it.edge && settled) it.off = show && !inside && view === 'city';
+        if (it.off) {
+          const [cx, cy] = project([0, 0]);
+          it.el.style.setProperty('--bearing', `${(Math.atan2(py - cy, px - cx) * 180 / Math.PI + 90).toFixed(1)}deg`);
+          it.el.hidden = view !== 'city'; it.el.style.transform = '';
+          return;
+        }
+        if (!inside) show = false;
         it.el.hidden = !show;
         if (show) it.el.style.transform = `translate(${px.toFixed(1)}px, ${py.toFixed(1)}px)`;
       });
+      if (settled) {
+        const off = items.filter(i => i.off).sort((a, b) => a.d - b.d);
+        items.filter(i => i.edge && !i.off && i.el.parentNode === offBar).forEach(i => { i.el.classList.remove('is-edge'); layer.append(i.el); });
+        off.forEach(i => { i.el.classList.add('is-edge'); offBar.append(i.el); });
+        offBar.hidden = !off.length || view !== 'city';
+        root.classList.toggle('has-off', !offBar.hidden);
+        root.style.setProperty('--off-h', `${offBar.hidden ? 0 : offBar.offsetHeight}px`);
+      } else if (view !== 'city') { offBar.hidden = true; root.classList.remove('has-off'); }
       gratLabels.forEach(gl => {
         const [px, py] = gl.axis === 'x' ? project([gl.v, 0]) : project([0, gl.v]);
         const show = gl.axis === 'x' ? px > 80 && px < W - 60 : py > 40 && py < H - 60;
@@ -262,8 +275,9 @@
       const shown = items.filter(i => !i.el.hidden);
       shown.forEach(i => { i.el.classList.remove('is-quiet', 'is-flip'); if (i.side) { i.el.classList.remove(OTHER[i.side]); i.el.classList.add(i.side); } });
       // fixed furniture first: pin bubbles, gate arches, the north arrow, the scale bar
-      shown.filter(i => i.kind !== 'label').forEach(i => placed.push(rect($('i', i.el))));
+      shown.filter(i => i.kind !== 'label' && !i.off).forEach(i => placed.push(rect($('i', i.el))));
       placed.push(rect($('.omap__north', chrome)), rect($('.omap__scale', chrome)));
+      if (!offBar.hidden) placed.push(rect(offBar));
       const settle = (i, turn) => {
         const lab = i.kind === 'label' ? i.el : $('span', i.el);
         if (!lab || !lab.offsetWidth) return;
@@ -273,7 +287,7 @@
       };
       const flipPin = i => on => i.el.classList.toggle('is-flip', on);
       const flipGate = i => on => { i.el.classList.remove(on ? i.side : OTHER[i.side]); i.el.classList.add(on ? OTHER[i.side] : i.side); };
-      const pins = shown.filter(i => i.kind === 'place').sort((a, b) => b.data.count - a.data.count).map(i => [i, flipPin(i)]);
+      const pins = shown.filter(i => i.kind === 'place' && !i.off).sort((a, b) => b.data.count - a.data.count).map(i => [i, flipPin(i)]);
       const gates = shown.filter(i => i.kind === 'gate').map(i => [i, flipGate(i)]);
       // the city view is about places; closer in, the gates lead
       (view === 'city' ? [...pins, ...gates] : [...gates, ...pins]).forEach(([i, turn]) => settle(i, turn));
@@ -317,7 +331,8 @@
     /* ---------- card ---------- */
     let pinned = null;
     function showCard(it) {
-      const [px, py] = it.el.style.transform.match(/-?[\d.]+/g).map(Number);
+      const tr = it.el.style.transform.match(/-?[\d.]+/g);
+      const [px, py] = tr ? tr.map(Number) : (() => { const r = it.el.getBoundingClientRect(), R = root.getBoundingClientRect(); return [r.left - R.left + r.width / 2, r.bottom - R.top]; })();
       const d = it.data;
       if (it.kind === 'place') {
         card.innerHTML = `<b>${d.n}</b><span class="omap__card-meta">${it.d > 60 ? `على بعد ${fmtDist(it.d)} من قبة الصخرة · ` : ''}${plural(d.count, 'قصة واحدة', 'قصتان', 'قصص', 'قصة')} هذا الأسبوع</span>
@@ -332,18 +347,21 @@
       card.style.transformOrigin = `${px - x}px ${above ? '100%' : '0'}`;
       card.classList.remove('is-in'); void card.offsetWidth; card.classList.add('is-in');
     }
-    function hideCard() { card.hidden = true; pinned = null; $$('.is-active', layer).forEach(b => b.classList.remove('is-active')); }
+    function hideCard() { card.hidden = true; pinned = null; $$('.is-active', root).forEach(b => b.classList.remove('is-active')); }
     const byEl = new Map(items.filter(i => i.kind !== 'label').map(i => [i.el, i]));
-    layer.addEventListener('pointerover', e => { const b = e.target.closest('button'); if (b && !pinned) showCard(byEl.get(b)); });
-    layer.addEventListener('pointerout', e => { const b = e.target.closest('button'); if (b && !pinned && !b.contains(e.relatedTarget)) card.hidden = true; });
-    layer.addEventListener('focusin', e => { const b = e.target.closest('button'); if (b) showCard(byEl.get(b)); });
-    layer.addEventListener('focusout', () => { if (!pinned) card.hidden = true; });
-    layer.addEventListener('click', e => {
-      const b = e.target.closest('button'); if (!b) return;
-      const it = byEl.get(b);
-      if (pinned === it) { hideCard(); onSelect && it.kind === 'place' && onSelect(null); return; }
-      hideCard(); pinned = it; b.classList.add('is-active'); showCard(it);
-      onSelect && it.kind === 'place' && onSelect(it.data.k);
+    // the strip's pins behave exactly like the ones on the map
+    [layer, offBar].forEach(host => {
+      host.addEventListener('pointerover', e => { const b = e.target.closest('button'); if (b && !pinned) showCard(byEl.get(b)); });
+      host.addEventListener('pointerout', e => { const b = e.target.closest('button'); if (b && !pinned && !b.contains(e.relatedTarget)) card.hidden = true; });
+      host.addEventListener('focusin', e => { const b = e.target.closest('button'); if (b) showCard(byEl.get(b)); });
+      host.addEventListener('focusout', () => { if (!pinned) card.hidden = true; });
+      host.addEventListener('click', e => {
+        const b = e.target.closest('button'); if (!b) return;
+        const it = byEl.get(b);
+        if (pinned === it) { hideCard(); onSelect && it.kind === 'place' && onSelect(null); return; }
+        hideCard(); pinned = it; b.classList.add('is-active'); showCard(it);
+        onSelect && it.kind === 'place' && onSelect(it.data.k);
+      });
     });
     root.addEventListener('keydown', e => { if (e.key === 'Escape') hideCard(); });
     document.addEventListener('pointerdown', e => { if (pinned && !root.contains(e.target)) hideCard(); });

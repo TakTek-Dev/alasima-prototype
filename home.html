@@ -10,7 +10,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Markazi+Text:wght@400;500;600;700&family=Noto+Kufi+Arabic:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap">
 <link rel="preload" as="image" href="assets/img/d9-rabbis-2.jpg" fetchpriority="high">
-<link rel="stylesheet" href="assets/css/asima.css?v=28">
+<link rel="stylesheet" href="assets/css/asima.css?v=35">
 <style>
 /* ===================== Home — «تحت القبة» =====================
    Spatial thesis: one lead composition (headline → dome photo → figure), wrapped by the
@@ -39,10 +39,11 @@
 .lead__actions .ai-mark { margin-inline-start: auto; }
 .lead__visual { grid-area: visual; position: relative; min-height: clamp(380px, 33vw, 480px); }
 .lead__visual .dome-frame { position: absolute; inset: 0; }
-.lead__figure { position: absolute; z-index: 3; inset-inline-start: calc(clamp(28px, 3.6vw, 56px) * -0.6); bottom: calc(var(--sash-overlap) + 18px); max-width: 78%; }
-.lead__figure .madd { font-size: clamp(1.35rem, 0.9rem + 1.3vw, 2.15rem); color: #F2F0EB; text-shadow: 0 2px 22px rgba(0,0,0,.5); }
+/* the figure stays on the photograph: light type set past its edge would vanish into the white page */
+.lead__figure { position: absolute; z-index: 3; inset-inline-start: clamp(14px, 1.8vw, 26px); bottom: calc(var(--sash-overlap) + 18px); max-width: calc(100% - 2 * clamp(14px, 1.8vw, 26px)); }
+.lead__figure .madd { font-size: clamp(1.35rem, 0.9rem + 1.3vw, 2.15rem); color: #F4F5F6; text-shadow: 0 2px 22px rgba(0,0,0,.5); }
 .lead__figure .madd__fig { color: var(--dome); }
-.lead__figure .madd__tail { color: #F2F0EB; }
+.lead__figure .madd__tail { color: #F4F5F6; }
 .lead .sash-wrap { margin-top: calc(var(--sash-overlap) * -1); position: relative; z-index: 4; }
 .lead .sash__list span { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
 :root { --sash-overlap: 56px; }
@@ -89,16 +90,16 @@
 .lens__stage { position: relative; aspect-ratio: 2.35 / 1; max-height: 78vh; width: 100%; overflow: hidden; }
 .lens__stage img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 58%; filter: saturate(.8) contrast(1.06); }
 .lens__stage::before { content: ""; position: absolute; inset: 0; z-index: 1; background: linear-gradient(270deg, rgba(16,18,21,.88) 0%, rgba(16,18,21,.5) 34%, rgba(16,18,21,0) 62%), linear-gradient(0deg, rgba(16,18,21,.8) 0%, rgba(16,18,21,0) 40%); }
-.lens__over { position: absolute; inset: 0; z-index: 2; display: grid; grid-template-rows: auto 1fr auto; padding-block: clamp(20px, 3vw, 40px); color: #F2F0EB; --ink: #F2F0EB; --ink-2: rgba(242,240,235,.85); --ink-3: rgba(242,240,235,.72); }
+.lens__over { position: absolute; inset: 0; z-index: 2; display: grid; grid-template-rows: auto 1fr auto; padding-block: clamp(20px, 3vw, 40px); color: #F4F5F6; --ink: #F4F5F6; --ink-2: rgba(244,245,246,.85); --ink-3: rgba(244,245,246,.72); }
 .lens__over .wrap { width: 100%; }
 .lens__title { display: grid; gap: 6px; max-width: 30ch; }
 .lens__title h2 { font-size: var(--fs-h2); font-weight: 800; }
-.lens__title p { color: #BDBAB2; font-size: var(--fs-small); }
+.lens__title p { color: #C3C7CC; font-size: var(--fs-small); text-wrap: balance; }
 .lens__story { display: flex; align-items: end; justify-content: space-between; gap: var(--s-5); flex-wrap: wrap; }
-.lens__story h3 { font-size: var(--fs-h2); font-weight: 800; max-width: 22ch; color: #F2F0EB; }
-.lens__story .meta { color: #C2BFB7; margin-top: 8px; }
+.lens__story h3 { font-size: var(--fs-h2); font-weight: 800; max-width: 22ch; color: #F4F5F6; }
+.lens__story .meta { color: #C3C7CC; margin-top: 8px; }
 .lens .play { position: static; }
-.lens__story h3 a { color: #F2F0EB; }
+.lens__story h3 a { color: #F4F5F6; }
 .contact { display: grid; grid-auto-flow: column; grid-auto-columns: calc((100% - var(--col-gap) * 4) / 5); gap: var(--col-gap); margin-top: var(--s-6); overflow-x: auto; scroll-snap-type: x mandatory; scroll-behavior: smooth; scrollbar-width: none; overscroll-behavior-x: contain; }
 .contact::-webkit-scrollbar { display: none; }
 @media (max-width: 900px) { .contact { grid-auto-columns: calc((100% - var(--col-gap) * 2) / 3); } }
@@ -109,7 +110,7 @@
 
 /* ---- Voices: analysis · politics ---- */
 /* ---- Prisoners: the brand's prisoner post, on the page ---- */
-.prisoners { padding-block: var(--sec-tight) var(--sec); }
+.prisoners { padding-block: 0 var(--sec); }
 .prisoners__more { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--col-gap); margin-top: var(--s-5); }
 .prisoners__more article { display: grid; gap: 8px; align-content: start; padding-top: var(--s-4); border-top: 1px solid var(--rule); }
 .prisoners__more h3 { font-size: var(--fs-h4); font-weight: 700; line-height: var(--lh-h4); }
@@ -148,7 +149,11 @@
   .lead__figure { inset-inline-start: 12px; bottom: 20px; }
   .lead__body { padding-top: 0; padding-bottom: var(--s-6); }
   .lead .sash-wrap { margin-top: 0; }
-  .orbit__grid { grid-template-columns: 1fr; }
+  .orbit__grid { grid-template-columns: 1fr; row-gap: var(--s-5); }
+  /* one column: the title first, then the level tabs right above the map they drive, then the place list */
+  .orbit__panel { display: contents; }
+  .orbit__intro { order: -3; margin-bottom: 0; }
+  .orbit__panel .tabs { order: -2; margin-top: 0; }
   .orbit__grid .orbit__map { order: -1; }
   .orbit__panel [data-panel] { max-height: none; }
   .month__grid { grid-template-columns: 1fr; }
@@ -335,11 +340,11 @@
         </article>
         <div class="covers">
           <article><a class="cover" href="article.html">
-            <div class="frame r-4x3 locator" data-locator="silwan"></div>
+            <div class="frame r-16x9 locator" data-locator="silwan"></div>
             <div class="cover__text"><h3 class="cover__h">حي البستان: 88 منزلا تنتظر الجرافات منذ 2005</h3><p class="placeline"><b>ملف مفتوح</b><span>11 قصة</span></p></div>
           </a></article>
           <article><a class="cover" href="article.html">
-            <div class="frame r-4x3"><img src="assets/img/d9-explainer-480.jpg" srcset="assets/img/d9-explainer-480.jpg 480w, assets/img/d9-explainer.jpg 640w" sizes="(max-width: 900px) 100vw, 24vw" loading="lazy" width="640" height="800" alt="" style="object-position: 50% 0%"></div>
+            <div class="frame r-16x9"><img src="assets/img/d9-prostration-480.jpg" srcset="assets/img/d9-prostration-480.jpg 480w, assets/img/d9-prostration.jpg 800w" sizes="(max-width: 900px) 100vw, 30vw" loading="lazy" width="800" height="533" alt="مستوطن يؤدي سجودا ملحميا على حجارة الساحة قرب باب الرحمة" style="object-position: 50% 42%"></div>
             <div class="cover__text"><h3 class="cover__h">السجود الملحمي: سجود سياسي وليس دينيا</h3><p class="placeline"><b>شرح</b><span>19:03</span></p></div>
           </a></article>
         </div>
@@ -449,10 +454,10 @@
 
 <footer data-coda></footer>
 <script src="assets/js/jerusalem-geo.js?v=3" defer></script>
-<script src="assets/js/asima.js?v=23" defer></script>
-<script src="assets/js/jerusalem-week.js?v=2" defer></script>
 <script src="assets/js/jerusalem-base.js?v=1" defer></script>
-<script src="assets/js/jerusalem-map.js?v=8" defer></script>
+<script src="assets/js/asima.js?v=26" defer></script>
+<script src="assets/js/jerusalem-week.js?v=2" defer></script>
+<script src="assets/js/jerusalem-map.js?v=9" defer></script>
 <script>
   addEventListener('DOMContentLoaded', () => {
     window.AsimaMap?.mount(document.getElementById('orbit-map'), { panel: document.getElementById('orbit-panel'), tabs: document.getElementById('orbit-tabs') });

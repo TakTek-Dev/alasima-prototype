@@ -23,6 +23,7 @@
   --rule-strong: rgba(18, 20, 23, .86);
   --accent: #A1383B;        /* the red of Al-Asima's own «عاجل» cards */
   --accent-deep: #7C2A2C;
+  --accent-hover: #8A2F32;   /* a red control under the pointer: darker in light, so white text stays clear */
   --accent-ink: #A1383B;    /* red as text on the page (AA) */
   --on-accent: #FFFFFF;
   --dome: #F0A808;          /* the dome: logo, dome marks, figures on photographs */
@@ -104,7 +105,7 @@
     --bg: #111315; --bg-2: #0B0C0E; --sheet: #1A1D21; --sunk: #08090A; --night: #08090A; --map-bg: #191C1F;
     --ink: #ECEEF0; --ink-2: #C3C8CE; --ink-3: #969DA6;
     --rule: rgba(236, 238, 240, .14); --rule-strong: rgba(236, 238, 240, .8);
-    --accent: #D9585B; --accent-ink: #E88A8C; --accent-deep: #A1383B; --on-accent: #111315;
+    --accent: #D9585B; --accent-ink: #E88A8C; --accent-deep: #A1383B; --on-accent: #111315; --accent-hover: #E36D70;
     --dome-ink: #F0A808; --silver: #9AA3AF; --silver-soft: rgba(154, 163, 175, .16);
     --paper: #1A1D21; --paper-ink: #ECEEF0; --fold: #A1383B;
     --alert: #E0676A; --on-alert: #111315; --ok: #5CC497; --scrim: rgba(0,0,0,.7);
@@ -116,7 +117,7 @@
   --bg: #111315; --bg-2: #0B0C0E; --sheet: #1A1D21; --sunk: #08090A; --night: #08090A; --map-bg: #191C1F;
   --ink: #ECEEF0; --ink-2: #C3C8CE; --ink-3: #969DA6;
   --rule: rgba(236, 238, 240, .14); --rule-strong: rgba(236, 238, 240, .8);
-  --accent: #D9585B; --accent-ink: #E88A8C; --accent-deep: #A1383B; --on-accent: #111315;
+  --accent: #D9585B; --accent-ink: #E88A8C; --accent-deep: #A1383B; --on-accent: #111315; --accent-hover: #E36D70;
   --dome-ink: #F0A808; --silver: #9AA3AF; --silver-soft: rgba(154, 163, 175, .16);
   --paper: #1A1D21; --paper-ink: #ECEEF0; --fold: #A1383B;
   --alert: #E0676A; --on-alert: #111315; --ok: #5CC497; --scrim: rgba(0,0,0,.7);
@@ -342,7 +343,20 @@ a.tag:hover { color: var(--ink); border-bottom-color: var(--accent); }
 .tool-btn:hover { background: var(--sunk); }
 .tool-btn svg { width: 20px; height: 20px; }
 .tool-btn--live { width: auto; padding-inline: 16px; display: flex; gap: 8px; font-size: var(--fs-small); font-weight: 700; background: var(--accent); color: var(--on-accent); }
-.tool-btn--live:hover { background: var(--accent-deep); }
+.tool-btn--live:hover { background: var(--accent-hover); }
+/* live coverage has one entry on wide screens, this button (the dock carries it on phones); on the live page it is the current section */
+.tool-btn--live[aria-current="page"] { box-shadow: inset 0 -3px 0 var(--on-accent); }
+/* theme switch: the moon offers the dark edition, the sun the light one; the two cross-fade in place */
+.tool-btn--theme { position: relative; }
+.theme-ico { display: grid; place-items: center; transition: opacity 200ms cubic-bezier(0.2, 0, 0, 1), scale 200ms cubic-bezier(0.2, 0, 0, 1), filter 200ms cubic-bezier(0.2, 0, 0, 1); }
+.theme-ico--sun { position: absolute; inset: 0; opacity: 0; scale: .25; filter: blur(4px); }
+:root[data-theme="dark"] .theme-ico--moon { opacity: 0; scale: .25; filter: blur(4px); }
+:root[data-theme="dark"] .theme-ico--sun { opacity: 1; scale: 1; filter: none; }
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .theme-ico--moon { opacity: 0; scale: .25; filter: blur(4px); }
+  :root:not([data-theme="light"]) .theme-ico--sun { opacity: 1; scale: 1; filter: none; }
+}
+@media (prefers-reduced-motion: reduce) { .theme-ico { transition: opacity 150ms ease; scale: 1 !important; filter: none !important; } }
 
 .dateline { border-bottom: 1px solid var(--rule); }
 .dateline__in { display: flex; justify-content: space-between; align-items: center; gap: 16px; min-height: 40px; font-size: var(--fs-meta); color: var(--ink-3); flex-wrap: wrap; padding-block: 6px; }
@@ -502,7 +516,7 @@ a:focus-visible .frame img { transform: scale(1.025); filter: saturate(1) contra
 .btn { --b-bg: var(--ink); --b-fg: var(--bg); display: inline-flex; align-items: center; justify-content: center; gap: 10px; min-height: 46px; padding-inline: 22px; border: 0; background: var(--b-bg); color: var(--b-fg); font-family: var(--f-display); font-weight: 700; font-size: var(--fs-ui); line-height: 1.2; white-space: nowrap; transition: background var(--d-2) ease, color var(--d-2) ease, transform 160ms var(--ease); }
 .btn:hover { --b-bg: color-mix(in srgb, var(--ink) 84%, var(--accent)); }
 .btn--gold { --b-bg: var(--accent); --b-fg: var(--on-accent); }
-.btn--gold:hover { --b-bg: var(--accent-deep); }
+.btn--gold:hover { --b-bg: var(--accent-hover); }
 .btn--line { --b-bg: transparent; --b-fg: var(--ink); box-shadow: inset 0 0 0 1.5px var(--ink); }
 .btn--line:hover { --b-bg: var(--ink); --b-fg: var(--bg); }
 .btn--quiet { --b-bg: transparent; --b-fg: var(--ink); padding-inline: 4px; text-decoration: underline; text-decoration-color: var(--accent); text-underline-offset: 7px; text-decoration-thickness: 2px; }
@@ -625,16 +639,18 @@ dialog.search::backdrop { background: var(--scrim); }
 
 /* ---------- 16. Newsletter («نشرة الفجر») ---------- */
 .brief { display: grid; gap: 14px; }
+.brief label { text-wrap: balance; }
 .brief__row { display: flex; flex-wrap: wrap; }
 .brief__row .input { flex: 1 1 220px; min-width: 0; }
 .brief__row .btn { flex: none; }
 
 /* ---------- 17. Coda («الخاتمة») — the dome rises at the end ---------- */
 .coda { background: var(--bg-2); color: var(--ink); position: relative; overflow: hidden; border-top: 3px double var(--ink); }
-.coda__statement { padding-block: var(--s-8) var(--s-7); display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); gap: var(--s-7); align-items: end; }
-.coda__statement h2 { font-family: var(--f-head); font-size: clamp(2.1rem, 1.4rem + 1.9vw, 2.9rem); font-weight: 700; line-height: 1.3; }
+/* one compact band: who we are in a line on one side, the morning brief on the other */
+.coda__statement { padding-block: var(--s-6); display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 28rem); gap: var(--s-5) var(--s-7); align-items: end; }
+.coda__statement h2 { font-family: var(--f-head); font-size: var(--fs-h2); font-weight: 700; line-height: 1.4; }
 .coda__statement h2 em { font-style: normal; color: var(--accent-ink); }
-.coda__statement p { color: var(--ink-2); max-width: 46ch; font-size: var(--fs-ui); line-height: 1.85; text-wrap: pretty; }
+.coda__statement p { color: var(--ink-2); margin-top: 4px; font-size: var(--fs-small); line-height: 1.75; text-wrap: pretty; }
 .coda__index { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: var(--s-6); padding-block: var(--s-6) var(--s-7); position: relative; }
 .coda__index::before { content: ""; position: absolute; inset-inline: 0; top: 0; height: 4px; background: var(--ink); clip-path: polygon(0 42%, 100% 0, 100% 100%, 0 58%); }
 .coda__index h4 { font-family: var(--f-display); font-size: var(--fs-small); font-weight: 700; color: var(--ink); margin-bottom: 10px; }
@@ -649,7 +665,7 @@ dialog.search::backdrop { background: var(--scrim); }
 .coda .dome-horizon { width: min(820px, 80vw); opacity: .07; inset-inline-end: -4vw; }
 .coda .input { background: var(--sheet); color: var(--ink); box-shadow: inset 0 0 0 1px var(--rule), inset 0 -2px 0 var(--accent); }
 @media (max-width: 960px) { .coda__statement { grid-template-columns: 1fr; } .coda__index { grid-template-columns: repeat(2, minmax(0,1fr)); } }
-@media (max-width: 520px) { .coda__index { gap: var(--s-5) var(--s-4); } .coda__statement { padding-top: var(--s-7); } }
+@media (max-width: 520px) { .coda__index { gap: var(--s-5) var(--s-4); } }
 
 /* ---------- 18. Utilities ---------- */
 .stack { display: grid; gap: var(--s-4); align-content: start; }

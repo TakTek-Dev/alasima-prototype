@@ -18,7 +18,8 @@
   /* ---------- icons ---------- */
   const I = {
     search: '<path d="M10.5 18a7.5 7.5 0 1 1 0-15 7.5 7.5 0 0 1 0 15Zm5.3-2.2L21 21" fill="none" stroke="currentColor" stroke-width="1.8"/>',
-    theme: '<path d="M12 3a9 9 0 1 0 0 18V3Z" fill="currentColor"/><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.8"/>',
+    moon: '<path d="M20 14.6A8.2 8.2 0 0 1 9.4 4 8.2 8.2 0 1 0 20 14.6Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>',
+    sun: '<circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M12 2.5v2.2M12 19.3v2.2M2.5 12h2.2M19.3 12h2.2M5.3 5.3l1.6 1.6M17.1 17.1l1.6 1.6M5.3 18.7l1.6-1.6M17.1 6.9l1.6-1.6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>',
     close: '<path d="M6 6l12 12M18 6 6 18" stroke="currentColor" stroke-width="1.8" fill="none"/>',
     menu: '<path d="M4 7h16M4 12h16M4 17h10" stroke="currentColor" stroke-width="1.8" fill="none"/>',
     more: '<circle cx="5" cy="12" r="1.6" fill="currentColor"/><circle cx="12" cy="12" r="1.6" fill="currentColor"/><circle cx="19" cy="12" r="1.6" fill="currentColor"/>',
@@ -126,7 +127,6 @@
   const pages = [
     ['home.html', 'الأولى', 'home'],
     ['jerusalem.html', 'مدار القدس', 'jerusalem', true],
-    ['live.html', 'مباشر', 'live'],
     ['article.html', 'سياسة', 'politics'],
     ['article.html', 'تحليل', 'analysis'],
     ['article.html', 'الأسرى', 'prisoners'],
@@ -159,8 +159,8 @@
             <span class="p">القدس · <span data-hijri></span></span>
           </div>
           <button class="tool-btn" type="button" data-search aria-label="بحث (Ctrl+K)">${icon('search')}</button>
-          <button class="tool-btn" type="button" data-theme-toggle aria-label="تبديل المظهر">${icon('theme')}</button>
-          <a class="tool-btn tool-btn--live" href="${base}live.html"><span class="pulse" aria-hidden="true"></span><span class="lbl">مباشر</span><span class="sr">التغطية المباشرة</span></a>
+          <button class="tool-btn tool-btn--theme" type="button" data-theme-toggle aria-label="التبديل إلى المظهر الداكن" title="المظهر الداكن"><span class="theme-ico theme-ico--moon">${icon('moon')}</span><span class="theme-ico theme-ico--sun">${icon('sun')}</span></button>
+          <a class="tool-btn tool-btn--live" href="${base}live.html" ${cur === 'live' ? 'aria-current="page"' : ''}><span class="pulse" aria-hidden="true"></span><span class="lbl">مباشر</span><span class="sr">التغطية المباشرة</span></a>
         </div>
       </div>`;
 
@@ -188,18 +188,18 @@
       <div class="dome-horizon">${domeSVG()}</div>
       <div class="wrap">
         <div class="coda__statement">
-          <h2>أخبار العاصمة<br><em>من العاصمة.</em></h2>
-          <div class="stack" style="gap:var(--s-5)">
-            <p>منصة إعلامية مقدسية. نكتب من داخل البلدة القديمة وأحيائها، نوثق كل خبر بمكانه وساعته، ونقول للقارئ كيف أعد.</p>
-            <form class="brief" data-brief novalidate>
-              <label for="brief-email" style="font-weight:700;font-size:var(--fs-small)">نشرة الفجر: أهم ما جرى في القدس، قبل السابعة صباحا</label>
-              <div class="brief__row">
-                <input class="input" id="brief-email" type="email" inputmode="email" autocomplete="email" placeholder="بريدك الإلكتروني" dir="ltr" style="text-align:right">
-                <button class="btn btn--gold" type="submit">اشترك</button>
-              </div>
-              <span class="err-msg" role="alert" hidden style="color:var(--accent-ink);font-size:var(--fs-meta)"></span>
-            </form>
+          <div class="coda__about">
+            <h2>أخبار العاصمة <em>من العاصمة.</em></h2>
+            <p>منصة إعلامية مقدسية تكتب من داخل البلدة القديمة، وتوثق كل خبر بمكانه وساعته.</p>
           </div>
+          <form class="brief" data-brief novalidate>
+            <label for="brief-email" style="font-weight:700;font-size:var(--fs-small)">نشرة الفجر: أهم أخبار القدس قبل السابعة</label>
+            <div class="brief__row">
+              <input class="input" id="brief-email" type="email" inputmode="email" autocomplete="email" placeholder="بريدك الإلكتروني" dir="ltr" style="text-align:right">
+              <button class="btn btn--gold" type="submit">اشترك</button>
+            </div>
+            <span class="err-msg" role="alert" hidden style="color:var(--accent-ink);font-size:var(--fs-meta)"></span>
+          </form>
         </div>
         <nav class="coda__index" aria-label="فهرس العاصمة">
           <div><h3>القدس</h3><ul>
@@ -280,16 +280,24 @@
   }
 
   /* ---------- theme ---------- */
+  const sysDarkQ = matchMedia('(prefers-color-scheme: dark)');
+  const themeNow = () => document.documentElement.dataset.theme || (sysDarkQ.matches ? 'dark' : 'light');
+  function syncThemeButtons() {
+    const toDark = themeNow() !== 'dark';
+    $$('[data-theme-toggle]').forEach(b => {
+      b.setAttribute('aria-label', toDark ? 'التبديل إلى المظهر الداكن' : 'التبديل إلى المظهر الفاتح');
+      b.title = toDark ? 'المظهر الداكن' : 'المظهر الفاتح';
+    });
+  }
   function initTheme() {
     const saved = store.get('asima-theme');
     if (saved === 'light' || saved === 'dark') document.documentElement.dataset.theme = saved;
+    sysDarkQ.addEventListener?.('change', syncThemeButtons);
     document.addEventListener('click', e => {
       if (!e.target.closest('[data-theme-toggle]')) return;
       const root = document.documentElement;
-      const sysDark = matchMedia('(prefers-color-scheme: dark)').matches;
-      const now = root.dataset.theme || (sysDark ? 'dark' : 'light');
-      const next = now === 'dark' ? 'light' : 'dark';
-      const flip = () => { root.dataset.theme = next; store.set('asima-theme', next); };
+      const next = themeNow() === 'dark' ? 'light' : 'dark';
+      const flip = () => { root.dataset.theme = next; store.set('asima-theme', next); syncThemeButtons(); };
       const done = () => toast(next === 'dark' ? 'الطبعة الليلية' : 'الطبعة النهارية', 'تغير المظهر وحفظ لهذا المتصفح.');
       if (!document.startViewTransition || reduceMotion) { flip(); done(); return; }
       const b = e.target.closest('[data-theme-toggle]').getBoundingClientRect();
@@ -683,6 +691,7 @@
 
   initTheme();
   mountRibbon();
+  syncThemeButtons();
   mountCoda();
   mountSearch();
   initClock();

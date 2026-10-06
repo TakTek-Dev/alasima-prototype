@@ -213,7 +213,8 @@ code.mono { direction: ltr; unicode-bidi: isolate; }
   .sash { grid-template-columns: 1fr; margin-inline-end: 0; }
   .sash::after { display: none; }
   .sash__label { border-inline-end: 0; border-bottom: 1px solid var(--rule); grid-auto-flow: column; justify-content: space-between; align-items: center; padding-block: 12px; }
-  .sash__list { grid-auto-columns: minmax(240px, 72%); overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; }
+  .sash__list { grid-auto-columns: minmax(240px, 72%); overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none;
+    padding-inline-end: 36px; -webkit-mask-image: linear-gradient(to right, transparent 0, #000 36px); mask-image: linear-gradient(to right, transparent 0, #000 36px); }
   .sash__list::-webkit-scrollbar { display: none; }
   .sash__list li { scroll-snap-align: start; }
   .sash__more { justify-content: center; padding-block: 14px; border-inline-start: 0; border-top: 1px solid var(--rule); }
@@ -654,9 +655,9 @@ dialog.search::backdrop { background: var(--scrim); }
 .coda__index { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: var(--s-6); padding-block: var(--s-6) var(--s-7); position: relative; }
 .coda__index::before { content: ""; position: absolute; inset-inline: 0; top: 0; height: 4px; background: var(--ink); clip-path: polygon(0 42%, 100% 0, 100% 100%, 0 58%); }
 .coda__index h4 { font-family: var(--f-display); font-size: var(--fs-small); font-weight: 700; color: var(--ink); margin-bottom: 10px; }
-.coda__index li a { display: flex; justify-content: space-between; gap: 10px; padding-block: 8px; font-size: var(--fs-small); color: var(--ink-2); border-bottom: 1px solid var(--rule); line-height: 1.6; }
+.coda__index li a { display: flex; justify-content: space-between; gap: 10px; padding-block: 10px; font-size: var(--fs-small); color: var(--ink-2); border-bottom: 1px solid var(--rule); line-height: 1.6; }
 .coda__index li a:hover { color: var(--accent-ink); }
-.coda__index li a .n { color: var(--ink-3); font-size: .76rem; font-variant-numeric: tabular-nums; }
+.coda__index li a .n { color: var(--ink-3); font-size: .8125rem; font-variant-numeric: tabular-nums; }
 .coda__base { display: flex; flex-wrap: wrap; gap: 14px 28px; justify-content: space-between; align-items: center; padding-block: 20px; border-top: 1px solid var(--rule); font-size: var(--fs-meta); color: var(--ink-3); }
 .coda__social { display: flex; gap: 2px; }
 .coda__social a { width: 44px; height: 44px; display: grid; place-items: center; color: var(--ink-2); }
@@ -666,6 +667,7 @@ dialog.search::backdrop { background: var(--scrim); }
 .coda .input { background: var(--sheet); color: var(--ink); box-shadow: inset 0 0 0 1px var(--rule), inset 0 -2px 0 var(--accent); }
 @media (max-width: 960px) { .coda__statement { grid-template-columns: 1fr; } .coda__index { grid-template-columns: repeat(2, minmax(0,1fr)); } }
 @media (max-width: 520px) { .coda__index { gap: var(--s-5) var(--s-4); } }
+@media (max-width: 379px) { .coda__index { grid-template-columns: 1fr; } }   /* narrow phones: one column, so every link stays on one line */
 
 /* ---------- 18. Utilities ---------- */
 .stack { display: grid; gap: var(--s-4); align-content: start; }
@@ -881,7 +883,7 @@ html.theme-vt::view-transition-group(site-ribbon), html.theme-vt::view-transitio
 
 /* places — a count bubble whose area follows the week's stories; red where there was news today */
 .omap__pin, .omap__gate { position: absolute; left: 0; top: 0; width: 0; height: 0; padding: 0; border: 0; background: none; color: inherit; font-family: var(--f-display); cursor: pointer; }
-.omap__pin i { position: absolute; left: 0; top: 0; width: var(--s); height: var(--s); translate: -50% -50%; border-radius: 50%; display: grid; place-items: center; font-style: normal; font-weight: 800; font-size: 12px; font-variant-numeric: tabular-nums; background: var(--map-bg); color: var(--m-ink); box-shadow: inset 0 0 0 1.5px var(--m-ink); transition: scale 200ms var(--ease), background 200ms ease; }
+.omap__pin i { position: absolute; left: 0; top: 0; width: var(--s); height: var(--s); translate: -50% -50%; border-radius: 50%; display: grid; place-items: center; font-style: normal; font-weight: 800; font-size: 12.5px; font-variant-numeric: tabular-nums; background: var(--map-bg); color: var(--m-ink); box-shadow: inset 0 0 0 1.5px var(--m-ink); transition: scale 200ms var(--ease), background 200ms ease; }
 .omap__pin i::before { content: ""; position: absolute; inset: -12px; border-radius: 50%; }
 .omap__pin.is-hot i { background: var(--accent); color: var(--on-accent); box-shadow: none; }
 .omap__pin.is-hot i::after { content: ""; position: absolute; inset: 0; border-radius: 50%; box-shadow: 0 0 0 1.5px var(--accent); animation: ring 2.6s var(--ease) infinite; }
@@ -893,13 +895,15 @@ html.theme-vt::view-transition-group(site-ribbon), html.theme-vt::view-transitio
 .omap__off-lead { font-size: 12.5px; font-weight: 700; color: var(--ink-3); }
 .omap__off .omap__pin { position: relative; width: auto; height: auto; min-height: 34px; display: inline-flex; align-items: center; gap: 7px; }
 .omap__off .omap__pin::before { content: ""; flex: none; width: 0; height: 0; border-inline: 4px solid transparent; border-bottom: 9px solid var(--accent); rotate: var(--bearing, 0deg); }
-.omap__off .omap__pin i { position: relative; left: auto; top: auto; translate: none; scale: 1; width: 24px; height: 24px; font-size: 11px; }
+.omap__off .omap__pin i { position: relative; left: auto; top: auto; translate: none; scale: 1; width: 26px; height: 26px; font-size: 12.5px; }
+@media (pointer: coarse) { .omap__off .omap__pin { min-height: 44px; } }
 .omap__off .omap__pin span { position: static; translate: none; font-size: 13px; text-shadow: none; }
 .omap__off .omap__pin:hover i, .omap__off .omap__pin.is-active i { scale: 1.1; }
 .omap.has-off .omap__north { top: calc(var(--off-h, 46px) + 10px); }
 /* a phone-width map keeps the strip to one line: the arrows say «beyond», the card gives the distance */
 .omap { container: omap / inline-size; }
 @container omap (max-width: 520px) {
+  .omap__grat { display: none; }
   .omap__off-lead { display: none; }
   .omap__off { gap: 2px 12px; padding-block: 4px; }
   .omap__off .omap__pin span::after { content: none; }

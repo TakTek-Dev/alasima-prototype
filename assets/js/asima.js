@@ -224,7 +224,7 @@
           </ul></div>
           <div><h3>العاصمة</h3><ul>
             <li><a href="${base}index.html">من نحن ومنهجنا</a></li>
-            <li><a href="${base}index.html#ai">كيف نستخدم الذكاء الاصطناعي</a></li>
+            <li><a href="${base}index.html#ai">سياسة الذكاء الاصطناعي</a></li>
             <li><a href="${base}index.html#system">نظام التصميم</a></li>
             <li><a href="${base}cms.html">غرفة التحرير</a></li>
           </ul></div>

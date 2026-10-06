@@ -10,7 +10,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Markazi+Text:wght@400;500;600;700&family=Noto+Kufi+Arabic:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap">
 <link rel="preload" as="image" href="assets/img/d9-rabbis-2.jpg" fetchpriority="high">
-<link rel="stylesheet" href="assets/css/asima.css?v=44">
+<link rel="stylesheet" href="assets/css/asima.css?v=48">
 <style>
 /* ===================== Home — «تحت القبة» =====================
    Spatial thesis: one lead composition (headline → dome photo → figure), wrapped by the
@@ -36,9 +36,11 @@
 .lead__body { grid-area: body; display: grid; gap: var(--s-4); align-content: end; padding-top: var(--s-4); padding-bottom: calc(var(--sash-overlap) + var(--s-5)); }
 .lead__body .dek { max-width: 54ch; }
 .lead__actions { display: flex; flex-wrap: wrap; gap: 8px 20px; align-items: center; padding-top: var(--s-1); }
-.lead__actions .ai-mark { margin-inline-start: auto; }
+.lead__ai { margin-top: calc(var(--s-2) * -1); }   /* sits under the summary it labels */
 .lead__visual { grid-area: visual; position: relative; min-height: clamp(380px, 33vw, 480px); }
 .lead__visual .dome-frame { position: absolute; inset: 0; }
+/* the source photo carries the channel's Telegram sticker 77–84% down: every crop must end above it */
+.lead__visual .dome-frame__clip img { object-position: 50% 16%; }
 /* the figure stays on the photograph: light type set past its edge would vanish into the white page */
 .lead__figure { position: absolute; z-index: 3; inset-inline-start: clamp(14px, 1.8vw, 26px); bottom: calc(var(--sash-overlap) + 18px); max-width: calc(100% - 2 * clamp(14px, 1.8vw, 26px)); }
 .lead__figure .madd { font-size: clamp(1.35rem, 0.9rem + 1.3vw, 2.15rem); color: #F4F5F6; text-shadow: 0 2px 22px rgba(0,0,0,.5); }
@@ -169,7 +171,9 @@
 }
 @media (max-width: 600px) {
   .lead__mast > :nth-child(2) { display: none; }
+  .inv__ruler li { font-size: var(--fs-meta); padding-inline-end: 8px; }   /* four years on one rule at phone width */
   .lead__visual { aspect-ratio: 1 / 1; margin-inline: calc(var(--gutter) * -1); }
+  .lead__visual .dome-frame__clip img { object-position: 50% 4%; }   /* square crop: shows source rows 1–76%, above the sticker */
   .lead .sash__more { display: none; }
   .lead .sash__label .live-tag { gap: 6px; }
   .also__grid, .covers, .politics__rows { grid-template-columns: 1fr; }
@@ -210,7 +214,7 @@
           <div class="dome-frame">
             <span class="dome-pin">أمام قبة الصخرة · 10:19</span>
             <div class="dome-frame__clip grain">
-              <img src="assets/img/d9-rabbis-2.jpg" srcset="assets/img/d9-rabbis-2-480.jpg 480w, assets/img/d9-rabbis-2.jpg 600w" sizes="(max-width: 900px) 100vw, 56vw" width="600" height="800" alt="مستوطنون يلتقطون صورة أمام قبة الصخرة خلال اقتحام ثالث أيام العرش، وخلفهم عناصر من شرطة الاحتلال" fetchpriority="high" style="object-position: 50% 16%">
+              <img src="assets/img/d9-rabbis-2.jpg" srcset="assets/img/d9-rabbis-2-480.jpg 480w, assets/img/d9-rabbis-2.jpg 600w" sizes="(max-width: 900px) 100vw, 56vw" width="600" height="800" alt="مستوطنون يلتقطون صورة أمام قبة الصخرة خلال اقتحام ثالث أيام العرش، وخلفهم عناصر من شرطة الاحتلال" fetchpriority="high">
             </div>
             <svg class="dome-meridians" viewBox="0 0 100 40" preserveAspectRatio="none" aria-hidden="true">
               <path d="M50 0 V40"/><path d="M50 0 C39 8 32.5 22 31.5 40"/><path d="M50 0 C61 8 67.5 22 68.5 40"/><path d="M50 0 C25 6 13 21 11 40"/><path d="M50 0 C75 6 87 21 89 40"/>
@@ -224,11 +228,11 @@
 
         <div class="lead__body">
           <p class="dek">حاخامات شاركوا في الاقتحام، ومستوطن أدخل قربانا نباتيا وأدى سجودا علنيا قرب باب الرحمة، ليصل عدد المقتحمين في ثلاثة أيام إلى 4060.</p>
+          <span class="ai-mark lead__ai"><span class="ai-glyph" aria-hidden="true"></span>ملخص آلي راجعه المحرر</span>
           <p class="placeline"><b>المسجد الأقصى</b><time datetime="2025-10-09T15:29">15:29</time><span>مراسلو العاصمة في الباحات</span><span>5 دقائق قراءة</span></p>
           <div class="lead__actions">
             <a class="btn" href="article.html">اقرأ القصة كاملة</a>
             <a class="btn btn--quiet" href="live.html">التغطية المباشرة<svg class="i-dir" viewBox="0 0 24 24" aria-hidden="true"><path d="M19 12H5m6-6-6 6 6 6" fill="none" stroke="currentColor" stroke-width="1.8"/></svg></a>
-            <span class="ai-mark"><span class="ai-glyph" aria-hidden="true"></span>ملخص آلي راجعه المحرر</span>
           </div>
         </div>
       </div>
@@ -236,7 +240,7 @@
 
     <div class="wrap sash-wrap">
       <nav class="sash" aria-label="الآن في القدس: آخر التحديثات">
-        <div class="sash__label"><b>الآن في القدس</b><span class="live-tag"><span class="pulse" aria-hidden="true"></span>مباشر · <span data-stream-count>60</span> تحديثا</span></div>
+        <div class="sash__label"><b>الآن في القدس</b><span class="live-tag"><span class="pulse" aria-hidden="true"></span><span>مباشر · <span data-stream-count>60</span> تحديثا</span></span></div>
         <ol class="sash__list">
           <li><a href="live.html"><time>20:08</time><small data-ago="22"></small><span>تمهيدا لزيارة ترامب: أعلام أمريكية في القدس والكنيست يضاء بالعلم الأمريكي</span></a></li>
           <li><a href="live.html"><time>17:25</time><small data-ago="185"></small><span>قوات الاحتلال تتمركز عند باب الساهرة</span></a></li>
@@ -455,7 +459,7 @@
 <footer data-coda></footer>
 <script src="assets/js/jerusalem-geo.js?v=3" defer></script>
 <script src="assets/js/jerusalem-base.js?v=1" defer></script>
-<script src="assets/js/asima.js?v=32" defer></script>
+<script src="assets/js/asima.js?v=33" defer></script>
 <script src="assets/js/jerusalem-week.js?v=3" defer></script>
 <script src="assets/js/jerusalem-map.js?v=10" defer></script>
 <script>
